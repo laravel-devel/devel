@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'dashboard'], function () {
+    Route::get('/', 'Dashboard\DashboardController@index')->name('dashboard.index');
+});
