@@ -391,8 +391,10 @@ class ModuleGenerator extends Generator
         }
 
         if (GenerateConfigReader::read('controller')->generate() === true) {
+            // Dashboard controller
             $this->console->call('module:make-controller', [
-                'controller' => $this->getName() . 'Controller',
+                // 'controller' => $this->getName() . 'Controller',
+                'controller' => 'DashboardController',
                 'module' => $this->getName(),
             ]);
         }

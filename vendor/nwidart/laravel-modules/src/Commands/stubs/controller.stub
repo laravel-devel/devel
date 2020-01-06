@@ -14,7 +14,7 @@ class $CLASS$ extends Controller
      */
     public function index()
     {
-        return view('$LOWER_NAME$::index');
+        return view('$LOWER_NAME$::dashboard.index');
     }
 
     /**
@@ -23,7 +23,7 @@ class $CLASS$ extends Controller
      */
     public function create()
     {
-        return view('$LOWER_NAME$::create');
+        return view('$LOWER_NAME$::dashboard.create');
     }
 
     /**
@@ -43,7 +43,7 @@ class $CLASS$ extends Controller
      */
     public function show($id)
     {
-        return view('$LOWER_NAME$::show');
+        return view('$LOWER_NAME$::dashboard.show');
     }
 
     /**
@@ -53,7 +53,7 @@ class $CLASS$ extends Controller
      */
     public function edit($id)
     {
-        return view('$LOWER_NAME$::edit');
+        return view('$LOWER_NAME$::dashboard.edit');
     }
 
     /**

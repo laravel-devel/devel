@@ -1,4 +1,5 @@
 @extends('$LOWER_NAME$::layouts.master')
+{{-- TODO: Extend the main Dashboard layout. Don't create the master.blade.php layout at all (search code for "views/master") --}}
 
 @section('content')
     <h1>Hello World</h1>
