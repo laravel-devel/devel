@@ -1,9 +1,15 @@
 <div class="sidebar">
     <header class="header">
-        {{ config('app.name') }}
+        <a href="{{ route('dashboard.index') }}">{{ config('app.name') }}</a>
     </header>
 
     <main class="main">
-        _SIDEBAR_
+        @foreach ($sidebarMenu as $category => $groups)
+            <p class="category">
+                {{ $category }}
+            </p>
+
+            @include('dashboard.sidebar._category', ['groups' => $groups])
+        @endforeach
     </main>
 </div>

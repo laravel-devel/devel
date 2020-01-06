@@ -11,50 +11,23 @@ html {
 
 html, body {
     min-height: 100vh;
-    height: 100%;
+    width: 100%;
 }
 
 body {
     background: $bg;
     color: #444054;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
+    flex: 1;
     display: flex;
-    height: 100%;
-
-    .main {
-        width: 100%;
-
-        >.header {
-            height: $headerH;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            padding: 0 2rem;
-            background: $headerBg;
-            color: $whiteInactive;
-        }
-
-        .content {
-            >.section-header {
-                background: $sectionHeaderBg;
-                padding: 1rem;
-
-                .title {
-                    font-size: 1.25rem;
-                }
-            }
-
-            >.section-body {
-                padding: 0 1rem;
-                padding-top: 1rem;
-            }
-        }
-    }
 }
 
-.sidebar {
+.container .sidebar {
+    min-width: 15rem;
     background: $sidebarBg;
 
     >.header {
@@ -68,10 +41,89 @@ body {
         font-size: 1.5rem;
         box-shadow: 0 0 1rem #000000;
         margin-bottom: 1rem;
+
+        a {
+            color: $whiteActive;
+            text-decoration: none;
+        }
     }
 
-    .main {
+    >.main {
         padding: 0 1rem;
         color: $whiteInactive;
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .category {
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: .9rem;
+            margin: 1rem 0;
+        }
+
+        .group li a, .items li a {
+            display: inline-block;
+            width: 100%;
+            padding: .5rem 1rem;
+            color: $whiteInactive;
+            text-decoration: none;
+            outline: none;
+
+            &:hover {
+                color: $whiteActive;
+                background: #ffffff44;
+                border-radius: .25rem;
+            }
+        }
+
+        .items {
+            padding-left: 1.75rem;
+
+            li {
+                position: relative;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: -.5rem;
+                    width: 2px;
+                    height: 100%;
+                    background: #ffffff44;
+                }
+            }
+        }
+    }
+}
+
+.container >.main {
+    flex: 1;
+
+    >.header {
+        height: $headerH;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 2rem;
+        background: $headerBg;
+        color: $whiteInactive;
+    }
+
+    >.content {
+        >.section-header {
+            background: $sectionHeaderBg;
+            padding: 1rem;
+
+            .title {
+                font-size: 1.25rem;
+            }
+        }
+
+        >.section-body {
+            padding: 0 1rem;
+            padding-top: 1rem;
+        }
     }
 }

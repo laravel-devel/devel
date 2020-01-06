@@ -3,11 +3,11 @@
 @section('content')
     <header class="section-header">
         <div class="title">
-            Pages
+            Dashboard
         </div>
     </header>
 
     <div class="section-body">
-        Main Content
+        Content here...
     </div>
 @endsection
