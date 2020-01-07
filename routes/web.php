@@ -11,10 +11,27 @@
 |
 */
 
+// Site routes
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'dashboard'], function () {
-    Route::get('/', 'Dashboard\DashboardController@index')->name('dashboard.index');
+// Dashboard auth routes
+Route::group([
+    'namespace' => 'Dashboard\Auth',
+    'prefix' => 'dashboard',
+    'as' => 'dashboard.auth.',
+], function () {
+    Route::get('/login', 'LoginController@showLoginForm')->name('login');
+    Route::post('/login', 'LoginController@showLoginForm')->name('login.post');
+});
+
+// Dashboard routes
+Route::group([
+    'namespace' => 'Dashboard',
+    'prefix' => 'dashboard',
+    'middleware' => ['dashboard.access'],
+    'as' => 'dashboard.',
+], function () {
+    Route::get('/', 'DashboardController@index')->name('index');
 });

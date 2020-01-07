@@ -1,5 +1,5 @@
-$bg: #f1f4f6;
-// $bg: #fafbfc;
+$pageBg: #f1f4f6;
+$contentBg: #fafbfc;
 
 $headerH: 4rem;
 $headerBg: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
@@ -11,3 +11,7 @@ $sectionHeaderBg: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 
 $whiteActive: #ffffff;
 $whiteInactive: #ffffffaa;
+
+// box-shadow
+$elevation: 0 .1rem 1rem #00000044;
+$slightElevation: 0 .1rem .25rem #00000044;

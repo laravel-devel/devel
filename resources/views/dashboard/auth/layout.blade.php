@@ -6,16 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ mix('css/dashboard.css') }}">
 
-    <title>Dashboard</title>
+    <title>Auth</title>
 </head>
 <body>
     <div id="vue" class="container">
-        @include('dashboard._sidebar')
-
         <main class="main">
-            @include('dashboard._header')
-            
-            <section class="content">
+            <section class="content center">
                 @yield('content')
             </section>
         </main>

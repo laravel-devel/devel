@@ -1,0 +1,12 @@
+.card {
+    padding: 1rem;
+    border-radius: .5rem;
+    background: $contentBg;
+    box-shadow: $elevation;
+
+    .title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+}
