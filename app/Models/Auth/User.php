@@ -2,13 +2,15 @@
 
 namespace App\Models\Auth;
 
+use App\Traits\HasPermissions;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasPermissions;
 
     /**
      * The attributes that are mass assignable.
@@ -47,6 +49,20 @@ class User extends Authenticatable
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'user_role', 'user_id', 'role');
+        return $this->belongsToMany(
+            Role::class, 'user_role', 'user_id', 'role', 'id', 'key'
+        );
+    }
+
+    /**
+     * A user has many individual permissions
+     *
+     * @return void
+     */
+    public function permissions()
+    {
+        return $this->belongsToMany(
+            Permission::class, 'user_permission', 'user_id', 'permission', 'id', 'key'
+        );
     }
 }

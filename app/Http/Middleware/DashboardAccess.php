@@ -19,8 +19,11 @@ class DashboardAccess
             return redirect()->route('dashboard.auth.login');
         }
 
-        // TODO: Check permissions, I can access the route instance and its
-        // properties here
+        // Check if the user has permission to access the admin dashboard
+        if (!auth()->user()->hasPermissions('admin_dashboard.access')) {
+            return redirect()->route('home');
+        }
+
         return $next($request);
     }
 }

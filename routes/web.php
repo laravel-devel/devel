@@ -14,7 +14,7 @@
 // Site routes
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 // Dashboard auth routes
 Route::group([
