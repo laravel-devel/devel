@@ -1,7 +1,7 @@
 @extends('dashboard.auth.layout')
 
 @section('content')
-    <div class="card">
+    <div class="card auth">
         <h1 class="title">
             Login
         </h1>
@@ -16,7 +16,8 @@
                 ]"
                 :button="{
                     text: 'Log in'
-                }"></v-form>
+                }"
+                success="{{ route('dashboard.index') }}"></v-form>
         </div>
     </div>
 @endsection

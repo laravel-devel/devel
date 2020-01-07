@@ -5,6 +5,10 @@
 
         <v-fel-checkbox v-else-if="field.type === 'checkbox'"
             :attrs="field"></v-fel-checkbox>
+
+        <div v-if="errors" class="hint danger">
+            {{ errors[0] }}
+        </div>
     </div>
 </template>
 
@@ -18,7 +22,7 @@ export default {
         'v-fel-checkbox': Checkbox,
     },
 
-    props: ['field'],
+    props: ['field', 'errors'],
 
     data() {
         return {

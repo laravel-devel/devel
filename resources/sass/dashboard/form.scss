@@ -8,6 +8,7 @@
     }
 
     .form-element {
+        width: 100%;
         border: none;
         outline: none;
         background: #00000007;
@@ -16,6 +17,18 @@
         border-radius: .25rem;
 
         box-shadow: 0 0 2px #00000022 inset;
+    }
+
+    .form-element:focus {
+        box-shadow: 0 0 2px #2d5776 inset;
+    }
+
+    .hint {
+        font-style: italic;
+
+        &.danger {
+            color: $danger;
+        }
     }
 
     .checkbox {
@@ -66,9 +79,5 @@
                 display: block;
             }
         }
-    }
-
-    .form-element:focus {
-        box-shadow: 0 0 2px #2d5776 inset;
     }
 }

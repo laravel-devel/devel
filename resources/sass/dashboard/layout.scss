@@ -89,12 +89,6 @@ body {
                 }
             }
         }
-
-        // .group {
-        //     padding-left: 1.75rem;
-
-            
-        // }
     }
 }
 
@@ -109,6 +103,20 @@ body {
         padding: 0 2rem;
         background: $headerBg;
         color: $whiteInactive;
+
+        .left {
+            flex: 1;
+        }
+
+        a {
+            color: $whiteInactive;
+            text-decoration: none;
+            outline: none;
+
+            &:hover {
+                color: $whiteActive;
+            }
+        }
     }
 
     >.content {

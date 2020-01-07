@@ -23,7 +23,8 @@ Route::group([
     'as' => 'dashboard.auth.',
 ], function () {
     Route::get('/login', 'LoginController@showLoginForm')->name('login');
-    Route::post('/login', 'LoginController@showLoginForm')->name('login.post');
+    Route::post('/login', 'LoginController@login')->name('login.post');
+    Route::post('/logout', 'LoginController@logout')->name('logout');
 });
 
 // Dashboard routes
