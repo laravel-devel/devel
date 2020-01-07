@@ -4,12 +4,17 @@
     </header>
 
     <main class="main">
-        @foreach ($sidebarMenu as $category => $groups)
+        @foreach ($sidebarMenu as $category => $items)
             <p class="category">
                 {{ $category }}
             </p>
 
-            @include('dashboard.sidebar._category', ['groups' => $groups])
+            @foreach ($items as $name => $item)
+                @include('dashboard.sidebar._group', [
+                    'name' => $name,
+                    'item' => $item,
+                ])
+            @endforeach
         @endforeach
     </main>
 </div>

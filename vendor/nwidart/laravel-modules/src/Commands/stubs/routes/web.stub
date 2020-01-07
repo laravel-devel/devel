@@ -15,6 +15,6 @@ Route::prefix('dashboard/$LOWER_NAME$')->group(function() {
     Route::get('/', [
         'as' => 'dashboard.pages.index',
         'uses' => 'DashboardController@index',
-        'dashboardMenu' => 'Custom->$STUDLY_NAME$->$STUDLY_NAME$',
+        'dashboardMenu' => 'Modules->$STUDLY_NAME$',
     ]);
 });

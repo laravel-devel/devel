@@ -18,29 +18,32 @@ class DashboardSidebarMenu
         }
     }
 
-    public static function addGroup(string $category, string $name)
+    public static function addItem(string $category, array $path, string $uri = null)
     {
         if (!isset(static::$items[$category])) {
             static::addCategory($category);
         }
 
-        if (!isset(static::$items[$category][$name])) {
-            static::$items[$category][$name] = [];
-        }
-    }
+        $pos = &static::$items[$category];
+        $i = 1;
 
-    public static function addItems(string $category, string $group, array $items)
-    {
-        if (!isset(static::$items[$category])) {
-            static::addCategory($category);
-        }
+        foreach ($path as $part) {
+            if (!isset($pos[$part])) {
+                $pos[$part] = [
+                    'url' => null,
+                    'children' => [],
+                ];
+            }
 
-        if (!isset(static::$items[$category][$group])) {
-            static::addGroup($category, $group);
-        }
+            if ($i === count($path)) {
+                $pos = &$pos[$part];
+                $pos['url'] = url($uri);
 
-        static::$items[$category][$group] = array_merge(
-            static::$items[$category][$group], $items
-        );
+                break;
+            }
+
+            $pos = &$pos[$part]['children'];
+            $i++;
+        }
     }
 }

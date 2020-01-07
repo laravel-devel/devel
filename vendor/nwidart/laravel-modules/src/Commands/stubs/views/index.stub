@@ -1,10 +1,13 @@
-@extends('$LOWER_NAME$::layouts.master')
-{{-- TODO: Extend the main Dashboard layout. Don't create the master.blade.php layout at all (search code for "views/master") --}}
+@extends('dashboard.layout')
 
 @section('content')
-    <h1>Hello World</h1>
+    <header class="section-header">
+        <div class="title">
+            $STUDLY_NAME$
+        </div>
+    </header>
 
-    <p>
-        This view is loaded from module: {!! config('$LOWER_NAME$.name') !!}
-    </p>
+    <div class="section-body">
+        Content here...
+    </div>
 @endsection

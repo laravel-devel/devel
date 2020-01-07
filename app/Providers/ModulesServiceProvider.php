@@ -33,16 +33,20 @@ class ModulesServiceProvider extends ServiceProvider
         // Add dashboard menu items
         View::composer('dashboard._sidebar', function ($view) {
             foreach (\Route::getRoutes() as $route) {
+                // TODO: Don't include an item if current user doesn't have
+                // permissions to access it. The list of required permissions
+                // will be also attached to the route and accessible in the same
+                // way as 'dashboardMenu'.
                 if (isset($route->action['dashboardMenu'])) {
                     $parts = explode('->', $route->action['dashboardMenu']);
 
-                    if (count($parts) < 3) {
+                    if (count($parts) < 2) {
                         throw new \Exception("Invalid dashboard menu entry for route \"{$route->uri}\".");
                     }
 
-                    DashboardSidebarMenu::addItems($parts[0], $parts[1], [
-                        url($route->uri) => $parts[2],
-                    ]);
+                    DashboardSidebarMenu::addItem(
+                        $parts[0], array_slice($parts, 1), $route->uri
+                    );
                 }
             }
 
