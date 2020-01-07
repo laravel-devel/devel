@@ -4,13 +4,29 @@ namespace App\Services;
 
 class DashboardSidebarMenu
 {
+    /**
+     * Menu items tree
+     *
+     * @var array
+     */
     protected static $items = [];
 
-    public static function getItems()
+    /**
+     * Get the menu items tree
+     *
+     * @return array
+     */
+    public static function getItems(): array
     {
         return static::$items;
     }
 
+    /**
+     * Add a category to the menu
+     *
+     * @param string $name
+     * @return void
+     */
     public static function addCategory(string $name)
     {
         if (!isset(static::$items[$name])) {
@@ -18,6 +34,14 @@ class DashboardSidebarMenu
         }
     }
 
+    /**
+     * Add an item to the menu
+     *
+     * @param string $category
+     * @param array $path
+     * @param string $uri
+     * @return void
+     */
     public static function addItem(string $category, array $path, string $uri = null)
     {
         if (!isset(static::$items[$category])) {
