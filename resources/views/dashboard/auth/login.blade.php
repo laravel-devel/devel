@@ -7,7 +7,16 @@
         </h1>
 
         <div class="body">
-            The form
+            <v-form action="{{ route('dashboard.auth.login.post') }}"
+                method="POST"
+                :fields="[
+                    { type: 'email', name: 'email', label: 'E-mail' },
+                    { type: 'password', name: 'password', label: 'Password' },
+                    { type: 'checkbox', name: 'remember', label: 'Remember Me' },
+                ]"
+                :button="{
+                    text: 'Log in'
+                }"></v-form>
         </div>
     </div>
 @endsection

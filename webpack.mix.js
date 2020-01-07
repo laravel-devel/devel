@@ -4,7 +4,6 @@ const mix = require('laravel-mix');
 require('laravel-mix-merge-manifest');
 mix.mergeManifest();
 
-// mix.js('resources/js/app.js', 'public/js')
-//     .sass('resources/sass/app.scss', 'public/css');
 mix.sass('resources/sass/dashboard.scss', 'public/css')
+    .js('resources/js/dashboard.js', 'public/js')
     .version();

@@ -10,3 +10,27 @@
         margin-bottom: 1rem;
     }
 }
+
+.btn {
+    background: none;
+    border: none;
+    outline: none !important;
+    box-shadow: $slightElevation;
+
+    cursor: pointer;
+    padding: .5rem 1rem;
+    font-size: .8rem;
+    font-weight: 600;
+    background-color: $primary;
+    color: $whiteActive;
+    border-radius: .25rem;
+
+    &::-moz-focus-inner { border:none; }
+
+    transition: all .3s ease;
+
+    &:hover {
+        box-shadow: $elevation;
+        background-color: $primaryHover;
+    }
+}

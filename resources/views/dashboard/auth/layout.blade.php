@@ -16,5 +16,7 @@
             </section>
         </main>
     </div>
+
+    <script src="{{ mix('js/dashboard.js') }}"></script>
 </body>
 </html>
