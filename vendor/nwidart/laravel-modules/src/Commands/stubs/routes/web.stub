@@ -11,10 +11,10 @@
 |
 */
 
-Route::prefix(config('app.dashboard_uri') . '/$LOWER_NAME$')->group(function() {
+Route::prefix(config('app.dashboard_uri') . '/' . config('$LOWER_NAME$.slug'))->group(function() {
     Route::get('/', [
         'as' => 'dashboard.pages.index',
         'uses' => 'DashboardController@index',
-        'dashboardMenu' => 'Modules->$STUDLY_NAME$',
+        'dashboardMenu' => 'Modules->' . config('$LOWER_NAME$.display_name'),
     ]);
 });

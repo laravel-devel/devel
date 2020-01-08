@@ -10,7 +10,7 @@ class $CLASS$ extends Controller
 {
     public function __construct() {
         $this->setMeta('title', 'Dashboard');
-        $this->setMeta('title', '$STUDLY_NAME$');
+        $this->setMeta('title', config('manageuserpermissions.display_name'));
     }
 
     /**

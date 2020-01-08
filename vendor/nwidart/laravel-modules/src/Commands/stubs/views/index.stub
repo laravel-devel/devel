@@ -3,7 +3,7 @@
 @section('content')
     <header class="section-header">
         <div class="title">
-            $STUDLY_NAME$
+            {{ config('manageuserpermissions.display_name') }}
         </div>
     </header>
 

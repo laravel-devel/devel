@@ -77,6 +77,20 @@ class ModuleGenerator extends Generator
     protected $isActive = false;
 
     /**
+     * An alternative display name for the module
+     *
+     * @var string
+     */
+    protected $displayName;
+
+    /**
+     * A model to generate CRUD for
+     *
+     * @var string
+     */
+    protected $model = '';
+
+    /**
      * The constructor.
      * @param $name
      * @param FileRepository $module
@@ -136,6 +150,16 @@ class ModuleGenerator extends Generator
     public function getName()
     {
         return Str::studly($this->name);
+    }
+
+    /**
+     * Get the alternative display name of module.
+     *
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        return $this->displayName ?? $this->name;
     }
 
     /**
@@ -278,6 +302,20 @@ class ModuleGenerator extends Generator
     public function setForce($force)
     {
         $this->force = $force;
+
+        return $this;
+    }
+
+    /**
+     * Set display name status.
+     *
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setDisplayName($name)
+    {
+        $this->displayName = $name;
 
         return $this;
     }
@@ -512,6 +550,26 @@ class ModuleGenerator extends Generator
     protected function getStudlyNameReplacement()
     {
         return $this->getName();
+    }
+
+    /**
+     * Get the module name in studly case.
+     *
+     * @return string
+     */
+    protected function getDisplayNameReplacement()
+    {
+        return $this->getDisplayName();
+    }
+
+    /**
+     * Get the module name in studly case.
+     *
+     * @return string
+     */
+    protected function getSlugReplacement()
+    {
+        return Str::slug($this->getDisplayName());
     }
 
     /**

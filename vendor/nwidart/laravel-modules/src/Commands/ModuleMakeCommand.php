@@ -41,8 +41,11 @@ class ModuleMakeCommand extends Command
                 ->setForce($this->option('force'))
                 ->setPlain($this->option('plain'))
                 ->setActive(!$this->option('disabled'))
+                ->setDisplayName($this->option('name'))
                 ->generate();
         }
+
+        $this->call('config:cache');
     }
 
     /**
@@ -63,6 +66,9 @@ class ModuleMakeCommand extends Command
             ['plain', 'p', InputOption::VALUE_NONE, 'Generate a plain module (without some resources).'],
             ['disabled', 'd', InputOption::VALUE_NONE, 'Do not enable the module at creation.'],
             ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when the module already exists.'],
+
+            ['name', null, InputOption::VALUE_REQUIRED, 'Specify an alternative name if you want the displayed module name to be different from the system module name.'],
+            ['model', null, InputOption::VALUE_REQUIRED, 'A model to generate CRUD for.'],
         ];
     }
 }
