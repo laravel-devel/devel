@@ -4,10 +4,15 @@ namespace $CLASS_NAMESPACE$;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 
 class $CLASS$ extends Controller
 {
+    public function __construct() {
+        $this->setMeta('title', 'Dashboard');
+        $this->setMeta('title', '$STUDLY_NAME$');
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response

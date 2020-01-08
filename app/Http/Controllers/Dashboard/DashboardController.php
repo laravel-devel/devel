@@ -14,6 +14,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $this->setMeta('title', 'Dashboard');
+        
         return view('dashboard.index');
     }
 }
