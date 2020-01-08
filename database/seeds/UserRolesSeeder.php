@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Schema;
 class UserRolesSeeder extends Seeder
 {
     protected $roles = [
-        'user' => 'User',
+        'user' => [
+            'name' => 'User',
+            'default' => true,
+        ],
         'admin' => [
             'name' => 'Admin',
             'permissions' => ['admin_dashboard.access'],
@@ -34,10 +37,13 @@ class UserRolesSeeder extends Seeder
                 $role = Role::create([
                     'key' => $key,
                     'name' => $name['name'],
+                    'default' => (isset($name['default']) && $name['default']),
                 ]);
 
-                foreach ($name['permissions'] as $permission) {
-                    $role->permissions()->attach($permission);
+                if (isset($name['permissions'])) {
+                    foreach ($name['permissions'] as $permission) {
+                        $role->permissions()->attach($permission);
+                    }
                 }
             }
         }
