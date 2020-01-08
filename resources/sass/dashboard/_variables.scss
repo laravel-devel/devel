@@ -12,10 +12,15 @@ $sectionHeaderBg: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 // Colors
 $whiteActive: #ffffff;
 $whiteInactive: #ffffffaa;
-$primary: #3f6ad8;
-$primaryHover: #285bc7;
-$danger: #d83f3f;
-$dangerHover: #c72828;
+$primary: #406bd6;  // HSV: S = 70, V = 84; H never changes
+$primaryHover: #3a61c2; // HSV: V = 76
+$primaryInactive: #abb7d6;  // HSV: S = 20
+$danger: #d64040;
+$dangerHover: #c23a3a;
+$dangerInactive: #d6abab;
+$success: #40d640;
+$successHover: #3ac23a;
+$successInactive: #abd6ab;
 
 // box-shadow
 $elevation: 0 .1rem 1rem #00000044;

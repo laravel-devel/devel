@@ -1,3 +1,19 @@
+.form {
+    .message {
+        text-align: center;
+        padding: 1rem;
+        padding-top: 0;
+
+        &.danger {
+            color: $danger;
+        }
+
+        &.success {
+            color: $success;
+        }
+    }
+}
+
 .form-group {
     padding-bottom: 1rem;
 
@@ -11,16 +27,16 @@
         width: 100%;
         border: none;
         outline: none;
-        background: #00000007;
+        background-color: #eee;
         padding: .5rem;
         box-shadow: none;
         border-radius: .25rem;
 
-        box-shadow: 0 0 2px #00000022 inset;
+        box-shadow: 0 0 2px #dadada inset;
     }
 
     .form-element:focus {
-        box-shadow: 0 0 2px #2d5776 inset;
+        box-shadow: 0 0 2px $primary inset;
     }
 
     .hint {

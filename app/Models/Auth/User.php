@@ -2,6 +2,7 @@
 
 namespace App\Models\Auth;
 
+use App\Notifications\ResetPasswordNotification;
 use App\Traits\HasPermissions;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -64,5 +65,16 @@ class User extends Authenticatable
         return $this->belongsToMany(
             Permission::class, 'user_permission', 'user_id', 'permission', 'id', 'key'
         );
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

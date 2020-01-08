@@ -14,6 +14,16 @@
         min-width: 30rem;
         max-width: 90%;
     }
+
+    a {
+        color: $primary;
+        text-decoration: none;
+        outline: none;
+
+        &:hover {
+            color: $primaryHover;
+        }
+    }
 }
 
 .btn {
@@ -37,5 +47,12 @@
     &:hover {
         box-shadow: $elevation;
         background-color: $primaryHover;
+    }
+
+    &[disabled] {
+        color: $whiteInactive;
+        background-color: $primaryInactive;
+        box-shadow: 0 0 0;
+        cursor: default;
     }
 }

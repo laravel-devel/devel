@@ -4,7 +4,9 @@
 
         <input class="form-element"
             :type="attrs.type"
-            :name="attrs.name">
+            :name="attrs.name"
+            autocomplete="off"
+            :value="attrs.value">
     </div>
 </template>
 

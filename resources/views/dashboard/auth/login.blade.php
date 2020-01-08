@@ -13,6 +13,7 @@
                     { type: 'email', name: 'email', label: 'E-mail' },
                     { type: 'password', name: 'password', label: 'Password' },
                     { type: 'checkbox', name: 'remember', label: 'Remember Me' },
+                    { type: 'link', label: 'Forgot password', url: '{{ route('dashboard.auth.forgot-password') }}' },
                 ]"
                 :button="{
                     text: 'Log in'

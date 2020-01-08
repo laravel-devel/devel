@@ -25,6 +25,11 @@ Route::group([
     Route::get('/login', 'LoginController@showLoginForm')->name('login');
     Route::post('/login', 'LoginController@login')->name('login.post');
     Route::post('/logout', 'LoginController@logout')->name('logout');
+
+    Route::get('/forgot-password', 'ForgotPasswordController@showLinkRequestForm')->name('forgot-password');
+    Route::post('/forgot-password', 'ForgotPasswordController@sendResetLinkEmail')->name('forgot-password.post');
+    Route::get('/reset-password/{token}', 'ResetPasswordController@showResetForm')->name('reset-password');
+    Route::post('/reset-password', 'ResetPasswordController@reset')->name('reset-password.post');
 });
 
 // Dashboard routes
