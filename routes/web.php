@@ -19,7 +19,7 @@ Route::get('/', function () {
 // Dashboard auth routes
 Route::group([
     'namespace' => 'Dashboard\Auth',
-    'prefix' => 'dashboard',
+    'prefix' => config('app.dashboard_uri'),
     'as' => 'dashboard.auth.',
 ], function () {
     Route::get('/login', 'LoginController@showLoginForm')->name('login');
@@ -37,7 +37,7 @@ Route::group([
 // Dashboard routes
 Route::group([
     'namespace' => 'Dashboard',
-    'prefix' => 'dashboard',
+    'prefix' => config('app.dashboard_uri'),
     'middleware' => ['dashboard.access'],
     'as' => 'dashboard.',
 ], function () {

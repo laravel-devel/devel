@@ -63,4 +63,14 @@ class LoginController extends Controller
 
         return response()->json([]);
     }
+
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        return config('app.dashboard_uri');
+    }
 }
