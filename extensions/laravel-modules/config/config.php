@@ -41,7 +41,7 @@ return [
             'gitignore' => '.gitignore',
         ],
         'replacements' => [
-            'routes/web' => ['LOWER_NAME', 'STUDLY_NAME'],
+            'routes/web' => ['LOWER_NAME', 'STUDLY_NAME', 'CONTROLLER_NAME'],
             'routes/api' => ['LOWER_NAME'],
             'webpack' => ['LOWER_NAME'],
             'json' => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE', 'PROVIDER_NAMESPACE'],

@@ -136,6 +136,8 @@ class ControllerMakeCommand extends GeneratorCommand
             $stub = '/controller-plain.stub';
         } elseif ($this->option('api') === true) {
             $stub = '/controller-api.stub';
+        } elseif (!empty($this->option('model'))) {
+            $stub = '/controller-crud.stub';
         } else {
             $stub = '/controller.stub';
         }
@@ -161,7 +163,7 @@ class ControllerMakeCommand extends GeneratorCommand
     protected function generateDatatable(): string
     {
         if (!$model = $this->getModel()) {
-            return [];
+            return '';
         }
 
         $model = new $model;

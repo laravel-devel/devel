@@ -163,6 +163,22 @@ class ModuleGenerator extends Generator
     }
 
     /**
+     * Get the controller name.
+     *
+     * @return string
+     */
+    public function getControllerName()
+    {
+        if ($this->model) {
+            $parts = explode('\\', $this->model);
+
+            return Str::plural($parts[count($parts) - 1]);
+        } else {
+            return $this->getName() . 'Controller';
+        }
+    }
+
+    /**
      * Get the CRUD model class name.
      *
      * @return string
@@ -455,8 +471,7 @@ class ModuleGenerator extends Generator
         if (GenerateConfigReader::read('controller')->generate() === true) {
             // Dashboard controller
             $this->console->call('module:make-controller', [
-                // 'controller' => $this->getName() . 'Controller',
-                'controller' => 'DashboardController',
+                'controller' => $this->getControllerName(),
                 'module' => $this->getName(),
                 '--model' => $this->getModel(),
             ]);
@@ -585,6 +600,16 @@ class ModuleGenerator extends Generator
     protected function getDisplayNameReplacement()
     {
         return $this->getDisplayName();
+    }
+
+    /**
+     * Get the module first controller name.
+     *
+     * @return string
+     */
+    protected function getControllerNameReplacement()
+    {
+        return $this->getControllerName() . 'Controller';
     }
 
     /**
