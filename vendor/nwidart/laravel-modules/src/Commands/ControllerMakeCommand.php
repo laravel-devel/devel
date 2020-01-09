@@ -65,6 +65,7 @@ class ControllerMakeCommand extends GeneratorCommand
             'MODULE'            => $this->getModuleName(),
             'NAME'              => $this->getModuleName(),
             'STUDLY_NAME'       => $module->getStudlyName(),
+            'MODEL'             => $this->getModel(),
             'MODULE_NAMESPACE'  => $this->laravel['modules']->config('namespace'),
         ]))->render();
     }
@@ -90,6 +91,7 @@ class ControllerMakeCommand extends GeneratorCommand
         return [
             ['plain', 'p', InputOption::VALUE_NONE, 'Generate a plain controller', null],
             ['api', null, InputOption::VALUE_NONE, 'Exclude the create and edit methods from the controller.'],
+            ['model', null, InputOption::VALUE_REQUIRED, 'A model to generate CRUD for.'],
         ];
     }
 
@@ -137,5 +139,15 @@ class ControllerMakeCommand extends GeneratorCommand
         }
 
         return $stub;
+    }
+
+    /**
+     * Get CRUD model class name.
+     *
+     * @return void
+     */
+    protected function getModel()
+    {
+        return $this->option('model') ?? '';
     }
 }

@@ -42,6 +42,7 @@ class ModuleMakeCommand extends Command
                 ->setPlain($this->option('plain'))
                 ->setActive(!$this->option('disabled'))
                 ->setDisplayName($this->option('name'))
+                ->setModel($this->option('model'))
                 ->generate();
         }
 

@@ -13,8 +13,13 @@
 
 Route::prefix(config('app.dashboard_uri') . '/' . config('$LOWER_NAME$.slug'))->group(function() {
     Route::get('/', [
-        'as' => 'dashboard.pages.index',
+        'as' => 'dashboard.$LOWER_NAME$.index',
         'uses' => 'DashboardController@index',
         'dashboardMenu' => 'Modules->' . config('$LOWER_NAME$.display_name'),
+    ]);
+
+    Route::get('/list', [
+        'as' => 'dashboard.$LOWER_NAME$.get',
+        'uses' => 'DashboardController@get',
     ]);
 });

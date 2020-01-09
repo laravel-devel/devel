@@ -163,6 +163,16 @@ class ModuleGenerator extends Generator
     }
 
     /**
+     * Get the CRUD model class name.
+     *
+     * @return string
+     */
+    public function getModel()
+    {
+        return $this->model ?? '';
+    }
+
+    /**
      * Get the laravel config instance.
      *
      * @return Config
@@ -321,6 +331,20 @@ class ModuleGenerator extends Generator
     }
 
     /**
+     * Set the CRUD model class name.
+     *
+     * @param string $class
+     *
+     * @return $this
+     */
+    public function setModel($class)
+    {
+        $this->model = $class;
+
+        return $this;
+    }
+
+    /**
      * Generate the module.
      */
     public function generate()
@@ -434,6 +458,7 @@ class ModuleGenerator extends Generator
                 // 'controller' => $this->getName() . 'Controller',
                 'controller' => 'DashboardController',
                 'module' => $this->getName(),
+                '--model' => $this->getModel(),
             ]);
         }
     }
@@ -560,6 +585,16 @@ class ModuleGenerator extends Generator
     protected function getDisplayNameReplacement()
     {
         return $this->getDisplayName();
+    }
+
+    /**
+     * Get the CRUD model class name.
+     *
+     * @return string
+     */
+    protected function getModelReplacement()
+    {
+        return $this->getModel();
     }
 
     /**

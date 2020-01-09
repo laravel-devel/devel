@@ -8,6 +8,6 @@
     </header>
 
     <div class="section-body">
-        Content here...
+        <v-datatable base-url="{{ route('dashboard.$LOWER_NAME$.get') }}"></v-datatable>
     </div>
 @endsection

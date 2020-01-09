@@ -2,19 +2,27 @@
 
 namespace $CLASS_NAMESPACE$;
 
+use App\Traits\Crud;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 
 class $CLASS$ extends Controller
 {
-    public function __construct() {
+    use Crud;
+
+    public function __construct()
+    {
         $this->setMeta('title', 'Dashboard');
         $this->setMeta('title', config('manageuserpermissions.display_name'));
+
+        // CRUD setup
+        $this->setModel('$MODEL$');
     }
 
     /**
      * Display a listing of the resource.
+     *
      * @return Response
      */
     public function index()
@@ -23,7 +31,18 @@ class $CLASS$ extends Controller
     }
 
     /**
+     * Return a listing of the resource.
+     *
+     * @return Response
+     */
+    public function get()
+    {
+        return response()->json($this->model()::paginate(20));
+    }
+
+    /**
      * Show the form for creating a new resource.
+     *
      * @return Response
      */
     public function create()
@@ -33,6 +52,7 @@ class $CLASS$ extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
      * @param Request $request
      * @return Response
      */
@@ -43,6 +63,7 @@ class $CLASS$ extends Controller
 
     /**
      * Show the specified resource.
+     *
      * @param int $id
      * @return Response
      */
@@ -53,6 +74,7 @@ class $CLASS$ extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     *
      * @param int $id
      * @return Response
      */
@@ -63,6 +85,7 @@ class $CLASS$ extends Controller
 
     /**
      * Update the specified resource in storage.
+     *
      * @param Request $request
      * @param int $id
      * @return Response
@@ -74,6 +97,7 @@ class $CLASS$ extends Controller
 
     /**
      * Remove the specified resource from storage.
+     *
      * @param int $id
      * @return Response
      */
