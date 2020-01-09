@@ -6,12 +6,13 @@
             :type="attrs.type"
             :name="attrs.name"
             autocomplete="off"
-            :value="attrs.value">
+            :value="value"
+            @input="$emit('input', $event.target.value)">
     </div>
 </template>
 
 <script>
 export default {
-    props: ['attrs'],
+    props: ['attrs', 'value'],
 }
 </script>

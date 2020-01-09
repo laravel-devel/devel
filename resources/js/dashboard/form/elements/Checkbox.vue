@@ -7,7 +7,8 @@
                 :type="attrs.type"
                 :name="attrs.name"
                 autocomplete="off"
-                :checked="attrs.value">
+                :checked="value"
+                @change="$emit('input', $event.target.checked)">
 
             <span class="checkmark"></span>
         </label>
@@ -16,6 +17,6 @@
 
 <script>
 export default {
-    props: ['attrs'],
+    props: ['attrs', 'value'],
 }
 </script>

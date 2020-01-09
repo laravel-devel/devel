@@ -30,9 +30,10 @@
     background: none;
     border: none;
     outline: none !important;
-    box-shadow: $slightElevation;
+    text-decoration: none;
 
     cursor: pointer;
+    box-shadow: $slightElevation;
     padding: .5rem 1rem;
     font-size: .8rem;
     font-weight: 600;
@@ -55,6 +56,18 @@
         box-shadow: 0 0 0;
         cursor: default;
     }
+    
+    // Button styles
+    &.link {
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        color: $primary;
+
+        &:hover {
+            color: $primaryHover;
+        }
+    }
 }
 
 .table {
@@ -62,6 +75,7 @@
     box-shadow: $slightElevation;
     border-collapse: collapse;
     font-size: .95rem;
+    margin-bottom: 1rem;
 
     th, td {
         padding: .5rem;
@@ -83,6 +97,24 @@
 
         &:hover {
             background: rgba($primary, .25);
+        }
+    }
+}
+
+.paginator {
+    display: flex;
+
+    .summary {
+        flex: 1;
+    }
+
+    .page {
+        margin-right: .25rem;
+
+        &:nth-last-of-type(2) { margin-right: 0; }
+
+        &.active {
+            background-color: $success;
         }
     }
 }

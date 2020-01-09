@@ -17,6 +17,10 @@
 .form-group {
     padding-bottom: 1rem;
 
+    &.inline {
+        display: inline-block;
+    }
+
     label {
         display: block;
         font-weight: 600;

@@ -1,10 +1,14 @@
 <template>
-    <div class="form-group">
+    <div class="form-group" :class="{ 'inline': inline }">
         <v-fel-input v-if="inputTypes.indexOf(field.type) >= 0"
-            :attrs="field"></v-fel-input>
+            :attrs="field"
+            :value="value"
+            @input="onInput"></v-fel-input>
 
         <v-fel-checkbox v-else-if="field.type === 'checkbox'"
-            :attrs="field"></v-fel-checkbox>
+            :attrs="field"
+            :value="value"
+            @input="onInput"></v-fel-checkbox>
 
         <v-fel-link v-else-if="field.type === 'link'"
             :attrs="field"></v-fel-link>
@@ -27,7 +31,20 @@ export default {
         'v-fel-link': Link,
     },
 
-    props: ['field', 'value', 'errors'],
+    props: {
+        field: {},
+
+        value: {
+            default: null,
+        },
+
+        errors: {},
+
+        inline: {
+            type: Boolean,
+            default: false,
+        }
+    },
 
     data() {
         return {
@@ -37,14 +54,13 @@ export default {
                 'password',
                 'hidden',
             ],
-            attrs: {},
         };
     },
 
-    created() {
-        this.attrs = Object.assign(this.field, {
-            value: this.value ? this.value : null,
-        });
+    methods: {
+        onInput(input) {
+            this.$emit('input', input);
+        }
     }
 }
 </script>

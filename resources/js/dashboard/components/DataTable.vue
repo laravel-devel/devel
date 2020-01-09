@@ -15,11 +15,21 @@
                 </tr>
             </tbody>
         </table>
+
+        <v-paginator :page="page"
+            :info="tableData"
+            @pageChanged="onPageChanged"></v-paginator>
     </div>
 </template>
 
 <script>
+import Paginator from './Paginator';
+
 export default {
+    components: {
+        'v-paginator': Paginator,
+    },
+
     props: {
         baseUrl: String,
 
@@ -31,7 +41,7 @@ export default {
 
     computed: {
         endpoint() {
-            return this.baseUrl;
+            return `${this.baseUrl}?page=${this.page}`;
         }
     },
 
@@ -40,6 +50,7 @@ export default {
             fetching: false,
             tableData: [],
             items: [],
+            page: 1,
         };
     },
  
@@ -58,6 +69,16 @@ export default {
 
                     this.fetching = false;
                 });
+        },
+
+        onPageChanged(page) {
+            if (page == this.page) {
+                return;
+            }
+
+            this.page = page;
+
+            this.fetchData();
         }
     }
 }
