@@ -11,9 +11,10 @@ window.Vue = require('vue');
 
 // Form
 Vue.component('v-form', require('./dashboard/form/Form').default);
-
-// Form elements/inputs
 Vue.component('v-form-el', require('./dashboard/form/Element').default);
+
+// Components
+Vue.component('v-datatable', require('./dashboard/components/DataTable').default);
 
 new Vue({
     el: '#vue',

@@ -18,6 +18,7 @@ class $CLASS$ extends Controller
 
         // CRUD setup
         $this->setModel('$MODEL$');
+        $this->setDatatable($MODEL_DATATABLE$);
     }
 
     /**
@@ -27,7 +28,9 @@ class $CLASS$ extends Controller
      */
     public function index()
     {
-        return view('$LOWER_NAME$::dashboard.index');
+        return view('$LOWER_NAME$::dashboard.index', [
+            'fields' => $this->datatable(),
+        ]);
     }
 
     /**

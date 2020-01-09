@@ -2,6 +2,7 @@
 
 namespace Nwidart\Modules\Commands;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Nwidart\Modules\Support\Config\GenerateConfigReader;
 use Nwidart\Modules\Support\Stub;
@@ -67,6 +68,7 @@ class ControllerMakeCommand extends GeneratorCommand
             'STUDLY_NAME'       => $module->getStudlyName(),
             'MODEL'             => $this->getModel(),
             'MODULE_NAMESPACE'  => $this->laravel['modules']->config('namespace'),
+            'MODEL_DATATABLE'   => $this->generateDatatable(),
         ]))->render();
     }
 
@@ -149,5 +151,43 @@ class ControllerMakeCommand extends GeneratorCommand
     protected function getModel()
     {
         return $this->option('model') ?? '';
+    }
+
+    /**
+     * Generate datatable fields list.
+     *
+     * @return string
+     */
+    protected function generateDatatable(): string
+    {
+        if (!$model = $this->getModel()) {
+            return [];
+        }
+
+        $model = new $model;
+        $table = $model->getTable();
+        $fields = Schema::getColumnListing($table);
+
+        // Exclude some generic fields
+        $fields = array_diff($fields, [
+            'id',
+            'email_verified_at',
+            'created_at',
+            'updated_at',
+        ]);
+
+        // Exclude hidden fields
+        $fields = array_diff($fields, $model->getHidden());
+
+        $values = "[\n";
+
+        foreach ($fields as $field) {
+            $name = ucwords(implode(' ', explode('_', $field)));
+            $values .= "            '{$field}' => '{$name}',\n";
+        }
+
+        $values .= "        ]";
+
+        return $values;
     }
 }

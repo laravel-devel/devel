@@ -12,6 +12,13 @@ trait Crud
     protected $modelClass;
 
     /**
+     * List of model fields to include in the datatable.
+     *
+     * @var array
+     */
+    protected $datatableFields = [];
+
+    /**
      * Set the model class
      *
      * @param string $class
@@ -23,6 +30,17 @@ trait Crud
     }
 
     /**
+     * Set datatable fields to be displayed.
+     *
+     * @param array $fields
+     * @return void
+     */
+    public function setDatatable(array $fields): void
+    {
+        $this->datatableFields = $fields;
+    }
+
+    /**
      * Return the model class
      *
      * @return string
@@ -30,5 +48,15 @@ trait Crud
     public function model(): string
     {
         return $this->modelClass;
+    }
+
+    /**
+     * Return the datatable fields list
+     *
+     * @return array
+     */
+    public function datatable(): array
+    {
+        return $this->datatableFields;
     }
 }
