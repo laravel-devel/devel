@@ -2,8 +2,7 @@
 /public/hot
 /public/storage
 /storage/*.key
-vendor/*
-!vendor/nwidart
+vendor
 .env
 .env.backup
 .phpunit.result.cache
