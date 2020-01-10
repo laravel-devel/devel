@@ -5,11 +5,14 @@ namespace Modules\DevelCore\Entities\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Modules\DevelCore\Traits\HasPermissions;
+use Modules\DevelCore\Traits\Sortable;
+use Modules\DevelDashboard\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasPermissions;
+    use Sortable;
 
     /**
      * The attributes that are mass assignable.

@@ -22,7 +22,7 @@ class DashboardAccess
 
         // Check if the user has permission to access the admin dashboard
         if (!auth()->user()->hasPermissions('admin_dashboard.access')) {
-            return redirect()->route('home');
+            return redirect('/');
         }
 
         return $next($request);

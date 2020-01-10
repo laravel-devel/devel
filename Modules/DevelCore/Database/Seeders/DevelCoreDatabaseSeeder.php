@@ -3,7 +3,10 @@
 namespace Modules\DevelCore\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
+use Modules\DevelCore\Entities\Auth\Permission;
+use Modules\DevelCore\Entities\Auth\Role;
+use Modules\DevelCore\Entities\Auth\User;
 
 class DevelCoreDatabaseSeeder extends Seeder
 {
@@ -14,8 +17,16 @@ class DevelCoreDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
+        // Truncate all the tables first
+        Schema::disableForeignKeyConstraints();
 
+        User::truncate();
+        Permission::truncate();
+        Role::truncate();
+
+        Schema::enableForeignKeyConstraints();
+
+        // Then seed the tables
         $this->call(UserPermissionsSeeder::class);
         $this->call(UserRolesSeeder::class);
         $this->call(UsersSeeder::class);

@@ -24,6 +24,8 @@ class CreateUserRoleTable extends Migration
             $table->foreign('role')
                 ->references('key')->on('user_roles')
                 ->onDelete('CASCADE');
+
+            $table->unique(['user_id', 'role']);
         });
     }
 

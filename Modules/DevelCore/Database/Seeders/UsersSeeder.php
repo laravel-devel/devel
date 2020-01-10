@@ -20,9 +20,6 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        Schema::disableForeignKeyConstraints();
-        User::truncate();
-
         foreach ($this->users as $email => $roles) {
             $user = factory(User::class)->create([
                 'email' => $email,
@@ -30,7 +27,5 @@ class UsersSeeder extends Seeder
 
             $user->roles()->attach($roles);
         }
-
-        Schema::enableForeignKeyConstraints();
     }
 }

@@ -1,10 +1,10 @@
 {
-    "name": "nwidart/develcore",
+    "name": "voerro/develcore",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Alexander Zavyalov ",
+            "email": "alex@voerro.com"
         }
     ],
     "extra": {

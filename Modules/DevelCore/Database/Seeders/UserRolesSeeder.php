@@ -26,9 +26,6 @@ class UserRolesSeeder extends Seeder
      */
     public function run()
     {
-        Schema::disableForeignKeyConstraints();
-        Role::truncate();
-
         foreach ($this->roles as $key => $name) {
             if (is_string($name)) {
                 Role::create([
@@ -49,7 +46,5 @@ class UserRolesSeeder extends Seeder
                 }
             }
         }
-
-        Schema::enableForeignKeyConstraints();
     }
 }

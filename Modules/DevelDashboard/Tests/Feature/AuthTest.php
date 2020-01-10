@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests\Feature;
+namespace Modules\DevelDashboard\Tests\Feature;
 
 use Tests\TestCase;
-use Modules\DevelCore\Entities\Auth\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Modules\DevelCore\Entities\Auth\User;
 
-class DashboardAuthTest extends TestCase
+class AuthTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     protected function setUp(): void
     {
         parent::setUp();

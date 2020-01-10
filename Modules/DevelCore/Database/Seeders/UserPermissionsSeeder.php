@@ -35,16 +35,11 @@ class UserPermissionsSeeder extends Seeder
      */
     public function run()
     {
-        Schema::disableForeignKeyConstraints();
-        Permission::truncate();
-
         foreach ($this->permissions as $permission => $name) {
             Permission::create([
                 'key' => $permission,
                 'name' => $name,
             ]);
         }
-
-        Schema::enableForeignKeyConstraints();
     }
 }

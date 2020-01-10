@@ -24,6 +24,8 @@ class CreateUserRolePermissionTable extends Migration
             $table->foreign('permission')
                 ->references('key')->on('user_permissions')
                 ->onDelete('CASCADE');
+
+            $table->unique(['role', 'permission']);
         });
     }
 
