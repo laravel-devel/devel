@@ -31,7 +31,7 @@ class ModulesServiceProvider extends ServiceProvider
         // dd($this->app);
 
         // Add dashboard menu items
-        View::composer('dashboard._sidebar', function ($view) {
+        View::composer('develdashboard::_sidebar', function ($view) {
             foreach (\Route::getRoutes() as $route) {
                 // TODO: Don't include an item if current user doesn't have
                 // permissions to access it. The list of required permissions

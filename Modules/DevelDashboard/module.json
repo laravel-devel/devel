@@ -1,0 +1,13 @@
+{
+    "name": "DevelDashboard",
+    "alias": "develdashboard",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\DevelDashboard\\Providers\\DevelDashboardServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": ["DevelCore"]
+}

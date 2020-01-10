@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/develdashboard",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\DevelDashboard\\Providers\\DevelDashboardServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\DevelDashboard\\": ""
+        }
+    }
+}

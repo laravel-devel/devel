@@ -1,4 +1,4 @@
-@extends('dashboard.layout')
+@extends('develdashboard::layout')
 
 @section('content')
     <header class="section-header">

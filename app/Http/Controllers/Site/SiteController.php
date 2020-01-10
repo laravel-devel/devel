@@ -19,7 +19,7 @@ class SiteController extends Controller
             'description' => 'Welcome to ' . config('app.name') . '!',
             'keywords' => 'modular, laravel, site',
         ]);
-        
+
         return view('site.home');
     }
 }

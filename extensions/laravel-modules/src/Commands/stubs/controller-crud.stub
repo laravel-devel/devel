@@ -5,7 +5,7 @@ namespace $CLASS_NAMESPACE$;
 use App\Traits\Crud;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\DevelCore\Http\Controllers;
+use Modules\DevelCore\Http\Controllers\Controller;
 
 class $CLASS$ extends Controller
 {
