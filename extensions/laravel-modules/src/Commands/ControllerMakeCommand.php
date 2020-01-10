@@ -185,7 +185,10 @@ class ControllerMakeCommand extends GeneratorCommand
 
         foreach ($fields as $field) {
             $name = ucwords(implode(' ', explode('_', $field)));
-            $values .= "            '{$field}' => '{$name}',\n";
+            $values .= "            '{$field}' => [\n";
+            $values .= "                'name' => '{$name}',\n";
+            $values .= "                'sortable' => true,\n";
+            $values .= "            ],\n";
         }
 
         $values .= "        ]";

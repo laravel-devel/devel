@@ -2,8 +2,20 @@
     <div>
         <table class="table card">
             <thead>
-                <th v-for="key in Object.keys(fields)" :key="key">
-                    {{ fields[key] }}
+                <th v-for="key in Object.keys(fields)"
+                    :key="key"
+                    :class="{ 'sortable': fields[key].sortable }"
+                    @click="toggleSort(key)"
+                >
+                    {{ fields[key].name }}
+
+                    <span v-if="fields[key].sortable">
+                        <i v-if="sort === key && sortAsc" class="las la-sort-up"></i>
+
+                        <i v-else-if="sort === key" class="las la-sort-down"></i>
+                        
+                        <i v-else class="las la-sort"></i>
+                    </span>
                 </th>
             </thead>
             
@@ -36,12 +48,13 @@ export default {
         fields: {
             type: Object,
             default: {},
+            required: true,
         }
     },
 
     computed: {
         endpoint() {
-            return `${this.baseUrl}?page=${this.page}`;
+            return `${this.baseUrl}?page=${this.page}&sort=${this.sort}|${this.sortAsc ? 'asc' : 'desc'}`;
         }
     },
 
@@ -51,6 +64,8 @@ export default {
             tableData: [],
             items: [],
             page: 1,
+            sort: Object.keys(this.fields)[0],
+            sortAsc: true,
         };
     },
  
@@ -77,6 +92,17 @@ export default {
             }
 
             this.page = page;
+
+            this.fetchData();
+        },
+
+        toggleSort(key) {
+            if (!this.fields[key].sortable) {
+                return;
+            }
+
+            this.sortAsc = (this.sort !== key) ? true : ! this.sortAsc;
+            this.sort = key;
 
             this.fetchData();
         }

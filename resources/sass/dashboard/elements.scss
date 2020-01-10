@@ -88,6 +88,10 @@
 
     th {
         border-bottom: 1px solid #ddd;
+
+        &.sortable {
+            cursor: pointer;
+        }
     }
 
     tr {

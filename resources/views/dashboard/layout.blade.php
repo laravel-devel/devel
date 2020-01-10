@@ -8,6 +8,7 @@
     @include('seo._metatags')
 
     <link rel="stylesheet" href="{{ mix('css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/line-awesome.min.css') }}">
 </head>
 <body>
     <div id="vue" class="container">

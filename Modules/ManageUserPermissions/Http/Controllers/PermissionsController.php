@@ -19,8 +19,14 @@ class PermissionsController extends Controller
         // CRUD setup
         $this->setModel('App\Models\Auth\Permission');
         $this->setDatatable([
-            'key' => 'Key',
-            'name' => 'Name',
+            'key' => [
+                'name' => 'Key',
+                'sortable' => true,
+            ],
+            'name' => [
+                'name' => 'Name',
+                'sortable' => true,
+            ],
         ]);
     }
 
