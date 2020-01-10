@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use Illuminate\Http\Request;
+
 trait Crud
 {
     /**
@@ -58,5 +60,60 @@ trait Crud
     public function datatable(): array
     {
         return $this->datatableFields;
+    }
+
+    /**
+     * API. Return a resource collection.
+     *
+     * @return Response
+     */
+    public function get()
+    {
+        return response()->json($this->model()::paginate(20));
+    }
+
+    /**
+     * Show the specified resource.
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * API. Store a newly created resource.
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource.
+     *
+     * @param Request $request
+     * @param int $id
+     * @return Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Delete the specified resource.
+     *
+     * @param int $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }
