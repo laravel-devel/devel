@@ -67,9 +67,12 @@ trait Crud
      *
      * @return Response
      */
-    public function get()
+    public function get(Request $request)
     {
-        return response()->json($this->model()::paginate(20));
+        $data = $this->model()::sort($request->sort)
+            ->paginate(20);
+
+        return response()->json($data);
     }
 
     /**
