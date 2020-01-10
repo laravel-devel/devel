@@ -6,4 +6,4 @@
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', 'SiteController@index')->name('home');
+Route::get('/', 'HomepageController@index')->name('home');

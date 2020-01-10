@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Site;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Modules\DevelCore\Http\Controllers\Controller;
 
-class SiteController extends Controller
+class HomepageController extends Controller
 {
     /**
      * Admin dashboard index
