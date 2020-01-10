@@ -1,0 +1,13 @@
+{
+    "name": "DevelCore",
+    "alias": "develcore",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\DevelCore\\Providers\\DevelCoreServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

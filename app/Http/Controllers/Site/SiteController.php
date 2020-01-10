@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Site;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Modules\DevelCore\Http\Controllers\Controller;
 
 class SiteController extends Controller
 {
