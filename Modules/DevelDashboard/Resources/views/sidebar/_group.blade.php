@@ -6,7 +6,7 @@
 
         @if (isset($item['children']))
             @foreach ($item['children'] as $name => $item)
-                @include('dashboard.sidebar._group', [
+                @include('develdashboard::sidebar._group', [
                     'name' => $name,
                     'item' => $item,
                 ])

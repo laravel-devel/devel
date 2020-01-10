@@ -13,16 +13,16 @@
 
 Route::group([
     'middleware' => [\Modules\DevelDashboard\Http\Middleware\DashboardAccess::class],
-    'prefix' => config('develdashboard.dashboard_uri') . '/' . config('$LOWER_NAME$.slug'),
+    'prefix' => config('develdashboard.dashboard_uri') . '/' . config('manageuserpermissions.slug'),
 ], function() {
     Route::get('/', [
-        'as' => 'dashboard.$LOWER_NAME$.index',
-        'uses' => '$CONTROLLER_NAME$@index',
-        'dashboardMenu' => 'Modules->' . config('$LOWER_NAME$.display_name'),
+        'as' => 'dashboard.manageuserpermissions.index',
+        'uses' => 'PermissionsController@index',
+        'dashboardMenu' => 'Modules->' . config('manageuserpermissions.display_name'),
     ]);
 
     Route::get('/list', [
-        'as' => 'dashboard.$LOWER_NAME$.get',
-        'uses' => '$CONTROLLER_NAME$@get',
+        'as' => 'dashboard.manageuserpermissions.get',
+        'uses' => 'PermissionsController@get',
     ]);
 });

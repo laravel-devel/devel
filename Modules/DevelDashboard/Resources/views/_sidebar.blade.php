@@ -10,7 +10,7 @@
             </p>
 
             @foreach ($items as $name => $item)
-                @include('dashboard.sidebar._group', [
+                @include('develdashboard::sidebar._group', [
                     'name' => $name,
                     'item' => $item,
                 ])
