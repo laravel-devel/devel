@@ -2,7 +2,7 @@
 
 namespace $CLASS_NAMESPACE$;
 
-use App\Traits\Crud;
+use Modules\DevelDashboard\Traits\Crud;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\DevelCore\Http\Controllers\Controller;

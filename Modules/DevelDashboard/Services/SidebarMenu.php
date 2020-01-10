@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace Modules\DevelDashboard\Services;
 
-class DashboardSidebarMenu
+class SidebarMenu
 {
     /**
      * Menu items tree

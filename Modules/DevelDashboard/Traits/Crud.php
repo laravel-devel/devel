@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits;
+namespace Modules\DevelDashboard\Traits;
 
 use Illuminate\Http\Request;
 

@@ -4,6 +4,8 @@ namespace Modules\DevelDashboard\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\Facades\View;
+use Modules\DevelDashboard\Services\SidebarMenu;
 
 class DevelDashboardServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,7 @@ class DevelDashboardServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(module_path('DevelDashboard', 'Database/Migrations'));
+        $this->addSidebarMenuItems();
     }
 
     /**
@@ -102,5 +105,38 @@ class DevelDashboardServiceProvider extends ServiceProvider
     public function provides()
     {
         return [];
+    }
+
+    /**
+     * Add items to the dashboard sidebar menu from all the modules.
+     *
+     * @return void
+     */
+    protected function addSidebarMenuItems()
+    {
+        // Add dashboard menu items
+        View::composer('develdashboard::_sidebar', function ($view) {
+            foreach (\Route::getRoutes() as $route) {
+                // TODO: Don't include an item if current user doesn't have
+                // permissions to access it. The list of required permissions
+                // will be also attached to the route and accessible in the same
+                // way as 'dashboardMenu'.
+                if (isset($route->action['dashboardMenu'])) {
+                    $parts = explode('->', $route->action['dashboardMenu']);
+
+                    if (count($parts) < 2) {
+                        throw new \Exception("Invalid dashboard menu entry for route \"{$route->uri}\".");
+                    }
+
+                    SidebarMenu::addItem(
+                        $parts[0],
+                        array_slice($parts, 1),
+                        $route->uri
+                    );
+                }
+            }
+
+            $view->with('sidebarMenu', SidebarMenu::getItems());
+        });
     }
 }
