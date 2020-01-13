@@ -1,5 +1,15 @@
 <template>
     <div>
+        <div>
+            Search:
+
+            <v-form-el :inline="true"
+                :field="{
+                    type: 'text'
+                }"
+                v-model="searchQuery"></v-form-el>
+        </div>
+
         <table class="table card">
             <thead>
                 <th v-for="key in Object.keys(fields)"
@@ -54,7 +64,7 @@ export default {
 
     computed: {
         endpoint() {
-            return `${this.baseUrl}?page=${this.page}&sort=${this.sort}|${this.sortAsc ? 'asc' : 'desc'}`;
+            return `${this.baseUrl}?page=${this.page}&sort=${this.sort}|${this.sortAsc ? 'asc' : 'desc'}&search=${this.searchQuery}`;
         }
     },
 
@@ -66,11 +76,23 @@ export default {
             page: 1,
             sort: Object.keys(this.fields)[0],
             sortAsc: true,
+            searchQuery: '',
+            searchTimeout: null,
         };
     },
  
     created() {
         this.fetchData();
+    },
+
+    watch: {
+        searchQuery() {
+            clearTimeout(this.searchTimeout);
+
+            this.searchTimeout = setTimeout(() => {
+                this.fetchData();
+            }, 250);
+        }
     },
 
     methods: {

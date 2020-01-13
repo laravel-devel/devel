@@ -6,6 +6,10 @@ trait Sortable
 {
     public function scopeSort($query, $sort)
     {
+        if (!$sort) {
+            return $query;
+        }
+        
         $sort = explode('|', $sort);
 
         if (count($sort) < 2) {

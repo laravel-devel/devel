@@ -70,6 +70,7 @@ trait Crud
     public function get(Request $request)
     {
         $data = $this->model()::sort($request->sort)
+            ->search($request->search)
             ->paginate(20);
 
         return response()->json($data);

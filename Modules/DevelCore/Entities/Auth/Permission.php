@@ -19,4 +19,9 @@ class Permission extends Model
         'key',
         'name',
     ];
+
+    protected $searchable = [
+        'key',
+        'name',
+    ];
 }
