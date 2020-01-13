@@ -30,6 +30,7 @@ class RolesController extends Controller
             'default' => [
                 'name' => 'Default',
                 'sortable' => true,
+                'format' => "value ? 'yes' : ''",
             ],
         ]);
     }

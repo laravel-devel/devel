@@ -32,7 +32,7 @@
             <tbody>
                 <tr v-for="(item, index) in items" :key="index">
                     <td v-for="key in Object.keys(fields)" :key="key">
-                        {{ item[key] ? item[key] : '-' }}
+                        {{ formatted(fields[key], item[key]) }}
                     </td>
                 </tr>
             </tbody>
@@ -127,6 +127,16 @@ export default {
             this.sort = key;
 
             this.fetchData();
+        },
+
+        formatted(field, value) {
+            let formatted = value;
+
+            if (field.format) {
+                formatted = eval(field.format);
+            }
+            
+            return formatted ? formatted : '-';
         }
     }
 }
