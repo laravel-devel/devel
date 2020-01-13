@@ -1,5 +1,4 @@
 {
     "DevelCore": true,
-    "DevelDashboard": true,
-    "ManageUserPermissions": true
+    "DevelDashboard": true
 }
