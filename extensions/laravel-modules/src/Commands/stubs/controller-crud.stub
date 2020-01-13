@@ -14,7 +14,7 @@ class $CLASS$ extends Controller
     public function __construct()
     {
         $this->setMeta('title', 'Dashboard');
-        $this->setMeta('title', config('manageuserpermissions.display_name'));
+        $this->setMeta('title', config('$LOWER_NAME$.display_name'));
 
         // CRUD setup
         $this->setModel('$MODEL$');
