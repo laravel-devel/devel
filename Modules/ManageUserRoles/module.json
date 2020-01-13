@@ -1,0 +1,13 @@
+{
+    "name": "ManageUserRoles",
+    "alias": "manageuserroles",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\ManageUserRoles\\Providers\\ManageUserRolesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": ["DevelCore"]
+}

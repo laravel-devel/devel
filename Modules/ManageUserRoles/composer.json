@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/manageuserroles",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\ManageUserRoles\\Providers\\ManageUserRolesServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ManageUserRoles\\": ""
+        }
+    }
+}

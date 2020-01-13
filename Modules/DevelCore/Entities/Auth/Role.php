@@ -24,6 +24,11 @@ class Role extends Model
         'default',
     ];
 
+    protected $searchable = [
+        'key',
+        'name',
+    ];
+
     /**
      * A role has many permissions
      *
