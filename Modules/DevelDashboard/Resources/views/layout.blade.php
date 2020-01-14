@@ -12,6 +12,8 @@
 </head>
 <body>
     <div id="vue" class="container">
+        <v-alert></v-alert>
+        
         @include('develdashboard::_sidebar')
 
         <main class="main">
