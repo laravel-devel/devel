@@ -13,7 +13,8 @@
 <body>
     <div id="vue" class="container">
         <v-alert></v-alert>
-        
+        <v-notification></v-notification>
+
         @include('develdashboard::_sidebar')
 
         <main class="main">

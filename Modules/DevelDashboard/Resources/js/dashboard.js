@@ -18,6 +18,7 @@ Vue.component('v-form-el', require('./dashboard/form/Element').default);
 // Components
 Vue.component('v-datatable', require('./dashboard/components/DataTable').default);
 Vue.component('v-alert', require('./dashboard/components/Alert').default);
+Vue.component('v-notification', require('./dashboard/components/Notification').default);
 
 new Vue({
     el: '#vue',
