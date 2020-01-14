@@ -43,7 +43,7 @@
                                 href="#"
                                 class="action-btn danger"
                                 title="Delete"
-                                @click.prevent="deleteItem(item, actions.delete)"
+                                @click.prevent="deleteItemConfirm(item, actions.delete)"
                             >
                                 <i class="las la-trash"></i>
                             </a>
@@ -82,6 +82,11 @@ export default {
 
         actions: {
             default: {},
+        },
+
+        deleteConfirmation: {
+            type: String,
+            default: 'Are you sure you want to delete this item?',
         }
     },
 
@@ -166,6 +171,14 @@ export default {
             return formatted ? formatted : '-';
         },
 
+        deleteItemConfirm(item, url) {
+            this.$confirm(this.deleteConfirmation, {
+                onOk: () => {
+                    this.deleteItem(item, url);
+                }
+            });
+        },
+
         deleteItem(item, url) {
             this.processing = true;
 
@@ -179,8 +192,6 @@ export default {
                     url = url.replace(param, item[attr]);
                 }
             }
-            
-            // TODO: Confirmation modal
 
             axios.delete(url)
                 .then((response) => {
