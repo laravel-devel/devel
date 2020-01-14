@@ -195,16 +195,18 @@ export default {
 
             axios.delete(url)
                 .then((response) => {
-                    // TODO: A success notification
                     this.fetchData();
+
+                    this.$notify('Item has been deleted!', 'success');
                 })
                 .catch(({ response }) => {
-                    // TODO: An error notification
+                    let error = 'Something went wrong!';
+
                     if (response.status == 409) {
-                        alert(response.data.message);
-                    } else {
-                        alert('Something went wrong!');
+                        error = response.data.message;
                     }
+
+                    this.$notify(error, 'error');
 
                     this.processing = false;
                 });
