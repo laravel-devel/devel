@@ -8,6 +8,10 @@ class Permission extends Model
 {
     public $table = 'user_permissions';
 
+    protected $primaryKey = 'key';
+
+    public $incrementing = false;
+
     public $timestamps = false;
 
     /**

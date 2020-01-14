@@ -10,33 +10,52 @@
                 v-model="searchQuery"></v-form-el>
         </div>
 
-        <table class="table card">
-            <thead>
-                <th v-for="key in Object.keys(fields)"
-                    :key="key"
-                    :class="{ 'sortable': fields[key].sortable }"
-                    @click="toggleSort(key)"
-                >
-                    {{ fields[key].name }}
+        <div class="table-wrapper">
+            <table class="table card">
+                <thead>
+                    <th v-for="key in Object.keys(fields)"
+                        :key="key"
+                        :class="{ 'sortable': fields[key].sortable }"
+                        @click="toggleSort(key)"
+                    >
+                        {{ fields[key].name }}
 
-                    <span v-if="fields[key].sortable">
-                        <i v-if="sort === key && sortAsc" class="las la-sort-up"></i>
+                        <span v-if="fields[key].sortable">
+                            <i v-if="sort === key && sortAsc" class="las la-sort-up"></i>
 
-                        <i v-else-if="sort === key" class="las la-sort-down"></i>
-                        
-                        <i v-else class="las la-sort"></i>
-                    </span>
-                </th>
-            </thead>
-            
-            <tbody>
-                <tr v-for="(item, index) in items" :key="index">
-                    <td v-for="key in Object.keys(fields)" :key="key">
-                        {{ formatted(fields[key], item[key]) }}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                            <i v-else-if="sort === key" class="las la-sort-down"></i>
+                            
+                            <i v-else class="las la-sort"></i>
+                        </span>
+                    </th>
+
+                    <th v-if="hasActions">Actions</th>
+                </thead>
+                
+                <tbody>
+                    <tr v-for="(item, index) in items" :key="index">
+                        <td v-for="key in Object.keys(fields)" :key="key">
+                            {{ formatted(fields[key], item[key]) }}
+                        </td>
+
+                        <td v-if="hasActions">
+                            <a v-if="actions.delete"
+                                href="#"
+                                class="action-btn danger"
+                                title="Delete"
+                                @click.prevent="deleteItem(item, actions.delete)"
+                            >
+                                <i class="las la-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div v-show="processing" class="processing-overlay">
+                <i class="las la-sync spin-ease"></i>
+            </div>
+        </div>
 
         <v-paginator :page="page"
             :info="tableData"
@@ -59,18 +78,26 @@ export default {
             type: Object,
             default: {},
             required: true,
+        },
+
+        actions: {
+            default: {},
         }
     },
 
     computed: {
         endpoint() {
             return `${this.baseUrl}?page=${this.page}&sort=${this.sort}|${this.sortAsc ? 'asc' : 'desc'}&search=${this.searchQuery}`;
+        },
+
+        hasActions() {
+            return this.actions && Object.keys(this.actions).length > 0;
         }
     },
 
     data() {
         return {
-            fetching: false,
+            processing: false,
             tableData: [],
             items: [],
             page: 1,
@@ -97,14 +124,14 @@ export default {
 
     methods: {
         fetchData() {
-            this.fetching = true;
+            this.processing = true;
 
             axios.get(this.endpoint)
                 .then(({ data }) => {
                     this.tableData = data;
                     this.items = data.data;
 
-                    this.fetching = false;
+                    this.processing = false;
                 });
         },
 
@@ -137,6 +164,39 @@ export default {
             }
             
             return formatted ? formatted : '-';
+        },
+
+        deleteItem(item, url) {
+            this.processing = true;
+
+            const params = url.match(new RegExp(':([a-zA-Z].*?)(/|$)', 'g'));
+
+            for (let param of params) {
+                param = param.replace('/', '');
+                const attr = param.replace(':', '');
+
+                if (item[attr]) {
+                    url = url.replace(param, item[attr]);
+                }
+            }
+            
+            // TODO: Confirmation modal
+
+            axios.delete(url)
+                .then((response) => {
+                    // TODO: A success notification
+                    this.fetchData();
+                })
+                .catch(({ response }) => {
+                    // TODO: An error notification
+                    if (response.status == 409) {
+                        alert(response.data.message);
+                    } else {
+                        alert('Something went wrong!');
+                    }
+
+                    this.processing = false;
+                });
         }
     }
 }

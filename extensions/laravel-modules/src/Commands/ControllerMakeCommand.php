@@ -166,6 +166,8 @@ class ControllerMakeCommand extends GeneratorCommand
             return '';
         }
 
+        $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+
         $model = new $model;
         $table = $model->getTable();
         $fields = Schema::getColumnListing($table);
@@ -191,6 +193,8 @@ class ControllerMakeCommand extends GeneratorCommand
             $values .= "            ],\n";
         }
 
+        $values .= "        ], [\n";
+        $values .= "            'delete' => route('dashboard.{$module->getLowerName()}.destroy', ':id'),\n";
         $values .= "        ]";
 
         return $values;

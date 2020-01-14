@@ -1,0 +1,12 @@
+@keyframes spin-ease {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spin-ease {
+    animation: spin-ease 1s ease infinite;
+}

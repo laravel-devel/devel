@@ -30,6 +30,7 @@ class $CLASS$ extends Controller
     {
         return view('$LOWER_NAME$::dashboard.index', [
             'fields' => $this->datatable(),
+            'actions' => $this->actions(),
         ]);
     }
 

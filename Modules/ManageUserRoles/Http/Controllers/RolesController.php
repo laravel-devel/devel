@@ -32,6 +32,8 @@ class RolesController extends Controller
                 'sortable' => true,
                 'format' => "value ? 'yes' : ''",
             ],
+        ], [
+            'delete' => route('dashboard.manageuserroles.destroy', ':key'),
         ]);
     }
 
@@ -44,6 +46,7 @@ class RolesController extends Controller
     {
         return view('manageuserroles::dashboard.index', [
             'fields' => $this->datatable(),
+            'actions' => $this->actions(),
         ]);
     }
 
@@ -66,5 +69,28 @@ class RolesController extends Controller
     public function edit($id)
     {
         return view('manageuserroles::dashboard.edit');
+    }
+
+    /**
+     * Determine whether an item can be deleted.
+     *
+     * @param mixed $id
+     * @return mixed
+     */
+    protected function canBeDeleted($id)
+    {
+        $model = new $this->modelClass;
+
+        $object = ($this->model())::where($model->getRouteKeyName(), $id)->first();
+
+        if (!$object) {
+            return 'Item with provided was id not found!';
+        }
+
+        if ($object->default) {
+            return 'The default role cannot be deleted!';
+        }
+
+        return true;
     }
 }

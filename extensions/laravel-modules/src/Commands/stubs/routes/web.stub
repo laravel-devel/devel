@@ -25,4 +25,9 @@ Route::group([
         'as' => 'dashboard.$LOWER_NAME$.get',
         'uses' => '$CONTROLLER_NAME$@get',
     ]);
+
+    Route::delete('/{id}', [
+        'as' => 'dashboard.$LOWER_NAME$.destroy',
+        'uses' => '$CONTROLLER_NAME$@destroy',
+    ]);
 });

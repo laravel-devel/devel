@@ -10,7 +10,11 @@ class Role extends Model
     use HasPermissions;
 
     public $table = 'user_roles';
+    
+    protected $primaryKey = 'key';
 
+    public $incrementing = false;
+    
     public $timestamps = false;
 
     /**
@@ -19,8 +23,8 @@ class Role extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id',
-        'role',
+        'key',
+        'name',
         'default',
     ];
 
