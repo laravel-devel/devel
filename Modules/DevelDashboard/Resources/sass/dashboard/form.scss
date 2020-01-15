@@ -1,4 +1,31 @@
 .form {
+    table {
+        width: 100%;
+
+        td {
+            vertical-align: middle;
+            
+            .form-group { padding-bottom: 0; }
+
+            .checkbox {
+                margin-bottom: 0;
+            }
+        }
+
+        tr td {
+            &:first-of-type {
+                white-space: nowrap;
+                padding-right: 1rem;
+                font-weight: 600;
+            }
+
+            &:last-of-type {
+                width: 100%;
+                white-space: nowrap;
+            }
+        }
+    }
+
     .message {
         text-align: center;
         padding: 1rem;
@@ -15,6 +42,7 @@
 }
 
 .form-group {
+    width: 100%;
     padding-bottom: 1rem;
 
     &.inline {
@@ -58,9 +86,8 @@
         user-select: none;
         cursor: pointer;
 
-         input {
-            position: absolute;
-            opacity: 0;
+        input {
+            display: none;
             cursor: pointer;
             height: 0;
             width: 0;
@@ -98,6 +125,11 @@
             &:after {
                 display: block;
             }
+        }
+
+        &:after {
+            content: " ";
+            white-space: pre;
         }
     }
 }

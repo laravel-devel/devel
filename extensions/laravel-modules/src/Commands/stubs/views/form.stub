@@ -1,0 +1,9 @@
+<v-form action="{{ route('dashboard.auth.login.post') }}"
+    method="POST"
+    type="table"
+    :fields="[
+        { type: 'email', name: 'email', label: 'E-mail' },
+        { type: 'password', name: 'password', label: 'Password' },
+        { type: 'checkbox', name: 'remember', label: 'Remember Me' },
+    ]"
+    success="{{ route('dashboard.index') }}"></v-form>

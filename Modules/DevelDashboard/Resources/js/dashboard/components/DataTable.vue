@@ -1,13 +1,19 @@
 <template>
     <div>
-        <div>
-            Search:
+        <div class="flex">
+            <div class="flex-1">
+                Search:
 
-            <v-form-el :inline="true"
-                :field="{
-                    type: 'text'
-                }"
-                v-model="searchQuery"></v-form-el>
+                <v-form-el :inline="true"
+                    :field="{
+                        type: 'text'
+                    }"
+                    v-model="searchQuery"></v-form-el>
+            </div>
+
+            <div v-if="hasActions && actions.create">
+                <a :href="actions.create" class="btn">Add</a>
+            </div>
         </div>
 
         <div class="table-wrapper">

@@ -26,6 +26,11 @@ Route::group([
         'uses' => 'RolesController@get',
     ]);
 
+    Route::get('/add', [
+        'as' => 'dashboard.manageuserroles.create',
+        'uses' => 'RolesController@create',
+    ]);
+
     Route::delete('/{id}', [
         'as' => 'dashboard.manageuserroles.destroy',
         'uses' => 'RolesController@destroy',

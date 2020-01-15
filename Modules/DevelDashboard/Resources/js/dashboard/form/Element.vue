@@ -1,17 +1,17 @@
 <template>
     <div class="form-group" :class="{ 'inline': inline }">
         <v-fel-input v-if="inputTypes.indexOf(field.type) >= 0"
-            :attrs="field"
+            :attrs="attrs"
             :value="value"
             @input="onInput"></v-fel-input>
 
         <v-fel-checkbox v-else-if="field.type === 'checkbox'"
-            :attrs="field"
+            :attrs="attrs"
             :value="value"
             @input="onInput"></v-fel-checkbox>
 
         <v-fel-link v-else-if="field.type === 'link'"
-            :attrs="field"></v-fel-link>
+            :attrs="attrs"></v-fel-link>
 
         <div v-if="errors" class="hint danger">
             {{ errors[0] }}
@@ -43,6 +43,11 @@ export default {
         inline: {
             type: Boolean,
             default: false,
+        },
+
+        showLabel: {
+            type: Boolean,
+            default: true,
         }
     },
 
@@ -54,7 +59,14 @@ export default {
                 'password',
                 'hidden',
             ],
+            attrs: {},
         };
+    },
+
+    created() {
+        this.attrs = Object.assign(this.field, {
+            label: this.showLabel ? this.field.label : undefined,
+        });
     },
 
     methods: {

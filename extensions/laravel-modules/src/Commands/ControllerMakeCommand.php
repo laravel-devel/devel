@@ -195,6 +195,7 @@ class ControllerMakeCommand extends GeneratorCommand
 
         $values .= "        ], [\n";
         $values .= "            'delete' => route('dashboard.{$module->getLowerName()}.destroy', ':id'),\n";
+        $values .= "            'create' => route('dashboard.{$module->getLowerName()}.create'),\n";
         $values .= "        ]";
 
         return $values;

@@ -34,6 +34,7 @@ class RolesController extends Controller
             ],
         ], [
             'delete' => route('dashboard.manageuserroles.destroy', ':key'),
+            'create' => route('dashboard.manageuserroles.create'),
         ]);
     }
 
@@ -57,17 +58,21 @@ class RolesController extends Controller
      */
     public function create()
     {
+        $this->setMeta('title', 'Add');
+
         return view('manageuserroles::dashboard.create');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param mixed $id
      * @return Response
      */
     public function edit($id)
     {
+        $this->setMeta('title', 'Edit');
+
         return view('manageuserroles::dashboard.edit');
     }
 

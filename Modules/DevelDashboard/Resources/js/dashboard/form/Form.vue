@@ -6,11 +6,33 @@
         @submit.prevent="onSubmit"
         ref="form"
     >
-        <v-form-el v-for="(field, index) in fields"
-            :key="index"
-            :field="field"
-            :errors="errors[field.name] ? errors[field.name] : []"
-            :value="(values && values[field.name]) ? values[field.name] : []"></v-form-el>
+        <div v-if="type === 'default'">
+            <v-form-el v-for="(field, index) in fields"
+                :key="index"
+                :field="field"
+                :errors="errors[field.name] ? errors[field.name] : []"
+                :value="(values && values[field.name]) ? values[field.name] : []">
+            </v-form-el>
+        </div>
+
+        <div v-else-if="type === 'table'">
+            <table>
+                <tr v-for="(field, index) in fields"
+                    :key="index"
+                >
+                    <td v-text="field.label"></td>
+
+                    <td>
+                        <v-form-el :field="field"
+                            :errors="errors[field.name] ? errors[field.name] : []"
+                            :value="(values && values[field.name]) ? values[field.name] : []"
+                            :show-label="false"
+                            :inline="true">
+                        </v-form-el>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
         <div class="message" :class="messageClass" v-text="message"></div>
 
@@ -29,14 +51,27 @@
 
 <script>
 export default {
-    props: [
-        'action',
-        'method',
-        'fields',
-        'values',
-        'button',
-        'success',
-    ],
+    props: {
+        action: String,
+
+        method: {
+            type: String,
+            default: 'GET',
+        },
+
+        fields: Array,
+        
+        values: Object,
+
+        button: Object,
+
+        success: String,
+
+        type: {
+            type: String,
+            default: 'default',
+        }
+    },
 
     data() {
         return {

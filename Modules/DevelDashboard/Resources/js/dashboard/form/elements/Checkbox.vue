@@ -1,7 +1,7 @@
 <template>
     <div>
-        <label class="checkbox" v-if="attrs.label">
-            {{ attrs.label }}
+        <label class="checkbox">
+            <span v-if="attrs.label">{{ attrs.label }}</span>
 
             <input class="form-element"
                 :type="attrs.type"
