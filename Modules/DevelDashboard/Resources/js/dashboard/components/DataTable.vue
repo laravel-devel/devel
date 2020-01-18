@@ -1,14 +1,15 @@
 <template>
-    <div>
-        <div class="flex">
-            <div class="flex-1">
-                Search:
+    <div class="datatable">
+        <div class="flex pb-1">
+            <div class="flex flex-align-center flex-1">
+                <span class="mr-1">Search:</span>
 
                 <v-form-el :inline="true"
                     :field="{
                         type: 'text'
                     }"
-                    v-model="searchQuery"></v-form-el>
+                    v-model="searchQuery"
+                    class="search-field"></v-form-el>
             </div>
 
             <div v-if="hasActions && actions.create">

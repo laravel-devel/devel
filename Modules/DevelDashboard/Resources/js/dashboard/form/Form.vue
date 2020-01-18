@@ -11,7 +11,8 @@
                 :key="index"
                 :field="field"
                 :errors="errors[field.name] ? errors[field.name] : []"
-                :value="(values && values[field.name]) ? values[field.name] : []">
+                :value="(values && values[field.name]) ? values[field.name] : []"
+                class="pb-1">
             </v-form-el>
         </div>
 
@@ -20,9 +21,9 @@
                 <tr v-for="(field, index) in fields"
                     :key="index"
                 >
-                    <td v-text="field.label"></td>
+                    <td class="pb-1" v-text="field.label"></td>
 
-                    <td>
+                    <td class="pb-1">
                         <v-form-el :field="field"
                             :errors="errors[field.name] ? errors[field.name] : []"
                             :value="(values && values[field.name]) ? values[field.name] : []"

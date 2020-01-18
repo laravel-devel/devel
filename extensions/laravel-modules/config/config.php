@@ -32,7 +32,6 @@ return [
             'routes/api' => 'Routes/api.php',
             'views/index' => 'Resources/views/dashboard/index.blade.php',
             'views/create' => 'Resources/views/dashboard/create.blade.php',
-            'views/form' => 'Resources/views/dashboard/form.blade.php',
             // 'views/master' => 'Resources/views/layouts/master.blade.php',
             'scaffold/config' => 'Config/config.php',
             'composer' => 'composer.json',

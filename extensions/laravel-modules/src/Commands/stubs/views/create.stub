@@ -10,9 +10,11 @@
     <div class="section-body">
         <div class="card">
             <div class="body">
-                @include('$LOWER_NAME$::dashboard.form', [
-                    'action' => route('dashboard.$LOWER_NAME$.store')
-                ])
+                <v-form action="{{ route('dashboard.$LOWER_NAME$.store') }}"
+                    method="POST"
+                    type="table"
+                    :fields="{{ json_encode($form) }}"
+                    success="{{ route('dashboard.$LOWER_NAME$.index') }}"></v-form>
             </div>
         </div>
     </div>

@@ -28,6 +28,13 @@ trait Crud
     protected $datatableActions = [];
 
     /**
+     * List of form fields to include into the create/edit forms.
+     *
+     * @var array
+     */
+    protected $formFields = [];
+
+    /**
      * Set the model class
      *
      * @param string $class
@@ -49,6 +56,17 @@ trait Crud
     {
         $this->datatableFields = $fields;
         $this->datatableActions = $actions;
+    }
+
+    /**
+     * Set form fields to be included into the form.
+     *
+     * @param array $fields
+     * @return void
+     */
+    protected function setForm(array $fields): void
+    {
+        $this->formFields = $fields;
     }
 
     /**
@@ -79,6 +97,16 @@ trait Crud
     protected function actions(): array
     {
         return $this->datatableActions;
+    }
+
+    /**
+     * Return the form fields list
+     *
+     * @return array
+     */
+    protected function form(): array
+    {
+        return $this->formFields;
     }
 
     /**

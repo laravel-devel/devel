@@ -4,8 +4,6 @@
 
         td {
             vertical-align: middle;
-            
-            .form-group { padding-bottom: 0; }
 
             .checkbox {
                 margin-bottom: 0;
@@ -43,9 +41,8 @@
 
 .form-group {
     width: 100%;
-    padding-bottom: 1rem;
 
-    &.inline {
+    &.inline, .inline {
         display: inline-block;
     }
 

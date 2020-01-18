@@ -1,5 +1,11 @@
 .flex { display: flex; }
 .flex-1 { flex: 1; }
+.flex-justify-center { justify-content: center; }
+.flex-align-center { align-items: center; }
+
+.pb-1 { padding-bottom: 1rem; }
+
+.mr-1 { margin-right: 1rem; }
 
 @keyframes spin-ease {
     from {

@@ -18,7 +18,10 @@ class $CLASS$ extends Controller
 
         // CRUD setup
         $this->setModel('$MODEL$');
+
         $this->setDatatable($MODEL_DATATABLE$);
+        
+        $this->setForm($MODEL_FORM$);
     }
 
     /**
@@ -43,7 +46,9 @@ class $CLASS$ extends Controller
     {
         $this->setMeta('title', 'Add');
 
-        return view('$LOWER_NAME$::dashboard.create');
+        return view('$LOWER_NAME$::dashboard.create', [
+            'form' => $this->form(),
+        ]);
     }
 
     /**
@@ -56,6 +61,8 @@ class $CLASS$ extends Controller
     {
         $this->setMeta('title', 'Edit');
 
-        return view('$LOWER_NAME$::dashboard.edit');
+        return view('$LOWER_NAME$::dashboard.edit', [
+            'form' => $this->form(),
+        ]);
     }
 }

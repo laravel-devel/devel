@@ -2,6 +2,7 @@
 
 namespace Nwidart\Modules\Commands;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
 use Nwidart\Modules\Support\Config\GenerateConfigReader;
@@ -34,6 +35,11 @@ class ControllerMakeCommand extends GeneratorCommand
      * @var string
      */
     protected $description = 'Generate new restful controller for the specified module.';
+
+    protected $dbToFormTypes = [
+        'string' => 'text',
+        'boolean' => 'checkbox',
+    ];
 
     /**
      * Get controller name.
@@ -69,6 +75,7 @@ class ControllerMakeCommand extends GeneratorCommand
             'MODEL'             => $this->getModel(),
             'MODULE_NAMESPACE'  => $this->laravel['modules']->config('namespace'),
             'MODEL_DATATABLE'   => $this->generateDatatable(),
+            'MODEL_FORM'        => $this->generateForm(),
         ]))->render();
     }
 
@@ -163,7 +170,7 @@ class ControllerMakeCommand extends GeneratorCommand
     protected function generateDatatable(): string
     {
         if (!$model = $this->getModel()) {
-            return '';
+            return '[]';
         }
 
         $module = $this->laravel['modules']->findOrFail($this->getModuleName());
@@ -196,6 +203,58 @@ class ControllerMakeCommand extends GeneratorCommand
         $values .= "        ], [\n";
         $values .= "            'delete' => route('dashboard.{$module->getLowerName()}.destroy', ':id'),\n";
         $values .= "            'create' => route('dashboard.{$module->getLowerName()}.create'),\n";
+        $values .= "        ]";
+
+        return $values;
+    }
+
+    /**
+     * Generate form fields list.
+     *
+     * @return string
+     */
+    protected function generateForm(): string
+    {
+        if (!$model = $this->getModel()) {
+            return '[]';
+        }
+
+        // $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+
+        $model = new $model;
+        // $table = $model->getTable();
+        // $fields = Schema::getColumnListing($table);
+
+        // // Exclude some generic fields
+        // $fields = array_diff($fields, [
+        //     'id',
+        //     'email_verified_at',
+        //     'created_at',
+        //     'updated_at',
+        // ]);
+
+        // // Exclude hidden fields
+        // $fields = array_diff($fields, $model->getHidden());
+
+        $values = "[\n";
+
+        // Only include the fillable fields
+        foreach ($model->getFillable() as $field) {
+            $label = ucwords(implode(' ', explode('_', $field)));
+
+            // Determine the field type from the DB type
+            $columnType = DB::getSchemaBuilder()
+                ->getColumnType($model->getTable(), $field);
+
+            $type = $this->dbToFormTypes[$columnType] ?? 'text';
+
+            $values .= "            [\n";
+            $values .= "                'type' => '{$type}',\n";
+            $values .= "                'name' => '{$field}',\n";
+            $values .= "                'label' => '{$label}',\n";
+            $values .= "            ],\n";
+        }
+
         $values .= "        ]";
 
         return $values;
