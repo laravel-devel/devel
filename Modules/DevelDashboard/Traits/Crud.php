@@ -4,6 +4,7 @@ namespace Modules\DevelDashboard\Traits;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 trait Crud
 {
@@ -175,7 +176,9 @@ trait Crud
      */
     public function update(Request $request, $id)
     {
-        $item = $this->storeOrUpdate($request);
+        $item = $this->model()::findOrFail($id);
+
+        $item = $this->storeOrUpdate($request, $item);
 
         return response()->json($item, 200);
     }
@@ -238,15 +241,20 @@ trait Crud
         $model = $this->model();
         $model = new $model;
 
-        foreach ($request->all() as $field => $value)
+        $table = $model->getTable();
+        $columns = Schema::getColumnListing($table);
+
+        foreach ($columns as $field)
         {
             $columnType = DB::getSchemaBuilder()
-                ->getColumnType($model->getTable(), $field);
+                ->getColumnType($table, $field);
 
             if ($columnType === 'boolean') {
-                $values[$field] = isset($value);
+                $values[$field] = !empty($request->get($field));
             } else {
-                $values[$field] = $value;
+                if ($request->has($field)) {
+                    $values[$field] = $request->get($field);
+                }
             }
         }
 

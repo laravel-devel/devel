@@ -60,9 +60,12 @@ class $CLASS$ extends Controller
      */
     public function edit($id)
     {
+        $item = $this->model()::findOrFail($id);
+
         $this->setMeta('title', 'Edit');
 
         return view('$LOWER_NAME$::dashboard.edit', [
+            'item' => $item,
             'form' => $this->form(),
         ]);
     }

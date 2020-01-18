@@ -31,6 +31,11 @@ Route::group([
         'uses' => '$CONTROLLER_NAME$@create',
     ]);
 
+    Route::get('/{id}/edit', [
+        'as' => 'dashboard.$LOWER_NAME$.edit',
+        'uses' => '$CONTROLLER_NAME$@edit',
+    ]);
+
     Route::post('/', [
         'as' => 'dashboard.$LOWER_NAME$.store',
         'uses' => '$CONTROLLER_NAME$@store',

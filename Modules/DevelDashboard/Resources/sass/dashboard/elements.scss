@@ -75,6 +75,19 @@
     .search-field {
         width: 13rem;
     }
+
+    .table {
+        table-layout: fixed;
+    }
+
+    td {
+        // TODO: The actions column should have auto width, other columns should all have the same width
+        // width: auto;
+
+        // &.actions {
+        //     width: 1rem !important;
+        // }
+    }
 }
 
 .table-wrapper {

@@ -206,6 +206,7 @@ class ControllerMakeCommand extends GeneratorCommand
         $module = $this->laravel['modules']->findOrFail($this->getModuleName());
 
         $model = new $model;
+        $idKey = $model->getRouteKeyName();
         $table = $model->getTable();
         $fields = Schema::getColumnListing($table);
 
@@ -231,8 +232,9 @@ class ControllerMakeCommand extends GeneratorCommand
         }
 
         $values .= "        ], [\n";
-        $values .= "            'delete' => route('dashboard.{$module->getLowerName()}.destroy', ':id'),\n";
+        $values .= "            'delete' => route('dashboard.{$module->getLowerName()}.destroy', ':{$idKey}'),\n";
         $values .= "            'create' => route('dashboard.{$module->getLowerName()}.create'),\n";
+        $values .= "            'edit' => route('dashboard.{$module->getLowerName()}.edit', ':{$idKey}'),\n";
         $values .= "        ]";
 
         return $values;

@@ -45,7 +45,7 @@
                             {{ formatted(fields[key], item[key]) }}
                         </td>
 
-                        <td v-if="hasActions">
+                        <td v-if="hasActions" class="actions">
                             <a v-if="actions.delete"
                                 href="#"
                                 class="action-btn danger"
@@ -53,6 +53,14 @@
                                 @click.prevent="deleteItemConfirm(item, actions.delete)"
                             >
                                 <i class="las la-trash"></i>
+                            </a>
+
+                            <a v-if="actions.edit"
+                                :href="actionEndpoint(actions.edit, item)"
+                                class="action-btn primary"
+                                title="Edit"
+                            >
+                                <i class="las la-edit"></i>
                             </a>
                         </td>
                     </tr>
@@ -178,6 +186,21 @@ export default {
             return formatted ? formatted : '-';
         },
 
+        actionEndpoint(url, item) {
+            const params = url.match(new RegExp(':([a-zA-Z].*?)(/|$)', 'g'));
+
+            for (let param of params) {
+                param = param.replace('/', '');
+                const attr = param.replace(':', '');
+
+                if (item[attr]) {
+                    url = url.replace(param, item[attr]);
+                }
+            }
+
+            return url;
+        },
+
         deleteItemConfirm(item, url) {
             this.$confirm(this.deleteConfirmation, {
                 onOk: () => {
@@ -189,16 +212,7 @@ export default {
         deleteItem(item, url) {
             this.processing = true;
 
-            const params = url.match(new RegExp(':([a-zA-Z].*?)(/|$)', 'g'));
-
-            for (let param of params) {
-                param = param.replace('/', '');
-                const attr = param.replace(':', '');
-
-                if (item[attr]) {
-                    url = url.replace(param, item[attr]);
-                }
-            }
+            url = this.actionEndpoint(url, item);
 
             axios.delete(url)
                 .then((response) => {
