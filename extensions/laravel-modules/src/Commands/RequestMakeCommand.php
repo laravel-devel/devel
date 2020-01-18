@@ -2,6 +2,7 @@
 
 namespace Nwidart\Modules\Commands;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Nwidart\Modules\Support\Config\GenerateConfigReader;
 use Nwidart\Modules\Support\Stub;
@@ -50,6 +51,7 @@ class RequestMakeCommand extends GeneratorCommand
         return [
             ['name', InputArgument::REQUIRED, 'The name of the form request class.'],
             ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['model', InputArgument::OPTIONAL, 'Specify a model if you want some rules to be automatically generated.'],
         ];
     }
 
@@ -63,6 +65,7 @@ class RequestMakeCommand extends GeneratorCommand
         return (new Stub('/request.stub', [
             'NAMESPACE' => $this->getClassNamespace($module),
             'CLASS'     => $this->getClass(),
+            'RULES'     => $this->getRules(),
         ]))->render();
     }
 
@@ -84,5 +87,57 @@ class RequestMakeCommand extends GeneratorCommand
     private function getFileName()
     {
         return Str::studly($this->argument('name'));
+    }
+
+    /**
+     * Get CRUD model class name.
+     *
+     * @return string
+     */
+    protected function getModel(): string
+    {
+        return $this->argument('model') ?? '';
+    }
+
+    /**
+     * Generate validation rules based on the model.
+     *
+     * @return string
+     */
+    protected function getRules(): string
+    {
+        if (!$model = $this->getModel()) {
+            return '            //';
+        }
+
+        $model = new $model;
+
+        $rules = '';
+
+        // Only include the fillable fields
+        foreach ($model->getFillable() as $field) {
+            $label = ucwords(implode(' ', explode('_', $field)));
+
+            // Determine the field type from the DB type
+            $type = DB::getSchemaBuilder()
+                ->getColumnType($model->getTable(), $field);
+   
+            $rules .= "            '{$field}' => [\n";
+
+            if ($type === 'boolean') {
+                $rules .= "                'sometimes',\n";
+            } else {
+                $rules .= "                'required',\n";
+                $rules .= "                '{$type}',\n";
+            }
+
+            if ($type === 'string') {
+                $rules .= "                'max:191',\n";
+            }
+
+            $rules .= "            ],\n";
+        }
+
+        return $rules;
     }
 }

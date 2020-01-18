@@ -18,6 +18,7 @@ class $CLASS$ extends Controller
 
         // CRUD setup
         $this->setModel('$MODEL$');
+        $this->setRequest('$REQUEST_CLASS$');
 
         $this->setDatatable($MODEL_DATATABLE$);
         

@@ -3,6 +3,7 @@
 namespace Modules\DevelDashboard\Traits;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 trait Crud
 {
@@ -12,6 +13,13 @@ trait Crud
      * @var string
      */
     protected $modelClass;
+
+    /**
+     * Form Request class.
+     *
+     * @var string
+     */
+    protected $requestClass;
 
     /**
      * List of model fields to include in the datatable.
@@ -43,6 +51,17 @@ trait Crud
     protected function setModel(string $class): void
     {
         $this->modelClass = $class;
+    }
+
+    /**
+     * Set the form Request class
+     *
+     * @param string $class
+     * @return void
+     */
+    protected function setRequest(string $class): void
+    {
+        $this->requestClass = $class;
     }
 
     /**
@@ -142,7 +161,9 @@ trait Crud
      */
     public function store(Request $request)
     {
-        //
+        $item = $this->storeOrUpdate($request);
+
+        return response()->json($item, 201);
     }
 
     /**
@@ -154,7 +175,9 @@ trait Crud
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = $this->storeOrUpdate($request);
+
+        return response()->json($item, 200);
     }
 
     /**
@@ -195,5 +218,44 @@ trait Crud
     protected function canBeDeleted($id)
     {
         return true;
+    }
+
+    /**
+     * Store or update an item.
+     *
+     * @param Request $request
+     * @param mixed $item
+     * @return mixed
+     */
+    protected function storeOrUpdate($request, $item = null)
+    {
+        // Validation
+        if ($this->requestClass) {
+            app($this->requestClass);
+        }
+
+        $values = [];
+        $model = $this->model();
+        $model = new $model;
+
+        foreach ($request->all() as $field => $value)
+        {
+            $columnType = DB::getSchemaBuilder()
+                ->getColumnType($model->getTable(), $field);
+
+            if ($columnType === 'boolean') {
+                $values[$field] = isset($value);
+            } else {
+                $values[$field] = $value;
+            }
+        }
+
+        if ($item) {
+            $item->update($values);
+        } else {
+            $item = $this->model()::create($values);
+        }
+
+        return $item;
     }
 }

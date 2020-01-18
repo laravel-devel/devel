@@ -2,6 +2,7 @@
 
 namespace Nwidart\Modules\Commands;
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -76,6 +77,7 @@ class ControllerMakeCommand extends GeneratorCommand
             'MODULE_NAMESPACE'  => $this->laravel['modules']->config('namespace'),
             'MODEL_DATATABLE'   => $this->generateDatatable(),
             'MODEL_FORM'        => $this->generateForm(),
+            'REQUEST_CLASS'     => $this->getFormRequestClass(),
         ]))->render();
     }
 
@@ -100,7 +102,7 @@ class ControllerMakeCommand extends GeneratorCommand
         return [
             ['plain', 'p', InputOption::VALUE_NONE, 'Generate a plain controller', null],
             ['api', null, InputOption::VALUE_NONE, 'Exclude the create and edit methods from the controller.'],
-            ['model', null, InputOption::VALUE_REQUIRED, 'A model to generate CRUD for.'],
+            ['model', null, InputOption::VALUE_OPTIONAL, 'A model to generate CRUD for.'],
         ];
     }
 
@@ -163,6 +165,34 @@ class ControllerMakeCommand extends GeneratorCommand
     }
 
     /**
+     * Get form request name.
+     *
+     * @return string
+     */
+    protected function getFormRequestName(): string
+    {
+        if ($model = $this->getModel()) {
+            $modelName = explode('\\', $model);
+
+            return array_pop($modelName) . 'Request';
+        }
+        
+        return '';
+    }
+
+    /**
+     * Get form request class name.
+     *
+     * @return string
+     */
+    protected function getFormRequestClass(): string
+    {
+        $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+
+        return 'Modules\\' . $module->getStudlyName() . '\Http\Requests\\' .$this->getFormRequestName();
+    }
+
+    /**
      * Generate datatable fields list.
      *
      * @return string
@@ -219,23 +249,8 @@ class ControllerMakeCommand extends GeneratorCommand
             return '[]';
         }
 
-        // $module = $this->laravel['modules']->findOrFail($this->getModuleName());
-
         $model = new $model;
-        // $table = $model->getTable();
-        // $fields = Schema::getColumnListing($table);
-
-        // // Exclude some generic fields
-        // $fields = array_diff($fields, [
-        //     'id',
-        //     'email_verified_at',
-        //     'created_at',
-        //     'updated_at',
-        // ]);
-
-        // // Exclude hidden fields
-        // $fields = array_diff($fields, $model->getHidden());
-
+        
         $values = "[\n";
 
         // Only include the fillable fields
@@ -258,5 +273,24 @@ class ControllerMakeCommand extends GeneratorCommand
         $values .= "        ]";
 
         return $values;
+    }
+
+    /**
+     * Additional actions to be performed after the generation.
+     *
+     * @return void
+     */
+    protected function after(): void
+    {
+        // Generate a Request if a model is specified
+        if ($model = $this->getModel()) {
+            $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+
+            Artisan::call('module:make-request', [
+                'name' => $this->getFormRequestName(),
+                'module' => $module->getName(),
+                'model' => $model,
+            ]);
+        }
     }
 }

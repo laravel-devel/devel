@@ -11,7 +11,7 @@
                 :key="index"
                 :field="field"
                 :errors="errors[field.name] ? errors[field.name] : []"
-                :value="(values && values[field.name]) ? values[field.name] : []"
+                :value="(values && values[field.name]) ? values[field.name] : undefined"
                 class="pb-1">
             </v-form-el>
         </div>
@@ -26,7 +26,7 @@
                     <td class="pb-1">
                         <v-form-el :field="field"
                             :errors="errors[field.name] ? errors[field.name] : []"
-                            :value="(values && values[field.name]) ? values[field.name] : []"
+                            :value="(values && values[field.name]) ? values[field.name] : undefined"
                             :show-label="false"
                             :inline="true">
                         </v-form-el>

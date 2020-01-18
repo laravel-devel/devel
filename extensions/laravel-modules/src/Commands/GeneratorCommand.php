@@ -46,6 +46,8 @@ abstract class GeneratorCommand extends Command
             $overwriteFile = $this->hasOption('force') ? $this->option('force') : false;
             (new FileGenerator($path, $contents))->withFileOverwrite($overwriteFile)->generate();
 
+            $this->after();
+
             $this->info("Created : {$path}");
         } catch (FileAlreadyExistException $e) {
             $this->error("File : {$path} already exists.");
@@ -96,5 +98,15 @@ abstract class GeneratorCommand extends Command
         $namespace = str_replace('/', '\\', $namespace);
 
         return trim($namespace, '\\');
+    }
+
+    /**
+     * Additional actions to be performed after the generation.
+     *
+     * @return void
+     */
+    protected function after(): void
+    {
+        //
     }
 }
