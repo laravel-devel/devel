@@ -18,6 +18,8 @@ class RolesController extends Controller
 
         // CRUD setup
         $this->setModel('Modules\DevelCore\Entities\Auth\Role');
+        $this->setRequest('Modules\ManageUserRoles\Http\Requests\RoleRequest');
+
         $this->setDatatable([
             'key' => [
                 'name' => 'Key',
@@ -30,11 +32,29 @@ class RolesController extends Controller
             'default' => [
                 'name' => 'Default',
                 'sortable' => true,
-                'format' => "value ? 'yes' : ''",
             ],
         ], [
             'delete' => route('dashboard.manageuserroles.destroy', ':key'),
             'create' => route('dashboard.manageuserroles.create'),
+            'edit' => route('dashboard.manageuserroles.edit', ':key'),
+        ]);
+        
+        $this->setForm([
+            [
+                'type' => 'text',
+                'name' => 'key',
+                'label' => 'Key',
+            ],
+            [
+                'type' => 'text',
+                'name' => 'name',
+                'label' => 'Name',
+            ],
+            [
+                'type' => 'checkbox',
+                'name' => 'default',
+                'label' => 'Default',
+            ],
         ]);
     }
 
@@ -60,7 +80,9 @@ class RolesController extends Controller
     {
         $this->setMeta('title', 'Add');
 
-        return view('manageuserroles::dashboard.create');
+        return view('manageuserroles::dashboard.create', [
+            'form' => $this->form(),
+        ]);
     }
 
     /**
@@ -71,9 +93,14 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
+        $item = $this->model()::findOrFail($id);
+
         $this->setMeta('title', 'Edit');
 
-        return view('manageuserroles::dashboard.edit');
+        return view('manageuserroles::dashboard.edit', [
+            'item' => $item,
+            'form' => $this->form(),
+        ]);
     }
 
     /**

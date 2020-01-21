@@ -31,6 +31,21 @@ Route::group([
         'uses' => 'RolesController@create',
     ]);
 
+    Route::get('/{id}/edit', [
+        'as' => 'dashboard.manageuserroles.edit',
+        'uses' => 'RolesController@edit',
+    ]);
+
+    Route::post('/', [
+        'as' => 'dashboard.manageuserroles.store',
+        'uses' => 'RolesController@store',
+    ]);
+
+    Route::post('/{id}', [
+        'as' => 'dashboard.manageuserroles.update',
+        'uses' => 'RolesController@update',
+    ]);
+
     Route::delete('/{id}', [
         'as' => 'dashboard.manageuserroles.destroy',
         'uses' => 'RolesController@destroy',

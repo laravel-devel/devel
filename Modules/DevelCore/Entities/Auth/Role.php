@@ -33,6 +33,23 @@ class Role extends Model
         'name',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating(function ($role) {
+            // The 'admin' role's key cannot be changed
+            if ($role->getOriginal('key') === 'admin') {
+                $role->key = 'admin';
+            }
+
+            // Only one role can be default at any given moment
+            if ($role->default && $role->default != $role->getOriginal('default')) {
+                static::where('default', true)->update(['default' => false]);
+            }
+        });
+    }
+
     /**
      * A role has many permissions
      *
