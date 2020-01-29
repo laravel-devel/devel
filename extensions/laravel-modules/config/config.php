@@ -30,11 +30,6 @@ return [
         'files' => [
             'routes/web' => 'Routes/web.php',
             'routes/api' => 'Routes/api.php',
-            'views/index' => 'Resources/views/dashboard/index.blade.php',
-            'views/create' => 'Resources/views/dashboard/create.blade.php',
-            'views/edit' => 'Resources/views/dashboard/edit.blade.php',
-            'views/_form' => 'Resources/views/dashboard/_form.blade.php',
-            // 'views/master' => 'Resources/views/layouts/master.blade.php',
             'scaffold/config' => 'Config/config.php',
             'composer' => 'composer.json',
             'assets/js/app' => 'Resources/js/app.js',
@@ -42,6 +37,14 @@ return [
             'webpack' => 'webpack.mix.js',
             'package' => 'package.json',
             'gitignore' => '.gitignore',
+        ],
+        'files-crud' => [
+            'views/index' => 'Resources/views/dashboard/index.blade.php',
+            'views/create' => 'Resources/views/dashboard/create.blade.php',
+            'views/edit' => 'Resources/views/dashboard/edit.blade.php',
+            'views/_form' => 'Resources/views/dashboard/_form.blade.php',
+            // 'views/master' => 'Resources/views/layouts/master.blade.php',
+            'routes/dashboard' => 'Routes/dashboard.php',
         ],
         'replacements' => [
             'routes/web' => ['LOWER_NAME', 'STUDLY_NAME', 'CONTROLLER_NAME'],

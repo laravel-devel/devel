@@ -50,6 +50,12 @@ class $CLASS$ extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->moduleNamespace)
             ->group(module_path('$MODULE$', '$WEB_ROUTES_PATH$'));
+
+        if (file_exists(module_path('Debug', '/Routes/dashboard.php'))) {
+            Route::middleware('web')
+                ->namespace($this->moduleNamespace)
+                ->group(module_path('$MODULE$', '$DASHBOARD_ROUTES_PATH$'));
+        }
     }
 
     /**
