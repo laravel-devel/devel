@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="hidden">
         <slot>
             <div v-if="type === 'default'">
                 <v-form-el v-for="(field, index) in fields"

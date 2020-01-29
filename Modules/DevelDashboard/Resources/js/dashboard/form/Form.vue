@@ -10,9 +10,9 @@
             <div v-for="(tab, index) in tabs"
                 :key="index"
                 class="form-tab"
-                :class="{ 'active': tab.name === activeTab }"
+                :class="{ 'active': tab.key === activeTab }"
                 v-text="tab.name"
-                @click="showTab(tab.name)"
+                @click="showTab(tab.key)"
             ></div>
         </div>
 
@@ -84,12 +84,15 @@ export default {
             this.tabs = this.$children.map(item => {
                 return {
                     el: item.$el,
+                    key: item.$attrs.name.toLowerCase(),
                     name: item.$attrs.name,
                 };
             });
 
-            if (!this.activeTab) {
-                this.activeTab = this.tabs[0].name;
+            if (location.hash.substr(0, 5) === '#tab-') {
+                this.activeTab = location.hash.substr(5);
+            } else {
+                this.activeTab = this.tabs[0].key;
             }
 
             this.showTab(this.activeTab);
@@ -136,19 +139,30 @@ export default {
             this.errors = {};
         },
 
-        showTab(name) {
-            const tab = this.tabs.find(item => item.name === name);
+        showTab(key) {
+            const tab = this.tabs.find(item => item.key === key);
 
             if (!tab) {
                 return;
             }
 
             for (let item of this.tabs) {
-                item.el.style.display = 'none';
+                item.el.classList.add('hidden');
             }
 
-            tab.el.style.display = 'block';
-            this.activeTab = name;
+            tab.el.classList.remove('hidden');
+            this.activeTab = key;
+
+            // Change the window location hash
+            if (this.tabs.length > 1) {
+                const hash = '#tab-' + key;
+
+                if (history.pushState) {
+                    history.replaceState(null, null, hash);
+                } else {
+                    location.hash = hash;
+                }
+            }
         }
     },
 }
