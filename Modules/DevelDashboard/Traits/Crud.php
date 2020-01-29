@@ -250,7 +250,7 @@ trait Crud
                 ->getColumnType($table, $field);
 
             if ($columnType === 'boolean') {
-                $values[$field] = !empty($request->get($field));
+                $values[$field] = $request->has($field);
             } else {
                 if ($request->has($field)) {
                     $values[$field] = $request->get($field);
@@ -264,6 +264,20 @@ trait Crud
             $item = $this->model()::create($values);
         }
 
+        $item = $this->afterStoreOrUpdate($request, $item);
+
+        return $item;
+    }
+
+    /**
+     * Perform actions on the model after storing or updating it.
+     *
+     * @param Request $request
+     * @param mixed $item
+     * @return mixed
+     */
+    protected function afterStoreOrUpdate($request, $item)
+    {
         return $item;
     }
 }

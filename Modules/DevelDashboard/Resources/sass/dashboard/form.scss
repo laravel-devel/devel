@@ -3,7 +3,7 @@
         width: 100%;
 
         td {
-            vertical-align: middle;
+            vertical-align: top;
 
             .checkbox {
                 margin-bottom: 0;
@@ -128,6 +128,36 @@
         &:after {
             content: " ";
             white-space: pre;
+        }
+    }
+}
+
+.form-tabs {
+    display: flex;
+    margin-bottom: 1rem;
+    position: relative;
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: #eee;
+    }
+
+    .form-tab {
+        cursor: pointer;
+        padding: .5rem;
+        border-bottom: 2px solid #eee;
+        z-index: 1;
+
+        &:hover {
+            border-bottom: 2px solid $primaryHover;
+        }
+        
+        &.active {
+            border-bottom: 2px solid $primary;
         }
     }
 }

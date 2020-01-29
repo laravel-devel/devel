@@ -13,7 +13,7 @@ class RoleRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'key' => [
                 'required',
                 'string',
@@ -27,8 +27,18 @@ class RoleRequest extends FormRequest
             'default' => [
                 'sometimes',
             ],
-
+            'permissions' => [
+                'sometimes',
+                'nullable',
+                'array',
+            ],
         ];
+
+        if (!$this->route('id')) {
+            $rules['key'][] = 'unique:user_roles,key';
+        }
+
+        return $rules;
     }
 
     /**

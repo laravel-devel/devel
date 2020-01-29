@@ -34,12 +34,6 @@ export default {
     props: {
         field: {},
 
-        value: {
-            default: null,
-        },
-
-        errors: {},
-
         inline: {
             type: Boolean,
             default: false,
@@ -63,9 +57,30 @@ export default {
         };
     },
 
+    computed: {
+        errors() {
+            return this.attrs.name
+                ? this.$parent.errors[this.attrs.name]
+                : undefined;
+        },
+
+        value() {
+            if (this.attrs.value) {
+                return this.attrs.value;
+            }
+
+            return this.attrs.name
+                ? this.$parent.values[this.attrs.name]
+                : undefined;
+        },
+    },
+
     created() {
         this.attrs = Object.assign({}, this.field);
         this.attrs.label = this.showLabel ? this.field.label : undefined;
+        this.attrs.checked = this.attrs.checked === undefined
+            ? this.value
+            : this.attrs.checked;
     },
 
     methods: {

@@ -609,7 +609,13 @@ class ModuleGenerator extends Generator
      */
     protected function getControllerNameReplacement()
     {
-        return $this->getControllerName() . 'Controller';
+        if ($this->model) {
+            $parts = explode('\\', $this->model);
+
+            return Str::plural($parts[count($parts) - 1]) . 'Controller';
+        } else {
+            return $this->getName() . 'Controller';
+        }
     }
 
     /**

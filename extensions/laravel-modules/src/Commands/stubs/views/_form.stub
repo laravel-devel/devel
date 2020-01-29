@@ -1,0 +1,6 @@
+<v-form action="{{ !empty($item) ? route('dashboard.$LOWER_NAME$.update', $item) : route('dashboard.$LOWER_NAME$.store') }}"
+    method="POST"
+    type="table"
+    :fields="{{ json_encode($form) }}"
+    success="{{ route('dashboard.$LOWER_NAME$.index') }}"
+    :values="{{ $item ?? '{}' }}"></v-form>

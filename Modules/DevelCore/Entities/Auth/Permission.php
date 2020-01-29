@@ -28,4 +28,35 @@ class Permission extends Model
         'key',
         'name',
     ];
+
+    protected $hidden = ['pivot'];
+
+    /**
+     * Get list of permissions grouped into groups
+     *
+     * @return array
+     */
+    public static function getGrouped(): array
+    {
+        $permissions = Permission::all();
+
+        $groups = [];
+
+        foreach ($permissions as $permission) {
+            $groupKey = explode('.', $permission->key)[0];
+
+            if (!isset($groups[$groupKey])) {
+                $groupName = ucwords(implode(' ', explode('_', $groupKey)));
+
+                $groups[$groupKey] = [
+                    'name' => $groupName,
+                    'permissions' => [],
+                ];
+            }
+
+            $groups[$groupKey]['permissions'][] = $permission->toArray();
+        }
+
+        return $groups;
+    }
 }

@@ -1,12 +1,18 @@
+/* Flex */
 .flex { display: flex; }
 .flex-1 { flex: 1; }
 .flex-justify-center { justify-content: center; }
 .flex-align-center { align-items: center; }
+.flex-wrap { flex-wrap: wrap; }
 
+/* Paddings */
 .pb-1 { padding-bottom: 1rem; }
 
+/* Margins */
 .mr-1 { margin-right: 1rem; }
+.mb-1 { margin-bottom: 1rem; }
 
+/* Animations */
 @keyframes spin-ease {
     from {
         transform: rotate(0);
@@ -18,4 +24,9 @@
 
 .spin-ease {
     animation: spin-ease 1s ease infinite;
+}
+
+/* Typography */
+.text-bold {
+    font-weight: 700;
 }

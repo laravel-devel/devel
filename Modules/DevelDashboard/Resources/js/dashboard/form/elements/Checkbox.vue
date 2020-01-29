@@ -7,7 +7,8 @@
                 :type="attrs.type"
                 :name="attrs.name"
                 autocomplete="off"
-                :checked="value"
+                :checked="attrs.checked"
+                :value="value"
                 @change="$emit('input', $event.target.checked)">
 
             <span class="checkmark"></span>

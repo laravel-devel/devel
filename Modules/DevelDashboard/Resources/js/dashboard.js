@@ -13,6 +13,7 @@ require('./dashboard/functions');
 
 // Form
 Vue.component('v-form', require('./dashboard/form/Form').default);
+Vue.component('v-form-tab', require('./dashboard/form/FormTab').default);
 Vue.component('v-form-el', require('./dashboard/form/Element').default);
 
 // Components

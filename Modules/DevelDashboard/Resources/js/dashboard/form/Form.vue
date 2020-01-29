@@ -6,34 +6,23 @@
         @submit.prevent="onSubmit"
         ref="form"
     >
-        <div v-if="type === 'default'">
-            <v-form-el v-for="(field, index) in fields"
+        <div v-if="tabs.length > 1" class="form-tabs">
+            <div v-for="(tab, index) in tabs"
                 :key="index"
-                :field="field"
-                :errors="errors[field.name] ? errors[field.name] : []"
-                :value="(values && values[field.name]) ? values[field.name] : undefined"
-                class="pb-1">
-            </v-form-el>
+                class="form-tab"
+                :class="{ 'active': tab.name === activeTab }"
+                v-text="tab.name"
+                @click="showTab(tab.name)"
+            ></div>
         </div>
 
-        <div v-else-if="type === 'table'">
-            <table>
-                <tr v-for="(field, index) in fields"
-                    :key="index"
-                >
-                    <td class="pb-1" v-text="field.label"></td>
-
-                    <td class="pb-1">
-                        <v-form-el :field="field"
-                            :errors="errors[field.name] ? errors[field.name] : []"
-                            :value="(values && values[field.name]) ? values[field.name] : undefined"
-                            :show-label="false"
-                            :inline="true">
-                        </v-form-el>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <slot v-bind:errors="errors" v-bind:values="values">
+            <v-form-tab name="Main"
+                :type="type"
+                :fields="fields"
+                :values="values"
+                :errors="errors"></v-form-tab>
+        </slot>
 
         <div class="message" :class="messageClass" v-text="message"></div>
 
@@ -62,7 +51,12 @@ export default {
 
         fields: Array,
         
-        values: Object,
+        values: {
+            type: Object,
+            default: () => {
+                return {};
+            },
+        },
 
         button: Object,
 
@@ -76,11 +70,30 @@ export default {
 
     data() {
         return {
+            tabs: [],
+            activeTab: null,
             processing: false,
             errors: {},
             message: '',
             messageClass: 'success',
         };
+    },
+
+    mounted() {
+        if (this.$children !== undefined) {
+            this.tabs = this.$children.map(item => {
+                return {
+                    el: item.$el,
+                    name: item.$attrs.name,
+                };
+            });
+
+            if (!this.activeTab) {
+                this.activeTab = this.tabs[0].name;
+            }
+
+            this.showTab(this.activeTab);
+        }
     },
 
     methods: {
@@ -121,6 +134,21 @@ export default {
 
         clearErrors() {
             this.errors = {};
+        },
+
+        showTab(name) {
+            const tab = this.tabs.find(item => item.name === name);
+
+            if (!tab) {
+                return;
+            }
+
+            for (let item of this.tabs) {
+                item.el.style.display = 'none';
+            }
+
+            tab.el.style.display = 'block';
+            this.activeTab = name;
         }
     },
 }

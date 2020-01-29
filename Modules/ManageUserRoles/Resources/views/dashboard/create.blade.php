@@ -10,11 +10,7 @@
     <div class="section-body">
         <div class="card">
             <div class="body">
-                <v-form action="{{ route('dashboard.manageuserroles.store') }}"
-                    method="POST"
-                    type="table"
-                    :fields="{{ json_encode($form) }}"
-                    success="{{ route('dashboard.manageuserroles.index') }}"></v-form>
+                @include('manageuserroles::dashboard._form')
             </div>
         </div>
     </div>
