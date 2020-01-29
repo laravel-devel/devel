@@ -98,7 +98,9 @@
             height: 1.25rem;
             width: 1.25rem;
             background-color: #eee;
+            border: 1px solid #ddd;
             border-radius: .25rem;
+            transition: background-color .1s ease;
 
             &:after {
                 content: "";
@@ -119,6 +121,7 @@
 
         input:checked ~ .checkmark {
             background-color: $primary;
+            border: none;
 
             &:after {
                 display: block;
