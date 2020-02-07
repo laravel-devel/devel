@@ -467,13 +467,12 @@ class ModuleGenerator extends Generator
                 'module' => $this->getName(),
             ]);
         }
-
-        if (GenerateConfigReader::read('controller')->generate() === true) {
-            // Dashboard controller
-            $this->console->call('module:make-controller', [
-                'controller' => $this->getControllerName(),
+        
+        if ($this->getModel()) {
+            // Generate CRUD for the provided model
+            $this->console->call('module:make-crud', [
                 'module' => $this->getName(),
-                '--model' => $this->getModel(),
+                'model' => $this->getModel(),
             ]);
         }
     }
@@ -485,7 +484,7 @@ class ModuleGenerator extends Generator
      *
      * @return string
      */
-    protected function getStubContents($stub)
+    public function getStubContents($stub)
     {
         return (new Stub(
             '/' . $stub . '.stub',

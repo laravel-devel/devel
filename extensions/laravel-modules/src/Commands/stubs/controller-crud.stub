@@ -32,7 +32,7 @@ class $CLASS$ extends Controller
      */
     public function index()
     {
-        return view('$LOWER_NAME$::dashboard.index', [
+        return view('$LOWER_NAME$::dashboard.$MODEL_LOWER$.index', [
             'fields' => $this->datatable(),
             'actions' => $this->actions(),
         ]);
@@ -47,7 +47,7 @@ class $CLASS$ extends Controller
     {
         $this->setMeta('title', 'Add');
 
-        return view('$LOWER_NAME$::dashboard.create', [
+        return view('$LOWER_NAME$::dashboard.$MODEL_LOWER$.create', [
             'form' => $this->form(),
         ]);
     }
@@ -64,7 +64,7 @@ class $CLASS$ extends Controller
 
         $this->setMeta('title', 'Edit');
 
-        return view('$LOWER_NAME$::dashboard.edit', [
+        return view('$LOWER_NAME$::dashboard.$MODEL_LOWER$.edit', [
             'item' => $item,
             'form' => $this->form(),
         ]);

@@ -10,7 +10,7 @@
     <div class="section-body">
         <div class="card">
             <div class="body">
-                @include('$LOWER_NAME$::dashboard._form')
+                @include('$LOWER_NAME$::dashboard.$CRUD_NAME_LOWER$._form')
             </div>
         </div>
     </div>

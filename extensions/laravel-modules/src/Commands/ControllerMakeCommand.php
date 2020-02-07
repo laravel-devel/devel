@@ -74,6 +74,7 @@ class ControllerMakeCommand extends GeneratorCommand
             'NAME'              => $this->getModuleName(),
             'STUDLY_NAME'       => $module->getStudlyName(),
             'MODEL'             => $this->getModel(),
+            'MODEL_LOWER'       => $this->getModelLowerName(),
             'MODULE_NAMESPACE'  => $this->laravel['modules']->config('namespace'),
             'MODEL_DATATABLE'   => $this->generateDatatable(),
             'MODEL_FORM'        => $this->generateForm(),
@@ -163,6 +164,16 @@ class ControllerMakeCommand extends GeneratorCommand
     {
         return $this->option('model') ?? '';
     }
+    
+    /**
+     * Get CRUD model lower name name.
+     *
+     * @return void
+     */
+    protected function getModelLowerName()
+    {
+        return Str::plural(strtolower(class_basename($this->getModel())));
+    }
 
     /**
      * Get form request name.
@@ -232,9 +243,9 @@ class ControllerMakeCommand extends GeneratorCommand
         }
 
         $values .= "        ], [\n";
-        $values .= "            'delete' => route('dashboard.{$module->getLowerName()}.destroy', ':{$idKey}'),\n";
-        $values .= "            'create' => route('dashboard.{$module->getLowerName()}.create'),\n";
-        $values .= "            'edit' => route('dashboard.{$module->getLowerName()}.edit', ':{$idKey}'),\n";
+        $values .= "            'delete' => route('dashboard.{$module->getLowerName()}.{$this->getModelLowerName()}.destroy', ':{$idKey}'),\n";
+        $values .= "            'create' => route('dashboard.{$module->getLowerName()}.{$this->getModelLowerName()}.create'),\n";
+        $values .= "            'edit' => route('dashboard.{$module->getLowerName()}.{$this->getModelLowerName()}.edit', ':{$idKey}'),\n";
         $values .= "        ]";
 
         return $values;

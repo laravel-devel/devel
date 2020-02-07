@@ -1,0 +1,42 @@
+    /**
+     * $MODEL_NAME$ CRUD
+     */
+    Route::group([
+        'prefix' => '$CRUD_NAME_LOWER$',
+    ], function() {
+        Route::get('/', [
+            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.index',
+            'uses' => '$CONTROLLER_NAME$@index',
+            'dashboardMenu' => 'Modules->$CRUD_NAME$',
+        ]);
+
+        Route::get('/list', [
+            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.get',
+            'uses' => '$CONTROLLER_NAME$@get',
+        ]);
+
+        Route::get('/add', [
+            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.create',
+            'uses' => '$CONTROLLER_NAME$@create',
+        ]);
+
+        Route::get('/{id}/edit', [
+            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.edit',
+            'uses' => '$CONTROLLER_NAME$@edit',
+        ]);
+
+        Route::post('/', [
+            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.store',
+            'uses' => '$CONTROLLER_NAME$@store',
+        ]);
+
+        Route::post('/{id}', [
+            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.update',
+            'uses' => '$CONTROLLER_NAME$@update',
+        ]);
+
+        Route::delete('/{id}', [
+            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.destroy',
+            'uses' => '$CONTROLLER_NAME$@destroy',
+        ]);
+    });

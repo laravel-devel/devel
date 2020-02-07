@@ -39,12 +39,13 @@ return [
             'gitignore' => '.gitignore',
         ],
         'files-crud' => [
-            'views/index' => 'Resources/views/dashboard/index.blade.php',
-            'views/create' => 'Resources/views/dashboard/create.blade.php',
-            'views/edit' => 'Resources/views/dashboard/edit.blade.php',
-            'views/_form' => 'Resources/views/dashboard/_form.blade.php',
+            'views/index' => 'Resources/views/dashboard/$CRUD_NAME_LOWER$/index.blade.php',
+            'views/create' => 'Resources/views/dashboard/$CRUD_NAME_LOWER$/create.blade.php',
+            'views/edit' => 'Resources/views/dashboard/$CRUD_NAME_LOWER$/edit.blade.php',
+            'views/_form' => 'Resources/views/dashboard/$CRUD_NAME_LOWER$/_form.blade.php',
             // 'views/master' => 'Resources/views/layouts/master.blade.php',
             'routes/dashboard' => 'Routes/dashboard.php',
+            'routes/crud' => 'Routes/crud.php',
         ],
         'replacements' => [
             'routes/web' => ['LOWER_NAME', 'STUDLY_NAME', 'CONTROLLER_NAME'],
