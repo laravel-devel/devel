@@ -221,11 +221,9 @@ export default {
                     this.$notify('Item has been deleted!', 'success');
                 })
                 .catch(({ response }) => {
-                    let error = 'Something went wrong!';
-
-                    if (response.status == 409) {
-                        error = response.data.message;
-                    }
+                    let error = response.data.message
+                        ? response.data.message
+                        : 'Something went wrong!';
 
                     this.$notify(error, 'error');
 

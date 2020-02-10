@@ -13,9 +13,18 @@
 
 <script>
 export default {
+    props: {
+        flash: {
+            type: Array,
+            default: () => {
+                return [];
+            },
+        }
+    },
+
     data() {
         return {
-            notifications: [],
+            notifications: this.flash,
             id: 0,
             types: [
                 'info',

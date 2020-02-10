@@ -117,6 +117,17 @@ class DevelDashboardServiceProvider extends ServiceProvider
         // Add dashboard menu items
         View::composer('develdashboard::_sidebar', function ($view) {
             foreach (\Route::getRoutes() as $route) {
+                // Check if the user has permissions to access the route
+                $permissions = $route->action['permissions'] ?? [];
+
+                if (!is_array($permissions) && !is_string($permissions)) {
+                    throw new \Exception('The route permissions should be set in as a string or an array of strings.');
+                }
+
+                if (!auth()->check() || !auth()->user()->hasPermissions($permissions)) {
+                    continue;
+                }
+
                 // TODO: Don't include an item if current user doesn't have
                 // permissions to access it. The list of required permissions
                 // will be also attached to the route and accessible in the same

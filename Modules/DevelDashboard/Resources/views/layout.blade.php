@@ -13,7 +13,16 @@
 <body>
     <div id="vue" class="container">
         <v-alert></v-alert>
-        <v-notification></v-notification>
+
+        <v-notification :flash="[
+            @if (session('info'))
+                { type: 'info', 'message': {{ json_encode(session('info')) }} },
+            @elseif (session('success'))
+                { type: 'success', 'message': {{ json_encode(session('success')) }} },
+            @elseif (session('error'))
+                { type: 'error', 'message': {{ json_encode(session('error')) }} },
+            @endif
+        ]"></v-notification>
 
         @include('develdashboard::_sidebar')
 

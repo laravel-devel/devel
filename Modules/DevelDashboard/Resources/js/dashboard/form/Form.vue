@@ -122,16 +122,21 @@ export default {
                 }
             })
             .catch(({ response }) => {
+                this.messageClass = 'danger';
+                
                 if (response.status === 422) {
                     this.message = response.data.message ? response.data.message : '';
-                    this.messageClass = 'danger';
 
                     if (response.data.errors) {
                         this.errors = response.data.errors;
                     }
-
-                    this.processing = false;
+                } else {
+                    this.message = response.data.message
+                        ? response.data.message
+                        : 'Something went wrong!';
                 }
+
+                this.processing = false;
             });
         },
 
