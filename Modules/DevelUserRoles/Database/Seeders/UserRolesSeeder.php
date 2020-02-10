@@ -9,10 +9,10 @@ use Modules\DevelCore\Entities\Auth\Permission;
 class UserRolesSeeder extends Seeder
 {
     protected $permissions = [
-        'user_roles.list-roles' => 'List Roles',
-        'user_roles.add-roles' => 'Add Roles',
-        'user_roles.edit-roles' => 'Edit Roles',
-        'user_roles.delete-roles' => 'Delete Roles',
+        'user_roles.list' => 'List Roles',
+        'user_roles.add' => 'Add Roles',
+        'user_roles.edit' => 'Edit Roles',
+        'user_roles.delete' => 'Delete Roles',
     ];
 
     /**
