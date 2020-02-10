@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\ManageUserRoles\Database\Seeders;
+namespace Modules\DevelUserRoles\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class ManageUserRolesDatabaseSeeder extends Seeder
+class DevelUserRolesDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +16,6 @@ class ManageUserRolesDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        $this->call(UserRolesSeeder::class);
     }
 }

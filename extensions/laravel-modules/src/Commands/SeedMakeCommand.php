@@ -57,6 +57,12 @@ class SeedMakeCommand extends GeneratorCommand
                 InputOption::VALUE_NONE,
                 'Indicates the seeder will created is a master database seeder.',
             ],
+            [
+                '--permissions',
+                null,
+                InputOption::VALUE_REQUIRED,
+                'Name of the model to generate permissions for.',
+            ],
         ];
     }
 
@@ -66,13 +72,38 @@ class SeedMakeCommand extends GeneratorCommand
     protected function getTemplateContents()
     {
         $module = $this->laravel['modules']->findOrFail($this->getModuleName());
+        $model = $this->option('permissions');
 
-        return (new Stub('/seeder.stub', [
-            'NAME' => $this->getSeederName(),
-            'MODULE' => $this->getModuleName(),
-            'NAMESPACE' => $this->getClassNamespace($module),
+        if ($model) {
+            // Register the seeder
+            $name = $this->getPermissionsSeederName();
+            $path = module_path($this->getModuleName(), 'Database/Seeders/' . $this->getModuleName()) . 'DatabaseSeeder.php';
 
-        ]))->render();
+            $contents = $this->laravel['files']->get($path);
+            preg_match('/public function run\(\)\R[\s]{4}{((?>[^{}]++|(?R))*)}/', $contents, $matches);
+
+            $contents = str_replace(
+                $matches[1],
+                $matches[1] . "    \$this->call({$name}::class);\n    ",
+                $contents
+            );
+
+            $this->laravel['files']->put($path, $contents);
+
+            // Create the seeder
+            return (new Stub('/seeder-permissions.stub', [
+                'NAME' => $name,
+                'MODULE' => $this->getModuleName(),
+                'NAMESPACE' => $this->getClassNamespace($module),
+                'PERMISSIONS' => $this->getPermissions($this->getModuleName(), $model),
+            ]))->render();
+        } else {
+            return (new Stub('/seeder.stub', [
+                'NAME' => $this->getSeederName(),
+                'MODULE' => $this->getModuleName(),
+                'NAMESPACE' => $this->getClassNamespace($module),
+            ]))->render();
+        }
     }
 
     /**
@@ -96,9 +127,23 @@ class SeedMakeCommand extends GeneratorCommand
      */
     private function getSeederName()
     {
-        $end = $this->option('master') ? 'DatabaseSeeder' : 'TableSeeder';
+        if ($this->option('permissions')) {
+            $end = 'Seeder';
+        } else {
+            $end = $this->option('master') ? 'DatabaseSeeder' : 'TableSeeder';
+        }
 
         return Str::studly($this->argument('name')) . $end;
+    }
+
+    /**
+     * Get permissions seeder name.
+     *
+     * @return string
+     */
+    private function getPermissionsSeederName()
+    {
+        return Str::studly($this->argument('name')) . 'Seeder';
     }
 
     /**
@@ -111,5 +156,23 @@ class SeedMakeCommand extends GeneratorCommand
         $module = $this->laravel['modules'];
 
         return $module->config('paths.generator.seeder.namespace') ?: $module->config('paths.generator.seeder.path', 'Database/Seeders');
+    }
+
+    public function getPermissions(string $module, string $model)
+    {
+        $name = \Str::plural(class_basename($model));
+        $nameLower = strtolower($name);
+
+        $moduleParts = preg_split('/(?=[A-Z])/', $module, -1, PREG_SPLIT_NO_EMPTY);
+        $module = implode(' ', $moduleParts);
+        $moduleLower = strtolower(implode('_', $moduleParts));
+        
+        $permissions = '';
+        $permissions .= "'{$moduleLower}.list-{$nameLower}' => '{$module} - List {$name}',\n";
+        $permissions .= "        '{$moduleLower}.add-{$nameLower}' => '{$module} - Add {$name}',\n";
+        $permissions .= "        '{$moduleLower}.edit-{$nameLower}' => '{$module} - Edit {$name}',\n";
+        $permissions .= "        '{$moduleLower}.delete-{$nameLower}' => '{$module} - Delete {$name}',";
+        
+        return $permissions;
     }
 }

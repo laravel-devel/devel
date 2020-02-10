@@ -1,5 +1,5 @@
 {
-    "name": "nwidart/manageuserroles",
+    "name": "nwidart/develuserroles",
     "description": "",
     "authors": [
         {
@@ -10,7 +10,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\ManageUserRoles\\Providers\\ManageUserRolesServiceProvider"
+                "Modules\\DevelUserRoles\\Providers\\DevelUserRolesServiceProvider"
             ],
             "aliases": {
 
@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\ManageUserRoles\\": ""
+            "Modules\\DevelUserRoles\\": ""
         }
     }
 }

@@ -64,6 +64,13 @@ class CrudMakeCommand extends Command
             '--model' => $this->getModel(),
         ]);
 
+        // Create a permissions seeder class for the model
+        $this->call('module:make-seed', [
+            'name' => $this->getCrudName(),
+            'module' => $this->getModuleName(),
+            '--permissions' => $this->getModel(),
+        ]);
+
         // Create views
         $this->generateViews();
 

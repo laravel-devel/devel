@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\ManageUserRoles\Http\Controllers;
+namespace Modules\DevelUserRoles\Http\Controllers;
 
 use Modules\DevelDashboard\Traits\Crud;
 use Illuminate\Http\Request;
@@ -16,11 +16,11 @@ class RolesController extends Controller
     public function __construct()
     {
         $this->setMeta('title', 'Dashboard');
-        $this->setMeta('title', config('manageuserroles.display_name'));
+        $this->setMeta('title', config('develuserroles.display_name'));
 
         // CRUD setup
         $this->setModel('Modules\DevelCore\Entities\Auth\Role');
-        $this->setRequest('Modules\ManageUserRoles\Http\Requests\RoleRequest');
+        $this->setRequest('Modules\DevelUserRoles\Http\Requests\RoleRequest');
 
         $this->setDatatable([
             'key' => [
@@ -37,9 +37,9 @@ class RolesController extends Controller
                 'format' => "value ? 'yes' : '-'",
             ],
         ], [
-            'delete' => route('dashboard.manageuserroles.destroy', ':key'),
-            'create' => route('dashboard.manageuserroles.create'),
-            'edit' => route('dashboard.manageuserroles.edit', ':key'),
+            'delete' => route('dashboard.develuserroles.destroy', ':key'),
+            'create' => route('dashboard.develuserroles.create'),
+            'edit' => route('dashboard.develuserroles.edit', ':key'),
         ]);
         
         $this->setForm([
@@ -68,7 +68,7 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return view('manageuserroles::dashboard.index', [
+        return view('develuserroles::dashboard.index', [
             'fields' => $this->datatable(),
             'actions' => $this->actions(),
         ]);
@@ -83,7 +83,7 @@ class RolesController extends Controller
     {
         $this->setMeta('title', 'Add');
 
-        return view('manageuserroles::dashboard.create', [
+        return view('develuserroles::dashboard.create', [
             'form' => $this->form(),
             'permissions' => $this->getPermissions(),
         ]);
@@ -101,7 +101,7 @@ class RolesController extends Controller
 
         $this->setMeta('title', 'Edit');
 
-        return view('manageuserroles::dashboard.edit', [
+        return view('develuserroles::dashboard.edit', [
             'item' => $item,
             'form' => $this->form(),
             'permissions' => $this->getPermissions($item),

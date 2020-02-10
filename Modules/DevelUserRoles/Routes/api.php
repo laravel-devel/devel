@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/manageuserroles', function (Request $request) {
+Route::middleware('auth:api')->get('/develuserroles', function (Request $request) {
     return $request->user();
 });

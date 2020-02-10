@@ -13,41 +13,41 @@
 
 Route::group([
     'middleware' => [\Modules\DevelDashboard\Http\Middleware\DashboardAccess::class],
-    'prefix' => config('develdashboard.dashboard_uri') . '/' . config('manageuserroles.slug'),
+    'prefix' => config('develdashboard.dashboard_uri') . '/' . config('develuserroles.slug'),
 ], function() {
     Route::get('/', [
-        'as' => 'dashboard.manageuserroles.index',
+        'as' => 'dashboard.develuserroles.index',
         'uses' => 'RolesController@index',
-        'dashboardMenu' => 'Users->' . config('manageuserroles.display_name'),
+        'dashboardMenu' => 'Users->' . config('develuserroles.display_name'),
     ]);
 
     Route::get('/list', [
-        'as' => 'dashboard.manageuserroles.get',
+        'as' => 'dashboard.develuserroles.get',
         'uses' => 'RolesController@get',
     ]);
 
     Route::get('/add', [
-        'as' => 'dashboard.manageuserroles.create',
+        'as' => 'dashboard.develuserroles.create',
         'uses' => 'RolesController@create',
     ]);
 
     Route::get('/{id}/edit', [
-        'as' => 'dashboard.manageuserroles.edit',
+        'as' => 'dashboard.develuserroles.edit',
         'uses' => 'RolesController@edit',
     ]);
 
     Route::post('/', [
-        'as' => 'dashboard.manageuserroles.store',
+        'as' => 'dashboard.develuserroles.store',
         'uses' => 'RolesController@store',
     ]);
 
     Route::post('/{id}', [
-        'as' => 'dashboard.manageuserroles.update',
+        'as' => 'dashboard.develuserroles.update',
         'uses' => 'RolesController@update',
     ]);
 
     Route::delete('/{id}', [
-        'as' => 'dashboard.manageuserroles.destroy',
+        'as' => 'dashboard.develuserroles.destroy',
         'uses' => 'RolesController@destroy',
     ]);
 });

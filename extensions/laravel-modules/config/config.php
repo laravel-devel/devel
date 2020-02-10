@@ -164,10 +164,10 @@ return [
     */
 
     'composer' => [
-        'vendor' => 'nwidart',
+        'vendor' => 'voerro',
         'author' => [
-            'name' => 'Nicolas Widart',
-            'email' => 'n.widart@gmail.com',
+            'name' => 'Alexander Zavyalov',
+            'email' => 'alex@voerro.com',
         ],
     ],
     /*

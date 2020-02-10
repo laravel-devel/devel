@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'ManageUserRoles',
+    'name' => 'DevelUserRoles',
 
     'display_name' => 'Roles',
 

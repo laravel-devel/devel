@@ -1,7 +1,7 @@
-<v-form action="{{ !empty($item) ? route('dashboard.manageuserroles.update', $item) : route('dashboard.manageuserroles.store') }}"
+<v-form action="{{ !empty($item) ? route('dashboard.develuserroles.update', $item) : route('dashboard.develuserroles.store') }}"
     method="POST"
     type="table"
-    success="{{ route('dashboard.manageuserroles.index') }}"
+    success="{{ route('dashboard.develuserroles.index') }}"
     :values="{{ $item ?? '{}' }}"
 >
     <template v-slot:default="slotProps">

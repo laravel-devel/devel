@@ -1,11 +1,11 @@
 {
-    "name": "ManageUserRoles",
-    "alias": "manageuserroles",
+    "name": "DevelUserRoles",
+    "alias": "develuserroles",
     "description": "",
     "keywords": [],
     "order": 0,
     "providers": [
-        "Modules\\ManageUserRoles\\Providers\\ManageUserRolesServiceProvider"
+        "Modules\\DevelUserRoles\\Providers\\DevelUserRolesServiceProvider"
     ],
     "aliases": {},
     "files": [],

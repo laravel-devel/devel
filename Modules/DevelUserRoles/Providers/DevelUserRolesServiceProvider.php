@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\ManageUserRoles\Providers;
+namespace Modules\DevelUserRoles\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class ManageUserRolesServiceProvider extends ServiceProvider
+class DevelUserRolesServiceProvider extends ServiceProvider
 {
     /**
      * Boot the application events.
@@ -18,7 +18,7 @@ class ManageUserRolesServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
-        $this->loadMigrationsFrom(module_path('ManageUserRoles', 'Database/Migrations'));
+        $this->loadMigrationsFrom(module_path('DevelUserRoles', 'Database/Migrations'));
     }
 
     /**
@@ -39,10 +39,10 @@ class ManageUserRolesServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            module_path('ManageUserRoles', 'Config/config.php') => config_path('manageuserroles.php'),
+            module_path('DevelUserRoles', 'Config/config.php') => config_path('develuserroles.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path('ManageUserRoles', 'Config/config.php'), 'manageuserroles'
+            module_path('DevelUserRoles', 'Config/config.php'), 'develuserroles'
         );
     }
 
@@ -53,17 +53,17 @@ class ManageUserRolesServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/manageuserroles');
+        $viewPath = resource_path('views/modules/develuserroles');
 
-        $sourcePath = module_path('ManageUserRoles', 'Resources/views');
+        $sourcePath = module_path('DevelUserRoles', 'Resources/views');
 
         $this->publishes([
             $sourcePath => $viewPath
         ],'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/modules/manageuserroles';
-        }, \Config::get('view.paths')), [$sourcePath]), 'manageuserroles');
+            return $path . '/modules/develuserroles';
+        }, \Config::get('view.paths')), [$sourcePath]), 'develuserroles');
     }
 
     /**
@@ -73,12 +73,12 @@ class ManageUserRolesServiceProvider extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/manageuserroles');
+        $langPath = resource_path('lang/modules/develuserroles');
 
         if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, 'manageuserroles');
+            $this->loadTranslationsFrom($langPath, 'develuserroles');
         } else {
-            $this->loadTranslationsFrom(module_path('ManageUserRoles', 'Resources/lang'), 'manageuserroles');
+            $this->loadTranslationsFrom(module_path('DevelUserRoles', 'Resources/lang'), 'develuserroles');
         }
     }
 
@@ -90,7 +90,7 @@ class ManageUserRolesServiceProvider extends ServiceProvider
     public function registerFactories()
     {
         if (! app()->environment('production') && $this->app->runningInConsole()) {
-            app(Factory::class)->load(module_path('ManageUserRoles', 'Database/factories'));
+            app(Factory::class)->load(module_path('DevelUserRoles', 'Database/factories'));
         }
     }
 

@@ -1,0 +1,35 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Illuminate\Database\Seeder;
+use Modules\DevelCore\Entities\Auth\Role;
+use Modules\DevelCore\Entities\Auth\Permission;
+
+class $NAME$ extends Seeder
+{
+    protected $permissions = [
+        $PERMISSIONS$
+    ];
+
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $admin = Role::find('admin');
+
+        foreach ($this->permissions as $permission => $name) {
+            $permission = Permission::firstOrCreate([
+                'key' => $permission,
+                'name' => $name,
+            ]);
+
+            if ($admin) {
+                $admin->permissions()->attach($permission);
+            }
+        }
+    }
+}
