@@ -8,42 +8,42 @@
             'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.index',
             'uses' => '$CONTROLLER_NAME$@index',
             'dashboardMenu' => 'Modules->$CRUD_NAME$',
-            'permissions' => '$PERMISSION_GROUP$.list',
+            'permissions' => '$PERMISSION_GROUP$.list-$CRUD_NAME_LOWER$',
         ]);
 
         Route::get('/list', [
             'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.get',
             'uses' => '$CONTROLLER_NAME$@get',
-            'permissions' => '$PERMISSION_GROUP$.list',
+            'permissions' => '$PERMISSION_GROUP$.list-$CRUD_NAME_LOWER$',
         ]);
 
         Route::get('/add', [
             'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.create',
             'uses' => '$CONTROLLER_NAME$@create',
-            'permissions' => '$PERMISSION_GROUP$.add',
+            'permissions' => '$PERMISSION_GROUP$.add-$CRUD_NAME_LOWER$',
         ]);
 
         Route::get('/{id}/edit', [
             'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.edit',
             'uses' => '$CONTROLLER_NAME$@edit',
-            'permissions' => '$PERMISSION_GROUP$.edit',
+            'permissions' => '$PERMISSION_GROUP$.edit-$CRUD_NAME_LOWER$',
         ]);
 
         Route::post('/', [
             'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.store',
             'uses' => '$CONTROLLER_NAME$@store',
-            'permissions' => '$PERMISSION_GROUP$.add',
+            'permissions' => '$PERMISSION_GROUP$.add-$CRUD_NAME_LOWER$',
         ]);
 
         Route::post('/{id}', [
             'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.update',
             'uses' => '$CONTROLLER_NAME$@update',
-            'permissions' => '$PERMISSION_GROUP$.edit',
+            'permissions' => '$PERMISSION_GROUP$.edit-$CRUD_NAME_LOWER$',
         ]);
 
         Route::delete('/{id}', [
             'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.destroy',
             'uses' => '$CONTROLLER_NAME$@destroy',
-            'permissions' => '$PERMISSION_GROUP$.delete',
+            'permissions' => '$PERMISSION_GROUP$.delete-$CRUD_NAME_LOWER$',
         ]);
     });

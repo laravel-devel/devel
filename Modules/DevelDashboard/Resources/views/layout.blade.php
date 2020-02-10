@@ -35,6 +35,9 @@
         </main>
     </div>
 
+    <script>
+        window.$user = {!! auth()->user() !!};
+    </script>
     <script src="{{ mix('js/devel/dashboard.js') }}"></script>
 </body>
 </html>

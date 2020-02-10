@@ -16,7 +16,7 @@ class CheckDashboardPermissions
      */
     public function handle(Request $request, Closure $next)
     {
-        $permissions = $request->route()->action['permissions'] ?? [];
+        $permissions = $request->route()->getAction()['permissions'] ?? [];
 
         if (!is_array($permissions) && !is_string($permissions)) {
             throw new \Exception('The route permissions should be set in as a string or an array of strings.');

@@ -118,7 +118,7 @@ class DevelDashboardServiceProvider extends ServiceProvider
         View::composer('develdashboard::_sidebar', function ($view) {
             foreach (\Route::getRoutes() as $route) {
                 // Check if the user has permissions to access the route
-                $permissions = $route->action['permissions'] ?? [];
+                $permissions = $route->getAction()['permissions'] ?? [];
 
                 if (!is_array($permissions) && !is_string($permissions)) {
                     throw new \Exception('The route permissions should be set in as a string or an array of strings.');
@@ -132,8 +132,8 @@ class DevelDashboardServiceProvider extends ServiceProvider
                 // permissions to access it. The list of required permissions
                 // will be also attached to the route and accessible in the same
                 // way as 'dashboardMenu'.
-                if (isset($route->action['dashboardMenu'])) {
-                    $parts = explode('->', $route->action['dashboardMenu']);
+                if (isset($route->getAction()['dashboardMenu'])) {
+                    $parts = explode('->', $route->getAction()['dashboardMenu']);
 
                     if (count($parts) < 2) {
                         throw new \Exception("Invalid dashboard menu entry for route \"{$route->uri}\".");

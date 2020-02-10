@@ -5,6 +5,12 @@ window.axios = require('axios');
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
+ * Auth module
+ */
+import Auth from './dashboard/Auth';
+window.$auth = new Auth(window.$user ? window.$user : {});
+
+/**
  * Vue.js
  */
 window.Vue = require('vue');

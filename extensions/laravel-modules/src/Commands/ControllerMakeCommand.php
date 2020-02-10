@@ -243,9 +243,9 @@ class ControllerMakeCommand extends GeneratorCommand
         }
 
         $values .= "        ], [\n";
-        $values .= "            'delete' => route('dashboard.{$module->getLowerName()}.{$this->getModelLowerName()}.destroy', ':{$idKey}'),\n";
-        $values .= "            'create' => route('dashboard.{$module->getLowerName()}.{$this->getModelLowerName()}.create'),\n";
-        $values .= "            'edit' => route('dashboard.{$module->getLowerName()}.{$this->getModelLowerName()}.edit', ':{$idKey}'),\n";
+        $values .= "            'delete' => ['dashboard.{$module->getLowerName()}.{$this->getModelLowerName()}.destroy', ':{$idKey}'],\n";
+        $values .= "            'create' => ['dashboard.{$module->getLowerName()}.{$this->getModelLowerName()}.create'],\n";
+        $values .= "            'edit' => ['dashboard.{$module->getLowerName()}.{$this->getModelLowerName()}.edit', ':{$idKey}'],\n";
         $values .= "        ]";
 
         return $values;

@@ -12,7 +12,7 @@
                     class="search-field"></v-form-el>
             </div>
 
-            <div v-if="hasActions && actions.create">
+            <div v-if="hasActions && actions.create && allowedTo('create')">
                 <a :href="actions.create" class="btn">Add</a>
             </div>
         </div>
@@ -46,7 +46,7 @@
                         </td>
 
                         <td v-if="hasActions" class="actions">
-                            <a v-if="actions.delete"
+                            <a v-if="actions.delete && allowedTo('delete')"
                                 href="#"
                                 class="action-btn danger"
                                 title="Delete"
@@ -55,7 +55,7 @@
                                 <i class="las la-trash"></i>
                             </a>
 
-                            <a v-if="actions.edit"
+                            <a v-if="actions.edit && allowedTo('edit')"
                                 :href="actionEndpoint(actions.edit, item)"
                                 class="action-btn primary"
                                 title="Edit"
@@ -96,13 +96,21 @@ export default {
         },
 
         actions: {
-            default: {},
+            default: () => {
+                return {};
+            },
+        },
+
+        permissions: {
+            default: () => {
+                return {};
+            },
         },
 
         deleteConfirmation: {
             type: String,
             default: 'Are you sure you want to delete this item?',
-        }
+        },
     },
 
     computed: {
@@ -229,7 +237,16 @@ export default {
 
                     this.processing = false;
                 });
-        }
+        },
+
+        allowedTo(action) {
+            // If a permissions for an action weren't specified - it is allowed
+            if (!this.permissions[action]) {
+                return true;
+            }
+
+            return $auth.hasPermissions(this.permissions[action]);
+        },
     }
 }
 </script>

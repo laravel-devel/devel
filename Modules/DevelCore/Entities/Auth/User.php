@@ -33,8 +33,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
+        'id',
+        'email',
         'password',
         'remember_token',
+        'email_verified_at',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -44,6 +49,10 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+    ];
+
+    protected $with = [
+        'permissions',
     ];
 
     /**

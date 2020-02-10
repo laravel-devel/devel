@@ -37,6 +37,13 @@ trait Crud
     protected $datatableActions = [];
 
     /**
+     * List of required CRUD permissions.
+     *
+     * @var array
+     */
+    protected $datatablePermissions = [];
+
+    /**
      * List of form fields to include into the create/edit forms.
      *
      * @var array
@@ -75,7 +82,7 @@ trait Crud
     protected function setDatatable(array $fields, array $actions = []): void
     {
         $this->datatableFields = $fields;
-        $this->datatableActions = $actions;
+        $this->setActions($actions);
     }
 
     /**
@@ -87,6 +94,23 @@ trait Crud
     protected function setForm(array $fields): void
     {
         $this->formFields = $fields;
+    }
+
+    /**
+     * Set datatable actions
+     *
+     * @param array $actions
+     * @return void
+     */
+    protected function setActions(array $actions):void
+    {
+        foreach ($actions as $action => $values) {
+            $this->datatableActions[$action] = route($values[0], $values[1] ?? null);
+
+            // Set permissions for each route
+            $this->datatablePermissions[$action] =
+                \Route::getRoutes()->getByName($values[0])->getAction()['permissions'] ?? [];
+        }
     }
 
     /**
@@ -117,6 +141,16 @@ trait Crud
     protected function actions(): array
     {
         return $this->datatableActions;
+    }
+
+    /**
+     * Return the datatable fields list
+     *
+     * @return array
+     */
+    protected function permissions(): array
+    {
+        return $this->datatablePermissions;
     }
 
     /**

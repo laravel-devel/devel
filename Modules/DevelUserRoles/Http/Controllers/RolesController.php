@@ -37,9 +37,9 @@ class RolesController extends Controller
                 'format' => "value ? 'yes' : '-'",
             ],
         ], [
-            'delete' => route('dashboard.develuserroles.destroy', ':key'),
-            'create' => route('dashboard.develuserroles.create'),
-            'edit' => route('dashboard.develuserroles.edit', ':key'),
+            'delete' => ['dashboard.develuserroles.destroy', ':key'],
+            'create' => ['dashboard.develuserroles.create'],
+            'edit' => ['dashboard.develuserroles.edit', ':key'],
         ]);
         
         $this->setForm([
@@ -71,6 +71,7 @@ class RolesController extends Controller
         return view('develuserroles::dashboard.index', [
             'fields' => $this->datatable(),
             'actions' => $this->actions(),
+            'permissions' => $this->permissions(),
         ]);
     }
 

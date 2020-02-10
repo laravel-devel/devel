@@ -33,6 +33,10 @@ class Role extends Model
         'name',
     ];
 
+    protected $with = [
+        'permissions',
+    ];
+
     protected static function boot()
     {
         parent::boot();
