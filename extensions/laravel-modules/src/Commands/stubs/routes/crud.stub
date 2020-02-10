@@ -5,38 +5,45 @@
         'prefix' => '$CRUD_NAME_LOWER$',
     ], function() {
         Route::get('/', [
-            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.index',
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.index',
             'uses' => '$CONTROLLER_NAME$@index',
             'dashboardMenu' => 'Modules->$CRUD_NAME$',
+            'permissions' => '$PERMISSION_GROUP$.list',
         ]);
 
         Route::get('/list', [
-            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.get',
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.get',
             'uses' => '$CONTROLLER_NAME$@get',
+            'permissions' => '$PERMISSION_GROUP$.list',
         ]);
 
         Route::get('/add', [
-            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.create',
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.create',
             'uses' => '$CONTROLLER_NAME$@create',
+            'permissions' => '$PERMISSION_GROUP$.add',
         ]);
 
         Route::get('/{id}/edit', [
-            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.edit',
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.edit',
             'uses' => '$CONTROLLER_NAME$@edit',
+            'permissions' => '$PERMISSION_GROUP$.edit',
         ]);
 
         Route::post('/', [
-            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.store',
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.store',
             'uses' => '$CONTROLLER_NAME$@store',
+            'permissions' => '$PERMISSION_GROUP$.add',
         ]);
 
         Route::post('/{id}', [
-            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.update',
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.update',
             'uses' => '$CONTROLLER_NAME$@update',
+            'permissions' => '$PERMISSION_GROUP$.edit',
         ]);
 
         Route::delete('/{id}', [
-            'as' => 'dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.destroy',
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.destroy',
             'uses' => '$CONTROLLER_NAME$@destroy',
+            'permissions' => '$PERMISSION_GROUP$.delete',
         ]);
     });

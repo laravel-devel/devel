@@ -1,7 +1,6 @@
 <?php
 
 Route::group([
-    'middleware' => [\Modules\DevelDashboard\Http\Middleware\DashboardAccess::class],
     'prefix' => config('develdashboard.dashboard_uri') . '/' . config('$LOWER_NAME$.slug'),
 ], function() {
 });

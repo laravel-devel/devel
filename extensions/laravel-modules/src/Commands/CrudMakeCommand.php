@@ -151,6 +151,8 @@ class CrudMakeCommand extends Command
      */
     protected function getStubContents(string $stub): string
     {
+        $moduleParts = preg_split('/(?=[A-Z])/', $this->getModuleName(), -1, PREG_SPLIT_NO_EMPTY);
+        $permissionGroup = strtolower(implode('_', $moduleParts));
         $content = $this->generator->getStubContents($stub);
 
         $replacements = [
@@ -159,6 +161,7 @@ class CrudMakeCommand extends Command
             '$CRUD_NAME_LOWER$' => strtolower($this->getCrudName()),
             '$CRUD_NAME$' => $this->getCrudName(),
             '$CONTROLLER_NAME$' => $this->getControllerName() . 'Controller',
+            '$PERMISSION_GROUP$' => $permissionGroup,
         ];
 
         foreach ($replacements as $from => $to) {

@@ -52,9 +52,14 @@ class $CLASS$ extends ServiceProvider
             ->group(module_path('$MODULE$', '$WEB_ROUTES_PATH$'));
 
         if (file_exists(module_path('Debug', '/Routes/dashboard.php'))) {
-            Route::middleware('web')
-                ->namespace($this->moduleNamespace)
-                ->group(module_path('$MODULE$', '$DASHBOARD_ROUTES_PATH$'));
+            Route::middleware([
+                'web',
+                \Modules\DevelDashboard\Http\Middleware\DashboardAccess::class,
+                \Modules\DevelDashboard\Http\Middleware\CheckDashboardPermissions::class,
+            ])
+            ->as('dashboard.')
+            ->namespace($this->moduleNamespace)
+            ->group(module_path('$MODULE$', '$DASHBOARD_ROUTES_PATH$'));
         }
     }
 

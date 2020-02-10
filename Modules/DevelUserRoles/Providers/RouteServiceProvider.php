@@ -65,5 +65,14 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->moduleNamespace)
             ->group(module_path('DevelUserRoles', '/Routes/api.php'));
+
+        Route::middleware([
+            'web',
+            \Modules\DevelDashboard\Http\Middleware\DashboardAccess::class,
+            \Modules\DevelDashboard\Http\Middleware\CheckDashboardPermissions::class,
+        ])
+        ->as('dashboard.')
+        ->namespace($this->moduleNamespace)
+        ->group(module_path('DevelUserRoles', '/Routes/dashboard.php'));
     }
 }
