@@ -1,0 +1,13 @@
+{
+    "name": "DevelUsers",
+    "alias": "develusers",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\DevelUsers\\Providers\\DevelUsersServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": ["DevelCore"]
+}

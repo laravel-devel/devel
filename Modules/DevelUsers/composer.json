@@ -1,0 +1,25 @@
+{
+    "name": "voerro/develusers",
+    "description": "",
+    "authors": [
+        {
+            "name": "Alexander Zavyalov",
+            "email": "alex@voerro.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\DevelUsers\\Providers\\DevelUsersServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\DevelUsers\\": ""
+        }
+    }
+}

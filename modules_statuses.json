@@ -1,5 +1,6 @@
 {
     "DevelCore": true,
     "DevelDashboard": true,
-    "DevelUserRoles": true
+    "DevelUserRoles": true,
+    "DevelUsers": true
 }
