@@ -3,18 +3,14 @@
 namespace Modules\DevelCore\Entities\Auth;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Modules\DevelCore\Entities\Authenticatable;
 use Modules\DevelCore\Traits\HasPermissions;
-use Modules\DevelCore\Traits\Searchable;
-use Modules\DevelCore\Traits\Sortable;
 use Modules\DevelDashboard\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable
 {
     use Notifiable;
     use HasPermissions;
-    use Sortable;
-    use Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -33,8 +29,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'id',
-        'email',
         'password',
         'remember_token',
         'email_verified_at',
@@ -49,6 +43,11 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+    ];
+
+    protected $searchable = [
+        'name',
+        'email',
     ];
 
     protected $with = [

@@ -6,7 +6,7 @@ Route::group([
     Route::get('/', [
         'as' => 'develuserroles.index',
         'uses' => 'RolesController@index',
-        'dashboardMenu' => 'Users->' . config('develuserroles.display_name'),
+        'dashboardMenu' => 'Manage Users->' . config('develuserroles.display_name'),
         'permissions' => 'user_roles.list',
     ]);
 

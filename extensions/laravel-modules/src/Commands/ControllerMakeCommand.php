@@ -158,9 +158,9 @@ class ControllerMakeCommand extends GeneratorCommand
     /**
      * Get CRUD model class name.
      *
-     * @return void
+     * @return string
      */
-    protected function getModel()
+    protected function getModel(): string
     {
         return $this->option('model') ?? '';
     }
@@ -263,6 +263,13 @@ class ControllerMakeCommand extends GeneratorCommand
         }
 
         $model = new $model;
+
+        $relationshipTypes = [
+            'HasOne' => 'select',
+            'BelongsToOne' => 'select',
+            'HasMany' => 'multiselect',
+            'BelongsToMany' => 'multiselect',
+        ];
         
         $values = "[\n";
 
@@ -283,6 +290,25 @@ class ControllerMakeCommand extends GeneratorCommand
             $values .= "            ],\n";
         }
 
+        // Include the Model's relationships
+        $relationships = $model->getRelationships();
+
+        foreach ($relationships as $name => $description) {
+            if (!isset($relationshipTypes[$description['type']])) {
+                continue;
+            }
+
+            $label = ucwords(implode(' ', explode('_', $name)));
+
+            $type = $relationshipTypes[$description['type']];
+
+            $values .= "            [\n";
+            $values .= "                'type' => '{$type}',\n";
+            $values .= "                'name' => '{$name}',\n";
+            $values .= "                'label' => '{$label}',\n";
+            $values .= "            ],\n";
+        }
+        
         $values .= "        ]";
 
         return $values;

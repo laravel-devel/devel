@@ -51,7 +51,7 @@ class $CLASS$ extends ServiceProvider
             ->namespace($this->moduleNamespace)
             ->group(module_path('$MODULE$', '$WEB_ROUTES_PATH$'));
 
-        if (file_exists(module_path('Debug', '/Routes/dashboard.php'))) {
+        if (file_exists(module_path('$MODULE$', '/Routes/dashboard.php'))) {
             Route::middleware([
                 'web',
                 \Modules\DevelDashboard\Http\Middleware\DashboardAccess::class,
