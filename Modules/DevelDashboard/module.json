@@ -1,7 +1,7 @@
 {
     "name": "DevelDashboard",
     "alias": "develdashboard",
-    "description": "",
+    "description": "The dashboard module of Devel.",
     "keywords": [],
     "order": 0,
     "providers": [
