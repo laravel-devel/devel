@@ -5,6 +5,7 @@ namespace Modules\DevelUsers\Http\Controllers;
 use Modules\DevelDashboard\Traits\Crud;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Modules\DevelCore\Http\Controllers\Controller;
 
 class UsersController extends Controller
@@ -47,7 +48,7 @@ class UsersController extends Controller
                 'label' => 'Email',
             ],
             [
-                'type' => 'text',
+                'type' => 'password',
                 'name' => 'password',
                 'label' => 'Password',
             ],
@@ -108,5 +109,23 @@ class UsersController extends Controller
             'item' => $item,
             'form' => $this->form(),
         ]);
+    }
+
+    /**
+     * Alter the values before storing or updating an item.
+     *
+     * @param Request $request
+     * @param array $item
+     * @return array
+     */
+    protected function alterValues($request, array $values): array
+    {
+        if (isset($values['password'])) {
+            $values['password'] = Hash::make($values['password']);
+        } else {
+            unset($values['password']);
+        }
+
+        return $values;
     }
 }

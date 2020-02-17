@@ -22,12 +22,14 @@ class UserRequest extends FormRequest
             'email' => [
                 'required',
                 'string',
+                'email',
                 'max:191',
             ],
             'password' => [
-                'required',
+                'sometimes',
+                'nullable',
                 'string',
-                'max:191',
+                'min:8',
             ],
 
         ];

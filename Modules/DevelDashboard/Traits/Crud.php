@@ -292,6 +292,8 @@ trait Crud
             }
         }
 
+        $values = $this->alterValues($request, $values);
+
         if ($item) {
             $item->update($values);
         } else {
@@ -333,5 +335,17 @@ trait Crud
     protected function afterStoreOrUpdate($request, $item)
     {
         return $item;
+    }
+
+    /**
+     * Alter the values before storing or updating an item.
+     *
+     * @param Request $request
+     * @param array $item
+     * @return array
+     */
+    protected function alterValues($request, array $values): array
+    {
+        return $values;
     }
 }
