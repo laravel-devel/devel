@@ -9,14 +9,16 @@
                     placeholder="Start typing..."
                     autocomplete="off"
                     v-model="search"
+                    ref="input"
                     @focus="open = true">
 
                 <div class="select-arrow"
                     :class="{ 'open': open }"
                     @click="toggleOpen"
+                    ref="arrow"
                 >
-                    <i v-if="open" class="las la-angle-up"></i>
-                    <i v-else class="las la-angle-down"></i>
+                    <i v-if="open" class="las la-angle-up" ref="arrow-up"></i>
+                    <i v-else class="las la-angle-down" ref="arrow-down"></i>
                 </div>
             </div>
 
@@ -101,13 +103,12 @@ export default {
 
     mounted() {
         document.addEventListener('click', (e) => {
-            const condition = (
-                e.target.parentNode && !e.target.parentNode.classList.contains('select-input')
-            ) && (
-                e.target.parentNode.parentNode && !e.target.parentNode.parentNode.classList.contains('select-input')
-            );
+            const condition = e.target === this.$refs['input']
+                || e.target === this.$refs['arrow']
+                || e.target === this.$refs['arrow-up']
+                || e.target === this.$refs['arrow-down'];
 
-            if (condition) {
+            if (!condition) {
                 this.open = false;
             }
         });
