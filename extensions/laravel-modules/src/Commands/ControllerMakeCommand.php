@@ -42,6 +42,13 @@ class ControllerMakeCommand extends GeneratorCommand
         'boolean' => 'checkbox',
     ];
 
+    protected $relationshipTypes = [
+        'HasOne' => 'select',
+        'BelongsToOne' => 'select',
+        'HasMany' => 'multiselect',
+        'BelongsToMany' => 'multiselect',
+    ];
+
     /**
      * Get controller name.
      *
@@ -79,6 +86,8 @@ class ControllerMakeCommand extends GeneratorCommand
             'MODEL_DATATABLE'   => $this->generateDatatable(),
             'MODEL_FORM'        => $this->generateForm(),
             'REQUEST_CLASS'     => $this->getFormRequestClass(),
+            'FORM_COLLECTIONS'  => $this->getFormCollections(),
+            'EDIT_MODEL_LOADS'  => $this->getEditModalLoads(),
         ]))->render();
     }
 
@@ -263,13 +272,6 @@ class ControllerMakeCommand extends GeneratorCommand
         }
 
         $model = new $model;
-
-        $relationshipTypes = [
-            'HasOne' => 'select',
-            'BelongsToOne' => 'select',
-            'HasMany' => 'multiselect',
-            'BelongsToMany' => 'multiselect',
-        ];
         
         $values = "[\n";
 
@@ -294,22 +296,101 @@ class ControllerMakeCommand extends GeneratorCommand
         $relationships = $model->getRelationships();
 
         foreach ($relationships as $name => $attrs) {
-            if (!isset($relationshipTypes[$attrs['type']])) {
+            if (!isset($this->relationshipTypes[$attrs['type']])) {
                 continue;
             }
 
             $label = ucwords(implode(' ', explode('_', $name)));
+            $type = $this->relationshipTypes[$attrs['type']];
 
-            $type = $relationshipTypes[$attrs['type']];
+            $idField = $attrs['relation']->getRelated()->getRouteKeyName();
+            $multipleChoice = ($type === 'multiselect') ? 'true' : 'false';
 
             $values .= "            [\n";
             $values .= "                'type' => '{$type}',\n";
             $values .= "                'name' => '{$name}',\n";
             $values .= "                'label' => '{$label}',\n";
+            $values .= "                'attrs' => [\n";
+            $values .= "                    'idField' => '{$idField}',\n";
+            $values .= "                    'textField' => '{$idField}',\n";
+            $values .= "                    'multipleChoice' => {$multipleChoice},\n";
+            $values .= "                ],\n";
             $values .= "            ],\n";
         }
         
         $values .= "        ]";
+
+        return $values;
+    }
+
+    /**
+     * Get collections of all the values to use in the form for the
+     * relationships.
+     *
+     * @return string
+     */
+    protected function getFormCollections(): string
+    {
+        if (!$model = $this->getModel()) {
+            return '[]';
+        }
+
+        $model = new $model;
+
+        $relationships = $model->getRelationships();
+
+        if (!count($relationships)) {
+            return '[]';
+        }
+
+        $values = "[\n";
+
+        foreach ($relationships as $name => $attrs) {
+            if (!isset($this->relationshipTypes[$attrs['type']])) {
+                continue;
+            }
+
+            $relatedModel = get_class($attrs['relation']->getRelated());
+
+            $values .= "                '{$name}' => \\{$relatedModel}::all(),\n";
+        }
+        
+        $values .= '            ]';
+
+        return $values;
+    }
+
+    /**
+     * Get the list of relationships to load with the model when editing an
+     * item.
+     *
+     * @return string
+     */
+    protected function getEditModalLoads(): string
+    {
+        if (!$model = $this->getModel()) {
+            return '';
+        }
+
+        $model = new $model;
+
+        $relationships = $model->getRelationships();
+
+        if (!count($relationships)) {
+            return '';
+        }
+
+        $values = "->load([\n";
+
+        foreach ($relationships as $name => $attrs) {
+            if (!isset($this->relationshipTypes[$attrs['type']])) {
+                continue;
+            }
+
+            $values .= "            '{$name}',\n";
+        }
+
+        $values .= '        ])';
 
         return $values;
     }

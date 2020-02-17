@@ -57,7 +57,6 @@ class UsersController extends Controller
                 'type' => 'multiselect',
                 'name' => 'roles',
                 'label' => 'Roles',
-                // TODO: I should be able to CRUD-generate this
                 'attrs' => [
                     'idField' => 'key',
                     'textField' => 'name',
@@ -92,10 +91,6 @@ class UsersController extends Controller
 
         return view('develusers::dashboard.users.create', [
             'form' => $this->form(),
-            // TODO: I should be able to CRUD-generate this, not sure about the
-            // actual array of values though. But I should be able to get the
-            // related model name, so should be no problem. Use full models
-            // names so that I wouldn't have to import (USE) anything.
             'collections' => [
                 'roles' => Role::all(),
             ],
@@ -110,7 +105,6 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        // TODO: (?) Add "load()" generation to the CRUD controller generator
         $item = $this->model()::findOrFail($id)->load([
             'roles',
         ]);
@@ -120,10 +114,6 @@ class UsersController extends Controller
         return view('develusers::dashboard.users.edit', [
             'item' => $item,
             'form' => $this->form(),
-            // TODO: I should be able to CRUD-generate this, not sure about the
-            // actual array of values though. But I should be able to get the
-            // related model name, so should be no problem. Use full models
-            // names so that I wouldn't have to import (USE) anything.
             'collections' => [
                 'roles' => Role::all(),
             ],

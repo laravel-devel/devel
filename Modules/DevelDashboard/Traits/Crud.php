@@ -320,9 +320,9 @@ trait Crud
                 // TODO: missing relationships (you can get the locale/foreign
                 // keys via $attrs['relation'] or maybe I can directly set the
                 // relations via Eloquent?)
+                // - HasMany (probably exact same code as for 'BelongsToMany')
                 // - BelongsToOne
                 // - HasOne
-                // - HasMany
             }
         }
 

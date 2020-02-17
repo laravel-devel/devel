@@ -50,6 +50,7 @@ class $CLASS$ extends Controller
 
         return view('$LOWER_NAME$::dashboard.$MODEL_LOWER$.create', [
             'form' => $this->form(),
+            'collections' => $FORM_COLLECTIONS$,
         ]);
     }
 
@@ -61,13 +62,14 @@ class $CLASS$ extends Controller
      */
     public function edit($id)
     {
-        $item = $this->model()::findOrFail($id);
+        $item = $this->model()::findOrFail($id)$EDIT_MODEL_LOADS$;
 
         $this->setMeta('title', 'Edit');
 
         return view('$LOWER_NAME$::dashboard.$MODEL_LOWER$.edit', [
             'item' => $item,
             'form' => $this->form(),
+            'collections' => $FORM_COLLECTIONS$,
         ]);
     }
 }

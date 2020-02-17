@@ -3,4 +3,5 @@
     type="table"
     :fields="{{ json_encode($form) }}"
     success="{{ route('dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.index') }}"
-    :values="{{ $item ?? '{}' }}"></v-form>
+    :values="{{ $item ?? '{}' }}"
+    :collections="{{ isset($collections) ? json_encode($collections) : '{}' }}"></v-form>

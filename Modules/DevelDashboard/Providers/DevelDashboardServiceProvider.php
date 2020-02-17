@@ -128,10 +128,6 @@ class DevelDashboardServiceProvider extends ServiceProvider
                     continue;
                 }
 
-                // TODO: Don't include an item if current user doesn't have
-                // permissions to access it. The list of required permissions
-                // will be also attached to the route and accessible in the same
-                // way as 'dashboardMenu'.
                 if (isset($route->getAction()['dashboardMenu'])) {
                     $parts = explode('->', $route->getAction()['dashboardMenu']);
 
