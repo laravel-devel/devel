@@ -166,18 +166,4 @@ class RolesController extends Controller
         
         return $permissions;
     }
-
-    /**
-     * Perform actions on the model after storing or updating it.
-     *
-     * @param Request $request
-     * @param mixed $item
-     * @return mixed
-     */
-    protected function afterStoreOrUpdate($request, $item)
-    {
-        $item->permissions()->sync($request->get('permissions', []));
-
-        return $item;
-    }
 }

@@ -298,6 +298,26 @@ trait Crud
             $item = $this->model()::create($values);
         }
 
+        // Update the relationships
+        foreach ($item->getRelationships() as $name => $attrs) {
+            if (!method_exists($item, $name)) {
+                continue;
+            }
+            
+            switch ($attrs['type']) {
+                case 'BelongsToMany':
+                    $item->{$name}()->sync($request->get($name, []));
+
+                    break;
+                // TODO: missing relationships (you can get the locale/foreign
+                // keys via $attrs['relation'] or maybe I can directly set the
+                // relations via Eloquent?)
+                // - BelongsToOne
+                // - HasOne
+                // - HasMany
+            }
+        }
+
         $item = $this->afterStoreOrUpdate($request, $item);
 
         return $item;

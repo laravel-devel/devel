@@ -30,6 +30,8 @@ trait HasRelationships
                     $relationships[$method->getName()] = [
                         'type' => class_basename($return),
                         'model' => get_class($return->getRelated()),
+                        'method' => $method,
+                        'relation' => $return,
                     ];
                 }
             } catch (\Exception $e) {

@@ -293,14 +293,14 @@ class ControllerMakeCommand extends GeneratorCommand
         // Include the Model's relationships
         $relationships = $model->getRelationships();
 
-        foreach ($relationships as $name => $description) {
-            if (!isset($relationshipTypes[$description['type']])) {
+        foreach ($relationships as $name => $attrs) {
+            if (!isset($relationshipTypes[$attrs['type']])) {
                 continue;
             }
 
             $label = ucwords(implode(' ', explode('_', $name)));
 
-            $type = $relationshipTypes[$description['type']];
+            $type = $relationshipTypes[$attrs['type']];
 
             $values .= "            [\n";
             $values .= "                'type' => '{$type}',\n";
