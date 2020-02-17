@@ -6,6 +6,7 @@ use Modules\DevelDashboard\Traits\Crud;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Modules\DevelCore\Entities\Auth\Role;
 use Modules\DevelCore\Http\Controllers\Controller;
 
 class UsersController extends Controller
@@ -56,11 +57,12 @@ class UsersController extends Controller
                 'type' => 'multiselect',
                 'name' => 'roles',
                 'label' => 'Roles',
-            ],
-            [
-                'type' => 'multiselect',
-                'name' => 'permissions',
-                'label' => 'Permissions',
+                // TODO: I should be able to CRUD-generate this
+                'attrs' => [
+                    'idField' => 'key',
+                    'textField' => 'name',
+                    'multipleChoice' => true,
+                ],
             ],
         ]);
     }
@@ -90,6 +92,13 @@ class UsersController extends Controller
 
         return view('develusers::dashboard.users.create', [
             'form' => $this->form(),
+            // TODO: I should be able to CRUD-generate this, not sure about the
+            // actual array of values though. But I should be able to get the
+            // related model name, so should be no problem. Use full models
+            // names so that I wouldn't have to import (USE) anything.
+            'collections' => [
+                'roles' => Role::all(),
+            ],
         ]);
     }
 
@@ -101,13 +110,23 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $item = $this->model()::findOrFail($id);
+        // TODO: (?) Add "load()" generation to the CRUD controller generator
+        $item = $this->model()::findOrFail($id)->load([
+            'roles',
+        ]);
 
         $this->setMeta('title', 'Edit');
 
         return view('develusers::dashboard.users.edit', [
             'item' => $item,
             'form' => $this->form(),
+            // TODO: I should be able to CRUD-generate this, not sure about the
+            // actual array of values though. But I should be able to get the
+            // related model name, so should be no problem. Use full models
+            // names so that I wouldn't have to import (USE) anything.
+            'collections' => [
+                'roles' => Role::all(),
+            ],
         ]);
     }
 

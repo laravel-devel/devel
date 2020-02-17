@@ -20,6 +20,7 @@
             <v-form-tab name="Main"
                 :type="type"
                 :fields="fields"
+                :collections="collections"
                 :values="values"
                 :errors="errors"></v-form-tab>
         </slot>
@@ -51,6 +52,13 @@ export default {
 
         fields: Array,
         
+        collections: {
+            type: Object,
+            default: () => {
+                return {};
+            },
+        },
+
         values: {
             type: Object,
             default: () => {

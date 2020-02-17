@@ -3,4 +3,6 @@
     type="table"
     :fields="{{ json_encode($form) }}"
     success="{{ route('dashboard.develusers.users.index') }}"
-    :values="{{ $item ?? '{}' }}"></v-form>
+    :values="{{ $item ?? '{}' }}"
+    :collections="{{ isset($collections) ? json_encode($collections) : '{}' }}"></v-form>
+{{-- // TODO: Add "collections" to the CRUD generation. I should be able to generate this stuff --}}

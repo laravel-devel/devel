@@ -93,6 +93,12 @@ trait Crud
      */
     protected function setForm(array $fields): void
     {
+        for ($i = 0; $i < count($fields); $i++) {
+            if (!isset($fields[$i]['attrs'])) {
+                $fields[$i]['attrs'] = [];
+            }
+        }
+        
         $this->formFields = $fields;
     }
 
@@ -302,7 +308,7 @@ trait Crud
 
         // Update the relationships
         foreach ($item->getRelationships() as $name => $attrs) {
-            if (!method_exists($item, $name)) {
+            if (!method_exists($item, $name) || !$request->has($name)) {
                 continue;
             }
             

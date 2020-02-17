@@ -13,6 +13,12 @@
         <v-fel-link v-else-if="field.type === 'link'"
             :attrs="attrs"></v-fel-link>
 
+        <v-fel-select v-else-if="field.type === 'multiselect'"
+            :attrs="attrs"
+            :value="value"
+            :collections="collections"
+            @input="onInput"></v-fel-select>
+
         <div v-if="errors" class="hint danger">
             {{ errors[0] }}
         </div>
@@ -23,16 +29,25 @@
 import Input from './elements/Input';
 import Checkbox from './elements/Checkbox';
 import Link from './elements/Link';
+import Select from './elements/Select';
 
 export default {
     components: {
         'v-fel-input': Input,
         'v-fel-checkbox': Checkbox,
         'v-fel-link': Link,
+        'v-fel-select': Select,
     },
 
     props: {
         field: {},
+
+        collections: {
+            type: Object,
+            default: () => {
+                return {};
+            },
+        },
 
         inline: {
             type: Boolean,
@@ -42,7 +57,7 @@ export default {
         showLabel: {
             type: Boolean,
             default: true,
-        }
+        },
     },
 
     data() {
@@ -78,9 +93,12 @@ export default {
     created() {
         this.attrs = Object.assign({}, this.field);
         this.attrs.label = this.showLabel ? this.field.label : undefined;
-        this.attrs.checked = this.attrs.checked === undefined
-            ? this.value
-            : this.attrs.checked;
+
+        if (this.field.type === 'checkbox') {
+            this.attrs.checked = this.attrs.checked === undefined
+                ? this.value
+                : this.attrs.checked;
+        }
     },
 
     methods: {

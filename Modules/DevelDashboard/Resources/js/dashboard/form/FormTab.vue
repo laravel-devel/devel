@@ -5,6 +5,7 @@
                 <v-form-el v-for="(field, index) in fields"
                     :key="index"
                     :field="field"
+                    :collections="collections"
                     class="pb-1">
                 </v-form-el>
             </div>
@@ -18,6 +19,7 @@
 
                         <td class="pb-1">
                             <v-form-el :field="field"
+                                :collections="collections"
                                 :show-label="false"
                                 :inline="true">
                             </v-form-el>
@@ -39,6 +41,13 @@ export default {
         type: {
             type: String,
             default: 'default',
+        },
+
+        collections: {
+            type: Object,
+            default: () => {
+                return {};
+            },
         },
         
         errors: {},
