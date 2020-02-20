@@ -99,6 +99,8 @@ export default {
                 ? this.value
                 : this.attrs.checked;
         }
+
+        this.attrs.disabled = (this.attrs.disabled == true) ? true : false;
     },
 
     methods: {

@@ -7,6 +7,7 @@
             :name="attrs.name"
             autocomplete="off"
             :value="value"
+            :disabled="attrs.disabled"
             @input="$emit('input', $event.target.value)">
     </div>
 </template>

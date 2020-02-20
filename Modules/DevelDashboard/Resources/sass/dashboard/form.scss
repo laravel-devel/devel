@@ -132,6 +132,14 @@
             content: " ";
             white-space: pre;
         }
+
+        &.disabled {
+            font-weight: 400;
+
+            input:checked ~ .checkmark {
+                background-color: $primaryInactive;
+            }
+        }
     }
 }
 

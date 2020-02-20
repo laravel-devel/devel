@@ -6,7 +6,9 @@ use Modules\DevelDashboard\Traits\Crud;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Modules\DevelCore\Entities\Auth\Permission;
 use Modules\DevelCore\Entities\Auth\Role;
+use Modules\DevelCore\Entities\Auth\User;
 use Modules\DevelCore\Http\Controllers\Controller;
 
 class UsersController extends Controller
@@ -94,6 +96,7 @@ class UsersController extends Controller
             'collections' => [
                 'roles' => Role::all(),
             ],
+            'permissions' => $this->getPermissions(),
         ]);
     }
 
@@ -117,6 +120,7 @@ class UsersController extends Controller
             'collections' => [
                 'roles' => Role::all(),
             ],
+            'permissions' => $this->getPermissions($item),
         ]);
     }
 
@@ -136,5 +140,55 @@ class UsersController extends Controller
         }
 
         return $values;
+    }
+
+    /**
+     * Get all existing grouped permissions, mark granted ones for a user.
+     *
+     * @param User $user
+     * @return array
+     */
+    protected function getPermissions(User $user = null): array
+    {
+        $permissions = Permission::getGrouped();
+
+        if ($user) {
+            $userPermissions = $user->permissions;
+            $rolesPermissions = collect();
+
+            foreach ($user->roles as $role) {
+                $rolesPermissions = $rolesPermissions->merge($role->permissions);
+            }
+
+            foreach ($userPermissions as $permission) {
+                $group = explode('.', $permission->key)[0];
+
+                if (!$permissions[$group]) {
+                    continue;
+                }
+
+                $index = array_search($permission->toArray(), $permissions[$group]['permissions']);
+
+                if ($index !== false) {
+                    $permissions[$group]['permissions'][$index]['granted'] = true;
+                }
+            }
+
+            foreach ($rolesPermissions as $permission) {
+                $group = explode('.', $permission->key)[0];
+
+                if (!$permissions[$group]) {
+                    continue;
+                }
+
+                $index = array_search($permission->toArray(), $permissions[$group]['permissions']);
+
+                if ($index !== false) {
+                    $permissions[$group]['permissions'][$index]['grantedByRole'] = true;
+                }
+            }
+        }
+
+        return $permissions;
     }
 }

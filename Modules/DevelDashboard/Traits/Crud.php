@@ -314,7 +314,8 @@ trait Crud
             
             switch ($attrs['type']) {
                 case 'BelongsToMany':
-                    $item->{$name}()->sync($request->get($name, []));
+                    // array_filters removes the null values
+                    $item->{$name}()->sync(array_filter($request->get($name, [])));
 
                     break;
                 // TODO: missing relationships (you can get the locale/foreign
