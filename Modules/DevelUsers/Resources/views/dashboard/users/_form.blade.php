@@ -21,7 +21,7 @@
             </p>
             <div class="flex flex-wrap">
                 @foreach ($permissions as $group)
-                    <div>
+                    <div class="flex flex-column px-1">
                         <p class="text-bold mb-1">{{ $group['name'] }}</p>
 
                         @foreach ($group['permissions'] as $permission)
