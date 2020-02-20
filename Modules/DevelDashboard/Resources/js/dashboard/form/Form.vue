@@ -92,7 +92,9 @@ export default {
             this.tabs = this.$children.map(item => {
                 return {
                     el: item.$el,
-                    key: item.$attrs.name.toLowerCase(),
+                    key: item.$attrs.name.toLowerCase()
+                        .replace(/[^\w ]+/g,'')
+                        .replace(/ +/g,'-'),
                     name: item.$attrs.name,
                 };
             });
