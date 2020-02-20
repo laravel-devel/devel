@@ -9,7 +9,7 @@ use Modules\DevelCore\Entities\Auth\User;
 class UsersSeeder extends Seeder
 {
     protected $users = [
-        'user@example.com' => ['user'],
+        'user@example.com' => ['user'], // TODO: Remove after debugging
         'admin@example.com' => ['admin'],
     ];
 

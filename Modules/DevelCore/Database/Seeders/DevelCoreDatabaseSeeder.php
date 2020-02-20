@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use Modules\DevelCore\Entities\Auth\Permission;
 use Modules\DevelCore\Entities\Auth\Role;
 use Modules\DevelCore\Entities\Auth\User;
+use Modules\DevelCore\Entities\Settings;
 
 class DevelCoreDatabaseSeeder extends Seeder
 {
@@ -18,11 +19,17 @@ class DevelCoreDatabaseSeeder extends Seeder
     public function run()
     {
         // Truncate all the tables first
+        User::query()->delete();
+        Permission::query()->delete();
+        Role::query()->delete();
+        Settings::query()->delete();
+
         Schema::disableForeignKeyConstraints();
 
         User::truncate();
         Permission::truncate();
         Role::truncate();
+        Settings::truncate();
 
         Schema::enableForeignKeyConstraints();
 
@@ -30,5 +37,6 @@ class DevelCoreDatabaseSeeder extends Seeder
         $this->call(UserPermissionsSeeder::class);
         $this->call(UserRolesSeeder::class);
         $this->call(UsersSeeder::class);
+        $this->call(SettingsSeeder::class);
     }
 }
