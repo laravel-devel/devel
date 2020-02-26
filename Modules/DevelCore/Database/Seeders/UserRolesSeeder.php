@@ -15,7 +15,10 @@ class UserRolesSeeder extends Seeder
         ],
         'admin' => [
             'name' => 'Admin',
-            'permissions' => ['admin_dashboard.access'],
+            'permissions' => [
+                'admin_dashboard.access',
+                'site_settings.edit',
+            ],
         ],
     ];
 

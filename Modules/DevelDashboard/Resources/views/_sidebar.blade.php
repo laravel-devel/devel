@@ -1,6 +1,6 @@
 <div class="sidebar">
     <header class="header">
-        <a href="{{ route('dashboard.index') }}">{{ config('app.name') }}</a>
+        <a href="{{ route('dashboard.index') }}">{{ setting('site-name') }}</a>
     </header>
 
     <main class="main">

@@ -15,7 +15,7 @@
                     <tr v-for="(field, index) in fields"
                         :key="index"
                     >
-                        <td class="pb-1" v-text="field.label"></td>
+                        <td class="pb-1 pt-05" v-text="field.label"></td>
 
                         <td class="pb-1">
                             <v-form-el :field="field"

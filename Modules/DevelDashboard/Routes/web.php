@@ -33,4 +33,18 @@ Route::group([
     'middleware' => [\Modules\DevelDashboard\Http\Middleware\DashboardAccess::class],
 ], function () {
     Route::get('/', 'DashboardController@index')->name('index');
+
+    // General site settings
+    Route::get('/settings', [
+        'as' => 'develdashboard.settings.edit',
+        'uses' => 'SettingsController@edit',
+        'dashboardMenu' => 'Site->Settings',
+        'permissions' => 'site_settings.edit',
+    ]);
+
+    Route::post('/settings', [
+        'as' => 'develdashboard.settings.update',
+        'uses' => 'SettingsController@update',
+        'permissions' => 'site_settings.edit',
+    ]);
 });

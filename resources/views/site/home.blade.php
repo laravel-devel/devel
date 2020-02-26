@@ -1,5 +1,5 @@
 @extends('site.layout')
 
 @section('content')
-    Welcome to {{ config('app.name') }}
+    Welcome to {{ setting('site-name') }}
 @endsection

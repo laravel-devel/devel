@@ -8,7 +8,10 @@ use Modules\DevelCore\Entities\Settings;
 class SettingsSeeder extends Seeder
 {
     protected $settings = [
-        'site.name' => 'Devel',
+        'site.name' => [
+            'name' => 'Site Name',
+            'value' => 'Devel',
+        ],
     ];
 
     /**
@@ -18,8 +21,19 @@ class SettingsSeeder extends Seeder
      */
     public function run()
     {
-        foreach ($this->settings as $key => $value) {
-            Settings::set($key, $value);
+        foreach ($this->settings as $key => $data) {
+            $parts = explode('.', $key);
+            $group = $parts[0];
+
+            array_shift($parts);
+            $key = implode('.', $parts);
+
+            Settings::create([
+                'group' => $group,
+                'key' => $key,
+                'name' => $data['name'],
+                'value' => $data['value'],
+            ]);
         }
     }
 }

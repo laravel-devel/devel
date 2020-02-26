@@ -16,7 +16,7 @@ class ViewServiceProvider extends ServiceProvider
     public function register()
     {
         // Main site-wide page title
-        MetaTags::setTag('title', config('app.name'));
+        MetaTags::setTag('title', setting('site-name'));
     }
 
     /**

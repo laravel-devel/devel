@@ -39,7 +39,8 @@
             "Modules\\": "Modules/"
         },
         "files": [
-            "extensions/laravel-modules/src/helpers.php"
+            "extensions/laravel-modules/src/helpers.php",
+            "Modules/DevelCore/Services/helpers.php"
         ],
         "classmap": [
             "database/seeds",

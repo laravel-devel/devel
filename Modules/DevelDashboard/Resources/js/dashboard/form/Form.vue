@@ -125,6 +125,13 @@ export default {
                 this.message = data.message ? data.message : '';
                 this.messageClass = 'success';
 
+                if (data.notification) {
+                    this.$notify(
+                        data.notification.message,
+                        data.notification.type ? data.notification.type : null
+                    );
+                }
+
                 if (this.success) {
                     window.location = this.success;
                 } else {
@@ -145,6 +152,8 @@ export default {
                         ? response.data.message
                         : 'Something went wrong!';
                 }
+
+                this.$notify(this.message, 'error');
 
                 this.processing = false;
             });

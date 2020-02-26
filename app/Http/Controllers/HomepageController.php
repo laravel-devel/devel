@@ -16,7 +16,7 @@ class HomepageController extends Controller
     {
         $this->setMeta([
             'title' => 'Homepage',
-            'description' => 'Welcome to ' . config('app.name') . '!',
+            'description' => 'Welcome to ' . setting('site-name') . '!',
             'keywords' => 'modular, laravel, site',
         ]);
 
