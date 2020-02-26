@@ -44,7 +44,7 @@ trait HasPermissions
      */
     public function hasPersonalPermission(string $permission): bool
     {
-        return $this->permissions()->where('key', $permission)->exists();
+        return $this->permissions->where('key', $permission)->first() == true;
     }
 
     /**
