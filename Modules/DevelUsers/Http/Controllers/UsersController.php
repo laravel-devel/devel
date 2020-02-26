@@ -40,29 +40,31 @@ class UsersController extends Controller
         ]);
         
         $this->setForm([
-            [
-                'type' => 'text',
-                'name' => 'name',
-                'label' => 'Name',
-            ],
-            [
-                'type' => 'text',
-                'name' => 'email',
-                'label' => 'Email',
-            ],
-            [
-                'type' => 'password',
-                'name' => 'password',
-                'label' => 'Password',
-            ],
-            [
-                'type' => 'multiselect',
-                'name' => 'roles',
-                'label' => 'Roles',
-                'attrs' => [
-                    'idField' => 'key',
-                    'textField' => 'name',
-                    'multipleChoice' => true,
+            'Main' => [
+                [
+                    'type' => 'text',
+                    'name' => 'name',
+                    'label' => 'Name',
+                ],
+                [
+                    'type' => 'text',
+                    'name' => 'email',
+                    'label' => 'Email',
+                ],
+                [
+                    'type' => 'password',
+                    'name' => 'password',
+                    'label' => 'Password',
+                ],
+                [
+                    'type' => 'multiselect',
+                    'name' => 'roles',
+                    'label' => 'Roles',
+                    'attrs' => [
+                        'idField' => 'key',
+                        'textField' => 'name',
+                        'multipleChoice' => true,
+                    ],
                 ],
             ],
         ]);

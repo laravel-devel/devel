@@ -25,22 +25,25 @@ class SettingsController extends Controller
 
         // Input fields for the form
         foreach ($this->groups as $group => $keys) {
-            foreach ($keys as $key) {
-                $setting = Settings::getObject("{$group}-{$key}");
+            $groupName = ucwords(str_replace('_', ' ', $group));
+            $form[$groupName] = [];
 
-                $this->form[] = [
+            foreach ($keys as $key) {
+                $key = "{$group}-{$key}";
+                $setting = Settings::getObject($key);
+
+                // A form field
+                $this->form[$groupName][] = [
                     'type' => 'text',
-                    'name' => "{$group}-{$key}",
+                    'name' => "$key",
                     'label' => isset($setting)
                         ? $setting->name
-                        : Settings::keyToName("{$group}-{$key}"),
+                        : Settings::keyToName("$key"),
                 ];
-            }
-        }
 
-        // Fetch current settings values
-        foreach ($this->form as $field) {
-            $this->values[$field['name']] = Settings::read($field['name']);
+                // A value for the field
+                $this->values[$key] = Settings::read($key);
+            }
         }
     }
 

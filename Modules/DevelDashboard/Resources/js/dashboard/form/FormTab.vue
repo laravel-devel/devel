@@ -1,5 +1,5 @@
 <template>
-    <div class="hidden">
+    <div :class="{ 'hidden': !show }">
         <slot>
             <div v-if="type === 'default'">
                 <v-form-el v-for="(field, index) in fields"
@@ -51,6 +51,12 @@ export default {
         },
         
         errors: {},
+
+        show: {
+            type: Boolean,
+            
+            default: false,
+        }
     },
 }
 </script>

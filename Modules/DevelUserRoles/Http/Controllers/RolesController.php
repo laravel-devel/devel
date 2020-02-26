@@ -43,20 +43,22 @@ class RolesController extends Controller
         ]);
         
         $this->setForm([
-            [
-                'type' => 'text',
-                'name' => 'key',
-                'label' => 'Key',
-            ],
-            [
-                'type' => 'text',
-                'name' => 'name',
-                'label' => 'Name',
-            ],
-            [
-                'type' => 'checkbox',
-                'name' => 'default',
-                'label' => 'Default',
+            'Main' => [
+                [
+                    'type' => 'text',
+                    'name' => 'key',
+                    'label' => 'Key',
+                ],
+                [
+                    'type' => 'text',
+                    'name' => 'name',
+                    'label' => 'Name',
+                ],
+                [
+                    'type' => 'checkbox',
+                    'name' => 'default',
+                    'label' => 'Default',
+                ],
             ],
         ]);
     }

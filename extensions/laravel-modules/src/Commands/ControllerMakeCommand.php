@@ -274,6 +274,7 @@ class ControllerMakeCommand extends GeneratorCommand
         $model = new $model;
         
         $values = "[\n";
+        $values .= "            'Main' => [\n";
 
         // Only include the fillable fields
         foreach ($model->getFillable() as $field) {
@@ -285,11 +286,11 @@ class ControllerMakeCommand extends GeneratorCommand
 
             $type = $this->dbToFormTypes[$columnType] ?? 'text';
 
-            $values .= "            [\n";
-            $values .= "                'type' => '{$type}',\n";
-            $values .= "                'name' => '{$field}',\n";
-            $values .= "                'label' => '{$label}',\n";
-            $values .= "            ],\n";
+            $values .= "                [\n";
+            $values .= "                    'type' => '{$type}',\n";
+            $values .= "                    'name' => '{$field}',\n";
+            $values .= "                    'label' => '{$label}',\n";
+            $values .= "                ],\n";
         }
 
         // Include the Model's relationships
@@ -306,18 +307,19 @@ class ControllerMakeCommand extends GeneratorCommand
             $idField = $attrs['relation']->getRelated()->getRouteKeyName();
             $multipleChoice = ($type === 'multiselect') ? 'true' : 'false';
 
-            $values .= "            [\n";
-            $values .= "                'type' => '{$type}',\n";
-            $values .= "                'name' => '{$name}',\n";
-            $values .= "                'label' => '{$label}',\n";
-            $values .= "                'attrs' => [\n";
-            $values .= "                    'idField' => '{$idField}',\n";
-            $values .= "                    'textField' => '{$idField}',\n";
-            $values .= "                    'multipleChoice' => {$multipleChoice},\n";
+            $values .= "                [\n";
+            $values .= "                    'type' => '{$type}',\n";
+            $values .= "                    'name' => '{$name}',\n";
+            $values .= "                    'label' => '{$label}',\n";
+            $values .= "                    'attrs' => [\n";
+            $values .= "                        'idField' => '{$idField}',\n";
+            $values .= "                        'textField' => '{$idField}',\n";
+            $values .= "                        'multipleChoice' => {$multipleChoice},\n";
+            $values .= "                    ],\n";
             $values .= "                ],\n";
-            $values .= "            ],\n";
         }
         
+        $values .= "            ],\n";
         $values .= "        ]";
 
         return $values;

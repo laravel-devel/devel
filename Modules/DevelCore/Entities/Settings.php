@@ -68,9 +68,9 @@ class Settings extends Model
      *
      * @param string $key
      * @param mixed $default
-     * @return string
+     * @return mixed
      */
-    public static function read(string $key, $default = null): string
+    public static function read(string $key, $default = null)
     {
         if (!static::$settings) {
             static::fetchAllSettings();

@@ -17,9 +17,12 @@
         </div>
 
         <slot v-bind:errors="errors" v-bind:values="values">
-            <v-form-tab name="Main"
+            <v-form-tab v-for="(key, index) in Object.keys(fields)"
+                :key="index"
+                :show="slug(key) === activeTab"
+                :name="key"
                 :type="type"
-                :fields="fields"
+                :fields="fields[key]"
                 :collections="collections"
                 :values="values"
                 :errors="errors"></v-form-tab>
@@ -50,7 +53,12 @@ export default {
             default: 'GET',
         },
 
-        fields: Array,
+        fields: {
+            type: Object,
+            default: () => {
+                return {};
+            },
+        },
         
         collections: {
             type: Object,
@@ -87,26 +95,38 @@ export default {
         };
     },
 
+    created() {
+        if (Object.keys(this.fields).length) {
+            for (let name of Object.keys(this.fields)) {
+                const key = this.slug(name);
+
+                this.tabs.push({
+                    el: this.$refs[`tab-content-${key}`],
+                    key: key,
+                    name: name,
+                });
+            }
+        }
+    },
+
     mounted() {
-        if (this.$children !== undefined) {
+        if (!Object.keys(this.fields).length && this.$children !== undefined) {
             this.tabs = this.$children.map(item => {
                 return {
                     el: item.$el,
-                    key: item.$attrs.name.toLowerCase()
-                        .replace(/[^\w ]+/g,'')
-                        .replace(/ +/g,'-'),
+                    key: this.slug(item.$attrs.name),
                     name: item.$attrs.name,
                 };
             });
-
-            if (location.hash.substr(0, 5) === '#tab-') {
-                this.activeTab = location.hash.substr(5);
-            } else {
-                this.activeTab = this.tabs[0].key;
-            }
-
-            this.showTab(this.activeTab);
         }
+
+        if (location.hash.substr(0, 5) === '#tab-') {
+            this.activeTab = location.hash.substr(5);
+        } else {
+            this.activeTab = this.tabs[0].key
+        }
+
+        this.showTab(this.activeTab);
     },
 
     methods: {
@@ -171,14 +191,19 @@ export default {
             }
 
             for (let item of this.tabs) {
-                item.el.classList.add('hidden');
+                if (item.el) {
+                    item.el.classList.add('hidden');
+                }
             }
 
-            tab.el.classList.remove('hidden');
+            if (tab.el) {
+                tab.el.classList.remove('hidden');
+            }
+
             this.activeTab = key;
 
             // Change the window location hash
-            if (this.tabs.length > 1) {
+            if (this.tabs.length > 0) {
                 const hash = '#tab-' + key;
 
                 if (history.pushState) {
@@ -187,6 +212,12 @@ export default {
                     location.hash = hash;
                 }
             }
+        },
+        
+        slug(str) {
+            return str.toLowerCase()
+                .replace(/[^\w ]+/g,'')
+                .replace(/ +/g,'-');
         }
     },
 }

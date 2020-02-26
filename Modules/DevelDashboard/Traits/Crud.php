@@ -93,9 +93,11 @@ trait Crud
      */
     protected function setForm(array $fields): void
     {
-        for ($i = 0; $i < count($fields); $i++) {
-            if (!isset($fields[$i]['attrs'])) {
-                $fields[$i]['attrs'] = [];
+        foreach ($fields as $tab => $data) {
+            for ($i = 0; $i < count($data); $i++) {
+                if (!isset($fields[$tab][$i]['attrs'])) {
+                    $fields[$tab][$i]['attrs'] = [];
+                }
             }
         }
         

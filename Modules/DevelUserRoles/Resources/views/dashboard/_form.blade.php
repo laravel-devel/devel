@@ -6,7 +6,7 @@
 >
     <template v-slot:default="slotProps">
         <v-form-tab name="Role"
-            :fields="{{ json_encode($form) }}"
+            :fields="{{ json_encode($form['Main']) }}"
             :errors="slotProps.errors"
             :values="slotProps.values"
             type="table"></v-form-tab>
