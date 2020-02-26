@@ -168,7 +168,8 @@ class SeedMakeCommand extends GeneratorCommand
         $moduleLower = strtolower(implode('_', $moduleParts));
         
         $permissions = '';
-        $permissions .= "'{$moduleLower}.list-{$nameLower}' => '{$module} - List {$name}',\n";
+        $permissions .= "'{$moduleLower}.edit-settings' => '{$module} - Edit Settings',\n";
+        $permissions .= "        '{$moduleLower}.list-{$nameLower}' => '{$module} - List {$name}',\n";
         $permissions .= "        '{$moduleLower}.add-{$nameLower}' => '{$module} - Add {$name}',\n";
         $permissions .= "        '{$moduleLower}.edit-{$nameLower}' => '{$module} - Edit {$name}',\n";
         $permissions .= "        '{$moduleLower}.delete-{$nameLower}' => '{$module} - Delete {$name}',";

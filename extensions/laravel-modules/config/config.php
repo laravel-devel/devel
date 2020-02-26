@@ -29,6 +29,7 @@ return [
         'path' => base_path() . '/extensions/laravel-modules/src/Commands/stubs',
         'files' => [
             'routes/web' => 'Routes/web.php',
+            'routes/dashboard' => 'Routes/dashboard.php',
             'routes/api' => 'Routes/api.php',
             'scaffold/config' => 'Config/config.php',
             'composer' => 'composer.json',
@@ -37,6 +38,7 @@ return [
             'webpack' => 'webpack.mix.js',
             'package' => 'package.json',
             'gitignore' => '.gitignore',
+            'views/settings' => 'Resources/views/dashboard/settings/edit.blade.php',
         ],
         'files-crud' => [
             'views/index' => 'Resources/views/dashboard/$CRUD_NAME_LOWER$/index.blade.php',
@@ -49,6 +51,7 @@ return [
         ],
         'replacements' => [
             'routes/web' => ['LOWER_NAME', 'STUDLY_NAME', 'CONTROLLER_NAME'],
+            'routes/dashboard' => ['LOWER_NAME', 'STUDLY_NAME', 'CONTROLLER_NAME'],
             'routes/api' => ['LOWER_NAME'],
             'webpack' => ['LOWER_NAME'],
             'json' => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE', 'PROVIDER_NAMESPACE'],
@@ -56,6 +59,7 @@ return [
             'views/create' => ['LOWER_NAME', 'STUDLY_NAME'],
             'views/edit' => ['LOWER_NAME', 'STUDLY_NAME'],
             'views/_form' => ['LOWER_NAME', 'STUDLY_NAME'],
+            'views/settings' => ['LOWER_NAME', 'STUDLY_NAME'],
             // 'views/master' => ['LOWER_NAME', 'STUDLY_NAME'],
             'scaffold/config' => ['STUDLY_NAME', 'DISPLAY_NAME', 'SLUG'],
             'composer' => [

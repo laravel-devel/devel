@@ -467,6 +467,13 @@ class ModuleGenerator extends Generator
                 'module' => $this->getName(),
             ]);
         }
+
+        // Generate the SettingsController
+        $this->console->call('module:make-controller', [
+            'controller' => $this->getControllerName(),
+            'module' => $this->getName(),
+            '--settings' => true,
+        ]);
         
         if ($this->getModel()) {
             // Generate CRUD for the provided model

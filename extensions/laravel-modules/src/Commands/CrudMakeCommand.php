@@ -157,6 +157,7 @@ class CrudMakeCommand extends Command
 
         $replacements = [
             '$LOWER_NAME$' => strtolower($this->getModuleName()),
+            '$STUDLY_NAME$' => $this->getModuleName(),
             '$MODEL_NAME$' => $this->getModel(),
             '$CRUD_NAME_LOWER$' => strtolower($this->getCrudName()),
             '$CRUD_NAME$' => $this->getCrudName(),

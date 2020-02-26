@@ -3,4 +3,19 @@
 Route::group([
     'prefix' => config('develdashboard.dashboard_uri') . '/' . config('$LOWER_NAME$.slug'),
 ], function() {
+    /**
+     * Module settings
+     */
+    Route::get('/settings', [
+        'as' => '$LOWER_NAME$.settings.edit',
+        'uses' => 'SettingsController@edit',
+        'dashboardMenu' => '$STUDLY_NAME$->Settings',
+        'permissions' => '$LOWER_NAME$.edit-settings',
+    ]);
+
+    Route::post('/settings', [
+        'as' => '$LOWER_NAME$.settings.update',
+        'uses' => 'SettingsController@update',
+        'permissions' => '$LOWER_NAME$.edit-settings',
+    ]);
 });

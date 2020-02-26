@@ -112,6 +112,7 @@ class ControllerMakeCommand extends GeneratorCommand
         return [
             ['plain', 'p', InputOption::VALUE_NONE, 'Generate a plain controller', null],
             ['api', null, InputOption::VALUE_NONE, 'Exclude the create and edit methods from the controller.'],
+            ['settings', null, InputOption::VALUE_NONE, 'Create the SettingsController for the module.'],
             ['model', null, InputOption::VALUE_OPTIONAL, 'A model to generate CRUD for.'],
         ];
     }
@@ -121,6 +122,10 @@ class ControllerMakeCommand extends GeneratorCommand
      */
     protected function getControllerName()
     {
+        if ($this->option('settings') === true) {
+            return 'SettingsController';
+        }
+
         $controller = Str::studly($this->argument('controller'));
 
         if (Str::contains(strtolower($controller), 'controller') === false) {
@@ -155,6 +160,8 @@ class ControllerMakeCommand extends GeneratorCommand
             $stub = '/controller-plain.stub';
         } elseif ($this->option('api') === true) {
             $stub = '/controller-api.stub';
+        } elseif ($this->option('settings') === true) {
+            $stub = '/controller-settings.stub';
         } elseif (!empty($this->option('model'))) {
             $stub = '/controller-crud.stub';
         } else {
