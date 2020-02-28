@@ -143,7 +143,7 @@ class DevelDashboardServiceProvider extends ServiceProvider
                 }
             }
 
-            $view->with('sidebarMenu', SidebarMenu::getItems());
+            $view->with('sidebarMenu', SidebarMenu::getSortedItems());
         });
     }
 }

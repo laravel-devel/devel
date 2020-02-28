@@ -22,6 +22,28 @@ class SidebarMenu
     }
 
     /**
+     * Get the menu items tree sorted alphabetically
+     *
+     * @return array
+     */
+    public static function getSortedItems(): array
+    {
+        $sorted = static::$items;
+
+        // Sort groups
+        ksort($sorted);
+
+        // Sort items within groups
+        foreach ($sorted as $group => $items) {
+            ksort($items);
+
+            $sorted[$group] = $items;
+        }
+
+        return $sorted;
+    }
+
+    /**
      * Add a category to the menu
      *
      * @param string $name
