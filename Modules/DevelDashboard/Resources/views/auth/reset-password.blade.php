@@ -9,12 +9,12 @@
         <div class="body">
             <v-form action="{{ route('dashboard.auth.reset-password.post') }}"
                 method="POST"
-                :fields="[
+                :fields="{ 'Main': [
                     { type: 'email', name: 'email', label: 'Your Email' },
                     { type: 'password', name: 'password', label: 'New Password' },
                     { type: 'password', name: 'password_confirmation', label: 'Confirm Password' },
                     { type: 'hidden', name: 'token' },
-                ]"
+                ]}"
                 :values="{
                     token: '{{ $token }}',
                 }"
