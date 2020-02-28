@@ -1,10 +1,13 @@
 {
-    "name": "laravel/laravel",
+    "name": "devel/devel",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Modular Laravel project with a dashboard and CRUD generator.",
     "keywords": [
         "framework",
-        "laravel"
+        "laravel",
+        "devel",
+        "dashboard",
+        "crud"
     ],
     "license": "MIT",
     "require": {

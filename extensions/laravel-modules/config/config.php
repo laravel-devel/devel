@@ -168,7 +168,7 @@ return [
     */
 
     'composer' => [
-        'vendor' => 'voerro',
+        'vendor' => 'devel',
         'author' => [
             'name' => 'Alexander Zavyalov',
             'email' => 'alex@voerro.com',
