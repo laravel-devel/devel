@@ -123,7 +123,7 @@ export default {
         if (location.hash.substr(0, 5) === '#tab-') {
             this.activeTab = location.hash.substr(5);
         } else {
-            this.activeTab = this.tabs[0].key
+            this.activeTab = this.tabs[0].key;
         }
 
         this.showTab(this.activeTab);
@@ -183,10 +183,14 @@ export default {
             this.errors = {};
         },
 
-        showTab(key) {
+        showTab(key, secondCall = false) {
             const tab = this.tabs.find(item => item.key === key);
 
             if (!tab) {
+                if (!secondCall) {
+                    this.showTab(this.tabs[0].key, true);
+                }
+
                 return;
             }
 
