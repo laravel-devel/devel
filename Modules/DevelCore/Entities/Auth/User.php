@@ -52,6 +52,7 @@ class User extends Authenticatable
 
     protected $with = [
         'roles',
+        'roles.permissions',
         'permissions',
     ];
 
@@ -66,9 +67,7 @@ class User extends Authenticatable
             Role::class,
             'user_role',
             'user_id',
-            'role',
-            'id',
-            'key'
+            'role'
         );
     }
 

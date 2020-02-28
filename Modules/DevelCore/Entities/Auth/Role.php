@@ -12,6 +12,7 @@ class Role extends Model
     public $table = 'user_roles';
     
     protected $primaryKey = 'key';
+    protected $keyType = 'string';
 
     public $incrementing = false;
     
@@ -66,8 +67,6 @@ class Role extends Model
             'user_role_permission',
             'role',
             'permission',
-            'key',
-            'key'
         );
     }
 }

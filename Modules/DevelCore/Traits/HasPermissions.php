@@ -17,7 +17,7 @@ trait HasPermissions
         }
 
         foreach ($permissions as $permission) {
-            if (!$this->hasPermission($permission)) {
+            if ($this->hasPermission($permission) === false) {
                 return false;
             }
         }
@@ -33,7 +33,7 @@ trait HasPermissions
      */
     protected function hasPermission(string $permission): bool
     {
-        return $this->hasPersonalPermission($permission) || $this->hasPermissionViaRole($permission);
+        return $this->hasPersonalPermission($permission) === true || $this->hasPermissionViaRole($permission) === true;
     }
 
     /**
@@ -44,7 +44,7 @@ trait HasPermissions
      */
     public function hasPersonalPermission(string $permission): bool
     {
-        return $this->permissions->where('key', $permission)->first() == true;
+        return $this->permissions->where('key', $permission)->first() !== null;
     }
 
     /**
@@ -56,7 +56,7 @@ trait HasPermissions
     protected function hasPermissionViaRole(string $permission): bool
     {
         foreach ($this->roles as $role) {
-            if ($role->hasPersonalPermission($permission)) {
+            if ($role->hasPersonalPermission($permission) === true) {
                 return true;
             }
         }

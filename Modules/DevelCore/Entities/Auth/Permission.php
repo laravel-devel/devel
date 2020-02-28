@@ -9,6 +9,7 @@ class Permission extends Model
     public $table = 'user_permissions';
 
     protected $primaryKey = 'key';
+    protected $keyType = 'string';
 
     public $incrementing = false;
 
