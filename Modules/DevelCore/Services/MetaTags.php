@@ -39,7 +39,7 @@ class MetaTags
      * @param string $value
      * @return void
      */
-    public static function setTag($name, $value): void
+    public static function setTag(string $name, string $value): void
     {
         if (!isset(static::$tags[$name])) {
             static::$tags[$name] = new MetaTag($name, $value);
