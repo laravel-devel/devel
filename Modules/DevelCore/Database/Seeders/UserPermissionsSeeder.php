@@ -10,7 +10,8 @@ class UserPermissionsSeeder extends Seeder
 {
     protected $permissions = [
         'admin_dashboard.access' => 'Access Admin Dashboard',
-        'site_settings.edit' => 'Edit Site Settings',
+        'site.edit_settings' => 'Edit Site Settings',
+        'site.manage_modules' => 'Manage Site Modules',
     ];
 
     /**

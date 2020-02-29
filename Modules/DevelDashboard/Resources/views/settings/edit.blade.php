@@ -10,7 +10,7 @@
     <div class="section-body">
         <div class="card">
             <div class="body">
-                <v-form action="{{ route('dashboard.develdashboard.settings.update') }}"
+                <v-form action="{{ route('dashboard.settings.update') }}"
                     method="POST"
                     type="table"
                     :fields="{{ json_encode($form) }}"

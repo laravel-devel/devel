@@ -32,19 +32,39 @@ Route::group([
 Route::group([
     'middleware' => [\Modules\DevelDashboard\Http\Middleware\DashboardAccess::class],
 ], function () {
+    // Dashboard homepage
     Route::get('/', 'DashboardController@index')->name('index');
 
-    // General site settings
+    /**
+     * General site settings
+     */
     Route::get('/settings', [
-        'as' => 'develdashboard.settings.edit',
+        'as' => 'settings.edit',
         'uses' => 'SettingsController@edit',
         'dashboardMenu' => 'Site->Settings',
-        'permissions' => 'site_settings.edit',
+        'permissions' => 'site.edit_settings',
     ]);
 
     Route::post('/settings', [
-        'as' => 'develdashboard.settings.update',
+        'as' => 'settings.update',
         'uses' => 'SettingsController@update',
-        'permissions' => 'site_settings.edit',
+        'permissions' => 'site.edit_settings',
+    ]);
+
+    /**
+     * Module Management
+     */
+    Route::get('/modules', [
+        'as' => 'modules.index',
+        'uses' => 'ModulesController@index',
+        'dashboardMenu' => 'Site->Modules',
+        'permissions' => 'site.manage_modules',
+    ]);
+
+    Route::post('/modules/{alias}', [
+        'as' => 'modules.toggle-enabled',
+        'uses' => 'ModulesController@toggleEnabled',
+        'dashboardMenu' => 'Site->Modules',
+        'permissions' => 'site.manage_modules',
     ]);
 });
