@@ -22,11 +22,17 @@
 
                         @foreach ($group['permissions'] as $permission)
                             <v-form-el :field="{
-                                type: 'checkbox', name: 'permissions[]', label: '{{ $permission['name'] }}', value: '{{ $permission['key'] }}', checked: '{{ $permission['granted'] ?? false }}',
+                                type: 'checkbox',
+                                name: 'permissions[]',
+                                label: '{{ $permission['name'] }}',
+                                value: '{{ $permission['key'] }}',
+                                checked: '{{ $permission['granted'] ?? false }}',
                             }" :inline="true"></v-form-el>
                         @endforeach
                     </div>
                 @endforeach
+
+                <input type="hidden" name="permissions[]">
             </div>
         </v-form-tab>
     </template>

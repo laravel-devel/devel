@@ -34,6 +34,7 @@ class ModulesController extends Controller
             $modules[$key] = [
                 'displayName' => config($module->getLowerName() . '.display_name'),
                 'name' => $module->getName(),
+                'alias' => $module->getAlias(),
                 'description' => $module->getDescription(),
                 'enabled' => $module->isEnabled(),
             ];

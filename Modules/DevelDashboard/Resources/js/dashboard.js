@@ -27,6 +27,9 @@ Vue.component('v-datatable', require('./dashboard/components/DataTable').default
 Vue.component('v-alert', require('./dashboard/components/Alert').default);
 Vue.component('v-notification', require('./dashboard/components/Notification').default);
 
+// Pages
+Vue.component('v-pages-modules', require('./dashboard/pages/Modules').default);
+
 new Vue({
     el: '#vue',
 });

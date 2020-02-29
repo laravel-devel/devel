@@ -30,9 +30,11 @@
 }
 
 /* Typography */
-.text-bold {
-    font-weight: 700;
-}
+.text-bold { font-weight: 700; }
+
+.text-danger { color: $danger; }
+
+.text-center { text-align: center; }
 
 /* Visibility */
 .hidden { display: none; }

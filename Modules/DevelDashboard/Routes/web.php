@@ -64,7 +64,6 @@ Route::group([
     Route::post('/modules/{alias}', [
         'as' => 'modules.toggle-enabled',
         'uses' => 'ModulesController@toggleEnabled',
-        'dashboardMenu' => 'Site->Modules',
         'permissions' => 'site.manage_modules',
     ]);
 });
