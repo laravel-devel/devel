@@ -18,6 +18,7 @@ class DevelCoreServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
+        $this->registerCommands();
         $this->loadMigrationsFrom(module_path('DevelCore', 'Database/Migrations'));
     }
 
@@ -93,6 +94,19 @@ class DevelCoreServiceProvider extends ServiceProvider
         if (! app()->environment('production') && $this->app->runningInConsole()) {
             app(Factory::class)->load(module_path('DevelCore', 'Database/factories'));
         }
+    }
+
+    /**
+     * Register additional console commands.
+     *
+     * @return void
+     */
+    public function registerCommands()
+    {
+        $this->commands([
+            \Modules\DevelCore\Console\InstallCommand::class,
+            \Modules\DevelCore\Console\UninstallCommand::class,
+        ]);
     }
 
     /**
