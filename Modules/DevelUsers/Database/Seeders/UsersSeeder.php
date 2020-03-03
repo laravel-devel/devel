@@ -30,7 +30,7 @@ class UsersSeeder extends Seeder
                 'name' => $name,
             ]);
 
-            if ($admin) {
+            if ($admin && !$admin->permissions->contains($permission)) {
                 $admin->permissions()->attach($permission);
             }
         }
