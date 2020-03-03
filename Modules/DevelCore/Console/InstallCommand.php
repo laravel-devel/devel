@@ -80,6 +80,9 @@ class InstallCommand extends Command
 
             $this->info('`npm run production` executed succesfully!');
         }
+
+        // Enable the module
+        $module->enable();
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace Modules\DevelCore\Console;
 
 use Illuminate\Console\Command;
+use Nwidart\Modules\Facades\Module;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -41,8 +42,19 @@ class UninstallCommand extends Command
     {
         $moduleName = $this->arguments()['module'];
 
+        try {
+            $module = Module::findOrFail($moduleName);
+        } catch (\Exception $e) {
+            $this->error("Module \"{$moduleName}\" not found!");
+
+            exit(0);
+        }
+
         // Rollback the module's migrations
         $this->call('module:migrate-rollback', ['module' => $moduleName]);
+
+        // Disable the module
+        $module->disable();
     }
 
     /**
