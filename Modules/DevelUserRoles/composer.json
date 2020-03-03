@@ -1,6 +1,7 @@
 {
     "name": "devel/develuserroles",
     "description": "",
+    "type": "devel-module",
     "authors": [
         {
             "name": "Alexander Zavyalov",

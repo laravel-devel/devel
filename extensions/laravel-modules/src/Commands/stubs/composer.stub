@@ -1,5 +1,6 @@
 {
     "name": "$VENDOR$/$LOWER_NAME$",
+    "type": "devel-module",
     "description": "",
     "authors": [
         {
