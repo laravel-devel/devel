@@ -9,14 +9,14 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
-class InstallCommand extends Command
+class ModuleInstallCommand extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'devel:install';
+    protected $name = 'devel:module:install';
 
     /**
      * The console command description.
@@ -42,46 +42,48 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $this->info('Installing Devel...');
+        $moduleName = $this->arguments()['module'];
+
+        try {
+            $module = Module::findOrFail($moduleName);
+        } catch (\Exception $e) {
+            $this->error("Module \"{$moduleName}\" not found!");
+
+            exit(0);
+        }
+
+        $modulePath = $module->getPath();
 
         // Install the PHP dependencies
         $this->info('Installing PHP dependencies...');
 
-        $this->runExternal('composer install', base_path());
+        $this->runExternal('composer install', $modulePath);
 
-        // Run `npm install`
-        $this->info('Installing npm dependencies...');
+        // Run the module's migrations
+        $this->info('Running migrations...');
 
-        $this->runExternal('npm install', base_path());
+        $this->call('module:migrate', ['module' => $moduleName]);
 
-        // Run `npm run production`
-        $this->info('Building frontend assets...');
-
-        $this->runExternal('npm run production', base_path());
-
-        // Run the base migrations and the seeds
-        $this->info('Running main migrations...');
-
-        $this->call('migrate:fresh');
-
+        // Run the module's seeder
         $this->info('Seeding the database...');
 
-        $this->call('db:seed');
+        $this->call('module:seed', ['module' => $moduleName]);
 
-        // Install each module
-        $this->info('Installing modules...');
+        // NPM
+        if ($module->json()->buildNpm === true) {
+            // Install npm dependencies
+            $this->info('Installing npm dependencies...');
 
-        foreach (Module::all() as $name => $module) {
-            $this->info('---');
-            $this->info("Installing [{$name}]...");
+            $this->runExternal('npm install', $modulePath);
 
-            if ($module->isEnabled()) {
-                $this->call('devel:module:install', ['module' => $name]);
-            }
+            // Build npm for production
+            $this->info('Building frontend assets...');
+
+            $this->runExternal('npm run production', $modulePath);
         }
 
-        $this->info('---');
-        $this->info('DONE! Now you can use Devel.');
+        // Enable the module
+        $module->enable();
     }
 
     /**
@@ -92,7 +94,7 @@ class InstallCommand extends Command
     protected function getArguments()
     {
         return [
-            // ['example', InputArgument::REQUIRED, 'An example argument.'],
+            ['module', InputArgument::REQUIRED, 'Module name.'],
         ];
     }
 

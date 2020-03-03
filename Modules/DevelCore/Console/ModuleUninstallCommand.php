@@ -7,7 +7,7 @@ use Nwidart\Modules\Facades\Module;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class UninstallCommand extends Command
+class ModuleUninstallCommand extends Command
 {
     /**
      * The console command name.

@@ -9,5 +9,6 @@
     ],
     "aliases": {},
     "files": [],
-    "requires": ["DevelCore"]
+    "requires": ["DevelCore"],
+    "buildNpm": true
 }
