@@ -8,7 +8,7 @@ use Modules\DevelCore\Entities\Settings;
 class SettingsSeeder extends Seeder
 {
     protected $settings = [
-        'site.name' => [
+        'site-name' => [
             'name' => 'Site Name',
             'value' => 'Devel',
         ],
@@ -21,8 +21,11 @@ class SettingsSeeder extends Seeder
      */
     public function run()
     {
+        // Read site name from the defaults
+        $settings['site-name']['value'] = config('app.name');
+
         foreach ($this->settings as $key => $data) {
-            $parts = explode('.', $key);
+            $parts = explode('-', $key);
             $group = $parts[0];
 
             array_shift($parts);

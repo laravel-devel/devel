@@ -42,6 +42,8 @@ class InstallCommand extends Command
      */
     public function handle()
     {
+        $this->call('config:cache');
+
         $this->info('Installing Devel...');
 
         // Install the PHP dependencies
