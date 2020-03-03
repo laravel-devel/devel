@@ -54,6 +54,12 @@ class Role extends Model
                 static::where('default', true)->update(['default' => false]);
             }
         });
+
+        static::deleting(function ($role) {
+            if ($role->key === 'root') {
+                return false;
+            }
+        });
     }
 
     /**

@@ -56,6 +56,17 @@ class User extends Authenticatable
         'permissions',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($user) {
+            if ($user->id === 1 && $user->roles->contains('root')) {
+                return false;
+            }
+        });
+    }
+
     /**
      * A user has many roles
      *

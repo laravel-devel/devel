@@ -202,4 +202,27 @@ class UsersController extends Controller
 
         return $permissions;
     }
+
+    /**
+     * Determine whether an item can be deleted.
+     *
+     * @param mixed $id
+     * @return mixed
+     */
+    protected function canBeDeleted($id)
+    {
+        $model = new $this->modelClass;
+
+        $object = ($this->model())::where($model->getRouteKeyName(), $id)->first();
+
+        if (!$object) {
+            return 'Item with provided id was not found!';
+        }
+
+        if ($object->id === 1 && $object->roles->contains('root')) {
+            return 'The Root user cannot be deleted!';
+        }
+
+        return true;
+    }
 }
