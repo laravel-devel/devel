@@ -17,7 +17,7 @@ class HomepageController extends Controller
         $this->setMeta([
             'title' => 'Homepage',
             'description' => 'Welcome to ' . setting('site-name') . '!',
-            'keywords' => 'modular, laravel, site',
+            'keywords' => 'devel, modular, laravel, site',
         ]);
 
         return view('site.home');
