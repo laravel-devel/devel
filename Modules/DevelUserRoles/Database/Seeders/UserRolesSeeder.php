@@ -22,7 +22,7 @@ class UserRolesSeeder extends Seeder
      */
     public function run()
     {
-        $admin = Role::find('admin');
+        $root = Role::find('root');
 
         foreach ($this->permissions as $permission => $name) {
             $permission = Permission::firstOrCreate([
@@ -30,8 +30,8 @@ class UserRolesSeeder extends Seeder
                 'name' => $name,
             ]);
 
-            if ($admin && !$admin->permissions->contains($permission)) {
-                $admin->permissions()->attach($permission);
+            if ($root && !$root->permissions->contains($permission)) {
+                $root->permissions()->attach($permission);
             }
         }
     }

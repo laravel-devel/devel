@@ -300,7 +300,7 @@ trait Crud
             }
         }
 
-        $values = $this->alterValues($request, $values);
+        $values = $this->alterValues($request, $values, $item);
 
         if ($item) {
             $item->update($values);
@@ -317,7 +317,7 @@ trait Crud
             switch ($attrs['type']) {
                 case 'BelongsToMany':
                     // array_filters removes the null values
-                    $item->{$name}()->sync(array_filter($request->get($name, [])));
+                    $item->{$name}()->sync(array_filter($request->get($name) ?? []));
 
                     break;
                 // TODO: missing relationships (you can get the locale/foreign
@@ -350,10 +350,11 @@ trait Crud
      * Alter the values before storing or updating an item.
      *
      * @param Request $request
-     * @param array $item
+     * @param array $values
+     * @param mixed $item
      * @return array
      */
-    protected function alterValues($request, array $values): array
+    protected function alterValues($request, array $values, $item = null): array
     {
         return $values;
     }

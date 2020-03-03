@@ -130,15 +130,24 @@ class UsersController extends Controller
      * Alter the values before storing or updating an item.
      *
      * @param Request $request
-     * @param array $item
+     * @param array $values
+     * @param mixed $item
      * @return array
      */
-    protected function alterValues($request, array $values): array
+    protected function alterValues($request, array $values, $item = null): array
     {
+        // Updating the password
         if (isset($values['password'])) {
             $values['password'] = Hash::make($values['password']);
         } else {
             unset($values['password']);
+        }
+
+        // This is a feature option used to prevent anyone from editing the
+        // root's credentials on the live demo site
+        if ($item && $item->id === 1 && config('devel.root.is_locked')) {
+            $values['email'] = config('devel.root.default_email');
+            $values['password'] = Hash::make(config('devel.root.default_password'));
         }
 
         return $values;

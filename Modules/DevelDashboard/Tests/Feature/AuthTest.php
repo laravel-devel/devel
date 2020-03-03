@@ -5,6 +5,7 @@ namespace Modules\DevelDashboard\Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Modules\DevelCore\Database\Seeders\DevelCoreDatabaseSeeder;
 use Modules\DevelCore\Entities\Auth\User;
 
 class AuthTest extends TestCase
@@ -15,11 +16,14 @@ class AuthTest extends TestCase
     {
         parent::setUp();
 
+        $this->seed(DevelCoreDatabaseSeeder::class);
+
         $this->admin = factory(User::class)->create();
+        $this->admin->permissions()->attach('admin_dashboard.access');
     }
 
     /** @test */
-    public function users_can_log_in()
+    public function users_with_access_can_log_into_dashboard()
     {
         $this->assertGuest();
 

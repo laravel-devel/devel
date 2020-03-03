@@ -13,12 +13,19 @@ class UserRolesSeeder extends Seeder
             'name' => 'User',
             'default' => true,
         ],
+        'root' => [
+            'name' => 'Root',
+            'permissions' => [
+                'admin_dashboard.access',
+                'site.edit_settings',
+                'site.manage_modules',
+            ],
+        ],
         'admin' => [
             'name' => 'Admin',
             'permissions' => [
                 'admin_dashboard.access',
                 'site.edit_settings',
-                'site.manage_modules',
             ],
         ],
     ];

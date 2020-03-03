@@ -131,8 +131,8 @@ class RolesController extends Controller
             return 'The default role cannot be deleted!';
         }
 
-        if ($object->key === 'admin') {
-            return 'The admin role cannot be deleted!';
+        if ($object->key === 'root') {
+            return 'The root role cannot be deleted!';
         }
 
         return true;

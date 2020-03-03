@@ -43,9 +43,10 @@ class Role extends Model
         parent::boot();
 
         static::updating(function ($role) {
-            // The 'admin' role's key cannot be changed
-            if ($role->getOriginal('key') === 'admin') {
-                $role->key = 'admin';
+            // The 'root' role cannot be changed
+            if ($role->getOriginal('key') === 'root') {
+                $role->key = 'root';
+                $role->name = 'Root';
             }
 
             // Only one role can be default at any given moment
