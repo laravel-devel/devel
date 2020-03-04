@@ -83,7 +83,9 @@ class ModuleInstallCommand extends Command
         }
 
         // Publish the config file
-        $this->call('module:publish-config', ['module' => $moduleName]);
+        if (!in_array($moduleName, ['DevelCore'])) {
+            $this->call('module:publish-config', ['module' => $moduleName]);
+        }
 
         // Enable the module
         $module->enable();
