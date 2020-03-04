@@ -27,6 +27,7 @@
                                 label: '{{ $permission['name'] }}',
                                 value: '{{ $permission['key'] }}',
                                 checked: '{{ $permission['granted'] ?? false }}',
+                                disabled: '{{ isset($item) && $item->key === 'root' }}'
                             }" :inline="true"></v-form-el>
                         @endforeach
                     </div>
