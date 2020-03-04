@@ -3,7 +3,7 @@
 namespace Modules\DevelCore\Console;
 
 use Illuminate\Console\Command;
-use Nwidart\Modules\Facades\Module;
+use Extensions\Modules\Facades\Module;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 

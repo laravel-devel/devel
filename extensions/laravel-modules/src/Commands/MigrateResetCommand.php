@@ -1,10 +1,10 @@
 <?php
 
-namespace Nwidart\Modules\Commands;
+namespace Extensions\Modules\Commands;
 
 use Illuminate\Console\Command;
-use Nwidart\Modules\Migrations\Migrator;
-use Nwidart\Modules\Traits\MigrationLoaderTrait;
+use Extensions\Modules\Migrations\Migrator;
+use Extensions\Modules\Traits\MigrationLoaderTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -27,7 +27,7 @@ class MigrateResetCommand extends Command
     protected $description = 'Reset the modules migrations.';
 
     /**
-     * @var \Nwidart\Modules\Contracts\RepositoryInterface
+     * @var \Extensions\Modules\Contracts\RepositoryInterface
      */
     protected $module;
 

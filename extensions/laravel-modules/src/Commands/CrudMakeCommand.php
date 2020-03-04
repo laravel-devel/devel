@@ -1,13 +1,13 @@
 <?php
 
-namespace Nwidart\Modules\Commands;
+namespace Extensions\Modules\Commands;
 
 use Illuminate\Support\Str;
-use Nwidart\Modules\Traits\ModuleCommandTrait;
+use Extensions\Modules\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Console\Command;
-use Nwidart\Modules\Contracts\ActivatorInterface;
-use Nwidart\Modules\Generators\ModuleGenerator;
+use Extensions\Modules\Contracts\ActivatorInterface;
+use Extensions\Modules\Generators\ModuleGenerator;
 
 class CrudMakeCommand extends Command
 {

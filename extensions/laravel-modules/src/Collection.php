@@ -1,6 +1,6 @@
 <?php
 
-namespace Nwidart\Modules;
+namespace Extensions\Modules;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection as BaseCollection;

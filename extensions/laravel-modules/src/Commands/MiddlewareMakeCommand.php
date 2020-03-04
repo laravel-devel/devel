@@ -1,11 +1,11 @@
 <?php
 
-namespace Nwidart\Modules\Commands;
+namespace Extensions\Modules\Commands;
 
 use Illuminate\Support\Str;
-use Nwidart\Modules\Support\Config\GenerateConfigReader;
-use Nwidart\Modules\Support\Stub;
-use Nwidart\Modules\Traits\ModuleCommandTrait;
+use Extensions\Modules\Support\Config\GenerateConfigReader;
+use Extensions\Modules\Support\Stub;
+use Extensions\Modules\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 
 class MiddlewareMakeCommand extends GeneratorCommand

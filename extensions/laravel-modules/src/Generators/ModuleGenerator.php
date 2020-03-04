@@ -1,15 +1,15 @@
 <?php
 
-namespace Nwidart\Modules\Generators;
+namespace Extensions\Modules\Generators;
 
 use Illuminate\Config\Repository as Config;
 use Illuminate\Console\Command as Console;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Str;
-use Nwidart\Modules\Contracts\ActivatorInterface;
-use Nwidart\Modules\FileRepository;
-use Nwidart\Modules\Support\Config\GenerateConfigReader;
-use Nwidart\Modules\Support\Stub;
+use Extensions\Modules\Contracts\ActivatorInterface;
+use Extensions\Modules\FileRepository;
+use Extensions\Modules\Support\Config\GenerateConfigReader;
+use Extensions\Modules\Support\Stub;
 
 class ModuleGenerator extends Generator
 {
@@ -51,7 +51,7 @@ class ModuleGenerator extends Generator
     /**
      * The module instance.
      *
-     * @var \Nwidart\Modules\Module
+     * @var \Extensions\Modules\Module
      */
     protected $module;
 
@@ -277,7 +277,7 @@ class ModuleGenerator extends Generator
     /**
      * Get the module instance.
      *
-     * @return \Nwidart\Modules\Module
+     * @return \Extensions\Modules\Module
      */
     public function getModule()
     {

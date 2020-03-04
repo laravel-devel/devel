@@ -1,10 +1,10 @@
 <?php
 
-namespace Nwidart\Modules\Commands;
+namespace Extensions\Modules\Commands;
 
 use Illuminate\Console\Command;
-use Nwidart\Modules\Migrations\Migrator;
-use Nwidart\Modules\Module;
+use Extensions\Modules\Migrations\Migrator;
+use Extensions\Modules\Module;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -25,7 +25,7 @@ class MigrateCommand extends Command
     protected $description = 'Migrate the migrations from the specified module or from all modules.';
 
     /**
-     * @var \Nwidart\Modules\Contracts\RepositoryInterface
+     * @var \Extensions\Modules\Contracts\RepositoryInterface
      */
     protected $module;
 

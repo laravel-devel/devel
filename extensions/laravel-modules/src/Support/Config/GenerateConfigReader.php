@@ -1,6 +1,6 @@
 <?php
 
-namespace Nwidart\Modules\Support\Config;
+namespace Extensions\Modules\Support\Config;
 
 class GenerateConfigReader
 {

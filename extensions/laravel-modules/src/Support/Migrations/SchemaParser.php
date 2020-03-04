@@ -1,6 +1,6 @@
 <?php
 
-namespace Nwidart\Modules\Support\Migrations;
+namespace Extensions\Modules\Support\Migrations;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Arr;

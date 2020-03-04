@@ -3,7 +3,7 @@
 namespace Modules\DevelDashboard\Http\Controllers;
 
 use Modules\DevelCore\Http\Controllers\Controller;
-use Nwidart\Modules\Facades\Module;
+use Extensions\Modules\Facades\Module;
 
 class ModulesController extends Controller
 {

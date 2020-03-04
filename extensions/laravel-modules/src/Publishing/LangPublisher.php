@@ -1,8 +1,8 @@
 <?php
 
-namespace Nwidart\Modules\Publishing;
+namespace Extensions\Modules\Publishing;
 
-use Nwidart\Modules\Support\Config\GenerateConfigReader;
+use Extensions\Modules\Support\Config\GenerateConfigReader;
 
 class LangPublisher extends Publisher
 {

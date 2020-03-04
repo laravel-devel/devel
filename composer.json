@@ -39,7 +39,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Nwidart\\": "extensions/laravel-modules",
+            "Extensions\\": "extensions/laravel-modules",
             "Modules\\": "Modules/"
         },
         "files": [
