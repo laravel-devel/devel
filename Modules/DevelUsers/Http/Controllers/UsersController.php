@@ -143,9 +143,28 @@ class UsersController extends Controller
             unset($values['password']);
         }
 
+        // The root user's roles and permissions cannot be altered
+        if ($item && $item->roles->contains('root')) {
+            $request->request->remove('roles');
+            $request->request->remove('permissions');
+        }
+
+        // The root role cannot be attached to anyone...
+        if ($request->has('roles') && array_search('root', $request->get('roles')) !== false) {
+            // ...unless the root user is being updated
+            if (!$item || !$item->roles->contains('root')) {
+                $roles = $request->get('roles');
+                array_splice($roles, array_search('root', $roles), 1);
+
+                $request->merge([
+                    'roles' => $roles,
+                ]);
+            }
+        }
+
         // This is a feature option used to prevent anyone from editing the
         // root's credentials on the live demo site
-        if ($item && $item->id === 1 && config('devel.root.is_locked')) {
+        if ($item && $item->roles->contains('root') && config('devel.root.is_locked')) {
             $values['email'] = config('devel.root.default_email');
             $values['password'] = Hash::make(config('devel.root.default_password'));
         }
@@ -204,12 +223,13 @@ class UsersController extends Controller
     }
 
     /**
-     * Determine whether an item can be deleted.
+     * Determine whether an item can be edited.
      *
+     * @param Request $request
      * @param mixed $id
      * @return mixed
      */
-    protected function canBeDeleted($id)
+    protected function canBeEdited($request, $id)
     {
         $model = new $this->modelClass;
 
@@ -219,7 +239,32 @@ class UsersController extends Controller
             return 'Item with provided id was not found!';
         }
 
-        if ($object->id === 1 && $object->roles->contains('root')) {
+        // No one can edit the root profile except for the root itself
+        if ($object->roles->contains('root') && $request->user()->id !== $object->id) {
+            return 'The Root user cannot be edited!';
+        }
+
+        return true;
+    }
+
+    /**
+     * Determine whether an item can be deleted.
+     *
+     * @param Request $request
+     * @param mixed $id
+     * @return mixed
+     */
+    protected function canBeDeleted($request, $id)
+    {
+        $model = new $this->modelClass;
+
+        $object = ($this->model())::where($model->getRouteKeyName(), $id)->first();
+
+        if (!$object) {
+            return 'Item with provided id was not found!';
+        }
+
+        if ($object->roles->contains('root')) {
             return 'The Root user cannot be deleted!';
         }
 

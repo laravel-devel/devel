@@ -60,8 +60,15 @@ class User extends Authenticatable
     {
         parent::boot();
 
+        static::updating(function ($user) {
+            // The root user can only be edited by the root themselves
+            if (!auth()->id() || ($user->roles->contains('root') && auth()->id() !== $user->id)) {
+                return false;
+            }
+        });
+
         static::deleting(function ($user) {
-            if ($user->id === 1 && $user->roles->contains('root')) {
+            if ($user->roles->contains('root')) {
                 return false;
             }
         });

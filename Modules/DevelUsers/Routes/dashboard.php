@@ -7,7 +7,7 @@ Route::group([
      * Modules\DevelCore\Entities\Auth\User CRUD
      */
     Route::group([
-        'prefix' => 'users',
+        'prefix' => config('develusers.slug'),
     ], function() {
         Route::get('/', [
             'as' => 'develusers.users.index',

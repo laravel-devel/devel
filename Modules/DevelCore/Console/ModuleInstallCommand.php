@@ -82,6 +82,9 @@ class ModuleInstallCommand extends Command
             $this->runExternal('npm run production', $modulePath);
         }
 
+        // Publish the config file
+        $this->call('module:publish-config', ['module' => $moduleName]);
+
         // Enable the module
         $module->enable();
     }

@@ -218,6 +218,12 @@ trait Crud
      */
     public function update(Request $request, $id)
     {
+        if (($can = $this->canBeEdited($request, $id)) !== true) {
+            return response()->json([
+                'message' => $can,
+            ], 409);
+        }
+
         $item = $this->model()::findOrFail($id);
 
         $item = $this->storeOrUpdate($request, $item);
@@ -231,9 +237,9 @@ trait Crud
      * @param mixed $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        if (($can = $this->canBeDeleted($id)) !== true) {
+        if (($can = $this->canBeDeleted($request, $id)) !== true) {
             return response()->json([
                 'message' => $can,
             ], 409);
@@ -255,12 +261,25 @@ trait Crud
     }
 
     /**
-     * Determine whether an item can be deleted.
+     * Determine whether an item can be edited.
      *
+     * @param Request $request
      * @param mixed $id
      * @return mixed
      */
-    protected function canBeDeleted($id)
+    protected function canBeEdited($request, $id)
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether an item can be deleted.
+     *
+     * @param Request $request
+     * @param mixed $id
+     * @return mixed
+     */
+    protected function canBeDeleted($request, $id)
     {
         return true;
     }
@@ -313,11 +332,15 @@ trait Crud
             if (!method_exists($item, $name) || !$request->has($name)) {
                 continue;
             }
+
+            $value = $request->get($name) ?: (
+                $item ? $item->{$name} : []
+            );
             
             switch ($attrs['type']) {
                 case 'BelongsToMany':
                     // array_filters removes the null values
-                    $item->{$name}()->sync(array_filter($request->get($name) ?? []));
+                    $item->{$name}()->sync(array_filter($value));
 
                     break;
                 // TODO: missing relationships (you can get the locale/foreign
