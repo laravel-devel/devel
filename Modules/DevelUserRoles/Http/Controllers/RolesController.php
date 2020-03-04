@@ -37,9 +37,9 @@ class RolesController extends Controller
                 'format' => "value ? 'yes' : '-'",
             ],
         ], [
-            'delete' => ['dashboard.develuserroles.destroy', ':key'],
-            'create' => ['dashboard.develuserroles.create'],
-            'edit' => ['dashboard.develuserroles.edit', ':key'],
+            'delete' => ['dashboard.develuserroles.roles.destroy', ':key'],
+            'create' => ['dashboard.develuserroles.roles.create'],
+            'edit' => ['dashboard.develuserroles.roles.edit', ':key'],
         ]);
         
         $this->setForm([
@@ -114,10 +114,11 @@ class RolesController extends Controller
     /**
      * Determine whether an item can be deleted.
      *
+     * @param Request $request
      * @param mixed $id
      * @return mixed
      */
-    protected function canBeDeleted($id)
+    protected function canBeDeleted($request, $id)
     {
         $model = new $this->modelClass;
 
@@ -126,7 +127,7 @@ class RolesController extends Controller
         if (!$object) {
             return 'Item with provided id was not found!';
         }
-
+        
         if ($object->default) {
             return 'The default role cannot be deleted!';
         }
@@ -136,6 +137,24 @@ class RolesController extends Controller
         }
 
         return true;
+    }
+
+    /**
+     * Alter the values before storing or updating an item.
+     *
+     * @param Request $request
+     * @param array $values
+     * @param mixed $item
+     * @return array
+     */
+    protected function alterValues($request, array $values, $item = null): array
+    {
+        // The root role's permissions cannot be altered
+        if ($item && $item->key === 'root') {
+            $request->request->remove('permissions');
+        }
+
+        return $values;
     }
 
     /**

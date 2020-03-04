@@ -10,44 +10,44 @@ Route::group([
         'prefix' => config('develuserroles.slug'),
     ], function () {
         Route::get('/', [
-            'as' => 'develuserroles.index',
+            'as' => 'develuserroles.roles.index',
             'uses' => 'RolesController@index',
             'dashboardMenu' => 'Manage Users->' . config('develuserroles.display_name'),
             'permissions' => 'user_roles.list',
         ]);
 
         Route::get('/list', [
-            'as' => 'develuserroles.get',
+            'as' => 'develuserroles.roles.get',
             'uses' => 'RolesController@get',
             'permissions' => 'user_roles.list',
         ]);
 
         Route::get('/add', [
-            'as' => 'develuserroles.create',
+            'as' => 'develuserroles.roles.create',
             'uses' => 'RolesController@create',
             'permissions' => 'user_roles.add',
         ]);
 
         Route::get('/{id}/edit', [
-            'as' => 'develuserroles.edit',
+            'as' => 'develuserroles.roles.edit',
             'uses' => 'RolesController@edit',
             'permissions' => 'user_roles.edit',
         ]);
 
         Route::post('/', [
-            'as' => 'develuserroles.store',
+            'as' => 'develuserroles.roles.store',
             'uses' => 'RolesController@store',
             'permissions' => 'user_roles.add',
         ]);
 
         Route::post('/{id}', [
-            'as' => 'develuserroles.update',
+            'as' => 'develuserroles.roles.update',
             'uses' => 'RolesController@update',
             'permissions' => 'user_roles.edit',
         ]);
 
         Route::delete('/{id}', [
-            'as' => 'develuserroles.destroy',
+            'as' => 'develuserroles.roles.destroy',
             'uses' => 'RolesController@destroy',
             'permissions' => 'user_roles.delete',
         ]);
