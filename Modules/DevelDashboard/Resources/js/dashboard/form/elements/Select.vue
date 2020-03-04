@@ -10,10 +10,11 @@
                     autocomplete="off"
                     v-model="search"
                     ref="input"
+                    :disabled="attrs.disabled"
                     @focus="open = true">
 
                 <div class="select-arrow"
-                    :class="{ 'open': open }"
+                    :class="{ 'open': open, 'disabled': attrs.disabled }"
                     @click="toggleOpen"
                     ref="arrow"
                 >
@@ -37,7 +38,10 @@
                 >
                     <div class="text">{{ option[textField] }}</div>
 
-                    <div class="remove" @click="unselectOption(option)">
+                    <div v-if="!attrs.disabled"
+                        class="remove"
+                        @click="unselectOption(option)"
+                    >
                         <i class="las la-times"></i>
                     </div>
                 </div>
@@ -157,7 +161,9 @@ export default {
         },
 
         toggleOpen() {
-            this.open = ! this.open;
+            if (!this.attrs.disabled) {
+                this.open = ! this.open;
+            }
         },
 
         selectOption(option) {

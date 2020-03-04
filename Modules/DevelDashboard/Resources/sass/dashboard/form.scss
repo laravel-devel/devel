@@ -255,6 +255,10 @@
             &:hover, &.open {
                 background-color: $primaryHover;
             }
+
+            &.disabled {
+                background-color: $primaryInactive;
+            }
         }
 
         input {
@@ -293,7 +297,7 @@
             background-color: $successInactive;
             margin: .25rem;
             padding: .25rem 0;
-            padding-left: .5rem;
+            padding: 0 .5rem;
             border-radius: .5rem;
 
             .text {
@@ -305,8 +309,7 @@
 
             .remove {
                 cursor: pointer;
-                padding: 0 .2rem;
-                margin-left: .5rem;
+                margin-left: .2rem;
             }
         }
     }

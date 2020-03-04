@@ -114,11 +114,17 @@ class UsersController extends Controller
             'roles',
         ]);
 
+        $form = $this->form();
+        
+        if ($item->roles->contains('root')) {
+            $form['Main'][3]['disabled'] = true;
+        }
+
         $this->setMeta('title', 'Edit');
 
         return view('develusers::dashboard.users.edit', [
             'item' => $item,
-            'form' => $this->form(),
+            'form' => $form,
             'collections' => [
                 'roles' => Role::all(),
             ],
