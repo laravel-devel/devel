@@ -49,24 +49,10 @@ class InstallCommand extends Command
             $this->call('key:generate');
         }
 
-        // Run `npm install`
-        $this->info('Installing npm dependencies...');
-
-        $this->runExternal('npm install', base_path());
-
-        // Run `npm run production`
-        $this->info('Building frontend assets...');
-
-        $this->runExternal('npm run production', base_path());
-
         // Run the base migrations and the seeds
         $this->info('Running main migrations...');
 
         $this->call('migrate:fresh');
-
-        $this->info('Seeding the database...');
-
-        $this->call('db:seed');
 
         // Install each module
         $this->info('Installing modules...');
