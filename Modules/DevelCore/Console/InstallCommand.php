@@ -42,8 +42,6 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $this->call('config:cache');
-
         $this->info('Installing Devel...');
 
         // Generate an app key
