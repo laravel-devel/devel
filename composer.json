@@ -1,11 +1,12 @@
 {
-    "name": "devel/devel",
+    "name": "voerro/devel",
     "type": "project",
     "description": "Modular Laravel project with a dashboard and CRUD generator.",
     "keywords": [
         "framework",
         "laravel",
         "devel",
+        "modular",
         "dashboard",
         "crud"
     ],
