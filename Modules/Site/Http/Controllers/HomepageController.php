@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Site\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Modules\DevelCore\Http\Controllers\Controller;
 
 class HomepageController extends Controller
 {
     /**
-     * Admin dashboard index
+     * The site's homepage
      *
      * @return void
      */
@@ -20,6 +19,6 @@ class HomepageController extends Controller
             'keywords' => 'devel, modular, laravel, site',
         ]);
 
-        return view('site.home');
+        return view('site::public.home');
     }
 }

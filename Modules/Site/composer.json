@@ -1,0 +1,26 @@
+{
+    "name": "devel/site",
+    "type": "devel-module",
+    "description": "",
+    "authors": [
+        {
+            "name": "Alexander Zavyalov",
+            "email": "alex@voerro.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Site\\Providers\\SiteServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Site\\": ""
+        }
+    }
+}
