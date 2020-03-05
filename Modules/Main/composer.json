@@ -11,7 +11,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\Site\\Providers\\SiteServiceProvider"
+                "Modules\\Main\\Providers\\MainServiceProvider"
             ],
             "aliases": {
 
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\Site\\": ""
+            "Modules\\Main\\": ""
         }
     }
 }

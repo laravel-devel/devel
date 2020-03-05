@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Site\Providers;
+namespace Modules\Main\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $moduleNamespace = 'Modules\Site\Http\Controllers';
+    protected $moduleNamespace = 'Modules\Main\Http\Controllers';
 
     /**
      * Called before routes are registered.
@@ -49,9 +49,9 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('Site', '/Routes/web.php'));
+            ->group(module_path('Main', '/Routes/web.php'));
 
-        if (file_exists(module_path('Site', '/Routes/dashboard.php'))) {
+        if (file_exists(module_path('Main', '/Routes/dashboard.php'))) {
             Route::middleware([
                 'web',
                 \Modules\DevelDashboard\Http\Middleware\DashboardAccess::class,
@@ -59,7 +59,7 @@ class RouteServiceProvider extends ServiceProvider
             ])
             ->as('dashboard.')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('Site', '/Routes/dashboard.php'));
+            ->group(module_path('Main', '/Routes/dashboard.php'));
         }
     }
 
@@ -75,6 +75,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api')
             ->middleware('api')
             ->namespace($this->moduleNamespace)
-            ->group(module_path('Site', '/Routes/api.php'));
+            ->group(module_path('Main', '/Routes/api.php'));
     }
 }

@@ -1,11 +1,11 @@
 {
-    "name": "Site",
-    "alias": "site",
-    "description": "The main site (the publically accessible part)",
+    "name": "Main",
+    "alias": "main",
+    "description": "The main site module",
     "keywords": [],
     "order": 3,
     "providers": [
-        "Modules\\Site\\Providers\\SiteServiceProvider"
+        "Modules\\Main\\Providers\\MainServiceProvider"
     ],
     "aliases": {},
     "files": [],

@@ -10,12 +10,12 @@ Route::group([
         'as' => '$LOWER_NAME$.settings.edit',
         'uses' => 'SettingsController@edit',
         'dashboardMenu' => '$STUDLY_NAME$->Settings',
-        'permissions' => '$LOWER_NAME$.edit-settings',
+        'permissions' => '$LOWER_NAME$.edit_settings',
     ]);
 
     Route::post('/settings', [
         'as' => '$LOWER_NAME$.settings.update',
         'uses' => 'SettingsController@update',
-        'permissions' => '$LOWER_NAME$.edit-settings',
+        'permissions' => '$LOWER_NAME$.edit_settings',
     ]);
 });

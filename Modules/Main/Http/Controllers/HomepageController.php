@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Site\Http\Controllers;
+namespace Modules\Main\Http\Controllers;
 
 use Modules\DevelCore\Http\Controllers\Controller;
 
@@ -19,6 +19,6 @@ class HomepageController extends Controller
             'keywords' => 'devel, modular, laravel, site',
         ]);
 
-        return view('site::public.home');
+        return view('main::public.home');
     }
 }

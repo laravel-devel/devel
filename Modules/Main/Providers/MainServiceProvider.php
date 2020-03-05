@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Site\Providers;
+namespace Modules\Main\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class SiteServiceProvider extends ServiceProvider
+class MainServiceProvider extends ServiceProvider
 {
     /**
      * Boot the application events.
@@ -18,7 +18,7 @@ class SiteServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
-        $this->loadMigrationsFrom(module_path('Site', 'Database/Migrations'));
+        $this->loadMigrationsFrom(module_path('Main', 'Database/Migrations'));
     }
 
     /**
@@ -39,10 +39,10 @@ class SiteServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            module_path('Site', 'Config/config.php') => config_path('site.php'),
+            module_path('Main', 'Config/config.php') => config_path('main.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path('Site', 'Config/config.php'), 'site'
+            module_path('Main', 'Config/config.php'), 'main'
         );
     }
 
@@ -53,17 +53,17 @@ class SiteServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/site');
+        $viewPath = resource_path('views/modules/main');
 
-        $sourcePath = module_path('Site', 'Resources/views');
+        $sourcePath = module_path('Main', 'Resources/views');
 
         $this->publishes([
             $sourcePath => $viewPath
         ],'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/modules/site';
-        }, \Config::get('view.paths')), [$sourcePath]), 'site');
+            return $path . '/modules/main';
+        }, \Config::get('view.paths')), [$sourcePath]), 'main');
     }
 
     /**
@@ -73,12 +73,12 @@ class SiteServiceProvider extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/site');
+        $langPath = resource_path('lang/modules/main');
 
         if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, 'site');
+            $this->loadTranslationsFrom($langPath, 'main');
         } else {
-            $this->loadTranslationsFrom(module_path('Site', 'Resources/lang'), 'site');
+            $this->loadTranslationsFrom(module_path('Main', 'Resources/lang'), 'main');
         }
     }
 
@@ -90,7 +90,7 @@ class SiteServiceProvider extends ServiceProvider
     public function registerFactories()
     {
         if (! app()->environment('production') && $this->app->runningInConsole()) {
-            app(Factory::class)->load(module_path('Site', 'Database/factories'));
+            app(Factory::class)->load(module_path('Main', 'Database/factories'));
         }
     }
 
