@@ -3,7 +3,7 @@
     "alias": "develusers",
     "description": "Devel Dashboard module adding CRUD for users.",
     "keywords": [],
-    "order": 0,
+    "order": 4,
     "providers": [
         "Modules\\DevelUsers\\Providers\\DevelUsersServiceProvider"
     ],

@@ -3,7 +3,7 @@
     "alias": "develdashboard",
     "description": "The dashboard module of Devel.",
     "keywords": [],
-    "order": 0,
+    "order": 1,
     "providers": [
         "Modules\\DevelDashboard\\Providers\\DevelDashboardServiceProvider"
     ],

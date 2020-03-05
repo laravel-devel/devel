@@ -3,7 +3,7 @@
     "alias": "develuserroles",
     "description": "Devel Dashboard module adding CRUD for user roles.",
     "keywords": [],
-    "order": 0,
+    "order": 4,
     "providers": [
         "Modules\\DevelUserRoles\\Providers\\DevelUserRolesServiceProvider"
     ],

@@ -3,7 +3,7 @@
     "alias": "site",
     "description": "The main site (the publically accessible part)",
     "keywords": [],
-    "order": 0,
+    "order": 3,
     "providers": [
         "Modules\\Site\\Providers\\SiteServiceProvider"
     ],
