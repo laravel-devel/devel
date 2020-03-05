@@ -2,7 +2,7 @@
 
 namespace Modules\DevelUserRoles\Tests\Feature;
 
-use Tests\TestCase;
+use Modules\DevelCore\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Modules\DevelCore\Database\Seeders\DevelCoreDatabaseSeeder;

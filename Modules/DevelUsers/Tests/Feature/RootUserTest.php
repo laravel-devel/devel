@@ -2,7 +2,7 @@
 
 namespace Modules\DevelUsers\Tests\Feature;
 
-use Tests\TestCase;
+use Modules\DevelCore\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;

@@ -2,7 +2,7 @@
 
 namespace Modules\DevelDashboard\Tests\Feature;
 
-use Tests\TestCase;
+use Modules\DevelCore\Tests\TestCase;
 use Modules\DevelCore\Entities\Auth\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
