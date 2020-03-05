@@ -46,10 +46,8 @@ class InstallCommand extends Command
 
         $this->info('Installing Devel...');
 
-        // Install the PHP dependencies
-        $this->info('Installing PHP dependencies...');
-
-        $this->runExternal('composer install', base_path());
+        // Generate an app key
+        $this->call('key:generate');
 
         // Run `npm install`
         $this->info('Installing npm dependencies...');
