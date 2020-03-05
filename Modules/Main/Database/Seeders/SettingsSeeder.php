@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\DevelUsers\Database\Seeders;
+namespace Modules\Main\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Modules\DevelCore\Entities\Auth\Role;
@@ -9,7 +9,7 @@ use Modules\DevelCore\Entities\Auth\Permission;
 class SettingsSeeder extends Seeder
 {
     protected $permissions = [
-        'main.settings_edit' => 'Edit Settings',
+        'main.edit_settings' => 'Edit Settings',
     ];
 
     /**

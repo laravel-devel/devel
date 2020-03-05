@@ -48,7 +48,7 @@ class SettingsController extends Controller
     }
 
     /**
-     * Show the site settings form
+     * Show the settings form
      *
      * @return void
      */
