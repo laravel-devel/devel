@@ -1,3 +1,9 @@
+<p align="center">
+<a href="https://packagist.org/packages/voerro/devel"><img src="https://poser.pugx.org/voerro/devel/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/voerro/devel"><img src="https://poser.pugx.org/voerro/devel/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/voerro/devel"><img src="https://poser.pugx.org/voerro/devel/license.svg" alt="License"></a>
+</p>
+
 Devel is a modular Laravel platform which comes with an admin dashboard and a CRUD generator.
 
 The modularity was achieved with the help of the [nWidart/laravel-modules](https://github.com/nWidart/laravel-modules) package, which was modified to the needs of Devel.
@@ -15,11 +21,9 @@ Devel is not a CMS and is meant to make the life of developers a bit easier.
 
 ## Installation
 
-- Run `git clone https://github.com/voerro/devel.git your-project-name` (`your-project-name` is a folder name to clone the project to)
+- Run `composer create-project --remove-vcs voerro/devel your-project-name dev-master` (`your-project-name` is a folder name to install the project to)
 - Navigate to your project folder
-- Run `cp .env.example .env` or manually create the `.env` file and copy over the contents of `.env.example`
 - Edit the DB settings in `.env`
-- Run `composer install`
 - Run `php artisan devel:install`
 - Now you can use Devel. To access the dashboard go to `/dashboard` and log in under `root@example.com` / `qwerty`. These credentials can be changed on the dashboard.
 

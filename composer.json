@@ -1,7 +1,7 @@
 {
     "name": "voerro/devel",
     "type": "project",
-    "description": "Modular Laravel project with a dashboard and CRUD generator.",
+    "description": "Modular Laravel platform with a dashboard and CRUD generator.",
     "keywords": [
         "framework",
         "laravel",

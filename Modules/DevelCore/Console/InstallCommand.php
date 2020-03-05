@@ -45,7 +45,9 @@ class InstallCommand extends Command
         $this->info('Installing Devel...');
 
         // Generate an app key
-        $this->call('key:generate');
+        if (!env('APP_KEY')) {
+            $this->call('key:generate');
+        }
 
         // Run `npm install`
         $this->info('Installing npm dependencies...');
