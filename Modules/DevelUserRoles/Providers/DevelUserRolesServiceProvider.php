@@ -18,6 +18,7 @@ class DevelUserRolesServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
+        $this->registerCommands();
         $this->loadMigrationsFrom(module_path('DevelUserRoles', 'Database/Migrations'));
     }
 
@@ -92,6 +93,18 @@ class DevelUserRolesServiceProvider extends ServiceProvider
         if (! app()->environment('production') && $this->app->runningInConsole()) {
             app(Factory::class)->load(module_path('DevelUserRoles', 'Database/factories'));
         }
+    }
+
+    /**
+     * Register the module's console commands.
+     *
+     * @return void
+     */
+    public function registerCommands()
+    {
+        $this->commands([
+            //
+        ]);
     }
 
     /**

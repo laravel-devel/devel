@@ -20,6 +20,7 @@ class DevelDashboardServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
+        $this->registerCommands();
         $this->loadMigrationsFrom(module_path('DevelDashboard', 'Database/Migrations'));
         $this->addSidebarMenuItems();
     }
@@ -95,6 +96,18 @@ class DevelDashboardServiceProvider extends ServiceProvider
         if (! app()->environment('production') && $this->app->runningInConsole()) {
             app(Factory::class)->load(module_path('DevelDashboard', 'Database/factories'));
         }
+    }
+
+    /**
+     * Register the module's console commands.
+     *
+     * @return void
+     */
+    public function registerCommands()
+    {
+        $this->commands([
+            //
+        ]);
     }
 
     /**
