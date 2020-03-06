@@ -3,7 +3,6 @@
 namespace Modules\DevelDashboard\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Modules\DevelCore\Http\Controllers\Controller;
 
@@ -21,13 +20,6 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::DASHBOARD;
 
     /**
      * Create a new controller instance.
