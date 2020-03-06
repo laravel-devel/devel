@@ -9,7 +9,7 @@ use Modules\DevelCore\Entities\Auth\Permission;
 class SettingsSeeder extends Seeder
 {
     protected $permissions = [
-        'main.edit_settings' => 'Edit Settings',
+        'main.edit_settings' => 'Edit Module Settings',
     ];
 
     /**

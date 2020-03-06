@@ -474,6 +474,13 @@ class ModuleGenerator extends Generator
             'module' => $this->getName(),
             '--settings' => true,
         ]);
+
+        // Generate the SettingsSeeder
+        $this->console->call('module:make-seed', [
+            'name' => 'SettingsSeeder',
+            'module' => $this->getName(),
+            '--settings' => true,
+        ]);
         
         if ($this->getModel()) {
             // Generate CRUD for the provided model
