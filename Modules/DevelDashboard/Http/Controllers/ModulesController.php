@@ -10,6 +10,7 @@ class ModulesController extends Controller
     protected $protectedModules = [
         'DevelCore',
         'DevelDashboard',
+        'Main',
     ];
 
     /**

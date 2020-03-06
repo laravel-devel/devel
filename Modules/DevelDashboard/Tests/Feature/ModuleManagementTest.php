@@ -29,7 +29,7 @@ class ModuleManagementTest extends TestCase
         // The page should display all the modules except 'DevelCore' and
         // 'DevelDashboard'
         $expected = array_values(array_filter(array_keys(Module::all()), function ($key) {
-            return (!in_array($key, ['DevelCore', 'DevelDashboard']));
+            return (!in_array($key, ['DevelCore', 'DevelDashboard', 'Main']));
         }));
 
         $response = $this->actingAs($this->admin)
@@ -50,7 +50,7 @@ class ModuleManagementTest extends TestCase
         $firstModule = '';
 
         foreach (Module::all() as $key => $module) {
-            if (in_array($key, ['DevelCore', 'DevelDashboard'])) {
+            if (in_array($key, ['DevelCore', 'DevelDashboard', 'Main'])) {
                 continue;
             }
 
@@ -100,7 +100,7 @@ class ModuleManagementTest extends TestCase
         $firstModule = '';
 
         foreach (Module::all() as $key => $module) {
-            if (in_array($key, ['DevelCore', 'DevelDashboard'])) {
+            if (in_array($key, ['DevelCore', 'DevelDashboard', 'Main'])) {
                 $firstModule = $module;
 
                 break;

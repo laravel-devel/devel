@@ -83,7 +83,7 @@ class ModuleInstallCommand extends Command
         }
 
         // Publish the config file
-        if (!in_array($moduleName, ['DevelCore'])) {
+        if (!in_array($moduleName, ['DevelCore', 'Main'])) {
             $this->call('module:publish-config', ['module' => $moduleName]);
         }
 
