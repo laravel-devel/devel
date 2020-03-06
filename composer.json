@@ -39,7 +39,6 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
             "Extensions\\": "extensions/laravel-modules",
             "Modules\\": "Modules/"
         },

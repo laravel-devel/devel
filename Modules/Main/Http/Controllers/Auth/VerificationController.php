@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace Modules\Main\Http\Controllers\Auth;
 
 use Modules\Main\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
