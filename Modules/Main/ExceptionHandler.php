@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Exceptions;
+namespace Modules\Main;
 
 use Exception;
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Foundation\Exceptions\Handler;
 
-class Handler extends ExceptionHandler
+class ExceptionHandler extends Handler
 {
     /**
      * A list of the exception types that are not reported.
