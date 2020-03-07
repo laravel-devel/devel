@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Modules\Main\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Modules\DevelCore\Http\Controllers\Controller;
+use Devel\Core\Http\Controllers\Controller;
 
 class RegisterController extends Controller
 {

@@ -1,0 +1,25 @@
+{
+    "name": "devel/core",
+    "description": "",
+    "authors": [
+        {
+            "name": "Alexander Zavyalov ",
+            "email": "alex@voerro.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Devel\\Core\\Providers\\DevelCoreServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Devel\\Core\\": ""
+        }
+    }
+}

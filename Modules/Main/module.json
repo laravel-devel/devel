@@ -9,6 +9,6 @@
     ],
     "aliases": {},
     "files": [],
-    "requires": ["DevelCore", "DevelDashboard"],
+    "requires": ["DevelDashboard"],
     "buildNpm": false
 }

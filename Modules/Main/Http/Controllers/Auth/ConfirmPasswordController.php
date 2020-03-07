@@ -4,7 +4,7 @@ namespace Modules\Main\Http\Controllers\Auth;
 
 use Modules\Main\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
-use Modules\DevelCore\Http\Controllers\Controller;
+use Devel\Core\Http\Controllers\Controller;
 
 class ConfirmPasswordController extends Controller
 {

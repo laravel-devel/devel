@@ -5,7 +5,7 @@ namespace Modules\DevelDashboard\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use Modules\Main\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use Modules\DevelCore\Http\Controllers\Controller;
+use Devel\Core\Http\Controllers\Controller;
 
 class ResetPasswordController extends Controller
 {

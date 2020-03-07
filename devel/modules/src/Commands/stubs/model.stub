@@ -2,7 +2,7 @@
 
 namespace $NAMESPACE$;
 
-use Modules\DevelCore\Entities\Model;
+use Devel\Core\Entities\Model;
 
 class $CLASS$ extends Model
 {

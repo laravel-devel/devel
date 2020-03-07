@@ -3,8 +3,8 @@
 namespace Modules\DevelDashboard\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Modules\DevelCore\Entities\Settings;
-use Modules\DevelCore\Http\Controllers\Controller;
+use Devel\Core\Entities\Settings;
+use Devel\Core\Http\Controllers\Controller;
 
 class SettingsController extends Controller
 {

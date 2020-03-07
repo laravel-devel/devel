@@ -44,7 +44,7 @@
         },
         "files": [
             "devel/modules/src/helpers.php",
-            "Modules/DevelCore/Services/helpers.php"
+            "devel/core/Services/helpers.php"
         ]
     },
     "minimum-stability": "dev",

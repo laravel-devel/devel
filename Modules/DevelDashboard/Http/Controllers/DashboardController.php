@@ -2,7 +2,7 @@
 
 namespace Modules\DevelDashboard\Http\Controllers;
 
-use Modules\DevelCore\Http\Controllers\Controller;
+use Devel\Core\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {

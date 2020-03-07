@@ -2,12 +2,12 @@
 
 namespace Modules\DevelUsers\Tests\Feature;
 
-use Modules\DevelCore\Tests\TestCase;
+use Devel\Core\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
-use Modules\DevelCore\Database\Seeders\DevelCoreDatabaseSeeder;
-use Modules\DevelCore\Entities\Auth\User;
+use Devel\Core\Database\Seeders\DevelCoreDatabaseSeeder;
+use Devel\Core\Entities\Auth\User;
 use Modules\DevelUsers\Database\Seeders\DevelUsersDatabaseSeeder;
 
 class CrudTest extends TestCase

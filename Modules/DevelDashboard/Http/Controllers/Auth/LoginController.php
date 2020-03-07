@@ -4,7 +4,7 @@ namespace Modules\DevelDashboard\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Modules\DevelCore\Http\Controllers\Controller;
+use Devel\Core\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {

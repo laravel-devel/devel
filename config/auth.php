@@ -68,7 +68,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Modules\DevelCore\Entities\Auth\User::class,
+            'model' => Devel\Core\Entities\Auth\User::class,
         ],
 
         // 'users' => [

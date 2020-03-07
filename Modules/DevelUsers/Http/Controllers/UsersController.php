@@ -6,10 +6,10 @@ use Modules\DevelDashboard\Traits\Crud;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
-use Modules\DevelCore\Entities\Auth\Permission;
-use Modules\DevelCore\Entities\Auth\Role;
-use Modules\DevelCore\Entities\Auth\User;
-use Modules\DevelCore\Http\Controllers\Controller;
+use Devel\Core\Entities\Auth\Permission;
+use Devel\Core\Entities\Auth\Role;
+use Devel\Core\Entities\Auth\User;
+use Devel\Core\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
@@ -21,7 +21,7 @@ class UsersController extends Controller
         $this->setMeta('title', config('develusers.display_name'));
 
         // CRUD setup
-        $this->setModel('Modules\DevelCore\Entities\Auth\User');
+        $this->setModel('Devel\Core\Entities\Auth\User');
         $this->setRequest('Modules\DevelUsers\Http\Requests\UserRequest');
 
         $this->setDatatable([

@@ -2,11 +2,11 @@
 
 namespace Modules\DevelDashboard\Tests\Feature;
 
-use Modules\DevelCore\Tests\TestCase;
-use Modules\DevelCore\Entities\Auth\User;
+use Devel\Core\Tests\TestCase;
+use Devel\Core\Entities\Auth\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Modules\DevelCore\Database\Seeders\DevelCoreDatabaseSeeder;
+use Devel\Core\Database\Seeders\DevelCoreDatabaseSeeder;
 use Devel\Modules\Facades\Module;
 
 class ModuleManagementTest extends TestCase
@@ -26,10 +26,10 @@ class ModuleManagementTest extends TestCase
     /** @test */
     public function admins_can_view_all_the_available_modules()
     {
-        // The page should display all the modules except 'DevelCore' and
-        // 'DevelDashboard'
+        // The page should display all the modules except 'DevelDashboard' and
+        // 'Main'
         $expected = array_values(array_filter(array_keys(Module::all()), function ($key) {
-            return (!in_array($key, ['DevelCore', 'DevelDashboard', 'Main']));
+            return (!in_array($key, ['DevelDashboard', 'Main']));
         }));
 
         $response = $this->actingAs($this->root)
@@ -50,7 +50,7 @@ class ModuleManagementTest extends TestCase
         $firstModule = '';
 
         foreach (Module::all() as $key => $module) {
-            if (in_array($key, ['DevelCore', 'DevelDashboard', 'Main'])) {
+            if (in_array($key, ['DevelDashboard', 'Main'])) {
                 continue;
             }
 
@@ -95,12 +95,12 @@ class ModuleManagementTest extends TestCase
     /** @test */
     public function certain_modules_cannot_be_disabled()
     {
-        // Only 'DevelCore' and 'DevelDashboard' cannot be disabled
+        // Only 'DevelDashboard' and 'Main' cannot be disabled
         // Find the first module
         $firstModule = '';
 
         foreach (Module::all() as $key => $module) {
-            if (in_array($key, ['DevelCore', 'DevelDashboard', 'Main'])) {
+            if (in_array($key, ['DevelDashboard', 'Main'])) {
                 $firstModule = $module;
 
                 break;

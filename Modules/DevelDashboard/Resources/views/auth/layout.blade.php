@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    @include('develcore::seo._metatags')
+    @include('core::seo._metatags')
 
     <link rel="stylesheet" href="{{ mix('css/devel/dashboard.css') }}">
 </head>

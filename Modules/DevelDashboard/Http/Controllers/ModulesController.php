@@ -2,13 +2,12 @@
 
 namespace Modules\DevelDashboard\Http\Controllers;
 
-use Modules\DevelCore\Http\Controllers\Controller;
+use Devel\Core\Http\Controllers\Controller;
 use Devel\Modules\Facades\Module;
 
 class ModulesController extends Controller
 {
     protected $protectedModules = [
-        'DevelCore',
         'DevelDashboard',
         'Main',
     ];

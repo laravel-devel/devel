@@ -48,7 +48,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware([
             'web',
             \Modules\DevelDashboard\Http\Middleware\DashboardAccess::class,
-            \Modules\DevelCore\Http\Middleware\CheckRoutePermissions::class,
+            \Devel\Core\Http\Middleware\CheckRoutePermissions::class,
         ])
         ->prefix(config('develdashboard.dashboard_uri'))
         ->as('dashboard.')

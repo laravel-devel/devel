@@ -3,9 +3,9 @@
 namespace $NAMESPACE$;
 
 use Illuminate\Database\Seeder;
-use Modules\DevelCore\Entities\Settings;
-use Modules\DevelCore\Entities\Auth\Role;
-use Modules\DevelCore\Entities\Auth\Permission;
+use Devel\Core\Entities\Settings;
+use Devel\Core\Entities\Auth\Role;
+use Devel\Core\Entities\Auth\Permission;
 
 class $NAME$ extends Seeder
 {

@@ -4,7 +4,7 @@ Route::group([
     'prefix' => config('develuserroles.slug'),
 ], function() {
     /**
-     * Modules\DevelCore\Entities\Auth\Role CRUD
+     * Devel\Core\Entities\Auth\Role CRUD
      */
     Route::group([
         'prefix' => config('develuserroles.slug'),

@@ -3,7 +3,7 @@
 namespace Modules\DevelDashboard\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
-use Modules\DevelCore\Http\Controllers\Controller;
+use Devel\Core\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class ForgotPasswordController extends Controller

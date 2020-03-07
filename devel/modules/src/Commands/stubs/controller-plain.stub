@@ -2,7 +2,7 @@
 
 namespace $CLASS_NAMESPACE$;
 
-use Modules\DevelCore\Http\Controllers\Controller;
+use Devel\Core\Http\Controllers\Controller;
 
 class $CLASS$ extends Controller
 {

@@ -2,12 +2,12 @@
 
 namespace Modules\DevelUserRoles\Tests\Feature;
 
-use Modules\DevelCore\Tests\TestCase;
+use Devel\Core\Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Modules\DevelCore\Database\Seeders\DevelCoreDatabaseSeeder;
-use Modules\DevelCore\Entities\Auth\Role;
-use Modules\DevelCore\Entities\Auth\User;
+use Devel\Core\Database\Seeders\DevelCoreDatabaseSeeder;
+use Devel\Core\Entities\Auth\Role;
+use Devel\Core\Entities\Auth\User;
 use Modules\DevelUserRoles\Database\Seeders\DevelUserRolesDatabaseSeeder;
 
 class RootRoleTest extends TestCase

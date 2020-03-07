@@ -5,9 +5,9 @@ namespace Modules\DevelUserRoles\Http\Controllers;
 use Modules\DevelDashboard\Traits\Crud;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\DevelCore\Entities\Auth\Permission;
-use Modules\DevelCore\Entities\Auth\Role;
-use Modules\DevelCore\Http\Controllers\Controller;
+use Devel\Core\Entities\Auth\Permission;
+use Devel\Core\Entities\Auth\Role;
+use Devel\Core\Http\Controllers\Controller;
 
 class RolesController extends Controller
 {
@@ -19,7 +19,7 @@ class RolesController extends Controller
         $this->setMeta('title', config('develuserroles.display_name'));
 
         // CRUD setup
-        $this->setModel('Modules\DevelCore\Entities\Auth\Role');
+        $this->setModel('Devel\Core\Entities\Auth\Role');
         $this->setRequest('Modules\DevelUserRoles\Http\Requests\RoleRequest');
 
         $this->setDatatable([

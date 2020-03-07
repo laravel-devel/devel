@@ -12,10 +12,12 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Unit">
+            <directory suffix="Test.php">./devel/core/Tests/Unit</directory>
             <directory suffix="Test.php">./Modules/**/Tests/Unit</directory>
         </testsuite>
 
         <testsuite name="Feature">
+            <directory suffix="Test.php">./devel/core/Tests/Feature</directory>
             <directory suffix="Test.php">./Modules/**/Tests/Feature</directory>
         </testsuite>
     </testsuites>

@@ -2,7 +2,7 @@
 
 namespace Modules\Main\Http\Controllers;
 
-use Modules\DevelCore\Http\Controllers\Controller;
+use Devel\Core\Http\Controllers\Controller;
 
 class HomepageController extends Controller
 {
