@@ -28,7 +28,7 @@ return [
         'enabled' => false,
         'path' => base_path() . '/extensions/laravel-modules/src/Commands/stubs',
         'files' => [
-            'routes/web' => 'Routes/web.php',
+            'routes/public' => 'Routes/public.php',
             'routes/dashboard' => 'Routes/dashboard.php',
             'routes/api' => 'Routes/api.php',
             'scaffold/config' => 'Config/config.php',
@@ -50,7 +50,7 @@ return [
             'routes/crud' => 'Routes/crud.php',
         ],
         'replacements' => [
-            'routes/web' => ['LOWER_NAME', 'STUDLY_NAME', 'CONTROLLER_NAME'],
+            'routes/public' => ['LOWER_NAME', 'STUDLY_NAME', 'CONTROLLER_NAME'],
             'routes/dashboard' => ['LOWER_NAME', 'STUDLY_NAME', 'CONTROLLER_NAME'],
             'routes/api' => ['LOWER_NAME'],
             'webpack' => ['LOWER_NAME'],

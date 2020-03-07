@@ -19,8 +19,8 @@ class ModuleManagementTest extends TestCase
 
         $this->seed(DevelCoreDatabaseSeeder::class);
 
-        $this->admin = factory(User::class)->create();
-        $this->admin->roles()->attach('admin');
+        $this->root = factory(User::class)->create();
+        $this->root->roles()->attach('root');
     }
 
     /** @test */
@@ -32,7 +32,7 @@ class ModuleManagementTest extends TestCase
             return (!in_array($key, ['DevelCore', 'DevelDashboard', 'Main']));
         }));
 
-        $response = $this->actingAs($this->admin)
+        $response = $this->actingAs($this->root)
             ->get(route('dashboard.modules.index'));
 
         $response->assertStatus(200);
@@ -67,7 +67,7 @@ class ModuleManagementTest extends TestCase
 
         try {
             // Now try toggling the module's status
-            $this->actingAs($this->admin)
+            $this->actingAs($this->root)
                 ->post(route('dashboard.modules.toggle-enabled', $firstModule->getAlias()))
                 ->assertStatus(200);
 
@@ -119,7 +119,7 @@ class ModuleManagementTest extends TestCase
 
         try {
             // Now try toggling the module's status
-            $this->actingAs($this->admin)
+            $this->actingAs($this->root)
                 ->post(route('dashboard.modules.toggle-enabled', $firstModule->getAlias()))
                 ->assertStatus(422);
 

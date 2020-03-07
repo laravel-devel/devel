@@ -37,32 +37,9 @@ class RouteServiceProvider extends ServiceProvider
     {
         $this->mapApiRoutes();
 
-        $this->mapWebRoutes();
-    }
+        $this->mapDashboardRoutes();
 
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapWebRoutes()
-    {
-        Route::middleware('web')
-            ->namespace($this->moduleNamespace)
-            ->group(module_path('Main', '/Routes/web.php'));
-
-        if (file_exists(module_path('Main', '/Routes/dashboard.php'))) {
-            Route::middleware([
-                'web',
-                \Modules\DevelDashboard\Http\Middleware\DashboardAccess::class,
-                \Modules\DevelDashboard\Http\Middleware\CheckDashboardPermissions::class,
-            ])
-            ->as('dashboard.')
-            ->namespace($this->moduleNamespace)
-            ->group(module_path('Main', '/Routes/dashboard.php'));
-        }
+        $this->mapPublicRoutes();
     }
 
     /**
@@ -78,5 +55,42 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->moduleNamespace)
             ->group(module_path('Main', '/Routes/api.php'));
+    }
+
+    /**
+     * Define the (admin) dashboard routes for the module.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapDashboardRoutes()
+    {
+        Route::middleware([
+            'web',
+            \Modules\DevelDashboard\Http\Middleware\DashboardAccess::class,
+            \Modules\DevelCore\Http\Middleware\CheckRoutePermissions::class,
+        ])
+        ->prefix(config('develdashboard.dashboard_uri'))
+        ->as('dashboard.')
+        ->namespace($this->moduleNamespace)
+        ->group(module_path('Main', '/Routes/dashboard.php'));
+    }
+
+    /**
+     * Define the public routes for the module.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapPublicRoutes()
+    {
+        Route::middleware([
+            'web',
+            \Modules\DevelCore\Http\Middleware\CheckRoutePermissions::class,
+        ])
+        ->namespace($this->moduleNamespace)
+        ->group(module_path('Main', '/Routes/public.php'));
     }
 }

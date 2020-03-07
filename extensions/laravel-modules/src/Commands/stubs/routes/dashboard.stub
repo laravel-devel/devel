@@ -1,7 +1,16 @@
 <?php
 
+/*
+|--------------------------------------------------------------------------
+| Dashboard Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register the (admin) dashboard routes for your module.
+|
+*/
+
 Route::group([
-    'prefix' => config('develdashboard.dashboard_uri') . '/' . config('$LOWER_NAME$.slug'),
+    'prefix' => config('$LOWER_NAME$.slug'),
 ], function() {
     /**
      * Module settings

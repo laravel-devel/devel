@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-    'prefix' => config('develdashboard.dashboard_uri'),
+    'prefix' => config('develusers.slug'),
 ], function() {
     /**
      * Modules\DevelCore\Entities\Auth\User CRUD

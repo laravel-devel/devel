@@ -22,6 +22,17 @@ class CheckRoutePermissions
             throw new \Exception('The route permissions should be set in as a string or an array of strings.');
         }
 
+        // If the route has no permissions -> continue
+        if (!$permissions) {
+            return $next($request);
+        }
+
+        // Guests can't have any permissions
+        if (!auth()->check()) {
+            return redirect('/')
+                ->with('error', 'You don\'t have permission to perform this action.');
+        }
+
         // Check if the user has all the permissions required by the route
         if (!auth()->user()->hasPermissions($permissions)) {
             if ($request->ajax() || $request->wantsJson()) {
@@ -31,8 +42,12 @@ class CheckRoutePermissions
             }
 
             if (back()->getTargetUrl() === url()->current()) {
+                // TODO:
+                // Admin dashboard
                 return redirect()->route('dashboard.index')
                     ->with('error', 'You don\'t have permission to perform this action.');
+
+                // Public stie
             }
 
             return back()->with('error', 'You don\'t have permission to perform this action.');

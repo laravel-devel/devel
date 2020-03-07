@@ -33,48 +33,26 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapApiRoutes();
-
-        $this->mapWebRoutes();
+        $this->mapDashboardRoutes();
     }
 
     /**
-     * Define the "web" routes for the application.
+     * Define the public routes for the module.
      *
      * These routes all receive session state, CSRF protection, etc.
      *
      * @return void
      */
-    protected function mapWebRoutes()
+    protected function mapDashboardRoutes()
     {
-        Route::middleware('web')
-            ->namespace($this->moduleNamespace)
-            ->group(module_path('DevelUsers', '/Routes/web.php'));
-
-        if (file_exists(module_path('DevelUsers', '/Routes/dashboard.php'))) {
-            Route::middleware([
-                'web',
-                \Modules\DevelDashboard\Http\Middleware\DashboardAccess::class,
-                \Modules\DevelCore\Http\Middleware\CheckRoutePermissions::class,
-            ])
-            ->as('dashboard.')
-            ->namespace($this->moduleNamespace)
-            ->group(module_path('DevelUsers', '/Routes/dashboard.php'));
-        }
-    }
-
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
-    protected function mapApiRoutes()
-    {
-        Route::prefix('api')
-            ->middleware('api')
-            ->namespace($this->moduleNamespace)
-            ->group(module_path('DevelUsers', '/Routes/api.php'));
+        Route::middleware([
+            'web',
+            \Modules\DevelDashboard\Http\Middleware\DashboardAccess::class,
+            \Modules\DevelCore\Http\Middleware\CheckRoutePermissions::class,
+        ])
+        ->prefix(config('develdashboard.dashboard_uri'))
+        ->namespace($this->moduleNamespace)
+        ->as('dashboard.')
+        ->group(module_path('DevelUsers', '/Routes/dashboard.php'));
     }
 }
