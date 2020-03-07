@@ -9,7 +9,14 @@ use Modules\DevelCore\Entities\Auth\Permission;
 class SettingsSeeder extends Seeder
 {
     protected $permissions = [
-        'main.edit_settings' => 'Edit Module Settings',
+        // 'main.edit_settings' => 'Edit Module Settings',
+    ];
+
+    protected $settings = [
+        // 'site-name' => [
+        //     'name' => 'Site Name',
+        //     'value' => 'Devel',
+        // ],
     ];
 
     /**
@@ -19,6 +26,7 @@ class SettingsSeeder extends Seeder
      */
     public function run()
     {
+        // Seed the permission to edit the module's settings
         $root = Role::find('root');
 
         foreach ($this->permissions as $permission => $name) {
@@ -30,6 +38,22 @@ class SettingsSeeder extends Seeder
             if ($root && !$root->permissions->contains($permission)) {
                 $root->permissions()->attach($permission);
             }
+        }
+
+        // Seed the module's settings
+        foreach ($this->settings as $key => $data) {
+            $parts = explode('-', $key);
+            $group = $parts[0];
+
+            array_shift($parts);
+            $key = implode('.', $parts);
+
+            Settings::create([
+                'group' => $group,
+                'key' => $key,
+                'name' => $data['name'],
+                'value' => $data['value'],
+            ]);
         }
     }
 }
