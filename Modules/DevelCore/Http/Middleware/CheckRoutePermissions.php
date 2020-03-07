@@ -3,6 +3,7 @@
 namespace Modules\DevelCore\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class CheckRoutePermissions
@@ -42,12 +43,15 @@ class CheckRoutePermissions
             }
 
             if (back()->getTargetUrl() === url()->current()) {
-                // TODO:
-                // Admin dashboard
-                return redirect()->route('dashboard.index')
-                    ->with('error', 'You don\'t have permission to perform this action.');
-
-                // Public stie
+                if (Str::startsWith(url()->current(), route('dashboard.index')) && auth()->user()->hasPermissions('admin_dashboard.access')) {
+                    // Admin dashboard
+                    return redirect()->route('dashboard.index')
+                        ->with('error', 'You don\'t have permission to perform this action.');
+                } else {
+                    // Public site
+                    return redirect('/')
+                        ->with('error', 'You don\'t have permission to perform this action.');
+                }
             }
 
             return back()->with('error', 'You don\'t have permission to perform this action.');
