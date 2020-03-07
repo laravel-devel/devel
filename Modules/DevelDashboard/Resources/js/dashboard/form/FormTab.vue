@@ -56,7 +56,18 @@ export default {
             type: Boolean,
             
             default: false,
-        }
+        },
+
+        readOnly: {
+            type: Boolean,
+            default: false,
+        },
+    },
+
+    data() {
+        return {
+            tabReadOly: this.readOnly || this.$parent.readOnly,
+        };
     },
 }
 </script>

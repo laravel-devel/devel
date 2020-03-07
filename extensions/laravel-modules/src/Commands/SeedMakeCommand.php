@@ -185,6 +185,7 @@ class SeedMakeCommand extends GeneratorCommand
 
         $permissions = '';
         $permissions .= "'{$moduleLower}.list-{$nameLower}' => '{$module} - List {$name}',\n";
+        $permissions .= "        '{$moduleLower}.view-{$nameLower}' => '{$module} - View {$name}',\n";
         $permissions .= "        '{$moduleLower}.add-{$nameLower}' => '{$module} - Add {$name}',\n";
         $permissions .= "        '{$moduleLower}.edit-{$nameLower}' => '{$module} - Edit {$name}',\n";
         $permissions .= "        '{$moduleLower}.delete-{$nameLower}' => '{$module} - Delete {$name}',";

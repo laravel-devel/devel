@@ -78,6 +78,7 @@ export default {
                 'hidden',
             ],
             attrs: {},
+            readOnly: this.$parent.tabReadOly,
         };
     },
 
@@ -110,7 +111,9 @@ export default {
     created() {
         this.attrs = Object.assign({}, this.field);
         this.attrs.label = this.showLabel ? this.field.label : undefined;
-        this.attrs.disabled = (this.attrs.disabled == true) ? true : false;
+        this.attrs.disabled = (
+            this.readOnly || ((this.attrs.disabled == true) ? true : false)
+        );
 
         this.setChecked();
     },

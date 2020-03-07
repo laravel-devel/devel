@@ -16,7 +16,7 @@
             ></div>
         </div>
 
-        <slot v-bind:errors="errors" v-bind:values="values">
+        <slot v-bind:errors="errors" v-bind:values="values" v-bind:read-only="readOnly">
             <v-form-tab v-for="(key, index) in Object.keys(fields)"
                 :key="index"
                 :show="slug(key) === activeTab"
@@ -25,21 +25,24 @@
                 :fields="fields[key]"
                 :collections="collections"
                 :values="values"
-                :errors="errors"></v-form-tab>
+                :errors="errors"
+                :read-only="readOnly"></v-form-tab>
         </slot>
 
         <div class="message" :class="messageClass" v-text="message"></div>
 
-        <button v-if="button"
-            type="submit"
-            class="btn"
-            :disabled="this.processing"
-            v-text="button.text"></button>
+        <template v-if="!readOnly">
+            <button v-if="button"
+                type="submit"
+                class="btn"
+                :disabled="this.processing"
+                v-text="button.text"></button>
 
-        <button v-else
-            type="submit"
-            class="btn"
-            :disabled="this.processing">Save</button>
+            <button v-else
+                type="submit"
+                class="btn"
+                :disabled="this.processing">Save</button>
+        </template>
     </form>
 </template>
 
@@ -81,7 +84,12 @@ export default {
         type: {
             type: String,
             default: 'default',
-        }
+        },
+
+        readOnly: {
+            type: Boolean,
+            default: false,
+        },
     },
 
     data() {

@@ -25,7 +25,7 @@ class CrudTest extends TestCase
     }
 
     /** @test */
-    public function admins_can_create_users()
+    public function roots_can_create_users()
     {
         $data = [
             'name' => 'user',
@@ -50,7 +50,17 @@ class CrudTest extends TestCase
     }
 
     /** @test */
-    public function admins_can_edit_users()
+    public function roots_can_view_users()
+    {
+        $user = factory(User::class)->create();
+
+        $this->actingAs($this->root)
+            ->get(route('dashboard.develusers.users.edit', $user->id))
+            ->assertStatus(200);
+    }
+
+    /** @test */
+    public function roots_can_edit_users()
     {
         $user = factory(User::class)->create();
 
@@ -76,7 +86,7 @@ class CrudTest extends TestCase
     }
 
     /** @test */
-    public function admins_can_delete_users()
+    public function roots_can_delete_users()
     {
         $user = factory(User::class)->create();
 
@@ -88,7 +98,7 @@ class CrudTest extends TestCase
     }
 
     /** @test */
-    public function admins_can_grant_personal_permissions_to_users()
+    public function roots_can_grant_personal_permissions_to_users()
     {
         $user = factory(User::class)->create();
 

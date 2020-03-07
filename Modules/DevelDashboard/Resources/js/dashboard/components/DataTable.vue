@@ -55,7 +55,7 @@
                                 <i class="las la-trash"></i>
                             </a>
 
-                            <a v-if="actions.edit && allowedTo('edit')"
+                            <a v-if="actions.edit && (allowedTo('edit') || allowedTo('view'))"
                                 :href="actionEndpoint(actions.edit, item)"
                                 class="action-btn primary"
                                 title="Edit"

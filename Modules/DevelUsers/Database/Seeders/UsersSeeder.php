@@ -10,6 +10,7 @@ class UsersSeeder extends Seeder
 {
     protected $permissions = [
         'users.list' => 'List Users',
+        'users.view' => 'View Users',
         'users.add' => 'Add Users',
         'users.edit' => 'Edit Users',
         'users.delete' => 'Delete Users',

@@ -69,7 +69,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware([
             'web',
             \Modules\DevelDashboard\Http\Middleware\DashboardAccess::class,
-            \Modules\DevelDashboard\Http\Middleware\CheckDashboardPermissions::class,
+            \Modules\DevelCore\Http\Middleware\CheckRoutePermissions::class,
         ])
         ->as('dashboard.')
         ->namespace($this->moduleNamespace)

@@ -25,7 +25,7 @@ class CrudTest extends TestCase
     }
 
     /** @test */
-    public function admins_can_create_user_roles()
+    public function roots_can_create_user_roles()
     {
         $data = [
             'key' => 'test',
@@ -47,7 +47,17 @@ class CrudTest extends TestCase
     }
 
     /** @test */
-    public function admins_can_edit_user_roles()
+    public function roots_can_view_user_roles()
+    {
+        $role = factory(Role::class)->create();
+
+        $this->actingAs($this->root)
+            ->get(route('dashboard.develuserroles.roles.edit', $role->key))
+            ->assertStatus(200);
+    }
+
+    /** @test */
+    public function roots_can_edit_user_roles()
     {
         $role = factory(Role::class)->create();
 
@@ -75,7 +85,7 @@ class CrudTest extends TestCase
     }
 
     /** @test */
-    public function admins_can_delete_user_roles()
+    public function roots_can_delete_user_roles()
     {
         $role = factory(Role::class)->create();
 

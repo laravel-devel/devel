@@ -31,7 +31,7 @@ Route::group([
         Route::get('/{id}/edit', [
             'as' => 'develusers.users.edit',
             'uses' => 'UsersController@edit',
-            'permissions' => 'users.edit',
+            'permissions' => 'users.view || users.edit',
         ]);
 
         Route::post('/', [

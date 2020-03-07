@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\DevelDashboard\Http\Middleware;
+namespace Modules\DevelCore\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckDashboardPermissions
+class CheckRoutePermissions
 {
     /**
      * Handle an incoming request.

@@ -3,6 +3,7 @@
     type="table"
     success="{{ route('dashboard.develuserroles.roles.index') }}"
     :values="{{ $item ?? '{}' }}"
+    :read-only="{{ !auth()->user()->hasPermissions('user_roles.edit') ? 'true' : 'false' }}"
 >
     <template v-slot:default="slotProps">
         <v-form-tab name="Role"

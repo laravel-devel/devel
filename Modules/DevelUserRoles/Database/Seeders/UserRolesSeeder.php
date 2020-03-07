@@ -10,6 +10,7 @@ class UserRolesSeeder extends Seeder
 {
     protected $permissions = [
         'user_roles.list' => 'List Roles',
+        'user_roles.view' => 'View Roles',
         'user_roles.add' => 'Add Roles',
         'user_roles.edit' => 'Edit Roles',
         'user_roles.delete' => 'Delete Roles',
