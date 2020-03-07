@@ -10,7 +10,7 @@ The modularity was achieved with the help of the [nWidart/laravel-modules](https
 
 Devel is not a CMS and is meant to make the life of developers a bit easier.
 
-**PROJECT STATUS: NOT READY TO BE USED!** The project is in its earlier stage. The dashboard/CRUD is incomplete and there are no any ready-to-use modules yet.
+**PROJECT STATUS: NOT READY TO BE USED!** The project is in its earlier stage. The dashboard/CRUD is incomplete and there are no any ready-to-use modules yet. Besides, breaking changes are made all the time.
 
 ## Features
 - Modular structure - organize your code into reusable modules, use modules made by other people
