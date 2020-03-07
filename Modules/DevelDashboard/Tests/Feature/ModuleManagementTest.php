@@ -7,7 +7,7 @@ use Modules\DevelCore\Entities\Auth\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Modules\DevelCore\Database\Seeders\DevelCoreDatabaseSeeder;
-use Extensions\Modules\Facades\Module;
+use Devel\Modules\Facades\Module;
 
 class ModuleManagementTest extends TestCase
 {

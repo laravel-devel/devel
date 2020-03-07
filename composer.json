@@ -39,11 +39,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Extensions\\": "extensions/modules",
+            "Devel\\": "devel",
             "Modules\\": "Modules/"
         },
         "files": [
-            "extensions/modules/src/helpers.php",
+            "devel/modules/src/helpers.php",
             "Modules/DevelCore/Services/helpers.php"
         ]
     },

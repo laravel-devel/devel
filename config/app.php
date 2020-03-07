@@ -165,7 +165,11 @@ return [
         /*
          * Package Service Providers...
          */
-        Extensions\Modules\LaravelModulesServiceProvider::class,
+
+        /*
+         * Devel Service Providers...
+         */
+        Devel\Modules\LaravelModulesServiceProvider::class,
 
         /*
          * Application Service Providers...
