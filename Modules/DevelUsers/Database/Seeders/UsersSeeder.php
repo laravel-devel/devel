@@ -13,6 +13,8 @@ class UsersSeeder extends Seeder
         'users.view' => 'View Users',
         'users.add' => 'Add Users',
         'users.edit' => 'Edit Users',
+        'users.assign_roles' => 'Assign Roles',
+        'users.grant_personal_permissions' => 'Grant Personal Permissions',
         'users.delete' => 'Delete Users',
     ];
 

@@ -168,6 +168,17 @@ class UsersController extends Controller
             }
         }
 
+        // A certain permission is required to be able to assign roles
+        if (!$request->user()->hasPermissions('users.assign_roles')) {
+            $request->request->remove('roles');
+        }
+
+        // A certain permission is required to be able to grant personal
+        // permissions
+        if (!$request->user()->hasPermissions('users.grant_personal_permissions')) {
+            $request->request->remove('permissions');
+        }
+
         // This is a feature option used to prevent anyone from editing the
         // root's credentials on the live demo site
         if ($item && $item->roles->contains('root') && config('devel.root.is_locked')) {
