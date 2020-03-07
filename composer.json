@@ -39,11 +39,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Extensions\\": "extensions/laravel-modules",
+            "Extensions\\": "extensions/modules",
             "Modules\\": "Modules/"
         },
         "files": [
-            "extensions/laravel-modules/src/helpers.php",
+            "extensions/modules/src/helpers.php",
             "Modules/DevelCore/Services/helpers.php"
         ]
     },
