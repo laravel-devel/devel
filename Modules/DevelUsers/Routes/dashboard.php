@@ -6,9 +6,7 @@ Route::group([
     /**
      * Devel\Core\Entities\Auth\User CRUD
      */
-    Route::group([
-        'prefix' => config('develusers.slug'),
-    ], function() {
+    Route::group([], function() {
         Route::get('/', [
             'as' => 'develusers.users.index',
             'uses' => 'UsersController@index',

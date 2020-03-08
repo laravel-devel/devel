@@ -6,9 +6,7 @@ Route::group([
     /**
      * Devel\Core\Entities\Auth\Role CRUD
      */
-    Route::group([
-        'prefix' => config('develuserroles.slug'),
-    ], function () {
+    Route::group([], function () {
         Route::get('/', [
             'as' => 'develuserroles.roles.index',
             'uses' => 'RolesController@index',
