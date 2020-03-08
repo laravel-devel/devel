@@ -50,8 +50,8 @@ return [
             'routes/crud' => 'Routes/crud.php',
         ],
         'replacements' => [
-            'routes/public' => ['LOWER_NAME', 'STUDLY_NAME', 'CONTROLLER_NAME'],
-            'routes/dashboard' => ['LOWER_NAME', 'STUDLY_NAME', 'CONTROLLER_NAME'],
+            'routes/public' => ['LOWER_NAME', 'DISPLAY_NAME', 'STUDLY_NAME', 'CONTROLLER_NAME'],
+            'routes/dashboard' => ['LOWER_NAME', 'DISPLAY_NAME', 'STUDLY_NAME', 'CONTROLLER_NAME'],
             'routes/api' => ['LOWER_NAME'],
             'webpack' => ['LOWER_NAME'],
             'json' => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE', 'PROVIDER_NAMESPACE'],

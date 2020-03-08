@@ -169,15 +169,15 @@ return [
         /*
          * Devel Service Providers...
          */
-        Devel\Core\Providers\DevelCoreServiceProvider::class,
         Devel\Modules\LaravelModulesServiceProvider::class,
+        Devel\Core\Providers\DevelCoreServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
         Modules\Main\Providers\AppServiceProvider::class,
         Modules\Main\Providers\AuthServiceProvider::class,
-        Modules\Main\Providers\BroadcastServiceProvider::class,
+        // Modules\Main\Providers\BroadcastServiceProvider::class,
         Modules\Main\Providers\EventServiceProvider::class,
         Modules\Main\Providers\RouteServiceProvider::class,
     ],
