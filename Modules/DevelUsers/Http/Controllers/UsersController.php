@@ -179,13 +179,6 @@ class UsersController extends Controller
             $request->request->remove('permissions');
         }
 
-        // This is a feature option used to prevent anyone from editing the
-        // root's credentials on the live demo site
-        if ($item && $item->roles->contains('root') && config('devel.root.is_locked')) {
-            $values['email'] = config('devel.root.default_email');
-            $values['password'] = Hash::make(config('devel.root.default_password'));
-        }
-
         return $values;
     }
 
