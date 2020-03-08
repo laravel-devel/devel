@@ -3,7 +3,7 @@
     "alias": "main",
     "description": "The main site module",
     "keywords": [],
-    "order": 3,
+    "order": 2,
     "providers": [
         "Modules\\Main\\Providers\\MainServiceProvider"
     ],

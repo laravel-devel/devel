@@ -28,7 +28,7 @@ class ModuleManagementTest extends TestCase
     {
         // The page should display all the modules except 'DevelDashboard' and
         // 'Main'
-        $expected = array_values(array_filter(array_keys(Module::all()), function ($key) {
+        $expected = array_values(array_filter(array_keys(Module::getOrdered()), function ($key) {
             return (!in_array($key, ['DevelDashboard', 'Main']));
         }));
 

@@ -21,7 +21,7 @@ class ModulesController extends Controller
     {
         $this->setMeta('title', 'Manage Modules');
 
-        $modules = Module::all();
+        $modules = Module::getOrdered();
 
         foreach ($modules as $key => $module) {
             // Some modules could not be disabled and shouldn't be visible
