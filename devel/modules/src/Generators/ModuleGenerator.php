@@ -390,7 +390,8 @@ class ModuleGenerator extends Generator
             $this->cleanModuleJsonFile();
         }
 
-        $this->activator->setActiveByName($name, $this->isActive);
+        // Don't activate/enable modules upon generation
+        // $this->activator->setActiveByName($name, $this->isActive);
 
         $this->console->info("Module [{$name}] created successfully.");
     }
