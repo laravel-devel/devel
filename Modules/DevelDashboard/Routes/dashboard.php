@@ -20,7 +20,7 @@ Route::get('/', 'DashboardController@index')->name('index');
 Route::get('/settings', [
     'as' => 'settings.edit',
     'uses' => 'SettingsController@edit',
-    'dashboardMenu' => 'Site->Settings',
+    'dashboardSidebar' => 'Site->Settings',
     'permissions' => 'site.edit_settings',
 ]);
 
@@ -36,7 +36,7 @@ Route::post('/settings', [
 Route::get('/modules', [
     'as' => 'modules.index',
     'uses' => 'ModulesController@index',
-    'dashboardMenu' => 'Site->Modules',
+    'dashboardSidebar' => 'Site->Modules',
     'permissions' => 'site.manage_modules',
 ]);
 

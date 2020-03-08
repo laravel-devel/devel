@@ -12,7 +12,7 @@ Route::group([
         Route::get('/', [
             'as' => 'develusers.users.index',
             'uses' => 'UsersController@index',
-            'dashboardMenu' => 'Manage Users->Users',
+            'dashboardSidebar' => 'Manage Users->Users',
             'permissions' => 'users.list',
         ]);
 

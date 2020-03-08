@@ -18,7 +18,7 @@ Route::group([
     // Route::get('/settings', [
     //     'as' => 'main.settings.edit',
     //     'uses' => 'SettingsController@edit',
-    //     'dashboardMenu' => 'Main->Settings',
+    //     'dashboardSidebar' => 'Main->Settings',
     //     'permissions' => 'main.edit_settings',
     // ]);
 

@@ -141,8 +141,8 @@ class DevelDashboardServiceProvider extends ServiceProvider
                     continue;
                 }
 
-                if (isset($route->getAction()['dashboardMenu'])) {
-                    $parts = explode('->', $route->getAction()['dashboardMenu']);
+                if (isset($route->getAction()['dashboardSidebar'])) {
+                    $parts = explode('->', $route->getAction()['dashboardSidebar']);
 
                     if (count($parts) < 2) {
                         throw new \Exception("Invalid dashboard menu entry for route \"{$route->uri}\".");
