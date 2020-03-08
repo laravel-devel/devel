@@ -7,6 +7,7 @@ use Devel\Modules\Facades\Module;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+use Devel\Core\Database\Seeders\DevelCoreDatabaseSeeder;
 use Symfony\Component\Process\Process;
 
 class InstallCommand extends Command
@@ -53,6 +54,9 @@ class InstallCommand extends Command
         $this->info('Running main migrations...');
 
         $this->call('migrate:fresh');
+
+        // Seed the core
+        (new DevelCoreDatabaseSeeder)->run();
 
         // Install each module
         $this->info('Installing modules...');
