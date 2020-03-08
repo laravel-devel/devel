@@ -90,7 +90,7 @@ class SeedMakeCommand extends GeneratorCommand
                 'NAME' => $name,
                 'MODULE' => $this->getModuleName(),
                 'NAMESPACE' => $this->getClassNamespace($module),
-                'PERMISSIONS' => $this->getPermissions($this->getModuleName(), $model),
+                'PERMISSIONS' => $this->getCrudPermissions($this->getModuleName(), $model),
             ]))->render();
         } else if ($this->option('settings')) { // Create the SettingsSeeder
             // Register the seeder
@@ -150,7 +150,7 @@ class SeedMakeCommand extends GeneratorCommand
      *
      * @return string
      */
-    private function getPermissionsSeederName()
+    protected function getPermissionsSeederName()
     {
         return Str::studly($this->argument('name')) . 'Seeder';
     }
@@ -174,7 +174,7 @@ class SeedMakeCommand extends GeneratorCommand
      * @param string $model
      * @return string
      */
-    public function getPermissions(string $module, string $model): string
+    public function getCrudPermissions(string $module, string $model): string
     {
         $name = \Str::plural(class_basename($model));
         $nameLower = strtolower($name);
@@ -184,11 +184,11 @@ class SeedMakeCommand extends GeneratorCommand
         $moduleLower = strtolower(implode('_', $moduleParts));
 
         $permissions = '';
-        $permissions .= "'{$moduleLower}.list-{$nameLower}' => '{$module} - List {$name}',\n";
-        $permissions .= "        '{$moduleLower}.view-{$nameLower}' => '{$module} - View {$name}',\n";
-        $permissions .= "        '{$moduleLower}.add-{$nameLower}' => '{$module} - Add {$name}',\n";
-        $permissions .= "        '{$moduleLower}.edit-{$nameLower}' => '{$module} - Edit {$name}',\n";
-        $permissions .= "        '{$moduleLower}.delete-{$nameLower}' => '{$module} - Delete {$name}',";
+        $permissions .= "'{$moduleLower}.list_{$nameLower}' => '{$module} - List {$name}',\n";
+        $permissions .= "        '{$moduleLower}.view_{$nameLower}' => '{$module} - View {$name}',\n";
+        $permissions .= "        '{$moduleLower}.add_{$nameLower}' => '{$module} - Add {$name}',\n";
+        $permissions .= "        '{$moduleLower}.edit_{$nameLower}' => '{$module} - Edit {$name}',\n";
+        $permissions .= "        '{$moduleLower}.delete_{$nameLower}' => '{$module} - Delete {$name}',";
 
         return $permissions;
     }

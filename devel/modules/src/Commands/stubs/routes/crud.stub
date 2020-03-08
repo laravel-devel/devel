@@ -7,7 +7,7 @@
         Route::get('/', [
             'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.index',
             'uses' => '$CONTROLLER_NAME$@index',
-            'dashboardSidebar' => '$STUDLY_NAME$->$CRUD_NAME$',
+            'dashboardSidebar' => '$DISPLAY_NAME$->$CRUD_NAME$',
             'permissions' => '$PERMISSION_GROUP$.list_$CRUD_NAME_LOWER$',
         ]);
 

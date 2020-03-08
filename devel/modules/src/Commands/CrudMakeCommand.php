@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Console\Command;
 use Devel\Modules\Contracts\ActivatorInterface;
 use Devel\Modules\Generators\ModuleGenerator;
+use Symfony\Component\Console\Input\InputOption;
 
 class CrudMakeCommand extends Command
 {
@@ -92,6 +93,18 @@ class CrudMakeCommand extends Command
     }
 
     /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['name', null, InputOption::VALUE_REQUIRED, 'Specify a module display name. Do not use this option manually.'],
+        ];
+    }
+
+    /**
      * Get module name.
      *
      * @return void
@@ -99,6 +112,22 @@ class CrudMakeCommand extends Command
     protected function getModuleName()
     {
         return $this->argument('module');
+    }
+
+    /**
+     * Get module name.
+     *
+     * @return void
+     */
+    protected function getModuleDisplayName()
+    {
+        $name = config(strtolower($this->getModuleName()) . '.display_name');
+
+        if (!$name) {
+            $name = $this->option('name');
+        }
+
+        return $name ?: $this->getModuleName();
     }
 
     /**
@@ -158,6 +187,7 @@ class CrudMakeCommand extends Command
         $replacements = [
             '$LOWER_NAME$' => strtolower($this->getModuleName()),
             '$STUDLY_NAME$' => $this->getModuleName(),
+            '$DISPLAY_NAME$' => $this->getModuleDisplayName(),
             '$MODEL_NAME$' => $this->getModel(),
             '$CRUD_NAME_LOWER$' => strtolower($this->getCrudName()),
             '$CRUD_NAME$' => $this->getCrudName(),

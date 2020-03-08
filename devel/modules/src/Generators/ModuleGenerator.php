@@ -488,6 +488,7 @@ class ModuleGenerator extends Generator
             $this->console->call('module:make-crud', [
                 'module' => $this->getName(),
                 'model' => $this->getModel(),
+                '--name' => $this->getDisplayName(),
             ]);
         }
     }
@@ -640,6 +641,20 @@ class ModuleGenerator extends Generator
     protected function getModelReplacement()
     {
         return $this->getModel();
+    }
+
+    /**
+     * Get the CRUD model class name.
+     *
+     * @return string
+     */
+    protected function getPermissionGroupReplacement()
+    {
+        $moduleParts = preg_split(
+            '/(?=[A-Z])/', $this->getStudlyNameReplacement(), -1, PREG_SPLIT_NO_EMPTY
+        );
+
+        return strtolower(implode('_', $moduleParts));
     }
 
     /**
