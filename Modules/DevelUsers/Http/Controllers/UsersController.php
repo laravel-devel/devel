@@ -57,7 +57,7 @@ class UsersController extends Controller
                     'label' => 'Password',
                 ],
                 [
-                    'type' => 'multiselect',
+                    'type' => 'select',
                     'name' => 'roles',
                     'label' => 'Roles',
                     'attrs' => [

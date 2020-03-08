@@ -193,6 +193,7 @@ class CrudMakeCommand extends Command
             '$CRUD_NAME$' => $this->getCrudName(),
             '$CONTROLLER_NAME$' => $this->getControllerName() . 'Controller',
             '$PERMISSION_GROUP$' => $permissionGroup,
+            '$PERMISSION_EDIT$' => $this->getEditPermissionName(),
         ];
 
         foreach ($replacements as $from => $to) {
@@ -269,5 +270,18 @@ class CrudMakeCommand extends Command
         $this->generator->getFilesystem()->put($path, $contents);
 
         $this->info("Generated CRUD routes for: {$this->getModel()}");
+    }
+
+    /**
+     * Get the name of the edit permission
+     *
+     * @return void
+     */
+    protected function getEditPermissionName()
+    {
+        $name = \Str::plural(class_basename($this->getModel()));
+        $nameLower = strtolower($name);
+
+        return "edit_{$nameLower}";
     }
 }

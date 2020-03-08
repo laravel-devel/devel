@@ -18,7 +18,7 @@
         <v-fel-link v-else-if="field.type === 'link'"
             :attrs="attrs"></v-fel-link>
 
-        <v-fel-select v-else-if="field.type === 'multiselect'"
+        <v-fel-select v-else-if="field.type === 'select'"
             :attrs="attrs"
             :value="val"
             :collections="collections"

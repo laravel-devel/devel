@@ -313,6 +313,11 @@ class ControllerMakeCommand extends GeneratorCommand
 
             $idField = $attrs['relation']->getRelated()->getRouteKeyName();
             $multipleChoice = ($type === 'multiselect') ? 'true' : 'false';
+            
+            // The multiselect is just a select with $multipleChoice === true
+            if ($type === 'multiselect') {
+                $type = 'select';
+            }
 
             $values .= "                [\n";
             $values .= "                    'type' => '{$type}',\n";
