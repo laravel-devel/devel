@@ -83,7 +83,7 @@ trait HasPermissions
      * @param string $permission
      * @return boolean
      */
-    protected function hasPermissionViaRole(string $permission): bool
+    public function hasPermissionViaRole(string $permission): bool
     {
         foreach ($this->roles as $role) {
             if ($role->hasPersonalPermission($permission) === true) {
