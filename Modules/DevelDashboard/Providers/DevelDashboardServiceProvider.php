@@ -145,7 +145,7 @@ class DevelDashboardServiceProvider extends ServiceProvider
                     $parts = explode('->', $route->getAction()['dashboardSidebar']);
 
                     if (count($parts) < 2) {
-                        throw new \Exception("Invalid dashboard menu entry for route \"{$route->uri}\".");
+                        throw new \Exception("Invalid dashboard sidebar menu entry for route \"{$route->uri}\".");
                     }
 
                     SidebarMenu::addItem(
