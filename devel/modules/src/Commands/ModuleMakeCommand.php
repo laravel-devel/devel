@@ -45,8 +45,6 @@ class ModuleMakeCommand extends Command
                 ->setModel($this->option('model'))
                 ->generate();
         }
-
-        $this->call('config:cache');
     }
 
     /**
