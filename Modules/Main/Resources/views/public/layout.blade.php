@@ -6,10 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     @include('core::seo._metatags')
+
+    @stack('head')
 </head>
 <body>
     <main id="vue" class="main">
         @yield('content')
     </main>
+
+    @stack('scripts')
 </body>
 </html>
