@@ -73,7 +73,7 @@ class Role extends Model
             Permission::class,
             'user_role_permission',
             'role',
-            'permission',
+            'permission'
         );
     }
 }
