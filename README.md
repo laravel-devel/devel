@@ -11,7 +11,7 @@ The modularity was achieved with the help of the [nWidart/laravel-modules](https
 **PROJECT STATUS: NOT READY TO BE USED!** The project is in its early development stage. The dashboard/CRUD is incomplete and there are no any ready-to-use modules yet. Besides, breaking changes are made all the time.
 
 - [Documentation](http://voerro.com/en/projects/devel/)
-- [Live Demo](devel.voerro.com/dashboard)
+- [Live Demo](http://devel.voerro.com/dashboard)
     - `admin@example.com` / `qwerty123` - note that this user only has view/read permissions on the demo site and some features won't be visible at all
 
 ## Features
