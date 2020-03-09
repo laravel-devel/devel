@@ -2,6 +2,7 @@
 
 namespace Devel\Core\Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
@@ -9,10 +10,6 @@ use Devel\Core\Entities\Auth\User;
 
 class UsersSeeder extends Seeder
 {
-    protected $users = [
-        //
-    ];
-
     /**
      * Run the database seeds.
      *
@@ -21,20 +18,13 @@ class UsersSeeder extends Seeder
     public function run()
     {
         // Create a root (superadmin)
-        $root = factory(User::class)->create([
+        $root = User::forceCreate([
+            'name' => 'Root',
             'email' => config('devel.root.default_email'),
+            'email_verified_at' => Carbon::now(),
             'password' => Hash::make(config('devel.root.default_password')),
         ]);
 
         $root->roles()->attach('root');
-
-        // Create other default users
-        foreach ($this->users as $email => $roles) {
-            $user = factory(User::class)->create([
-                'email' => $email,
-            ]);
-
-            $user->roles()->attach($roles);
-        }
     }
 }
