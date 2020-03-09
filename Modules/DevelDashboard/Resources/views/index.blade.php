@@ -8,6 +8,6 @@
     </header>
 
     <div class="section-body">
-        Content here...
+        Welcome to Devel Dashboard!
     </div>
 @endsection
