@@ -4,28 +4,24 @@
 <a href="https://packagist.org/packages/voerro/devel"><img src="https://poser.pugx.org/voerro/devel/license.svg" alt="License"></a>
 </p>
 
-Devel is a modular Laravel platform which comes with an admin dashboard and a CRUD generator.
+Devel is a modular Laravel platform which comes with an admin dashboard, a CRUD generator and a bunch of other useful tools. It is meant to make the life of developers a bit easier.
 
 The modularity was achieved with the help of the [nWidart/laravel-modules](https://github.com/nWidart/laravel-modules) package, which was modified to the needs of Devel.
 
-Devel is not a CMS and is meant to make the life of developers a bit easier.
+**PROJECT STATUS: NOT READY TO BE USED!** The project is in its early development stage. The dashboard/CRUD is incomplete and there are no any ready-to-use modules yet. Besides, breaking changes are made all the time.
 
-**PROJECT STATUS: NOT READY TO BE USED!** The project is in its earlier stage. The dashboard/CRUD is incomplete and there are no any ready-to-use modules yet. Besides, breaking changes are made all the time.
+- [Documentation](http://voerro.com/en/projects/devel/)
+- [Live Demo](devel.voerro.com/dashboard)
+    - `admin@example.com` / `qwerty123` - note that this user only has view/read permissions on the demo site and some features won't be visible at all
 
 ## Features
+
 - Modular structure - organize your code into reusable modules, use modules made by other people
-- The Devel Core and Devel Dashboard are modules too. Feel free to modify them to your needs.
-- User roles and permissions
+- All the custom Devel code comes with the project. Feel free to modify it to your needs.
+- User roles and permissions system
 - An admin dashboard built with custom Vue.js components
 - CRUD generation for the dashboard
-
-## Installation
-
-- Run `composer create-project --remove-vcs voerro/devel your-project-name dev-master` (`your-project-name` is a folder name to install the project to)
-- Navigate to your project folder
-- Edit the DB settings in `.env`
-- Run `php artisan devel:install`
-- Now you can use Devel. To access the dashboard go to `/dashboard` and log in under `root@example.com` / `qwerty`. These credentials can be changed on the dashboard.
+- A set of utilities solving some common problems
 
 ## Contributing
 
