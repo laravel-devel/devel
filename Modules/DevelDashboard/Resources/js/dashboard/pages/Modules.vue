@@ -70,7 +70,11 @@ export default {
             this.processing = true;
 
             const endpoint = `${this.baseUrl}/${this.modules[key].alias}`;
-            const moduleName = `${this.modules[key].displayName} (${key})`;
+            let moduleName = key;
+
+            if (this.modules[key].displayName) {
+                moduleName = `${this.modules[key].displayName} (${key})`;
+            }
 
             axios.post(endpoint)
                 .then((response) => {
@@ -91,8 +95,6 @@ export default {
                     } else {
                         msg = `Something went wrong! Module "${moduleName}" has not been ` + (enabled ? 'disabled.' : 'enabled.');
                     }
-
-                    msg = `Something went wrong! Module "${moduleName}" has not been ` + (enabled ? 'disabled.' : 'enabled.');
 
                     this.$notify(msg, 'error');
 

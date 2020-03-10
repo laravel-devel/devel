@@ -4,10 +4,9 @@
             :key="notification.id"
             class="card notification"
             :class="type(notification)"
+            v-text="notification.message"
             @click="hide(notification)"
-        >
-            {{ notification.message }}
-        </div>
+        ></div>
     </div>
 </template>
 
@@ -37,10 +36,11 @@ export default {
     created() {
         Events.$on('notify', (options) => {
             const notification = Object.assign(options, { id: this.id++ });
+            const duration = notification.message.length * 30;
 
             notification.timeout = setTimeout(() => {
                 this.hide(notification);
-            }, 3000);
+            }, (duration > 3000 ? duration : 3000));
 
             this.notifications.push(notification);
         });

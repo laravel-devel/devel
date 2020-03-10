@@ -225,6 +225,7 @@
         cursor: pointer;
         margin-top: .25rem;
         pointer-events: all;
+        white-space: pre;
 
         &.info {
             background: $primary;
