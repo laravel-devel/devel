@@ -9,5 +9,5 @@
     ],
     "aliases": {},
     "files": [],
-    "requires": ["DevelDashboard"]
+    "requires": ["develdashboard"]
 }

@@ -63,10 +63,16 @@ class InstallCommand extends Command
 
         foreach (Module::all() as $name => $module) {
             $this->info('---');
-            $this->info("Installing [{$name}]...");
+            $this->info("Installing Module [{$name}]...");
 
             if ($module->isEnabled()) {
-                $this->call('devel:module:install', ['module' => $name]);
+                try {
+                    $this->call('devel:module:install', ['module' => $name]);
+                } catch (\Exception $e) {
+                    $this->error("Module {$name} could not be installed! Reason: \"" . $e->getMessage() . '".');
+
+                    $this->error("Please fix all the errors and run \"php artisan devel:module:install {$name}\" later.");
+                }
             }
         }
 

@@ -3,6 +3,7 @@
 namespace Modules\DevelDashboard\Http\Controllers;
 
 use Devel\Core\Http\Controllers\Controller;
+use Devel\Core\Services\ModuleService;
 use Devel\Modules\Facades\Module;
 
 class ModulesController extends Controller
@@ -55,11 +56,30 @@ class ModulesController extends Controller
             ], 404);
         }
 
+        $name = $module->getName();
+
         // Certain modules cannot be disabled
         if (in_array($module->getName(), $this->protectedModules)) {
             return response()->json([
-                'message' => "Module \"{$alias}\" cannot be disabled.",
+                'message' => "Module \"{$name}\" cannot be disabled.",
             ], 422);
+        }
+
+        // A module cannot be enabled if its dependencies are not met
+        if (!$module->isEnabled()) { 
+            $depenencyErrors = ModuleService::checkDependencies($module);
+
+            if (count($depenencyErrors)) {
+                $msg = "Module \"{$name}\" has unmet dependencies and cannot be enabled:";
+
+                foreach ($depenencyErrors as $error) {
+                    $msg .= "\n- {$error}";
+                }
+
+                return response()->json([
+                    'message' => $msg,
+                ], 422);
+            }
         }
 
         if ($module->isEnabled()) {

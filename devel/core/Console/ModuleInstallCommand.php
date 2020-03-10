@@ -2,6 +2,7 @@
 
 namespace Devel\Core\Console;
 
+use Devel\Core\Services\ModuleService;
 use Illuminate\Console\Command;
 use Devel\Modules\Facades\Module;
 use Symfony\Component\Console\Input\InputOption;
@@ -50,6 +51,18 @@ class ModuleInstallCommand extends Command
             $this->error("Module \"{$moduleName}\" not found!");
 
             exit(0);
+        }
+
+        $this->info('Checking the dependencies...');
+
+        $errors = ModuleService::checkDependencies($module);
+
+        if (count($errors)) {
+            foreach ($errors as $error) {
+                $this->error($error);
+            }
+
+            throw new \Exception('Unmet dependencies!');
         }
 
         $modulePath = $module->getPath();
