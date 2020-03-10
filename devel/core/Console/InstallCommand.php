@@ -65,14 +65,12 @@ class InstallCommand extends Command
             $this->info('---');
             $this->info("Installing Module [{$name}]...");
 
-            if ($module->isEnabled()) {
-                try {
-                    $this->call('devel:module:install', ['module' => $name]);
-                } catch (\Exception $e) {
-                    $this->error("Module {$name} could not be installed! Reason: \"" . $e->getMessage() . '".');
+            try {
+                $this->call('devel:module:install', ['module' => $name]);
+            } catch (\Exception $e) {
+                $this->error("Module {$name} could not be installed! Reason: \"" . $e->getMessage() . '".');
 
-                    $this->error("Please fix all the errors and run \"php artisan devel:module:install {$name}\" later.");
-                }
+                $this->error("Please fix all the errors and run \"php artisan devel:module:install {$name}\" later.");
             }
         }
 

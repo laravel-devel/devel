@@ -4,6 +4,7 @@ namespace Devel\Core\Console;
 
 use Illuminate\Console\Command;
 use Devel\Modules\Facades\Module;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -52,6 +53,11 @@ class ModuleUninstallCommand extends Command
 
         // Rollback the module's migrations
         $this->call('module:migrate-rollback', ['module' => $moduleName]);
+
+        // Delete the `.installed` meta file
+        if (file_exists($module->getExtraPath('.installed'))) {
+            File::delete($module->getExtraPath('.installed'));
+        }
 
         // Disable the module
         $module->disable();

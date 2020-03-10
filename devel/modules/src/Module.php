@@ -339,6 +339,60 @@ abstract class Module
     }
 
     /**
+     * Determine whether the current module is installed.
+     * The result returned is not 100% accurate and is more of an assumption.
+     *
+     * @return bool
+     */
+    public function isInstalled() : bool
+    {
+        // Check if there's a `.installed` meta file in the module's root
+        if (!file_exists($this->getExtraPath('.installed'))) {
+            return false;
+        }
+        
+        // Check whether the module has a `vendor` folder
+        if (!file_exists($this->getPath() . '/vendor')) {
+            return false;
+        }
+
+        // Check whether the module has a `node_modules` folder (when required)
+        if ($this->json()->buildNpm) {
+            if (!file_exists($this->getPath() . '/node_modules')) {
+                return false;
+            }
+        }
+
+        // Checked whether all the module's migrations have been ran
+        // The only problem is we can't really determine all the module's
+        // migrations paths, so we're only check inside the default path
+        if (file_exists($this->getExtraPath('Database/Migrations'))) {
+            $files = scandir($this->getExtraPath('Database/Migrations'));
+
+            // Get all the php files
+            $files = array_values(array_filter($files, function ($item) {
+                return !\Str::startsWith($item, '.') && \Str::endsWith($item, '.php');
+            }));
+
+            // Remove extension from the file name
+            $files = array_map(function ($item) {
+                return substr($item, 0, -4);
+            }, $files);
+
+            $ranMigrations = $this->app->migrator->repositoryExists()
+                ? $this->app->migrator->getRepository()->getRan()
+                : [];
+
+            if (count(array_diff($files, $ranMigrations))) {
+                return false;
+            }
+        }
+
+        // Assuming the module has been installed
+        return true;
+    }
+
+    /**
      *  Determine whether the current module not disabled.
      *
      * @return bool

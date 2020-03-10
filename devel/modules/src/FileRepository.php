@@ -269,6 +269,18 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
+     * Get all installed modules.
+     *
+     * @return array
+     */
+    public function allInstalled(): array
+    {
+        return array_filter($this->all(), function ($item) {
+            return $item->isInstalled();
+        });
+    }
+
+    /**
      * Get count from all modules.
      *
      * @return int
@@ -288,6 +300,32 @@ abstract class FileRepository implements RepositoryInterface, Countable
     public function getOrdered($direction = 'asc') : array
     {
         $modules = $this->allEnabled();
+
+        uasort($modules, function (Module $a, Module $b) use ($direction) {
+            if ($a->get('order') === $b->get('order')) {
+                return 0;
+            }
+
+            if ($direction === 'desc') {
+                return $a->get('order') < $b->get('order') ? 1 : -1;
+            }
+
+            return $a->get('order') > $b->get('order') ? 1 : -1;
+        });
+
+        return $modules;
+    }
+
+    /**
+     * Get all installed modules orderd.
+     *
+     * @param string $direction
+     *
+     * @return array
+     */
+    public function getInstalledOrdered($direction = 'asc') : array
+    {
+        $modules = $this->allInstalled();
 
         uasort($modules, function (Module $a, Module $b) use ($direction) {
             if ($a->get('order') === $b->get('order')) {

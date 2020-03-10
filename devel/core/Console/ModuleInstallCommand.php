@@ -5,6 +5,7 @@ namespace Devel\Core\Console;
 use Devel\Core\Services\ModuleService;
 use Illuminate\Console\Command;
 use Devel\Modules\Facades\Module;
+use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Process\Exception\ProcessFailedException;
@@ -104,6 +105,9 @@ class ModuleInstallCommand extends Command
         if (!in_array($moduleName, ['Main'])) {
             $this->call('module:publish-config', ['module' => $moduleName]);
         }
+
+        // Mark the module as "installed" with a special meta file
+        File::put($module->getExtraPath('.installed'), '');
 
         $this->call('config:clear');
     }

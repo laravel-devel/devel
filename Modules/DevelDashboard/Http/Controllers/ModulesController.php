@@ -22,7 +22,7 @@ class ModulesController extends Controller
     {
         $this->setMeta('title', 'Manage Modules');
 
-        $modules = Module::getOrdered();
+        $modules = Module::getInstalledOrdered();
 
         foreach ($modules as $key => $module) {
             // Some modules could not be disabled and shouldn't be visible
@@ -65,8 +65,8 @@ class ModulesController extends Controller
             ], 422);
         }
 
-        // A module cannot be enabled if its dependencies are not met
         if (!$module->isEnabled()) { 
+            // A module cannot be enabled if its dependencies are not met
             $depenencyErrors = ModuleService::checkDependencies($module);
 
             if (count($depenencyErrors)) {
@@ -78,6 +78,13 @@ class ModulesController extends Controller
 
                 return response()->json([
                     'message' => $msg,
+                ], 422);
+            }
+
+            // A module cannot be enabled if it's not properly installed
+            if (!$module->isInstalled()) {
+                return response()->json([
+                    'message' => "Module \"{$name}\" is not installed.",
                 ], 422);
             }
         }
