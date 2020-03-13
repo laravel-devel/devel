@@ -29,11 +29,26 @@ class UserRolesSeeder extends Seeder
             $permission = Permission::firstOrCreate([
                 'key' => $permission,
                 'name' => $name,
+                'module' => 'DevelUserRoles',
             ]);
 
             if ($root && !$root->permissions->contains($permission)) {
                 $root->permissions()->attach($permission);
             }
+        }
+    }
+
+    /**
+     * Revert the changes made by the seeder.
+     *
+     * @return void
+     */
+    public function revert()
+    {
+        foreach ($this->permissions as $permission => $name) {
+            Permission::where('module', 'DevelUserRoles')
+                ->where('key', $permission)
+                ->forceDelete();
         }
     }
 }

@@ -5,6 +5,7 @@ namespace Modules\Main\Database\Seeders;
 use Devel\Core\Entities\Auth\Role;
 use Devel\Core\Database\Seeders\Seeder;
 use Devel\Core\Entities\Auth\Permission;
+use Devel\Core\Entities\Settings;
 
 class SettingsSeeder extends Seeder
 {
@@ -33,6 +34,7 @@ class SettingsSeeder extends Seeder
             $permission = Permission::firstOrCreate([
                 'key' => $permission,
                 'name' => $name,
+                'module' => 'Main',
             ]);
 
             if ($root && !$root->permissions->contains($permission)) {
@@ -54,6 +56,20 @@ class SettingsSeeder extends Seeder
                 'name' => $data['name'],
                 'value' => $data['value'],
             ]);
+        }
+    }
+
+    /**
+     * Revert the changes made by the seeder.
+     *
+     * @return void
+     */
+    public function revert()
+    {
+        foreach ($this->permissions as $permission => $name) {
+            Permission::where('module', 'DevelUserRoles')
+                ->where('key', $permission)
+                ->forceDelete();
         }
     }
 }

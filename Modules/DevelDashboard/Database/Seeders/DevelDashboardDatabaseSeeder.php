@@ -24,7 +24,7 @@ class DevelDashboardDatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function revert(): void
+    public function revert()
     {
         $this->uncall(PermissionsSeeder::class);
     }

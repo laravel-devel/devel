@@ -16,7 +16,16 @@ class DevelUsersDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
         $this->call(UsersSeeder::class);
+    }
+
+    /**
+     * Revert the changes made by the seeder.
+     *
+     * @return void
+     */
+    public function revert()
+    {
+        $this->uncall(UsersSeeder::class);
     }
 }

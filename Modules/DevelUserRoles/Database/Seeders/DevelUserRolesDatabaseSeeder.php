@@ -18,4 +18,14 @@ class DevelUserRolesDatabaseSeeder extends Seeder
 
         $this->call(UserRolesSeeder::class);
     }
+
+    /**
+     * Revert the changes made by the seeder.
+     *
+     * @return void
+     */
+    public function revert()
+    {
+        $this->uncall(UserRolesSeeder::class);
+    }
 }

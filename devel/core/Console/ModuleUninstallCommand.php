@@ -58,13 +58,13 @@ class ModuleUninstallCommand extends Command
 
         try {
             // Rollback the module's migrations
-            $this->info('Rolling the migrations back...');
-
-            $this->call('module:migrate-rollback', ['module' => $moduleName]);
-
             $this->info('Removing the seeded data...');
 
             $this->call('module:unseed', ['module' => $moduleName]);
+            
+            $this->info('Rolling the migrations back...');
+
+            $this->call('module:migrate-rollback', ['module' => $moduleName]);
 
             DB::commit();
         } catch (\Exception $e) {

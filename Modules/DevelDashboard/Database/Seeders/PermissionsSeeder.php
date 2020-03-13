@@ -33,7 +33,7 @@ class PermissionsSeeder extends Seeder
      *
      * @return void
      */
-    public function revert(): void
+    public function revert()
     {
         Permission::where('module', 'DevelDashboard')->forceDelete();
     }

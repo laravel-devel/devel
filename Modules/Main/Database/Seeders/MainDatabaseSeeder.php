@@ -18,4 +18,14 @@ class MainDatabaseSeeder extends Seeder
 
         $this->call(SettingsSeeder::class);
     }
+
+    /**
+     * Revert the changes made by the seeder.
+     *
+     * @return void
+     */
+    public function revert()
+    {
+        $this->uncall(SettingsSeeder::class);
+    }
 }

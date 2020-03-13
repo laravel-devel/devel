@@ -34,6 +34,7 @@ class $NAME$ extends Seeder
             $permission = Permission::firstOrCreate([
                 'key' => $permission,
                 'name' => $name,
+                'module' => '$MODULE$',
             ]);
 
             if ($root && !$root->permissions->contains($permission)) {
@@ -55,6 +56,20 @@ class $NAME$ extends Seeder
                 'name' => $data['name'],
                 'value' => $data['value'],
             ]);
+        }
+    }
+
+    /**
+     * Revert the changes made by the seeder.
+     *
+     * @return void
+     */
+    public function revert()
+    {
+        foreach ($this->permissions as $permission => $name) {
+            Permission::where('module', '$MODULE$')
+                ->where('key', $permission)
+                ->forceDelete();
         }
     }
 }

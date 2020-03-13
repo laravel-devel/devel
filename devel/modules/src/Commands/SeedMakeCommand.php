@@ -220,12 +220,25 @@ class SeedMakeCommand extends GeneratorCommand
         // Register the seeder
         $path = module_path($this->getModuleName(), 'Database/Seeders/' . $this->getModuleName()) . 'DatabaseSeeder.php';
 
+        // The 'run' method
         $contents = $this->laravel['files']->get($path);
         preg_match('/public function run\(\)\R[\s]{4}{((?>[^{}]++|(?R))*)}/', $contents, $matches);
 
         $contents = str_replace(
             $matches[1],
             $matches[1] . "    \$this->call({$className}::class);\n    ",
+            $contents
+        );
+
+        $this->laravel['files']->put($path, $contents);
+
+        // The 'revert' method
+        $contents = $this->laravel['files']->get($path);
+        preg_match('/public function revert\(\)\R[\s]{4}{((?>[^{}]++|(?R))*)}/', $contents, $matches);
+
+        $contents = str_replace(
+            $matches[1],
+            $matches[1] . "    \$this->uncall({$className}::class);\n    ",
             $contents
         );
 

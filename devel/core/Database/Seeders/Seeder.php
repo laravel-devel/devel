@@ -11,7 +11,7 @@ abstract class Seeder extends IlluminateSeeder
      *
      * @return void
      */
-    public function revert(): void
+    public function revert()
     {
         //
     }

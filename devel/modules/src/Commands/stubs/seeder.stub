@@ -16,6 +16,16 @@ class $NAME$ extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        // $this->call(OthersTableSeeder::class);
+    }
+
+    /**
+     * Revert the changes made by the seeder.
+     *
+     * @return void
+     */
+    public function revert()
+    {
+        // $this->uncall(OthersTableSeeder::class);
     }
 }
