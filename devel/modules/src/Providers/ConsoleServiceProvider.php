@@ -42,6 +42,7 @@ use Devel\Modules\Commands\SeedCommand;
 use Devel\Modules\Commands\SeedMakeCommand;
 use Devel\Modules\Commands\SetupCommand;
 use Devel\Modules\Commands\TestMakeCommand;
+use Devel\Modules\Commands\UnseedCommand;
 use Devel\Modules\Commands\UnUseCommand;
 use Devel\Modules\Commands\UpdateCommand;
 use Devel\Modules\Commands\UseCommand;
@@ -88,6 +89,7 @@ class ConsoleServiceProvider extends ServiceProvider
         PublishMigrationCommand::class,
         PublishTranslationCommand::class,
         SeedCommand::class,
+        UnseedCommand::class,
         SeedMakeCommand::class,
         SetupCommand::class,
         UnUseCommand::class,

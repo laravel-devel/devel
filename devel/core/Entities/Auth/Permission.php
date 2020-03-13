@@ -23,11 +23,13 @@ class Permission extends Model
     protected $fillable = [
         'key',
         'name',
+        'module',
     ];
 
     protected $searchable = [
         'key',
         'name',
+        'module',
     ];
 
     protected $hidden = ['pivot'];

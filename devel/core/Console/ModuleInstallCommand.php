@@ -71,7 +71,9 @@ class ModuleInstallCommand extends Command
         // Install the PHP dependencies
         $this->info('Installing PHP dependencies...');
 
-        $this->runExternal('composer install', $modulePath);
+        if (!file_exists($module->getExtraPath('vendor'))) {
+            $this->runExternal('composer install', $modulePath);
+        }
 
         // Run the module's migrations
         $this->info('Running migrations...');

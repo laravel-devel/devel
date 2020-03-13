@@ -2,8 +2,8 @@
 
 namespace $NAMESPACE$;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Devel\Core\Database\Seeders\Seeder;
 
 class $NAME$ extends Seeder
 {

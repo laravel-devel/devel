@@ -2,7 +2,6 @@
 
 namespace Devel\Core\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Devel\Core\Entities\Settings;
 
 class SettingsSeeder extends Seeder

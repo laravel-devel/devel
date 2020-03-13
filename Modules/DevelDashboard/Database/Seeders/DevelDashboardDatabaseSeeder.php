@@ -2,7 +2,7 @@
 
 namespace Modules\DevelDashboard\Database\Seeders;
 
-use Illuminate\Database\Seeder;
+use Devel\Core\Database\Seeders\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
 class DevelDashboardDatabaseSeeder extends Seeder
@@ -16,6 +16,16 @@ class DevelDashboardDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        $this->call(PermissionsSeeder::class);
+    }
+
+    /**
+     * Revert the changes made by the seeder.
+     *
+     * @return void
+     */
+    public function revert(): void
+    {
+        $this->uncall(PermissionsSeeder::class);
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Devel\Core\Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Schema;
 use Devel\Core\Entities\Auth\Role;
 
 class UserRolesSeeder extends Seeder
@@ -16,7 +14,6 @@ class UserRolesSeeder extends Seeder
         'root' => [
             'name' => 'Root',
             'permissions' => [
-                'admin_dashboard.access',
                 'site.edit_settings',
                 'site.manage_modules',
             ],
@@ -24,7 +21,6 @@ class UserRolesSeeder extends Seeder
         'admin' => [
             'name' => 'Admin',
             'permissions' => [
-                'admin_dashboard.access',
                 'site.edit_settings',
             ],
         ],

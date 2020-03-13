@@ -2,8 +2,8 @@
 
 namespace Modules\DevelUsers\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Devel\Core\Entities\Auth\Role;
+use Devel\Core\Database\Seeders\Seeder;
 use Devel\Core\Entities\Auth\Permission;
 
 class UsersSeeder extends Seeder

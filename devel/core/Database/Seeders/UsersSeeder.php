@@ -3,9 +3,7 @@
 namespace Devel\Core\Database\Seeders;
 
 use Carbon\Carbon;
-use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Schema;
 use Devel\Core\Entities\Auth\User;
 
 class UsersSeeder extends Seeder

@@ -2,7 +2,6 @@
 
 namespace Devel\Core\Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 use Devel\Core\Entities\Auth\Permission;
 use Devel\Core\Entities\Auth\Role;

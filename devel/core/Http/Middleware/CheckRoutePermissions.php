@@ -3,6 +3,7 @@
 namespace Devel\Core\Http\Middleware;
 
 use Closure;
+use Devel\Modules\Facades\Module;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,9 @@ class CheckRoutePermissions
             }
 
             if (back()->getTargetUrl() === url()->current()) {
-                if (Str::startsWith(url()->current(), route('dashboard.index')) && auth()->user()->hasPermissions('admin_dashboard.access')) {
+                $dm = Module::find('develdashboard')->isINstalled();
+
+                if (Str::startsWith(url()->current(), route('dashboard.index')) && auth()->user()->hasPermissions('admin_dashboard.access') && $dm && $dm->isInstalled() && $dm->isEnabled()) {
                     // Admin dashboard
                     return redirect()->route('dashboard.index')
                         ->with('error', 'You don\'t have permission to perform this action.');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserPermissionsTable extends Migration
+class CreateSeedsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateUserPermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_permissions', function (Blueprint $table) {
-            $table->string('key')->unique();
-            $table->string('name');
-            $table->string('module')->nullable();
+        Schema::create('_seeds', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('module');
+            $table->string('model');
+            $table->string('pk');
+            $table->string('object_id');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +30,6 @@ class CreateUserPermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_permissions');
+        Schema::dropIfExists('_seeds');
     }
 }
