@@ -4,6 +4,7 @@ namespace Devel\Core\Console;
 
 use Illuminate\Console\Command;
 use Devel\Modules\Facades\Module;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
@@ -43,6 +44,8 @@ class ModuleUninstallCommand extends Command
     {
         $moduleName = $this->arguments()['module'];
 
+        $this->info("Uninstalling module [{$moduleName}]...");
+
         try {
             $module = Module::findOrFail($moduleName);
         } catch (\Exception $e) {
@@ -51,8 +54,26 @@ class ModuleUninstallCommand extends Command
             exit(0);
         }
 
-        // Rollback the module's migrations
-        $this->call('module:migrate-rollback', ['module' => $moduleName]);
+        DB::beginTransaction();
+
+        try {
+            // Rollback the module's migrations
+            $this->info('Rolling the migrations back...');
+
+            $this->call('module:migrate-rollback', ['module' => $moduleName]);
+
+            $this->info('Removing the seeded data...');
+
+            $this->call('module:unseed', ['module' => $moduleName]);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            $this->error('Could not uninstall the module. Rolling changes back...');
+
+            throw $e;
+        }
 
         // Delete the `.installed` meta file
         if (file_exists($module->getExtraPath('.installed'))) {
@@ -61,6 +82,8 @@ class ModuleUninstallCommand extends Command
 
         // Disable the module
         $module->disable();
+
+        $this->info("Module [{$moduleName}] have been successfully uninstalled!");
     }
 
     /**
