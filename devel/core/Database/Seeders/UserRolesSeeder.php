@@ -2,6 +2,7 @@
 
 namespace Devel\Core\Database\Seeders;
 
+use Devel\Core\Entities\Auth\Permission;
 use Devel\Core\Entities\Auth\Role;
 
 class UserRolesSeeder extends Seeder
@@ -13,10 +14,6 @@ class UserRolesSeeder extends Seeder
         ],
         'root' => [
             'name' => 'Root',
-            'permissions' => [
-                'site.edit_settings',
-                'site.manage_modules',
-            ],
         ],
         'admin' => [
             'name' => 'Admin',
@@ -50,6 +47,11 @@ class UserRolesSeeder extends Seeder
                     foreach ($name['permissions'] as $permission) {
                         $role->permissions()->attach($permission);
                     }
+                }
+
+                // The root role has ALL the possible permissions
+                if ($key === 'root') {
+                    $role->permissions()->attach(Permission::all());
                 }
             }
         }

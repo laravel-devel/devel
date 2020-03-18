@@ -1,7 +1,7 @@
 {
     "name": "DevelUserRoles",
     "alias": "develuserroles",
-    "description": "Devel Dashboard module adding CRUD for user roles.",
+    "description": "Devel Dashboard module that allows managing user roles.",
     "keywords": [],
     "order": 3,
     "providers": [

@@ -1,7 +1,7 @@
 {
     "name": "DevelUsers",
     "alias": "develusers",
-    "description": "Devel Dashboard module adding CRUD for users.",
+    "description": "Devel Dashboard module that allows managing users.",
     "keywords": [],
     "order": 3,
     "providers": [

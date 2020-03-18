@@ -16,7 +16,7 @@ class DevelUsersDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call(UsersSeeder::class);
+        // $this->call(UsersSeeder::class);
     }
 
     /**
@@ -26,6 +26,6 @@ class DevelUsersDatabaseSeeder extends Seeder
      */
     public function revert()
     {
-        $this->uncall(UsersSeeder::class);
+        // $this->uncall(UsersSeeder::class);
     }
 }
