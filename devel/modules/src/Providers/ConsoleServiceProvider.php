@@ -7,6 +7,7 @@ use Devel\Modules\Commands\CommandMakeCommand;
 use Devel\Modules\Commands\ControllerMakeCommand;
 use Devel\Modules\Commands\CrudMakeCommand;
 use Devel\Modules\Commands\DisableCommand;
+use Devel\Modules\Commands\DownloadCommand;
 use Devel\Modules\Commands\DumpCommand;
 use Devel\Modules\Commands\EnableCommand;
 use Devel\Modules\Commands\EventMakeCommand;
@@ -70,6 +71,7 @@ class ConsoleServiceProvider extends ServiceProvider
         ProviderMakeCommand::class,
         RouteProviderMakeCommand::class,
         InstallCommand::class,
+        DownloadCommand::class,
         ListCommand::class,
         ModuleDeleteCommand::class,
         ModuleMakeCommand::class,

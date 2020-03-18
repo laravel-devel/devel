@@ -20,7 +20,7 @@
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
-        "composer/composer": "^1.9",
+        "devel/module-installer-composer-plugin": "^0.1.0",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
@@ -47,7 +47,7 @@
             "devel/core/Services/helpers.php"
         ]
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [

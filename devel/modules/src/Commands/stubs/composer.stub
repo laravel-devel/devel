@@ -1,5 +1,5 @@
 {
-    "name": "$VENDOR$/$LOWER_NAME$",
+    "name": "$VENDOR$/$PACKAGE_NAME$",
     "type": "devel-module",
     "description": "",
     "authors": [

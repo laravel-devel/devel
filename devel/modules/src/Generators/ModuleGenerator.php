@@ -707,6 +707,16 @@ class ModuleGenerator extends Generator
         return $this->module->config('composer.author.email');
     }
 
+    /**
+     * Get replacement for $PACKAGE_NAME$.
+     *
+     * @return string
+     */
+    protected function getPackageNameReplacement()
+    {
+        return str_replace('_', '-', Str::snake($this->name)) . '-devel-module';
+    }
+
     protected function getProviderNamespaceReplacement(): string
     {
         return str_replace('\\', '\\\\', GenerateConfigReader::read('provider')->getNamespace());

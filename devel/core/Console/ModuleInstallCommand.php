@@ -2,14 +2,11 @@
 
 namespace Devel\Core\Console;
 
-use Devel\Core\Services\ModuleService;
-use Illuminate\Console\Command;
 use Devel\Modules\Facades\Module;
 use Illuminate\Support\Facades\File;
+use Devel\Core\Services\ModuleService;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
 
 class ModuleInstallCommand extends Command
 {
@@ -136,24 +133,5 @@ class ModuleInstallCommand extends Command
         return [
             // ['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
         ];
-    }
-
-    /**
-     * Run an external command
-     *
-     * @param string $command
-     * @param string $dir
-     * @return void
-     */
-    protected function runExternal(string $command, string $dir): void
-    {
-        $process = new Process($command, $dir);
-        $process->run();
-
-        if (!$process->isSuccessful()) {
-            $this->error("Error while running `{$command}`!");
-
-            throw new ProcessFailedException($process);
-        }
     }
 }

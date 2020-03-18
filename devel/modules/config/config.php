@@ -66,6 +66,7 @@ return [
                 'LOWER_NAME',
                 'STUDLY_NAME',
                 'VENDOR',
+                'PACKAGE_NAME',
                 'AUTHOR_NAME',
                 'AUTHOR_EMAIL',
                 'MODULE_NAMESPACE',
