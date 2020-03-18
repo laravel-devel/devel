@@ -17,7 +17,6 @@ class CreateSeedsTable extends Migration
             $table->bigIncrements('id');
             $table->string('module');
             $table->string('model');
-            $table->string('pk');
             $table->string('object_id');
             $table->timestamps();
         });
