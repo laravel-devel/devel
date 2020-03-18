@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder as IlluminateSeeder;
 abstract class Seeder extends IlluminateSeeder
 {
     /**
-     * Revert the changes made by the seeder.
+     * Revert the database seeds.
      *
      * @return void
      */

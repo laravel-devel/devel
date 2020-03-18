@@ -20,7 +20,7 @@ class DevelUsersDatabaseSeeder extends Seeder
     }
 
     /**
-     * Revert the changes made by the seeder.
+     * Revert the database seeds.
      *
      * @return void
      */
