@@ -273,6 +273,7 @@
         box-shadow: $slightElevation;
         max-height: 13rem;
         overflow-y: auto;
+        z-index: 1;
 
         ul {
             list-style: none;

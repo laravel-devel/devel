@@ -73,9 +73,12 @@ export default {
         return {
             inputTypes: [
                 'text',
+                'hidden',
                 'email',
                 'password',
-                'hidden',
+                'number',
+                'color',
+                'range',
             ],
             attrs: {},
             readOnly: this.$parent.tabReadOly,
