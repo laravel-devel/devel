@@ -6,7 +6,6 @@ use Illuminate\Support\Str;
 use Devel\Modules\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Console\Command;
-use Devel\Modules\Contracts\ActivatorInterface;
 use Devel\Modules\Generators\ModuleGenerator;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -54,7 +53,6 @@ class CrudMakeCommand extends Command
             ->setFilesystem($this->laravel['files'])
             ->setModule($this->laravel['modules'])
             ->setConfig($this->laravel['config'])
-            ->setActivator($this->laravel[ActivatorInterface::class])
             ->setConsole($this)
             ->setModel($this->getModel());
 
