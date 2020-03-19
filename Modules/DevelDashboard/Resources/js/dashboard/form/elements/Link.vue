@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a :href="attrs.attrs.url" v-text="attrs.label"></a>
+        <a :href="attrs.url" v-text="attrs.label"></a>
     </div>
 </template>
 

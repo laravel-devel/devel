@@ -112,7 +112,7 @@ export default {
     },
 
     created() {
-        this.attrs = Object.assign({}, this.field);
+        this.attrs = Object.assign({}, this.field, this.field.attrs);
         this.attrs.label = this.showLabel ? this.field.label : undefined;
         this.attrs.disabled = (
             this.readOnly || ((this.attrs.disabled == true) ? true : false)

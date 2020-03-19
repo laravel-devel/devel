@@ -64,6 +64,14 @@
         box-shadow: 0 0 2px #dadada inset;
     }
 
+    .form-element::placeholder { color: $inputPlaceholder; }
+    .form-element:-ms-input-placeholder { color: $inputPlaceholder; }
+    .form-element::-ms-input-placeholder { color: $inputPlaceholder; }
+    .placeholder {
+        color: $inputPlaceholder;
+        opacity: .6;
+    }
+
     .form-element:focus {
         box-shadow: 0 0 2px $primary inset;
     }
@@ -80,7 +88,7 @@
         display: inline-block;
         position: relative;
         padding-left: 1.75rem;
-        user-select: none;
+        @include noselect;
         cursor: pointer;
 
         input {
@@ -147,7 +155,7 @@
         position: relative;
         width: 2.75rem;
         height: 1.5rem;
-        user-select: none;
+        @include noselect;
         cursor: pointer;
 
         input {
@@ -237,6 +245,10 @@
     .select-input {
         position: relative;
 
+        .placeholder, .value {
+            @include noselect;
+        }
+
         .select-arrow {
             position: absolute;
             top: 0;
@@ -302,10 +314,7 @@
             border-radius: .5rem;
 
             .text {
-                -webkit-user-select: none; /* Safari */        
-                -moz-user-select: none; /* Firefox */
-                -ms-user-select: none; /* IE10+/Edge */
-                user-select: none; /* Standard */
+                @include noselect;
             }
 
             .remove {

@@ -4,14 +4,25 @@
 
         <div class="select">
             <div class="select-input">
-                <input type="text"
+                <input v-if="multipleChoice"
+                    type="text"
                     class="form-element"
-                    placeholder="Start typing..."
+                    :placeholder="placeholder"
                     autocomplete="off"
                     v-model="search"
                     ref="input"
                     :disabled="attrs.disabled"
                     @focus="open = true">
+                
+                <div v-else class="form-element" ref="input" @click="toggleOpen">
+                    <span v-if="selectedOptions.length > 0" class="value">
+                        {{ selectedOptions[0][textField] }}
+                    </span>
+
+                    <span v-else class="placeholder">
+                        {{ placeholder }}
+                    </span>
+                </div>
 
                 <div class="select-arrow"
                     :class="{ 'open': open, 'disabled': attrs.disabled }"
@@ -25,13 +36,20 @@
 
             <div v-show="open" class="select-dropdown">
                 <ul>
+                    <li v-if="!multipleChoice && !attrs.required"
+                        class="placeholder"
+                        @click="unselectOption"
+                    >
+                        {{ placeholder }}
+                    </li>
+
                     <li v-for="(option, index) in filteredOptions"
                         :key="index"
                         @click="selectOption(option)">{{ option[textField] }}</li>
                 </ul>
             </div>
 
-            <div class="select-selected-items">
+            <div v-if="multipleChoice" class="select-selected-items">
                 <div v-for="(option, index) in selectedOptions"
                     :key="index"
                     class="select-seleced-item"
@@ -70,9 +88,13 @@ export default {
     props: ['attrs', 'value', 'collections'],
 
     data() {
+        const collectionName = this.attrs.collection
+            ? this.attrs.collection
+            : this.attrs.name;
+
         return {
-            options: (this.collections && this.collections[this.attrs.name])
-                ? this.collections[this.attrs.name]
+            options: (this.collections && this.collections[collectionName])
+                ? this.collections[collectionName]
                 : [],
             selectedOptions: [],
             availableOptions: [],
@@ -86,14 +108,22 @@ export default {
         };
     },
 
+    computed: {
+        placeholder() {
+            return this.attrs.placeholder ? this.attrs.placeholder : (
+                this.multipleChoice ? 'Start typing...' : ' - '
+            );
+        }
+    },
+
     created() {
-        if (!this.attrs.attrs || !this.attrs.attrs.idField || !this.attrs.attrs.textField) {
+        if (!this.attrs || !this.attrs.idField || !this.attrs.textField) {
             throw 'Missing attributes for the select field.';
         }
 
-        this.idField = this.attrs.attrs.idField;
-        this.textField = this.attrs.attrs.textField;
-        this.multipleChoice = (this.attrs.attrs.multipleChoice == true);
+        this.idField = this.attrs.idField;
+        this.textField = this.attrs.textField;
+        this.multipleChoice = (this.attrs.multipleChoice == true);
 
         if (this.value) {
             for (let item of this.value) {
@@ -108,6 +138,7 @@ export default {
     mounted() {
         document.addEventListener('click', (e) => {
             const condition = e.target === this.$refs['input']
+                || e.target.parentNode === this.$refs['input']
                 || e.target === this.$refs['arrow']
                 || e.target === this.$refs['arrow-up']
                 || e.target === this.$refs['arrow-down'];
@@ -144,7 +175,7 @@ export default {
                     return item[this.idField] === option[this.idField];
                 });
 
-                if (selected === undefined) {
+                if (selected === undefined || !this.multipleChoice) {
                     this.availableOptions.push(this.formatOption(option));
                 }
             }
@@ -167,13 +198,27 @@ export default {
         },
 
         selectOption(option) {
-            this.selectedOptions.push(this.formatOption(option));
+            if (this.multipleChoice) {
+                this.selectedOptions.push(this.formatOption(option));
+            } else {
+                this.selectedOptions = [this.formatOption(option)];
+            }
 
             this.search = '';
             this.open = false;
         },
 
-        unselectOption(option) {
+        unselectOption(option = null) {
+            if (!this.multipleChoice) {
+                this.selectedOptions = [];
+
+                return;
+            }
+
+            if (!option) {
+                return;
+            }
+
             const index = this.selectedOptions.indexOf(option);
 
             if (index >= 0) {
