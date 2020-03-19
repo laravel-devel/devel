@@ -37,8 +37,8 @@ class MigrationMakeCommand extends GeneratorCommand
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The migration name will be created.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be created.'],
+            ['name', InputArgument::REQUIRED, 'The name of the migration.'],
+            ['module', InputArgument::OPTIONAL, 'Module to generate the migration for.'],
         ];
     }
 

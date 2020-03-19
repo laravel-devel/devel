@@ -71,8 +71,8 @@ class ModelMakeCommand extends GeneratorCommand
     protected function getArguments()
     {
         return [
-            ['model', InputArgument::REQUIRED, 'The name of model will be created.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['model', InputArgument::REQUIRED, 'The name of the model.'],
+            ['module', InputArgument::OPTIONAL, 'Module to generate the model for.'],
         ];
     }
 

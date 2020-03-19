@@ -20,7 +20,7 @@ class ListCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Show list of all modules.';
+    protected $description = 'Show a list of all modules.';
 
     /**
      * Execute the console command.
@@ -92,7 +92,7 @@ class ListCommand extends Command
     protected function getOptions()
     {
         return [
-            ['only', 'o', InputOption::VALUE_OPTIONAL, 'Types of modules will be displayed.', null],
+            ['only', 'o', InputOption::VALUE_OPTIONAL, 'Show installed|uninstalled|enabled|disabled|ordered modules.', null],
             ['direction', 'd', InputOption::VALUE_OPTIONAL, 'The direction of ordering.', 'asc'],
         ];
     }

@@ -23,7 +23,7 @@ class UninstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Uninstall a devel module.';
+    protected $description = 'Uninstall a module.';
 
     /**
      * Create a new command instance.

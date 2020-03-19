@@ -21,7 +21,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install a devel module.';
+    protected $description = 'Install devel.';
 
     /**
      * Create a new command instance.

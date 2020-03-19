@@ -38,8 +38,8 @@ class SeedMakeCommand extends GeneratorCommand
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of seeder will be created.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['name', InputArgument::REQUIRED, 'The name of the seeder.'],
+            ['module', InputArgument::OPTIONAL, 'Module to generate the seeder for.'],
         ];
     }
 

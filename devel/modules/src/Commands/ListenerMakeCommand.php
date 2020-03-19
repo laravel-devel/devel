@@ -38,8 +38,8 @@ class ListenerMakeCommand extends GeneratorCommand
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the command.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['name', InputArgument::REQUIRED, 'The name of the event listener.'],
+            ['module', InputArgument::OPTIONAL, 'Module to generate the event listener for.'],
         ];
     }
 

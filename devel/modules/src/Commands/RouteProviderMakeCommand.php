@@ -36,7 +36,7 @@ class RouteProviderMakeCommand extends GeneratorCommand
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['module', InputArgument::OPTIONAL, 'Module to generate the route service provider for.'],
         ];
     }
 

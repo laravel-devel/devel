@@ -35,7 +35,7 @@ class EnableCommand extends Command
 
             $this->info("Module [{$module}] enabled successful.");
         } else {
-            $this->comment("Module [{$module}] has already enabled.");
+            $this->comment("Module [{$module}] is already enabled.");
         }
     }
 

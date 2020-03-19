@@ -24,7 +24,7 @@ class MigrateResetCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Reset the modules migrations.';
+    protected $description = 'Reset migrations for one or all modules.';
 
     /**
      * @var \Devel\Modules\Contracts\RepositoryInterface
@@ -93,7 +93,7 @@ class MigrateResetCommand extends Command
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['module', InputArgument::OPTIONAL, 'Module to run the command for.'],
         ];
     }
 

@@ -59,8 +59,8 @@ class DownloadCommand extends Command
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the module to be installed.'],
-            ['version', InputArgument::OPTIONAL, 'The version of the module to be installed.'],
+            ['name', InputArgument::REQUIRED, 'The name of the module to be downloaded.'],
+            ['version', InputArgument::OPTIONAL, 'The version of the module to be downloaded.'],
         ];
     }
 

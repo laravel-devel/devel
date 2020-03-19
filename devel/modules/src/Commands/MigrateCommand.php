@@ -22,7 +22,7 @@ class MigrateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Migrate the migrations from the specified module or from all modules.';
+    protected $description = 'Run the migrations from the specified module or from all modules.';
 
     /**
      * @var \Devel\Modules\Contracts\RepositoryInterface
@@ -86,7 +86,7 @@ class MigrateCommand extends Command
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['module', InputArgument::OPTIONAL, 'Module to run the command for.'],
         ];
     }
 

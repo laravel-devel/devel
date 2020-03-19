@@ -22,7 +22,7 @@ class MigrateStatusCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Status for all module migrations';
+    protected $description = 'Get migrations status for one or all modules.';
 
     /**
      * @var \Devel\Modules\Contracts\RepositoryInterface
@@ -75,7 +75,7 @@ class MigrateStatusCommand extends Command
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['module', InputArgument::OPTIONAL, 'Module to run the command for.'],
         ];
     }
 

@@ -35,7 +35,7 @@ class ControllerMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $description = 'Generate new restful controller for the specified module.';
+    protected $description = 'Generate new controller for the specified module.';
 
     protected $dbToFormTypes = [
         'string' => 'text',
@@ -100,7 +100,7 @@ class ControllerMakeCommand extends GeneratorCommand
     {
         return [
             ['controller', InputArgument::REQUIRED, 'The name of the controller class.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['module', InputArgument::OPTIONAL, 'Module to generate the controller for.'],
         ];
     }
 
@@ -111,8 +111,8 @@ class ControllerMakeCommand extends GeneratorCommand
     {
         return [
             ['plain', 'p', InputOption::VALUE_NONE, 'Generate a plain controller', null],
-            ['api', null, InputOption::VALUE_NONE, 'Exclude the create and edit methods from the controller.'],
-            ['settings', null, InputOption::VALUE_NONE, 'Create the SettingsController for the module.'],
+            ['api', null, InputOption::VALUE_NONE, 'Generate an API controller.'],
+            ['settings', null, InputOption::VALUE_NONE, 'Generate the SettingsController for the module.'],
             ['model', null, InputOption::VALUE_OPTIONAL, 'A model to generate CRUD for.'],
         ];
     }

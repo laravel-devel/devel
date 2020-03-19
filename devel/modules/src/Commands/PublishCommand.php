@@ -21,7 +21,7 @@ class PublishCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Publish a module\'s assets to the application';
+    protected $description = 'Publish a module\'s assets to the application.';
 
     /**
      * Execute the console command.
@@ -76,7 +76,7 @@ class PublishCommand extends Command
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['module', InputArgument::OPTIONAL, 'Module to publish the assets for.'],
         ];
     }
 }

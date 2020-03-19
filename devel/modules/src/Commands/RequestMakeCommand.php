@@ -50,8 +50,8 @@ class RequestMakeCommand extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the form request class.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
-            ['model', InputArgument::OPTIONAL, 'Specify a model if you want some rules to be automatically generated.'],
+            ['module', InputArgument::OPTIONAL, 'Module to generate the form request for.'],
+            ['model', InputArgument::OPTIONAL, 'Specify a model if you want some default rules to be generated for you.'],
         ];
     }
 

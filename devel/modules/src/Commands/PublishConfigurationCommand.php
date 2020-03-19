@@ -21,7 +21,7 @@ class PublishConfigurationCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Publish a module\'s config files to the application';
+    protected $description = 'Publish a module\'s config files to the application.';
 
     /**
      * Execute the console command.
@@ -71,7 +71,7 @@ class PublishConfigurationCommand extends Command
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of module being used.'],
+            ['module', InputArgument::OPTIONAL, 'Module to publish the config files for.'],
         ];
     }
 
@@ -81,7 +81,7 @@ class PublishConfigurationCommand extends Command
     protected function getOptions()
     {
         return [
-            ['--force', '-f', InputOption::VALUE_NONE, 'Force the publishing of config files'],
+            ['--force', '-f', InputOption::VALUE_NONE, 'Force the publishing of config files.'],
         ];
     }
 }

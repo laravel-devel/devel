@@ -23,7 +23,7 @@ class MigrateRefreshCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Rollback & re-migrate the modules migrations.';
+    protected $description = 'Rollback & re-migrate migrations of one or all modules.';
 
     /**
      * Execute the console command.
@@ -57,7 +57,7 @@ class MigrateRefreshCommand extends Command
     protected function getArguments()
     {
         return [
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['module', InputArgument::OPTIONAL, 'Module to run the command for.'],
         ];
     }
 

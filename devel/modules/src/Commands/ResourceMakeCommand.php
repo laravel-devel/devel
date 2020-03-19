@@ -14,8 +14,20 @@ class ResourceMakeCommand extends GeneratorCommand
     use ModuleCommandTrait;
 
     protected $argumentName = 'name';
+
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
     protected $name = 'module:make-resource';
-    protected $description = 'Create a new resource class for the specified module.';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Create a new API resource class for the specified module.';
 
     public function getDefaultNamespace() : string
     {
@@ -33,7 +45,7 @@ class ResourceMakeCommand extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the resource class.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['module', InputArgument::OPTIONAL, 'Module to generate the resource for.'],
         ];
     }
 

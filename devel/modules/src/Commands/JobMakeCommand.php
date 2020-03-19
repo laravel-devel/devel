@@ -45,7 +45,7 @@ class JobMakeCommand extends GeneratorCommand
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the job.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['module', InputArgument::OPTIONAL, 'Module to generate the job for.'],
         ];
     }
 
@@ -57,7 +57,7 @@ class JobMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
-            ['sync', null, InputOption::VALUE_NONE, 'Indicates that job should be synchronous.'],
+            ['sync', null, InputOption::VALUE_NONE, 'Indicates that the job should be synchronous.'],
         ];
     }
 

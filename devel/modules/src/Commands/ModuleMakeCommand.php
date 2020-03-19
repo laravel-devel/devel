@@ -36,11 +36,9 @@ class ModuleMakeCommand extends Command
                 ->setFilesystem($this->laravel['files'])
                 ->setModule($this->laravel['modules'])
                 ->setConfig($this->laravel['config'])
-                ->setActivator($this->laravel[ActivatorInterface::class])
                 ->setConsole($this)
                 ->setForce($this->option('force'))
                 ->setPlain($this->option('plain'))
-                ->setActive(!$this->option('disabled'))
                 ->setDisplayName($this->option('name'))
                 ->setModel($this->option('model'))
                 ->generate();
@@ -55,15 +53,15 @@ class ModuleMakeCommand extends Command
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::IS_ARRAY, 'The names of modules will be created.'],
+            ['name', InputArgument::IS_ARRAY, 'Module name.'],
         ];
     }
 
     protected function getOptions()
     {
         return [
+            // TODO: I don't think I've ever used these two. Are these useful at all?
             ['plain', 'p', InputOption::VALUE_NONE, 'Generate a plain module (without some resources).'],
-            ['disabled', 'd', InputOption::VALUE_NONE, 'Do not enable the module at creation.'],
             ['force', null, InputOption::VALUE_NONE, 'Force the operation to run when the module already exists.'],
 
             ['name', null, InputOption::VALUE_REQUIRED, 'Specify an alternative name if you want the displayed module name to be different from the system module name.'],

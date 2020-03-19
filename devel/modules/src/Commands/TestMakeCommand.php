@@ -14,7 +14,19 @@ class TestMakeCommand extends GeneratorCommand
     use ModuleCommandTrait;
 
     protected $argumentName = 'name';
+
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
     protected $name = 'module:make-test';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
     protected $description = 'Create a new test class for the specified module.';
 
     public function getDefaultNamespace() : string
@@ -36,8 +48,8 @@ class TestMakeCommand extends GeneratorCommand
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the form request class.'],
-            ['module', InputArgument::OPTIONAL, 'The name of module will be used.'],
+            ['name', InputArgument::REQUIRED, 'The name of the test class.'],
+            ['module', InputArgument::OPTIONAL, 'Module to generate the test for.'],
         ];
     }
 
