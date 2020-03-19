@@ -90,8 +90,6 @@ class DevelCoreServiceProvider extends ServiceProvider
     {
         $this->commands([
             \Devel\Core\Console\InstallCommand::class,
-            \Devel\Core\Console\ModuleInstallCommand::class,
-            \Devel\Core\Console\ModuleUninstallCommand::class,
         ]);
     }
 

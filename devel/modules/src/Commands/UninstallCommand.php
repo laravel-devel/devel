@@ -1,6 +1,6 @@
 <?php
 
-namespace Devel\Core\Console;
+namespace Devel\Modules\Commands;
 
 use Illuminate\Console\Command;
 use Devel\Modules\Facades\Module;
@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\File;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-class ModuleUninstallCommand extends Command
+class UninstallCommand extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'devel:module:uninstall';
+    protected $name = 'module:uninstall';
 
     /**
      * The console command description.

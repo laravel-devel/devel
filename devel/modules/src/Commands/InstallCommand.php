@@ -2,11 +2,13 @@
 
 namespace Devel\Modules\Commands;
 
-use Illuminate\Console\Command;
-use Devel\Modules\Json;
-use Devel\Modules\Process\Installer;
-use Symfony\Component\Console\Input\InputArgument;
+use Devel\Core\Console\Command;
+use Devel\Modules\Facades\Module;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Devel\Core\Services\ModuleService;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Input\InputArgument;
 
 class InstallCommand extends Command
 {
@@ -22,10 +24,12 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install the specified module by given package name (vendor/name).';
+    protected $description = 'Install a devel module.';
 
     /**
      * Create a new command instance.
+     *
+     * @return void
      */
     public function __construct()
     {
@@ -34,85 +38,91 @@ class InstallCommand extends Command
 
     /**
      * Execute the console command.
+     *
+     * @return mixed
      */
     public function handle()
     {
-        if (is_null($this->argument('name'))) {
-            $this->installFromFile();
+        $moduleName = $this->arguments()['module'];
 
-            return;
+        try {
+            $module = Module::findOrFail($moduleName);
+        } catch (\Exception $e) {
+            $this->error("Module \"{$moduleName}\" not found!");
+
+            exit(0);
         }
 
-        $this->install(
-            $this->argument('name'),
-            $this->argument('version'),
-            $this->option('type'),
-            $this->option('tree')
-        );
-    }
+        $this->info('Checking the dependencies...');
 
-    /**
-     * Install modules from modules.json file.
-     */
-    protected function installFromFile()
-    {
-        if (!file_exists($path = base_path('modules.json'))) {
-            $this->error("File 'modules.json' does not exist in your project root.");
+        $errors = ModuleService::checkDependencies($module);
 
-            return;
+        if (count($errors)) {
+            foreach ($errors as $error) {
+                $this->error($error);
+            }
+
+            throw new \Exception('Unmet dependencies!');
         }
 
-        $modules = Json::make($path);
+        $modulePath = $module->getPath();
 
-        $dependencies = $modules->get('require', []);
+        // Install the PHP dependencies
+        $this->info('Installing PHP dependencies...');
 
-        foreach ($dependencies as $module) {
-            $module = collect($module);
-
-            $this->install(
-                $module->get('name'),
-                $module->get('version'),
-                $module->get('type')
-            );
-        }
-    }
-
-    /**
-     * Install the specified module.
-     *
-     * @param string $name
-     * @param string $version
-     * @param string $type
-     * @param bool   $tree
-     */
-    protected function install($name, $version = 'dev-master', $type = 'composer', $tree = false)
-    {
-        $installer = new Installer(
-            $name,
-            $version,
-            $type ?: $this->option('type'),
-            $tree ?: $this->option('tree')
-        );
-
-        $installer->setRepository($this->laravel['modules']);
-
-        $installer->setConsole($this);
-
-        if ($timeout = $this->option('timeout')) {
-            $installer->setTimeout($timeout);
+        if (!file_exists($module->getExtraPath('vendor'))) {
+            $this->runExternal('composer install', $modulePath);
         }
 
-        if ($path = $this->option('path')) {
-            $installer->setPath($path);
+        // Run the module's migrations
+        $this->info('Running migrations...');
+
+        DB::beginTransaction();
+
+        try {
+            $this->call('module:migrate', ['module' => $moduleName]);
+
+            // Run the module's seeder
+            $this->info('Seeding the database...');
+
+            $this->call('module:seed', ['module' => $moduleName]);
+            
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            $this->error('Could not install the module. Rolling changes back...');
+
+            throw $e;
         }
 
-        $installer->run();
+        // NPM
+        if ($module->json()->buildNpm === true) {
+            // Install npm dependencies
+            $this->info('Installing npm dependencies...');
 
-        if (!$this->option('no-update')) {
-            $this->call('module:update', [
-                'module' => $installer->getModuleName(),
-            ]);
+            $this->runExternal('npm install', $modulePath);
+
+            // Build npm for production
+            $this->info('Building frontend assets...');
+
+            $this->runExternal('npm run production', $modulePath);
         }
+
+        // Enable the module
+        $module->enable();
+
+        $this->call('config:cache');
+
+        // Publish the config file
+        if (!in_array($moduleName, ['Main'])) {
+            $this->call('module:publish-config', ['module' => $moduleName]);
+        }
+
+        // Mark the module as "installed" with a special meta file
+        File::put($module->getExtraPath('.installed'), '');
+
+        $this->call('config:clear');
     }
 
     /**
@@ -123,8 +133,7 @@ class InstallCommand extends Command
     protected function getArguments()
     {
         return [
-            ['name', InputArgument::OPTIONAL, 'The name of module will be installed.'],
-            ['version', InputArgument::OPTIONAL, 'The version of module will be installed.'],
+            ['module', InputArgument::REQUIRED, 'Module name.'],
         ];
     }
 
@@ -136,11 +145,7 @@ class InstallCommand extends Command
     protected function getOptions()
     {
         return [
-            ['timeout', null, InputOption::VALUE_OPTIONAL, 'The process timeout.', null],
-            ['path', null, InputOption::VALUE_OPTIONAL, 'The installation path.', null],
-            ['type', null, InputOption::VALUE_OPTIONAL, 'The type of installation.', null],
-            ['tree', null, InputOption::VALUE_NONE, 'Install the module as a git subtree', null],
-            ['no-update', null, InputOption::VALUE_NONE, 'Disables the automatic update of the dependencies.', null],
+            // ['example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null],
         ];
     }
 }

@@ -43,6 +43,7 @@ use Devel\Modules\Commands\SeedCommand;
 use Devel\Modules\Commands\SeedMakeCommand;
 use Devel\Modules\Commands\SetupCommand;
 use Devel\Modules\Commands\TestMakeCommand;
+use Devel\Modules\Commands\UninstallCommand;
 use Devel\Modules\Commands\UnseedCommand;
 use Devel\Modules\Commands\UnUseCommand;
 use Devel\Modules\Commands\UpdateCommand;
@@ -71,6 +72,7 @@ class ConsoleServiceProvider extends ServiceProvider
         ProviderMakeCommand::class,
         RouteProviderMakeCommand::class,
         InstallCommand::class,
+        UninstallCommand::class,
         DownloadCommand::class,
         ListCommand::class,
         ModuleDeleteCommand::class,
