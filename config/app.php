@@ -137,13 +137,13 @@ return [
     'providers' => [
 
         /*
-         * Laravel Framework Service Providers...
+         * Laravel Framework & Devel Service Providers...
          */
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
-        Illuminate\Foundation\Providers\ConsoleSupportServiceProvider::class,
+        Devel\Core\Providers\ConsoleSupportServiceProvider::class,
         Illuminate\Cookie\CookieServiceProvider::class,
         Illuminate\Database\DatabaseServiceProvider::class,
         Illuminate\Encryption\EncryptionServiceProvider::class,
@@ -161,16 +161,12 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Devel\Modules\LaravelModulesServiceProvider::class,
+        Devel\Core\Providers\DevelCoreServiceProvider::class,
 
         /*
          * Package Service Providers...
          */
-
-        /*
-         * Devel Service Providers...
-         */
-        Devel\Modules\LaravelModulesServiceProvider::class,
-        Devel\Core\Providers\DevelCoreServiceProvider::class,
 
         /*
          * Application Service Providers...
