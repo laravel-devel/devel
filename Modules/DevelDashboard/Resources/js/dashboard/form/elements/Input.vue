@@ -6,6 +6,7 @@
             :type="attrs.type"
             :name="attrs.name"
             autocomplete="off"
+            :placeholder="attrs.placeholder ? attrs.placeholder : ''"
             :value="value"
             :disabled="attrs.disabled"
             @input="$emit('input', $event.target.value)">
