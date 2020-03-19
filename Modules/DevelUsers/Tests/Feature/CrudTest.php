@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Devel\Core\Database\Seeders\DevelCoreDatabaseSeeder;
 use Devel\Core\Entities\Auth\User;
-use Modules\DevelUsers\Database\Seeders\DevelUsersDatabaseSeeder;
+use Modules\DevelDashboard\Database\Seeders\DevelDashboardDatabaseSeeder;
 
 class CrudTest extends TestCase
 {
@@ -19,7 +19,7 @@ class CrudTest extends TestCase
         parent::setUp();
 
         $this->seed(DevelCoreDatabaseSeeder::class);
-        $this->seed(DevelUsersDatabaseSeeder::class);
+        $this->seed(DevelDashboardDatabaseSeeder::class);
 
         $this->root = User::find(1);
         $this->admin = factory(User::class)->create();

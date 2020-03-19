@@ -7,6 +7,7 @@ use Devel\Core\Entities\Auth\User;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Devel\Core\Database\Seeders\DevelCoreDatabaseSeeder;
+use Modules\DevelDashboard\Database\Seeders\DevelDashboardDatabaseSeeder;
 
 class AccessTest extends TestCase
 {
@@ -17,6 +18,7 @@ class AccessTest extends TestCase
         parent::setUp();
 
         $this->seed(DevelCoreDatabaseSeeder::class);
+        $this->seed(DevelDashboardDatabaseSeeder::class);
 
         $this->admin = factory(User::class)->create();
         $this->user = factory(User::class)->create();

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Devel\Core\Database\Seeders\DevelCoreDatabaseSeeder;
 use Devel\Core\Entities\Auth\Role;
 use Devel\Core\Entities\Auth\User;
-use Modules\DevelUserRoles\Database\Seeders\DevelUserRolesDatabaseSeeder;
+use Modules\DevelDashboard\Database\Seeders\DevelDashboardDatabaseSeeder;
 
 class RootRoleTest extends TestCase
 {
@@ -19,7 +19,7 @@ class RootRoleTest extends TestCase
         parent::setUp();
 
         $this->seed(DevelCoreDatabaseSeeder::class);
-        $this->seed(DevelUserRolesDatabaseSeeder::class);
+        $this->seed(DevelDashboardDatabaseSeeder::class);
 
         $this->root = User::find(1);
     }

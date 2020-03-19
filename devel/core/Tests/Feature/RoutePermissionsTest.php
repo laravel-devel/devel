@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Devel\Core\Database\Seeders\DevelCoreDatabaseSeeder;
 use Illuminate\Support\Facades\Route;
+use Modules\DevelDashboard\Database\Seeders\DevelDashboardDatabaseSeeder;
 
 class RoutePermissionsTest extends TestCase
 {
@@ -18,6 +19,7 @@ class RoutePermissionsTest extends TestCase
         parent::setUp();
 
         $this->seed(DevelCoreDatabaseSeeder::class);
+        $this->seed(DevelDashboardDatabaseSeeder::class);
 
         $this->root = factory(User::class)->create();
         $this->user = factory(User::class)->create();
