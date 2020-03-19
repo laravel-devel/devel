@@ -97,17 +97,7 @@ return [
         */
 
         'assets' => public_path('modules'),
-        /*
-        |--------------------------------------------------------------------------
-        | The migrations path
-        |--------------------------------------------------------------------------
-        |
-        | Where you run 'module:publish-migration' command, where do you publish the
-        | the migration files?
-        |
-        */
 
-        'migration' => base_path('database/migrations'),
         /*
         |--------------------------------------------------------------------------
         | Generator path

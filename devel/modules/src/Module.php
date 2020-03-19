@@ -165,6 +165,16 @@ abstract class Module
     }
 
     /**
+     * Get relative path.
+     *
+     * @return string
+     */
+    public function getRelativePath(): string
+    {
+        return substr($this->path, strlen(base_path()));
+    }
+
+    /**
      * Set path.
      *
      * @param string $path

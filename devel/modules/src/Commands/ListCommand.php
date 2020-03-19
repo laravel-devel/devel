@@ -41,11 +41,14 @@ class ListCommand extends Command
 
         /** @var Module $module */
         foreach ($this->getModules() as $module) {
+            $status = ($module->isInstalled() ? 'Installed' : 'Not Installed')
+                . ($module->isEnabled() ? ' & Enabled' : '');
+
             $rows[] = [
                 $module->getName(),
-                $module->isEnabled() ? 'Enabled' : 'Disabled',
+                $status,
                 $module->get('order'),
-                $module->getPath(),
+                $module->getRelativePath(),
             ];
         }
 
@@ -63,8 +66,16 @@ class ListCommand extends Command
                 return $this->laravel['modules']->getByStatus(0);
                 break;
 
+            case 'installed':
+                return $this->laravel['modules']->getInstalled();
+                break;
+
+            case 'uninstalled':
+                return $this->laravel['modules']->getInstalled(false);
+                break;
+
             case 'ordered':
-                return $this->laravel['modules']->getOrdered($this->option('direction'));
+                return $this->laravel['modules']->getAllOrdered($this->option('direction'));
                 break;
 
             default:

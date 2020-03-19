@@ -237,6 +237,20 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
+     * Get all installed modules.
+     *
+     * @param $status
+     *
+     * @return array
+     */
+    public function getInstalled($installed = true) : array
+    {
+        return array_filter($this->all(), function ($item) use ($installed) {
+            return $item->isInstalled() === $installed;
+        });
+    }
+
+    /**
      * Determine whether the given module exist.
      *
      * @param $name
@@ -269,18 +283,6 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get all installed modules.
-     *
-     * @return array
-     */
-    public function allInstalled(): array
-    {
-        return array_filter($this->all(), function ($item) {
-            return $item->isInstalled();
-        });
-    }
-
-    /**
      * Get count from all modules.
      *
      * @return int
@@ -291,7 +293,19 @@ abstract class FileRepository implements RepositoryInterface, Countable
     }
 
     /**
-     * Get all ordered modules.
+     * Get ALL modules ordered.
+     *
+     * @param string $direction
+     *
+     * @return array
+     */
+    public function getAllOrdered($direction = 'asc') : array
+    {
+        return $this->order($this->all(), $direction);
+    }
+
+    /**
+     * Get all enabled modules ordered.
      *
      * @param string $direction
      *
@@ -299,25 +313,11 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function getOrdered($direction = 'asc') : array
     {
-        $modules = $this->allEnabled();
-
-        uasort($modules, function (Module $a, Module $b) use ($direction) {
-            if ($a->get('order') === $b->get('order')) {
-                return 0;
-            }
-
-            if ($direction === 'desc') {
-                return $a->get('order') < $b->get('order') ? 1 : -1;
-            }
-
-            return $a->get('order') > $b->get('order') ? 1 : -1;
-        });
-
-        return $modules;
+        return $this->order($this->allEnabled(), $direction);
     }
 
     /**
-     * Get all installed modules orderd.
+     * Get all installed modules ordered.
      *
      * @param string $direction
      *
@@ -325,9 +325,19 @@ abstract class FileRepository implements RepositoryInterface, Countable
      */
     public function getInstalledOrdered($direction = 'asc') : array
     {
-        $modules = $this->allInstalled();
+        return $this->order($this->getInstalled(), $direction);
+    }
 
-        uasort($modules, function (Module $a, Module $b) use ($direction) {
+    /**
+     * Order a collection of modules
+     *
+     * @param array $collection
+     * @param string $direction
+     * @return array
+     */
+    public function order(array $collection, string $direction = 'asc'): array
+    {
+        uasort($collection, function (Module $a, Module $b) use ($direction) {
             if ($a->get('order') === $b->get('order')) {
                 return 0;
             }
@@ -339,7 +349,7 @@ abstract class FileRepository implements RepositoryInterface, Countable
             return $a->get('order') > $b->get('order') ? 1 : -1;
         });
 
-        return $modules;
+        return $collection;
     }
 
     /**
@@ -476,60 +486,6 @@ abstract class FileRepository implements RepositoryInterface, Countable
     public function config(string $key, $default = null)
     {
         return $this->config->get('modules.' . $key, $default);
-    }
-
-    /**
-     * Get storage path for module used.
-     *
-     * @return string
-     */
-    public function getUsedStoragePath() : string
-    {
-        $directory = storage_path('app/modules');
-        if ($this->getFiles()->exists($directory) === false) {
-            $this->getFiles()->makeDirectory($directory, 0777, true);
-        }
-
-        $path = storage_path('app/modules/modules.used');
-        if (!$this->getFiles()->exists($path)) {
-            $this->getFiles()->put($path, '');
-        }
-
-        return $path;
-    }
-
-    /**
-     * Set module used for cli session.
-     *
-     * @param $name
-     *
-     * @throws ModuleNotFoundException
-     */
-    public function setUsed($name)
-    {
-        $module = $this->findOrFail($name);
-
-        $this->getFiles()->put($this->getUsedStoragePath(), $module);
-    }
-
-    /**
-     * Forget the module used for cli session.
-     */
-    public function forgetUsed()
-    {
-        if ($this->getFiles()->exists($this->getUsedStoragePath())) {
-            $this->getFiles()->delete($this->getUsedStoragePath());
-        }
-    }
-
-    /**
-     * Get module used for cli session.
-     * @return string
-     * @throws \Devel\Modules\Exceptions\ModuleNotFoundException
-     */
-    public function getUsedNow() : string
-    {
-        return $this->findOrFail($this->getFiles()->get($this->getUsedStoragePath()));
     }
 
     /**

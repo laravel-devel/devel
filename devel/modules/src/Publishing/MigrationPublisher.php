@@ -2,6 +2,7 @@
 
 namespace Devel\Modules\Publishing;
 
+use Devel\Modules\Facades\Module;
 use Devel\Modules\Migrations\Migrator;
 
 class MigrationPublisher extends AssetPublisher
@@ -28,7 +29,7 @@ class MigrationPublisher extends AssetPublisher
      */
     public function getDestinationPath()
     {
-        return $this->repository->config('paths.migration');
+        return Module::findOrFail('Main')->getExtraPath('Database/Migrations');
     }
 
     /**

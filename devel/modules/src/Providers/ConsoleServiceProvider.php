@@ -45,9 +45,7 @@ use Devel\Modules\Commands\SetupCommand;
 use Devel\Modules\Commands\TestMakeCommand;
 use Devel\Modules\Commands\UninstallCommand;
 use Devel\Modules\Commands\UnseedCommand;
-use Devel\Modules\Commands\UnUseCommand;
 use Devel\Modules\Commands\UpdateCommand;
-use Devel\Modules\Commands\UseCommand;
 
 class ConsoleServiceProvider extends ServiceProvider
 {
@@ -61,7 +59,9 @@ class ConsoleServiceProvider extends ServiceProvider
         ControllerMakeCommand::class,
         CrudMakeCommand::class,
         DisableCommand::class,
-        DumpCommand::class,
+        // TODO: Runs `composer dump -o -n -q` for a module. Not sure if I need
+        // this but keeping it just in case for the future.
+        // DumpCommand::class,
         EnableCommand::class,
         EventMakeCommand::class,
         JobMakeCommand::class,
@@ -96,12 +96,14 @@ class ConsoleServiceProvider extends ServiceProvider
         UnseedCommand::class,
         SeedMakeCommand::class,
         SetupCommand::class,
-        UnUseCommand::class,
-        UpdateCommand::class,
-        UseCommand::class,
+        // TODO: Installs/updates all the modules "required" and "required-dev"
+        // from the module's `composer.json` to the main `vendor` folder. Not
+        // sure if it's needed right now but it might be proven needed in the
+        // future as I get deeper into module development. Maybe running
+        // `composer install` for each module doesn't work as I think it does.
+        // UpdateCommand::class,
         ResourceMakeCommand::class,
         TestMakeCommand::class,
-        LaravelModulesV6Migrator::class,
     ];
 
     /**

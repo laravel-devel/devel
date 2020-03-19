@@ -14,7 +14,9 @@ class $NAME$ extends Seeder
      */
     public function run()
     {
-        //
+        Model::unguard();
+
+        // $this->call(OthersTableSeeder::class);
     }
 
     /**
@@ -24,6 +26,6 @@ class $NAME$ extends Seeder
      */
     public function revert()
     {
-        //
+        // $this->uncall(OthersTableSeeder::class);
     }
 }

@@ -105,7 +105,9 @@ class SeedMakeCommand extends GeneratorCommand
                 'PERMISSIONS' => $this->getSettingsPermissions($this->getModuleName()),
             ]))->render();
         } else {
-            return (new Stub('/seeder.stub', [
+            $file = $this->option('master') ? '/seeder-master.stub' : '/seeder.stub';
+
+            return (new Stub($file, [
                 'NAME' => $this->getSeederName(),
                 'MODULE' => $this->getModuleName(),
                 'NAMESPACE' => $this->getClassNamespace($module),
