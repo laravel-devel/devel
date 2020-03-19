@@ -5,6 +5,7 @@ namespace Devel\Core\Console;
 use Devel\Modules\Facades\Module;
 use Illuminate\Support\Facades\File;
 use Devel\Core\Services\ModuleService;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
@@ -75,12 +76,24 @@ class ModuleInstallCommand extends Command
         // Run the module's migrations
         $this->info('Running migrations...');
 
-        $this->call('module:migrate', ['module' => $moduleName]);
+        DB::beginTransaction();
 
-        // Run the module's seeder
-        $this->info('Seeding the database...');
+        try {
+            $this->call('module:migrate', ['module' => $moduleName]);
 
-        $this->call('module:seed', ['module' => $moduleName]);
+            // Run the module's seeder
+            $this->info('Seeding the database...');
+
+            $this->call('module:seed', ['module' => $moduleName]);
+            
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            $this->error('Could not install the module. Rolling changes back...');
+
+            throw $e;
+        }
 
         // NPM
         if ($module->json()->buildNpm === true) {

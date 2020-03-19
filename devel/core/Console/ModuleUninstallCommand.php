@@ -76,12 +76,32 @@ class ModuleUninstallCommand extends Command
         }
 
         // Delete the `.installed` meta file
-        if (file_exists($module->getExtraPath('.installed'))) {
-            File::delete($module->getExtraPath('.installed'));
+        if (file_exists($path = $module->getExtraPath('.installed'))) {
+            File::delete($path);
         }
 
-        // Disable the module
-        $module->disable();
+        // Remove the published config file
+        if (file_exists($path = base_path('config/' . $module->getAlias() . '.php'))) {
+            File::delete($path);
+        }
+
+        // Remove the module from the modules list JSON file
+        $path = config('modules.activators')[config('modules.activator')]['statuses-file'];
+        $modulesFile = File::get($path);
+
+        $regex = '/\s{0,4}"' . $module->getName() . '.*?\n/';
+        preg_match($regex, $modulesFile, $match, PREG_UNMATCHED_AS_NULL);
+
+        if (isset($match[0])) {
+            // Remove the module from the list
+            $modulesFile = str_replace($match[0], '', $modulesFile);
+
+            // Remove comma after the last item in the list if any
+            $regex = '/(\s{0,4}".*?),(\n})/';
+            $modulesFile = preg_replace($regex, '$1$2', $modulesFile);
+
+            File::put($path, $modulesFile);
+        }
 
         $this->info("Module [{$moduleName}] have been successfully uninstalled!");
     }

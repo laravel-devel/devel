@@ -409,7 +409,7 @@ abstract class Module
      *
      * @return bool
      */
-    public function setActive(bool $active): bool
+    public function setActive(bool $active)
     {
         return $this->activator->setActive($this, $active);
     }
