@@ -116,8 +116,6 @@ class RequestMakeCommand extends GeneratorCommand
 
         // Only include the fillable fields
         foreach ($model->getFillable() as $field) {
-            $label = ucwords(implode(' ', explode('_', $field)));
-
             // Determine the field type from the DB type
             $type = DB::getSchemaBuilder()
                 ->getColumnType($model->getTable(), $field);
@@ -137,6 +135,9 @@ class RequestMakeCommand extends GeneratorCommand
 
             $rules .= "            ],\n";
         }
+
+        // Remove the last extra "\n"
+        $rules = substr($rules, 0, strlen($rules) - 2);
 
         return $rules;
     }
