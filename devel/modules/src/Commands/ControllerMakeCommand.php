@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Devel\Modules\Support\Config\GenerateConfigReader;
 use Devel\Modules\Support\Stub;
 use Devel\Modules\Traits\ModuleCommandTrait;
+use Doctrine\DBAL\Schema\SchemaException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -288,8 +289,14 @@ class ControllerMakeCommand extends GeneratorCommand
             $label = ucwords(implode(' ', explode('_', $field)));
 
             // Determine the field type from the DB type
-            $columnType = DB::getSchemaBuilder()
-                ->getColumnType($model->getTable(), $field);
+            try {
+                $columnType = DB::getSchemaBuilder()
+                    ->getColumnType($model->getTable(), $field);
+            } catch (SchemaException $e) {
+                throw new \Exception($e->getMessage() . ' Did you run the migrations?');
+            } catch (\Exception $e) {
+                throw $e;
+            }
 
             $type = $this->dbToFormTypes[$columnType] ?? 'text';
 
