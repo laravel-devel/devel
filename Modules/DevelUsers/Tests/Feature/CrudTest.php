@@ -28,6 +28,18 @@ class CrudTest extends TestCase
     }
 
     /** @test */
+    public function roots_can_view_user_lists()
+    {
+        $response = $this->actingAs($this->root)
+            ->get(route('dashboard.develusers.users.get'))
+            ->assertStatus(200);
+
+        $data = $response->json();
+
+        $this->assertEquals(User::count(), $data['total']);
+    }
+
+    /** @test */
     public function roots_can_create_users()
     {
         $data = [

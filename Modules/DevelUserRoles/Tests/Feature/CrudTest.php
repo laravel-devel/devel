@@ -25,6 +25,18 @@ class CrudTest extends TestCase
     }
 
     /** @test */
+    public function roots_can_view_user_role_lists()
+    {
+        $response = $this->actingAs($this->root)
+            ->get(route('dashboard.develuserroles.roles.get'))
+            ->assertStatus(200);
+
+        $data = $response->json();
+
+        $this->assertEquals(Role::count(), $data['total']);
+    }
+
+    /** @test */
     public function roots_can_create_user_roles()
     {
         $data = [
