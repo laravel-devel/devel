@@ -75,6 +75,14 @@ class CrudMakeCommand extends Command
 
         // Add routes
         $this->addRoutes();
+
+        // Create a CRUD feature test
+        $this->call('module:make-test', [
+            'name' => $this->getCrudName() . 'CrudTest',
+            'module' => $this->getModuleName(),
+            '--crud' => true,
+            '--model' => $this->getModel(),
+        ]);
     }
 
     /**
@@ -155,7 +163,6 @@ class CrudMakeCommand extends Command
      */
     protected function getCrudName()
     {
-        
         return Str::plural(class_basename($this->getModel()));
     }
 

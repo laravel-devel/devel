@@ -33,7 +33,7 @@ class TestMakeCommand extends GeneratorCommand
     {
         $module = $this->laravel['modules'];
 
-        if ($this->option('feature')) {
+        if ($this->option('feature') || $this->option('crud')) {
             return $module->config('paths.generator.test-feature.namespace') ?: $module->config('paths.generator.test-feature.path', 'Tests/Feature');
         }
 
@@ -62,6 +62,8 @@ class TestMakeCommand extends GeneratorCommand
     {
         return [
             ['feature', false, InputOption::VALUE_NONE, 'Create a feature test.'],
+            ['crud', false, InputOption::VALUE_NONE, 'Create a feature CRUD test.'],
+            ['model', false, InputOption::VALUE_OPTIONAL, 'Model class to generate the test for.'],
         ];
     }
 
@@ -73,14 +75,30 @@ class TestMakeCommand extends GeneratorCommand
         $module = $this->laravel['modules']->findOrFail($this->getModuleName());
         $stub = '/unit-test.stub';
 
+        $replacements = [
+            'NAMESPACE' => $this->getClassNamespace($module),
+            'CLASS' => $this->getClass(),
+        ];
+
         if ($this->option('feature')) {
             $stub = '/feature-test.stub';
         }
 
-        return (new Stub($stub, [
-            'NAMESPACE' => $this->getClassNamespace($module),
-            'CLASS'     => $this->getClass(),
-        ]))->render();
+        if ($this->option('crud')) {
+            $stub = '/feature-crud-test.stub';
+
+            $replacements = array_merge($replacements, [
+                'MODEL_IMPORT' => $this->getModelImportReplacement(),
+                'MODEL_SHORT' => $this->getShortModel(),
+                'CRUD_NAME' => $this->getCrudName(),
+                'MODULE_ALIAS' => $this->getModuleAlias(),
+                'PK' => $this->getModelPrimaryKey(),
+                'MAKE_VISIBLE' => $this->getModelMakeVisibleFields(),
+                'MODULE_SEEDER' => $this->getModuleSeederClass(),
+            ]);
+        }
+
+        return (new Stub($stub, $replacements))->render();
     }
 
     /**
@@ -90,7 +108,7 @@ class TestMakeCommand extends GeneratorCommand
     {
         $path = $this->laravel['modules']->getModulePath($this->getModuleName());
 
-        if ($this->option('feature')) {
+        if ($this->option('feature') || $this->option('crud')) {
             $testPath = GenerateConfigReader::read('test-feature');
         } else {
             $testPath = GenerateConfigReader::read('test');
@@ -105,5 +123,90 @@ class TestMakeCommand extends GeneratorCommand
     private function getFileName()
     {
         return Str::studly($this->argument('name'));
+    }
+
+    /**
+     * Get the "use ...;" statement for the model.
+     * 
+     * @return string
+     */
+    private function getModelImportReplacement(): string
+    {
+        $model = $this->option('model');
+
+        return $model !== 'Devel\Core\Entities\Auth\User'
+            ? "\nuse {$model};"
+            : '';
+    }
+
+    /**
+     * Get CRUD (class base) name.
+     *
+     * @return string
+     */
+    protected function getCrudName(): string
+    {
+        return strtolower(Str::plural(class_basename($this->option('model'))));
+    }
+
+    /**
+     * Get model's short class name.
+     *
+     * @return string
+     */
+    protected function getShortModel(): string
+    {
+        return class_basename($this->option('model'));
+    }
+
+    /**
+     * Get model's primary key.
+     *
+     * @return string
+     */
+    protected function getModelPrimaryKey(): string
+    {
+        $model = $this->option('model');
+        $model = new $model;
+
+        return $model->getRouteKeyName();
+    }
+
+    /**
+     * Model's fields that are supposed to be made visible.
+     *
+     * @return string
+     */
+    protected function getModelMakeVisibleFields(): string
+    {
+        $model = $this->option('model');
+        $model = new $model;
+        
+        $fields = array_values(
+            array_intersect($model->getFillable(), $model->getHidden())
+        );
+
+        $string = count($fields) ? "\n" : '';
+
+        foreach ($fields as $field) {
+            $string .= "                '{$field}',\n";
+        }
+
+        if (count($fields)) {
+            $string .= "            ";
+        }
+
+        return $string;
+    }
+
+    /**
+     * Module's seeder class name.
+     *
+     * @return string
+     */
+    protected function getModuleSeederClass(): string
+    {
+        return 'Modules\\' . $this->getModuleName() . '\Database\Seeders\\'
+            . $this->getModuleName() . 'DatabaseSeeder';
     }
 }

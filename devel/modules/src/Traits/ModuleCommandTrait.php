@@ -17,4 +17,18 @@ trait ModuleCommandTrait
 
         return $module->getStudlyName();
     }
+
+    /**
+     * Get the module name.
+     *
+     * @return string
+     */
+    public function getModuleAlias()
+    {
+        $module = $this->argument('module') ?: app('modules')->getUsedNow();
+
+        $module = app('modules')->findOrFail($module);
+
+        return $module->getAlias();
+    }
 }
