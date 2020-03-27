@@ -83,6 +83,13 @@ class CrudMakeCommand extends Command
             '--crud' => true,
             '--model' => $this->getModel(),
         ]);
+
+        // Create a factory for the model if it doesn't exist yet
+        $this->call('module:make-factory', [
+            'name' => Str::singular($this->getCrudName()) . 'Factory',
+            'module' => $this->getModuleName(),
+            '--model' => $this->getModel(),
+        ]);
     }
 
     /**
