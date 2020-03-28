@@ -11,18 +11,22 @@ class Command extends IlluminateCommand
     /**
      * Run an external command.
      *
-     * @param string $command
+     * @param string|array $command
      * @param string $dir
      * @return void
      */
-    protected function runExternal(string $command, string $dir = null): void
+    protected function runExternal($command, string $dir = null): void
     {
-        $command = explode(' ', $command);
+        if (is_string($command)) {
+            $command = explode(' ', $command);
+        }
+        
         $process = new Process($command, $dir);
         $process->run();
 
         if (!$process->isSuccessful()) {
-            $this->error("Error while running `{$command}`!");
+            $commandStr = implode(' ', $command);
+            $this->error("Error while running `{$commandStr}`!");
 
             throw new ProcessFailedException($process);
         }
