@@ -1,31 +1,20 @@
 <p align="center">
-<a href="https://packagist.org/packages/voerro/devel"><img src="https://poser.pugx.org/voerro/devel/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/voerro/devel"><img src="https://poser.pugx.org/voerro/devel/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/voerro/devel"><img src="https://poser.pugx.org/voerro/devel/license.svg" alt="License"></a>
+<a href="https://packagist.org/packages/devel/devel"><img src="https://poser.pugx.org/devel/devel/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/devel/devel"><img src="https://poser.pugx.org/devel/devel/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/devel/devel"><img src="https://poser.pugx.org/devel/devel/license.svg" alt="License"></a>
 </p>
 
-Devel is a modular Laravel platform which comes with an admin dashboard, a CRUD generator and a bunch of other useful tools. It is meant to make the life of developers a bit easier.
+Devel (a **DEV**eloper's Larav**EL**) enhances Laravel in different ways making life of Laravel developers easier.
 
-The modularity was achieved with the help of the [nWidart/laravel-modules](https://github.com/nWidart/laravel-modules) package, which was modified to the needs of Devel.
+The Devel's main goal is to solve some of the common problems, minimize the routine of the development process, give projects a better structure. Devel can be used to develop regular web sites, as well as APIs/backends for Web Apps / PWAs / Mobile Apps. It comes with an admin dashboard too!
 
-**PROJECT STATUS: NOT READY TO BE USED!** The project is in its early development stage. The dashboard/CRUD is incomplete and there are no any ready-to-use modules yet. Besides, breaking changes are made all the time.
-
-- [Documentation](http://voerro.com/en/projects/devel/)
+- [Documentation](http://voerro.com/en/projects/devel/) - features, installation, development, and more
 - [Live Demo](http://devel.voerro.com/dashboard)
     - `admin@example.com` / `qwerty123` - note that this user only has view/read permissions on the demo site and some features won't be visible at all
 
-## Features
+## Project Status
 
-- Modular structure - organize your code into reusable modules, use modules made by other people
-- All the custom Devel code comes with the project. Feel free to modify it to your needs.
-- User roles and permissions system
-- An admin dashboard built with custom Vue.js components
-- CRUD generation for the dashboard
-- A set of utilities solving some common problems
-
-## Contributing
-
-Thank you for considering contributing to Devel! To make a contribution just fork the project and create a Pull Request. Please point your PRs to be merged into the `dev` branch.
+**TRIAL AND ERROR STAGE. USE AT YOUR OWN RISK!** The project is in its early active development stage. The dashboard/CRUD is incomplete and there are no any ready-to-use modules yet. Besides, breaking changes are made quite often.
 
 ## License
 
