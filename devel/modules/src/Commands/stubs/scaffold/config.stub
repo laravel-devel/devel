@@ -1,9 +1,0 @@
-<?php
-
-return [
-    'name' => '$STUDLY_NAME$',
-
-    'display_name' => '$DISPLAY_NAME$',
-
-    'slug' => '$SLUG$',
-];

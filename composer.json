@@ -1,64 +1,58 @@
 {
-    "name": "voerro/devel",
-    "type": "project",
-    "description": "Modular Laravel platform with a dashboard and CRUD generator.",
+    "name": "devel/devel",
+    "description": "Dev tools & utils + admin dashboard / backend / API + modularity for Laravel",
     "keywords": [
-        "framework",
         "laravel",
         "devel",
+        "modules",
         "modular",
+        "admin",
         "dashboard",
-        "crud"
+        "crud",
+        "tools",
+        "utils"
     ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Zavyalov",
+            "email": "alex@voerro.com",
+            "homepage": "http://voerro.com",
+            "role": "Developer"
+        }
+    ],
     "require": {
-        "php": "^7.2",
-        "doctrine/dbal": "^2.10",
-        "fideloper/proxy": "^4.0",
-        "laravel/framework": "^6.2",
-        "laravel/tinker": "^2.0"
+        "devel/modules": "^0.1",
+        "php": ">=7.2",
+        "doctrine/dbal": "^2.10"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.2",
-        "devel/module-installer-composer-plugin": "^0.1.0",
-        "facade/ignition": "^1.4",
-        "fzaninotto/faker": "^1.4",
-        "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
-    },
-    "config": {
-        "optimize-autoloader": true,
-        "preferred-install": "dist",
-        "sort-packages": true
-    },
-    "extra": {
-        "laravel": {
-            "dont-discover": []
-        }
+        "phpunit/phpunit": "~7.0|~8.0",
+        "mockery/mockery": "~1.0",
+        "orchestra/testbench": "^4.0",
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "laravel/framework": "^6|^7"
     },
     "autoload": {
         "psr-4": {
-            "Devel\\": "devel",
-            "Modules\\": "Modules/"
+            "Devel\\": "src"
         },
         "files": [
-            "devel/modules/src/helpers.php",
-            "devel/core/Services/helpers.php"
+            "src/Services/helpers.php"
         ]
     },
-    "minimum-stability": "stable",
-    "prefer-stable": true,
-    "scripts": {
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ],
-        "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
-        ]
-    }
+    "autoload-dev": {
+        "psr-4": {
+            "Devel\\Dev\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Devel\\Providers\\DevelServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
