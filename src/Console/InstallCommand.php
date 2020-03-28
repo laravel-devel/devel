@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\File;
 
 class InstallCommand extends Command
 {
+    protected $modulesToInstall = [
+        'DevelDashboard' => 'devel/dashboard-module',
+        'DevelUserRoles' => 'devel/dashboard-user-roles-module',
+        'DevelUsers' => 'devel/dashboard-users-module',
+    ];
+
     /**
      * The console command name.
      *
@@ -72,16 +78,34 @@ class InstallCommand extends Command
                 '--model' => $userModel,
             ]);
         }
-        // $userModel = config('auth.providers.users.model');
 
         // Create the Modules folder if it doesn't exist yet
         if (!file_exists(config('devel-modules.paths.modules'))) {
             mkdir(config('devel-modules.paths.modules'));
         }
 
-        // TODO: Download and install the default modules (require into the main project)
-        // IMPORTANT: Don't download if the module/folder already exist
-            // - Module install command - "return" if the module is already installed
+        // Download and install the default modules (require into the main project)
+        $this->info('Downloading the default modules...');
+
+        $installedModules = Module::all();
+
+        foreach ($this->modulesToInstall as $name => $package) {
+            if (isset($installedModules[$name])) {
+                $this->info("Module [$name] already exists. Skipping...");
+
+                continue;
+            }
+
+            // No exception catching. In case of an error the instalation will
+            // be terminated at this point, because the default modules are
+            // like a part of the Devel package and we should make sure they can
+            // be installed.
+            $this->call('module:download', [
+                'name' => $package,
+            ]);
+
+            $this->info("Downloaded module [$name]!");
+        }
 
         // Install each module
         $this->info('Installing modules...');
