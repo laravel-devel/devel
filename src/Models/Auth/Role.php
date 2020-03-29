@@ -38,11 +38,15 @@ class Role extends Model
         'permissions',
     ];
 
+    protected $casts = [
+        'default' => 'boolean',
+    ];
+
     protected static function boot()
     {
         parent::boot();
 
-        static::updating(function ($role) {
+        static::saving(function ($role) {
             // The 'root' role cannot be changed
             if ($role->getOriginal('key') === 'root') {
                 $role->key = 'root';
