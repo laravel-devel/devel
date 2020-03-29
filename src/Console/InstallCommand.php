@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\File;
 class InstallCommand extends Command
 {
     protected $modulesToInstall = [
-        'DevelDashboard' => 'devel/dashboard-module',
-        'DevelUserRoles' => 'devel/dashboard-user-roles-module',
-        'DevelUsers' => 'devel/dashboard-users-module',
+        'DevelDashboard' => 'devel/devel-dashboard-module',
+        'DevelUserRoles' => 'devel/devel-dashboard-user-roles-module',
+        'DevelUsers' => 'devel/devel-dashboard-users-module',
     ];
 
     /**
