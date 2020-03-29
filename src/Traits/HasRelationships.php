@@ -31,6 +31,11 @@ trait HasRelationships
 
             try {
                 $return = $method->invoke($this);
+                
+                if (!is_object($return) && !method_exists($return, 'getRelated')) {
+                    continue;
+                }
+
                 $className = get_class($return->getRelated());
 
                 if ($return instanceof Relation && substr($className, 0, 10) !== 'Illuminate') {
