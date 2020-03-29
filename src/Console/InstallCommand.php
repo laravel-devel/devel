@@ -12,8 +12,8 @@ class InstallCommand extends Command
 {
     protected $modulesToInstall = [
         'DevelDashboard' => 'devel/devel-dashboard-module',
-        'DevelUserRoles' => 'devel/devel-dashboard-user-roles-module',
-        'DevelUsers' => 'devel/devel-dashboard-users-module',
+        'DevelUserRoles' => 'devel/devel-user-roles-module',
+        'DevelUsers' => 'devel/devel-users-module',
     ];
 
     /**
