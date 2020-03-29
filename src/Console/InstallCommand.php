@@ -102,10 +102,14 @@ class InstallCommand extends Command
             // be installed.
             $this->call('module:download', [
                 'name' => $package,
+                '--no-dump' => true,
             ]);
 
             $this->info("Downloaded module [$name]!");
         }
+
+        // Dump composer's autoload
+        $this->runExternal('composer dump-autoload');
 
         // Install each module
         $this->info('Installing modules...');
