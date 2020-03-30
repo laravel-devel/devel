@@ -41,48 +41,8 @@ trait Sortable
      */
     protected function sortJoinRelationship(Builder $query, string $sort): Builder
     {
-        list($method, $col) = explode('.', $sort);
+        $method = explode('.', $sort)[0];
 
-        if (!$model = $query->getModel()) {
-            throw new \Exception('Could not define model for the sort query.');
-        }
-
-        $relationships = $model->getRelationships();
-        $relation = $relationships[$method] ?? null;
-
-        if (!$relation) {
-            // Sometimes a relationship could not be found because the string is
-            // in a wrong case (camel instead of snake or ise-versa)
-            $reformatted = strpos($method, '_') !== false
-                ? \Str::camel($method)
-                : \Str::snake($method);
-
-            $relation = $relationships[$reformatted] ?? null;
-
-            if (!$relation) {
-                $model = get_class($model);
-
-                throw new \Exception("Relationship '{$method}' does not exist in the '{$model}' model");
-            }
-        }
-
-        // The table names
-        $relatedTable = (new $relation['model'])->getTable();
-
-        // Foreign and local keys
-        $lk = $relation['relation']->getQualifiedParentKeyName();   // With the table name
-        $fk = $relation['relation']->getForeignKeyName();   // Without the table name
-
-        $lk = is_string($lk) ? [$lk] : $lk;
-        $fk = is_string($fk) ? [$fk] : $fk;
-
-        // Now we can add a join. Alliasing the join table as the method name.
-        $query->leftJoin($relatedTable . ' as ' . $method, function ($join) use ($fk, $lk, $method) {
-            for ($i = 0; $i < count($fk); $i++) {
-                $join->on($lk[$i], '=', $method . '.' . $fk[$i]);
-            }
-        });
-
-        return $query;
+        return $this->leftJoinRelationship($query, $method);
     }
 }
