@@ -5,6 +5,7 @@ namespace Devel\Models\Auth;
 use Illuminate\Notifications\Notifiable;
 use Devel\Models\Authenticatable;
 use Devel\Traits\HasPermissions;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Modules\DevelDashboard\Notifications\ResetPasswordNotification;
 
 class User extends Authenticatable
@@ -79,7 +80,7 @@ class User extends Authenticatable
      *
      * @return void
      */
-    public function roles()
+    public function roles(): BelongsToMany
     {
         return $this->belongsToMany(
             Role::class,
@@ -94,7 +95,7 @@ class User extends Authenticatable
      *
      * @return void
      */
-    public function permissions()
+    public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(
             Permission::class,

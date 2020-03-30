@@ -4,18 +4,19 @@ namespace Devel\Models\Auth;
 
 use Devel\Models\Model;
 use Devel\Traits\HasPermissions;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Role extends Model
 {
     use HasPermissions;
 
     public $table = 'devel_user_roles';
-    
+
     protected $primaryKey = 'key';
     protected $keyType = 'string';
 
     public $incrementing = false;
-    
+
     public $timestamps = false;
 
     /**
@@ -71,7 +72,7 @@ class Role extends Model
      *
      * @return void
      */
-    public function permissions()
+    public function permissions(): BelongsToMany
     {
         return $this->belongsToMany(
             Permission::class,

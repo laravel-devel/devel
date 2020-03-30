@@ -4,6 +4,7 @@ namespace Devel\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 trait HasRelationships
@@ -31,11 +32,21 @@ trait HasRelationships
             }
 
             try {
-                $return = $method->invoke($this);
+                // Require relationship methods to have explicit return types.
+                // We don't want to invoke non-relationship methods because
+                // those might perform unwanted actions.
+                $returnType = $method->getReturnType();
 
-                if (!is_object($return) && !method_exists($return, 'getRelated')) {
+                if (!$returnType || get_class($returnType) !== 'ReflectionNamedType') {
                     continue;
                 }
+
+                if (!method_exists($returnType->getName(), 'getRelated')) {
+                    continue;
+                }
+
+                // Now it should be safe to invoke a method
+                $return = $method->invoke($this);
 
                 $className = get_class($return->getRelated());
 
