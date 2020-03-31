@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "devel/modules": "^0.1",
+        "devel/modules": "~0.1",
         "laravel/framework": "^6|^7",
         "php": ">=7.2",
         "doctrine/dbal": "^2.10"
