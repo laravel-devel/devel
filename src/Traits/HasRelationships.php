@@ -95,7 +95,10 @@ trait HasRelationships
         }
 
         // The table names
-        $relatedTable = (new $relation['model'])->getTable();
+        $relatedModel = new $relation['model'];
+
+        $relatedTable = $relatedModel->getConnection()->getDatabaseName()
+            . '.' . $relatedModel->getTable();
 
         // Don't join the table more than ones - produces an SQL error
         if ($this->tableJoined($query, $relatedTable)) {
