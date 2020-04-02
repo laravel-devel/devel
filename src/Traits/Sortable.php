@@ -3,6 +3,7 @@
 namespace Devel\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 trait Sortable
 {
@@ -26,10 +27,17 @@ trait Sortable
         // Sorting by a relationship column
         if (strpos($sort, '.') !== false) {
             $query = $this->sortJoinRelationship($query, $sort);
+
+            // We need to wrap the multilevel relationship/join name into tildas
+
+            $parts = explode('.', $sort);
+            $field = array_pop($parts);
+
+            $sort = '`' . implode('.', $parts) . '`.`' . $field . '`';
         }
 
         // Sorting by an own column
-        return $query->orderBy($sort, $order);
+        return $query->orderBy(DB::raw($sort), $order);
     }
 
     /**
@@ -41,8 +49,11 @@ trait Sortable
      */
     protected function sortJoinRelationship(Builder $query, string $sort): Builder
     {
-        $method = explode('.', $sort)[0];
+        $method = explode('.', $sort);
+        
+        // Remove the field name from the chain, only keep the relationship names
+        array_pop($method);
 
-        return $this->leftJoinRelationship($query, $method);
+        return $this->leftJoinRelationship($query, implode('.', $method));
     }
 }
