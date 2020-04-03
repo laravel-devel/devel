@@ -32,7 +32,9 @@ trait Filterable
 
             // Custom filter logic
             if (method_exists($this, $method)) {
-                return $this->{$method}($query, $values);
+                $query = $this->{$method}($query, $values);
+
+                continue;
             }
 
             if (\Str::contains($filter, '__')) {
