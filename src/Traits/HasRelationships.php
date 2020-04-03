@@ -154,6 +154,8 @@ trait HasRelationships
             $baseModel = $relatedModel;
         }
 
+        $query->groupBy($this->getTable() . '.' . $this->primaryKey);
+
         return $query;
     }
 
