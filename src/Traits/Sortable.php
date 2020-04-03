@@ -34,6 +34,8 @@ trait Sortable
             $field = array_pop($parts);
 
             $sort = '`' . implode('.', $parts) . '`.`' . $field . '`';
+        } else {
+            $sort = "`{$sort}`";
         }
 
         // Sorting by an own column
