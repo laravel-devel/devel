@@ -1,0 +1,82 @@
+<?php
+
+namespace Devel\Modules\Commands;
+
+use Illuminate\Console\Command;
+use Devel\Modules\Module;
+use Devel\Modules\Publishing\AssetPublisher;
+use Symfony\Component\Console\Input\InputArgument;
+
+class PublishCommand extends Command
+{
+    /**
+     * The console command name.
+     *
+     * @var string
+     */
+    protected $name = 'module:publish';
+
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Publish a module\'s assets to the application.';
+
+    /**
+     * Execute the console command.
+     */
+    public function handle()
+    {
+        if ($name = $this->argument('module')) {
+            $this->publish($name);
+
+            return;
+        }
+
+        $this->publishAll();
+    }
+
+    /**
+     * Publish assets from all modules.
+     */
+    public function publishAll()
+    {
+        foreach ($this->laravel['devel-modules']->allEnabled() as $module) {
+            $this->publish($module);
+        }
+    }
+
+    /**
+     * Publish assets from the specified module.
+     *
+     * @param string $name
+     */
+    public function publish($name)
+    {
+        if ($name instanceof Module) {
+            $module = $name;
+        } else {
+            $module = $this->laravel['devel-modules']->findOrFail($name);
+        }
+
+        with(new AssetPublisher($module))
+            ->setRepository($this->laravel['devel-modules'])
+            ->setConsole($this)
+            ->publish();
+
+        $this->line("<info>Published</info>: {$module->getStudlyName()}");
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['module', InputArgument::OPTIONAL, 'Module to publish the assets for.'],
+        ];
+    }
+}

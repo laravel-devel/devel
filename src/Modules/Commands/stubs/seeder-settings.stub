@@ -1,0 +1,75 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Devel\Models\Settings;
+use Devel\Models\Auth\Role;
+use Devel\Database\Seeders\Seeder;
+use Devel\Models\Auth\Permission;
+
+class $NAME$ extends Seeder
+{
+    protected $permissions = [
+        $PERMISSIONS$
+    ];
+
+    protected $settings = [
+        // 'site-name' => [
+        //     'name' => 'Site Name',
+        //     'value' => 'Devel',
+        // ],
+    ];
+
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        // Seed the permission to edit the module's settings
+        $root = Role::find('root');
+
+        foreach ($this->permissions as $permission => $name) {
+            $permission = Permission::firstOrCreate([
+                'key' => $permission,
+                'name' => $name,
+                'module' => '$MODULE$',
+            ]);
+
+            if ($root && !$root->permissions->contains($permission)) {
+                $root->permissions()->attach($permission);
+            }
+        }
+
+        // Seed the module's settings
+        foreach ($this->settings as $key => $data) {
+            $parts = explode('-', $key);
+            $group = $parts[0];
+
+            array_shift($parts);
+            $key = implode('.', $parts);
+
+            Settings::create([
+                'group' => $group,
+                'key' => $key,
+                'name' => $data['name'],
+                'value' => $data['value'],
+            ]);
+        }
+    }
+
+    /**
+     * Revert the database seeds.
+     *
+     * @return void
+     */
+    public function revert()
+    {
+        foreach ($this->permissions as $permission => $name) {
+            Permission::where('module', '$MODULE$')
+                ->where('key', $permission)
+                ->forceDelete();
+        }
+    }
+}

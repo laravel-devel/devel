@@ -1,0 +1,49 @@
+    /**
+     * $MODEL_NAME$ CRUD
+     */
+    Route::group([
+        'prefix' => '$CRUD_NAME_LOWER$',
+    ], function() {
+        Route::get('/', [
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.index',
+            'uses' => '$CONTROLLER_NAME$@index',
+            'dashboardSidebar' => '$DISPLAY_NAME$->$CRUD_NAME$',
+            'permissions' => '$PERMISSION_GROUP$.list_$CRUD_NAME_LOWER$',
+        ]);
+
+        Route::get('/list', [
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.get',
+            'uses' => '$CONTROLLER_NAME$@get',
+            'permissions' => '$PERMISSION_GROUP$.list_$CRUD_NAME_LOWER$',
+        ]);
+
+        Route::get('/add', [
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.create',
+            'uses' => '$CONTROLLER_NAME$@create',
+            'permissions' => '$PERMISSION_GROUP$.add_$CRUD_NAME_LOWER$',
+        ]);
+
+        Route::get('/{id}/edit', [
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.edit',
+            'uses' => '$CONTROLLER_NAME$@edit',
+            'permissions' => '$PERMISSION_GROUP$.view_$CRUD_NAME_LOWER$ || $PERMISSION_GROUP$.edit_$CRUD_NAME_LOWER$',
+        ]);
+
+        Route::post('/', [
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.store',
+            'uses' => '$CONTROLLER_NAME$@store',
+            'permissions' => '$PERMISSION_GROUP$.add_$CRUD_NAME_LOWER$',
+        ]);
+
+        Route::post('/{id}', [
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.update',
+            'uses' => '$CONTROLLER_NAME$@update',
+            'permissions' => '$PERMISSION_GROUP$.edit_$CRUD_NAME_LOWER$',
+        ]);
+
+        Route::delete('/{id}', [
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.destroy',
+            'uses' => '$CONTROLLER_NAME$@destroy',
+            'permissions' => '$PERMISSION_GROUP$.delete_$CRUD_NAME_LOWER$',
+        ]);
+    });

@@ -1,0 +1,16 @@
+@extends('develdashboard::layout')
+
+@section('content')
+    <header class="section-header">
+        <div class="title">
+            {{ config('$LOWER_NAME$.display_name') }}
+        </div>
+    </header>
+
+    <div class="section-body">
+        <v-datatable base-url="{{ route('dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.get') }}"
+            :fields="{{ json_encode($fields) }}"
+            :actions="{{ json_encode($actions) }}"
+            :permissions="{{ json_encode($permissions ?? []) }}"></v-datatable>
+    </div>
+@endsection

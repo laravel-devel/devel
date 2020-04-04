@@ -1,0 +1,14 @@
+{
+    "name": "$STUDLY_NAME$",
+    "alias": "$LOWER_NAME$",
+    "description": "",
+    "keywords": [],
+    "order": 4,
+    "providers": [
+        "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\$PROVIDER_NAMESPACE$\\$STUDLY_NAME$ServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": ["DevelDashboard"],
+    "buildNpm": false
+}

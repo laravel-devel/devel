@@ -1,0 +1,50 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Devel\Models\Auth\Role;
+use Devel\Database\Seeders\Seeder;
+use Devel\Models\Auth\Permission;
+
+class $NAME$ extends Seeder
+{
+    protected $permissions = [
+        $PERMISSIONS$
+    ];
+
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $root = Role::find('root');
+
+        foreach ($this->permissions as $permission => $name) {
+            $permission = Permission::firstOrCreate([
+                'key' => $permission,
+                'name' => $name,
+                'module' => '$MODULE$',
+            ]);
+
+            if ($root && !$root->permissions->contains($permission)) {
+                $root->permissions()->attach($permission);
+            }
+        }
+    }
+
+    /**
+     * Revert the database seeds.
+     *
+     * @return void
+     */
+    public function revert()
+    {
+        foreach ($this->permissions as $permission => $name) {
+            Permission::where('module', '$MODULE$')
+                ->where('key', $permission)
+                ->forceDelete();
+        }
+    }
+}

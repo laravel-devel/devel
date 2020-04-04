@@ -1,0 +1,30 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Dashboard Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register the (admin) dashboard routes for your module.
+|
+*/
+
+Route::group([
+    'prefix' => config('$LOWER_NAME$.slug'),
+], function() {
+    /**
+     * Module settings
+     */
+    Route::get('/settings', [
+        'as' => '$LOWER_NAME$.settings.edit',
+        'uses' => 'SettingsController@edit',
+        'dashboardSidebar' => '$DISPLAY_NAME$->Settings',
+        'permissions' => '$PERMISSION_GROUP$.edit_settings',
+    ]);
+
+    Route::post('/settings', [
+        'as' => '$LOWER_NAME$.settings.update',
+        'uses' => 'SettingsController@update',
+        'permissions' => '$PERMISSION_GROUP$.edit_settings',
+    ]);
+});
