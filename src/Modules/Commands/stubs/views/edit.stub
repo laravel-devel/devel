@@ -1,0 +1,17 @@
+@extends('develdashboard::layout')
+
+@section('content')
+    <header class="section-header">
+        <div class="title">
+            {{ config('$LOWER_NAME$.display_name') }} - Edit
+        </div>
+    </header>
+
+    <div class="section-body">
+        <div class="card">
+            <div class="body">
+                @include('$LOWER_NAME$::dashboard.$CRUD_NAME_LOWER$._form')
+            </div>
+        </div>
+    </div>
+@endsection

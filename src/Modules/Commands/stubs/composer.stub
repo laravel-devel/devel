@@ -1,0 +1,26 @@
+{
+    "name": "$VENDOR$/$PACKAGE_NAME$",
+    "type": "devel-module",
+    "description": "",
+    "authors": [
+        {
+            "name": "$AUTHOR_NAME$",
+            "email": "$AUTHOR_EMAIL$"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\$PROVIDER_NAMESPACE$\\$STUDLY_NAME$ServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "$MODULE_NAMESPACE$\\$STUDLY_NAME$\\": ""
+        }
+    }
+}

@@ -22,7 +22,7 @@
         }
     ],
     "require": {
-        "devel/modules": "~0.1",
+        "devel/module-installer-composer-plugin": "~0.1",
         "laravel/framework": "^6|^7",
         "php": ">=7.2",
         "doctrine/dbal": "^2.10"
@@ -38,7 +38,8 @@
             "Devel\\": "src"
         },
         "files": [
-            "src/Services/helpers.php"
+            "src/helpers.php",
+            "src/Modules/helpers.php"
         ]
     },
     "autoload-dev": {
@@ -49,8 +50,12 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Devel\\Providers\\DevelServiceProvider"
-            ]
+                "Devel\\Providers\\DevelServiceProvider",
+                "Devel\\Modules\\LaravelModulesServiceProvider"
+            ],
+            "aliases": {
+                "Module": "Devel\\Modules\\Facades\\Module"
+            }
         }
     },
     "minimum-stability": "dev",

@@ -1,0 +1,8 @@
+<v-form action="{{ !empty($item) ? route('dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.update', $item) : route('dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.store') }}"
+    method="POST"
+    type="table"
+    :fields="{{ json_encode($form) }}"
+    success="{{ route('dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.index') }}"
+    :values="{{ $item ?? '{}' }}"
+    :collections="{{ isset($collections) ? json_encode($collections) : '{}' }}"
+    :read-only="{{ !auth()->user()->hasPermissions('$PERMISSION_GROUP$.$PERMISSION_EDIT$') ? 'true' : 'false' }}"></v-form>

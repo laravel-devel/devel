@@ -1,0 +1,28 @@
+<?php
+
+namespace $CLASS_NAMESPACE$;
+
+use Illuminate\Http\Request;
+use Modules\DevelDashboard\Http\Controllers\BaseSettingsController as Controller;
+
+class $CLASS$ extends Controller
+{
+    protected $groups = [
+        // 'site' => [
+        //     'name',
+        // ],
+    ];
+
+    /**
+     * Show the settings form
+     *
+     * @return void
+     */
+    public function edit()
+    {
+        return view('$LOWER_NAME$::dashboard.settings.edit', [
+            'form' => $this->form,
+            'values' => $this->values,
+        ]);
+    }
+}

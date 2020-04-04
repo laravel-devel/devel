@@ -1,0 +1,95 @@
+<?php
+
+namespace $NAMESPACE$;
+
+use Devel\Tests\TestCase;
+use Devel\Models\Auth\User;$MODEL_IMPORT$
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class $CLASS$ extends TestCase
+{
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->seed(\Devel\Database\Seeders\DevelDatabaseSeeder::class);
+        $this->seed(\Modules\DevelDashboard\Database\Seeders\DevelDashboardDatabaseSeeder::class);
+        $this->seed(\$MODULE_SEEDER$::class);
+
+        $this->root = User::find(1);
+    }
+
+    /** @test */
+    public function roots_can_view_$CRUD_NAME$_lists()
+    {
+        $response = $this->actingAs($this->root)
+            ->get(route('dashboard.$MODULE_ALIAS$.$CRUD_NAME$.get'))
+            ->assertStatus(200);
+
+        $data = $response->json();
+
+        $this->assertEquals($MODEL_SHORT$::count(), $data['total']);
+    }
+
+    /** @test */
+    public function roots_can_create_$CRUD_NAME$()
+    {
+        $data = factory($MODEL_SHORT$::class)->make()
+            ->makeVisible([$MAKE_VISIBLE$])
+            ->toArray();
+
+        $this->assertNull($MODEL_SHORT$::where($data)->first());
+
+        $this->actingAs($this->root)
+            ->post(route('dashboard.$MODULE_ALIAS$.$CRUD_NAME$.store'), $data)
+            ->assertStatus(201);
+
+        $this->assertNotNull($MODEL_SHORT$::where($data)->first());
+    }
+
+    /** @test */
+    public function roots_can_view_$CRUD_NAME$()
+    {
+        $item = factory($MODEL_SHORT$::class)->create();
+
+        $this->actingAs($this->root)
+            ->get(route('dashboard.$MODULE_ALIAS$.$CRUD_NAME$.edit', $item->$PK$))
+            ->assertStatus(200);
+    }
+
+    /** @test */
+    public function roots_can_edit_$CRUD_NAME$()
+    {
+        $item = factory($MODEL_SHORT$::class)->create();
+
+        $data = factory($MODEL_SHORT$::class)->make()
+            ->makeVisible([$MAKE_VISIBLE$])
+            ->toArray();
+
+        $this->actingAs($this->root)
+            ->post(route('dashboard.$MODULE_ALIAS$.$CRUD_NAME$.update', $item->$PK$), $data)
+            ->assertStatus(200);
+
+        $item = $item->refresh()
+            ->makeVisible([$MAKE_VISIBLE$]);
+
+        $this->assertEquals(
+            $data, array_intersect($data, $item->toArray())
+        );
+    }
+
+    /** @test */
+    public function roots_can_delete_$CRUD_NAME$()
+    {
+        $item = factory($MODEL_SHORT$::class)->create();
+
+        $this->actingAs($this->root)
+            ->delete(route('dashboard.$MODULE_ALIAS$.$CRUD_NAME$.destroy', $item->$PK$))
+            ->assertStatus(200);
+
+        $this->assertNull($MODEL_SHORT$::find($item->$PK$));
+    }
+}
