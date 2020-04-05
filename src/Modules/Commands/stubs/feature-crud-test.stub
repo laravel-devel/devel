@@ -25,6 +25,8 @@ class $CLASS$ extends TestCase
     /** @test */
     public function roots_can_view_$CRUD_NAME$_lists()
     {
+        factory($MODEL_SHORT$::class, 5)->create();
+
         $response = $this->actingAs($this->root)
             ->get(route('dashboard.$MODULE_ALIAS$.$CRUD_NAME$.get'))
             ->assertStatus(200);
