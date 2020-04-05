@@ -65,7 +65,7 @@ class FactoryMakeCommand extends GeneratorCommand
      */
     protected function getTemplateContents()
     {
-        if (!$this->options('model')) {
+        if (!$this->option('model')) {
             return (new Stub('/factory.stub'))->render();
         }
 
