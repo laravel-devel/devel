@@ -33,7 +33,7 @@ class TestMakeCommand extends GeneratorCommand
     {
         $module = $this->laravel['devel-modules'];
 
-        if ($this->option('feature') || $this->option('crud')) {
+        if ($this->option('feature') || $this->option('model')) {
             return $module->config('paths.generator.test-feature.namespace') ?: $module->config('paths.generator.test-feature.path', 'Tests/Feature');
         }
 
@@ -62,7 +62,6 @@ class TestMakeCommand extends GeneratorCommand
     {
         return [
             ['feature', false, InputOption::VALUE_NONE, 'Create a feature test.'],
-            ['crud', false, InputOption::VALUE_NONE, 'Create a feature CRUD test.'],
             ['model', false, InputOption::VALUE_OPTIONAL, 'Model class to generate the test for.'],
         ];
     }
@@ -84,7 +83,7 @@ class TestMakeCommand extends GeneratorCommand
             $stub = '/feature-test.stub';
         }
 
-        if ($this->option('crud')) {
+        if ($this->option('model')) {
             $stub = '/feature-crud-test.stub';
 
             $replacements = array_merge($replacements, [
@@ -108,7 +107,7 @@ class TestMakeCommand extends GeneratorCommand
     {
         $path = $this->laravel['devel-modules']->getModulePath($this->getModuleName());
 
-        if ($this->option('feature') || $this->option('crud')) {
+        if ($this->option('feature') || $this->option('model')) {
             $testPath = GenerateConfigReader::read('test-feature');
         } else {
             $testPath = GenerateConfigReader::read('test');

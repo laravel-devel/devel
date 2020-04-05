@@ -80,7 +80,6 @@ class CrudMakeCommand extends Command
         $this->call('module:make-test', [
             'name' => $this->getCrudName() . 'CrudTest',
             'module' => $this->getModuleName(),
-            '--crud' => true,
             '--model' => $this->getModel(),
         ]);
 
