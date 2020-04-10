@@ -168,6 +168,9 @@ trait HasRelationships
      */
     protected function tableJoined(Builder $query, string $table): bool
     {
-        return \Str::contains($query->toSql(), "join `{$table}`");
+        return \Str::contains($query->toSql(), [
+            "join `{$table}`",
+            "join {$table}"
+        ]);
     }
 }
