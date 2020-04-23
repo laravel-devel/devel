@@ -105,6 +105,7 @@ trait HasRelationships
             // The table names
             $relatedModel = new $relation['model'];
 
+            $localTable = $baseModel->getTable();
             $relatedTable = $relatedModel->getConnection()->getDatabaseName()
                 . '.' . $relatedModel->getTable();
 
@@ -114,8 +115,29 @@ trait HasRelationships
             }
 
             // Foreign and local keys
-            $lk = $relation['relation']->getQualifiedParentKeyName();   // With the table name
-            $fk = $relation['relation']->getForeignKeyName();   // Without the table name
+            switch ($relation['type']) {
+                case 'BelongsTo':
+                    $fk = $relation['relation']->getOwnerKeyName();
+                    $lk = $localTable . '.' . $relation['relation']->getForeignKeyName();
+                    break;
+
+                case 'MorphTo':
+                    $fk = $relation['relation']->getOwnerKeyName();
+                    $lk = $localTable . '.' . $relation['relation']->getForeignKeyName();
+                    break;
+
+                case 'MorphToMany':
+                    $lk = $relation['relation']->getOwnerKeyName();
+                    $fk = $localTable . '.' . $relation['relation']->getForeignKeyName();
+                    break;
+
+                    // TODO: BelongsToMany is not supported by this code. Possibly
+                    // there are more special cases/methods.
+
+                default:
+                    $lk = $relation['relation']->getLocalKeyName();
+                    $fk = $relation['relation']->getForeignKeyName();
+            }
 
             $lk = is_string($lk) ? [$lk] : $lk;
             $fk = is_string($fk) ? [$fk] : $fk;
