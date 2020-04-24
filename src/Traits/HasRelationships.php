@@ -106,8 +106,8 @@ trait HasRelationships
             $relatedModel = new $relation['model'];
 
             $localTable = $baseModel->getTable();
-            $relatedTable = $relatedModel->getConnection()->getDatabaseName()
-                . '.' . $relatedModel->getTable();
+            $relatedTable = '`' . $relatedModel->getConnection()->getDatabaseName()
+                . '`.`' . $relatedModel->getTable() . '`';
 
             // Don't join the table more than ones - produces an SQL error
             if ($this->tableJoined($query, $relatedTable)) {
@@ -167,7 +167,7 @@ trait HasRelationships
                 }
             }
 
-            $query->leftJoin(DB::raw($relatedTable . ' as ' . $chainedMethodStr), function ($join) use ($fk, $lk, $chainedMethodStr, $alias) {
+            $query->leftJoin(DB::raw("{$relatedTable} as {$chainedMethodStr}"), function ($join) use ($fk, $lk, $chainedMethodStr, $alias) {
                 for ($i = 0; $i < count($fk); $i++) {
                     $join->on(DB::raw($lk[$i]), '=', DB::raw($chainedMethodStr . '.' . $fk[$i]));
                 }
