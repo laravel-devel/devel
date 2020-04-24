@@ -118,17 +118,17 @@ trait HasRelationships
             switch ($relation['type']) {
                 case 'BelongsTo':
                     $fk = $relation['relation']->getOwnerKeyName();
-                    $lk = $localTable . '.' . $relation['relation']->getForeignKeyName();
+                    $lk = $relation['relation']->getForeignKeyName();
                     break;
 
                 case 'MorphTo':
                     $fk = $relation['relation']->getOwnerKeyName();
-                    $lk = $localTable . '.' . $relation['relation']->getForeignKeyName();
+                    $lk = $relation['relation']->getForeignKeyName();
                     break;
 
                 case 'MorphToMany':
                     $lk = $relation['relation']->getOwnerKeyName();
-                    $fk = $localTable . '.' . $relation['relation']->getForeignKeyName();
+                    $fk = $relation['relation']->getForeignKeyName();
                     break;
 
                     // TODO: BelongsToMany is not supported by this code. Possibly
@@ -138,7 +138,9 @@ trait HasRelationships
                     $lk = $relation['relation']->getLocalKeyName();
                     $fk = $relation['relation']->getForeignKeyName();
             }
-
+            
+            $lk = "`{$localTable}`.`{$lk}`";
+            $fk = "`{$fk}`";
             $lk = is_string($lk) ? [$lk] : $lk;
             $fk = is_string($fk) ? [$fk] : $fk;
 
@@ -158,18 +160,21 @@ trait HasRelationships
                 $alias = implode('.', $alias);
 
                 for ($i = 0; $i < count($lk); $i++) {
-                    // Grab the field name
+                    // Grab the field name & attach it to the alias instead
                     $field = explode('.', $lk[$i]);
-                    $field = array_pop($field);
+                    $field = trim(array_pop($field), '`');
 
-                    // Attach it to the alias instead
-                    $lk[$i] = "`{$alias}`.{$field}";
+                    $lk[$i] = "`{$alias}`.`{$field}`";
                 }
             }
 
-            $query->leftJoin(DB::raw("{$relatedTable} as {$chainedMethodStr}"), function ($join) use ($fk, $lk, $chainedMethodStr, $alias) {
+            $query->leftJoin(DB::raw("{$relatedTable} as {$chainedMethodStr}"), function ($join) use ($fk, $lk, $chainedMethodStr, $localTable) {
                 for ($i = 0; $i < count($fk); $i++) {
-                    $join->on(DB::raw($lk[$i]), '=', DB::raw($chainedMethodStr . '.' . $fk[$i]));
+                    $join->on(
+                        DB::raw("{$lk[$i]}"),
+                        '=',
+                        DB::raw("{$chainedMethodStr}.{$fk[$i]}")
+                    );
                 }
             });
 
