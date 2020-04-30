@@ -48,6 +48,8 @@ class InstallAllCommand extends Command
 
             // Skip the already installed modules unless '--force'd
             if ($module->isInstalled() && !$this->option('force')) {
+                $this->info('Module already installed!');
+                
                 continue;
             }
 
