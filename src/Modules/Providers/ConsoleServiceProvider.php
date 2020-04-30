@@ -12,6 +12,7 @@ use Devel\Modules\Commands\DumpCommand;
 use Devel\Modules\Commands\EnableCommand;
 use Devel\Modules\Commands\EventMakeCommand;
 use Devel\Modules\Commands\FactoryMakeCommand;
+use Devel\Modules\Commands\InstallAllCommand;
 use Devel\Modules\Commands\InstallCommand;
 use Devel\Modules\Commands\JobMakeCommand;
 use Devel\Modules\Commands\LaravelModulesV6Migrator;
@@ -72,6 +73,7 @@ class ConsoleServiceProvider extends ServiceProvider
         ProviderMakeCommand::class,
         RouteProviderMakeCommand::class,
         InstallCommand::class,
+        InstallAllCommand::class,
         UninstallCommand::class,
         DownloadCommand::class,
         ListCommand::class,

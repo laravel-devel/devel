@@ -87,10 +87,10 @@ class InstallCommand extends Command
         // Download and install the default modules (require into the main project)
         $this->info('Downloading the default modules...');
 
-        $installedModules = Module::all();
+        $downloadedModules = Module::all();
 
         foreach ($this->modulesToInstall as $name => $package) {
-            if (isset($installedModules[$name])) {
+            if (isset($downloadedModules[$name])) {
                 $this->info("Module [$name] already exists. Skipping...");
 
                 continue;
@@ -111,21 +111,10 @@ class InstallCommand extends Command
         // Dump composer's autoload
         $this->runExternal('composer dump-autoload');
 
-        // Install each module
-        $this->info('Installing modules...');
-
-        foreach (Module::all() as $name => $module) {
-            $this->info('---');
-            $this->info("Installing Module [{$name}]...");
-
-            try {
-                $this->call('module:install', ['module' => $name]);
-            } catch (\Exception $e) {
-                $this->error("Module {$name} could not be installed! Reason: \"" . $e->getMessage() . '".');
-
-                $this->error("Please fix all the errors and run \"php artisan module:install {$name}\" later.");
-            }
-        }
+        // Install all the modules
+        $this->call('module:install-all', [
+            '--force' => true,
+        ]);
 
         $this->info('---');
         $this->info('DONE! Now you can use Devel.');
