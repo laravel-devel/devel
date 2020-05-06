@@ -17,10 +17,6 @@ class CreateDevelUserRoleTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('role');
 
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('CASCADE');
-
             $table->foreign('role')
                 ->references('key')->on('devel_user_roles')
                 ->onDelete('CASCADE');

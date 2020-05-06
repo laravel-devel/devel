@@ -17,10 +17,6 @@ class CreateDevelUserPermissionTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('permission');
 
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('CASCADE');
-
             $table->foreign('permission')
                 ->references('key')->on('devel_user_permissions')
                 ->onDelete('CASCADE');
