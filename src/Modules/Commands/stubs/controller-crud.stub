@@ -19,9 +19,25 @@ class $CLASS$ extends Controller
         // CRUD setup
         $this->setModel('$MODEL$');
         $this->setRequest('$REQUEST_CLASS$');
+    }
 
+    /**
+     * Set datatable for the current request.
+     *
+     * @return void
+     */
+    protected function withDatatable()
+    {
         $this->setDatatable($MODEL_DATATABLE$);
-        
+    }
+
+    /**
+     * Set form for the current request.
+     *
+     * @return void
+     */
+    protected function withForm()
+    {
         $this->setForm($MODEL_FORM$);
     }
 
@@ -32,6 +48,8 @@ class $CLASS$ extends Controller
      */
     public function index()
     {
+        $this->withDatatable();
+
         return view('$LOWER_NAME$::dashboard.$MODEL_LOWER$.index', [
             'fields' => $this->datatable(),
             'actions' => $this->actions(),
@@ -47,6 +65,7 @@ class $CLASS$ extends Controller
     public function create()
     {
         $this->setMeta('title', 'Add');
+        $this->withForm();
 
         return view('$LOWER_NAME$::dashboard.$MODEL_LOWER$.create', [
             'form' => $this->form(),
@@ -65,6 +84,7 @@ class $CLASS$ extends Controller
         $item = $this->model()::findOrFail($id)$EDIT_MODEL_LOADS$;
 
         $this->setMeta('title', 'Edit');
+        $this->withForm();
 
         return view('$LOWER_NAME$::dashboard.$MODEL_LOWER$.edit', [
             'item' => $item,

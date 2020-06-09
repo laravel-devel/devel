@@ -251,6 +251,7 @@ class ControllerMakeCommand extends GeneratorCommand
         $fields = array_diff($fields, $model->getHidden());
 
         $values = "[\n";
+        $values .= "            // Columns\n";
 
         foreach ($fields as $field) {
             $name = ucwords(implode(' ', explode('_', $field)));
@@ -261,9 +262,12 @@ class ControllerMakeCommand extends GeneratorCommand
         }
 
         $values .= "        ], [\n";
+        $values .= "            // Actions\n";
         $values .= "            'delete' => ['dashboard.{$module->getLowerName()}.{$this->getModelLowerName()}.destroy', ':{$idKey}'],\n";
         $values .= "            'create' => ['dashboard.{$module->getLowerName()}.{$this->getModelLowerName()}.create'],\n";
         $values .= "            'edit' => ['dashboard.{$module->getLowerName()}.{$this->getModelLowerName()}.edit', ':{$idKey}'],\n";
+        $values .= "        ], [\n";
+        $values .= "            // Filters\n";
         $values .= "        ]";
 
         return $values;
