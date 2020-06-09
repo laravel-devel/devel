@@ -376,7 +376,8 @@ class ModuleGenerator extends Generator
      */
     public function generateGitKeep($path)
     {
-        $this->filesystem->put($path . '/.gitkeep', '');
+        // NOTE: Disabled for the time being as these files are pretty annoying
+        // $this->filesystem->put($path . '/.gitkeep', '');
     }
 
     /**
