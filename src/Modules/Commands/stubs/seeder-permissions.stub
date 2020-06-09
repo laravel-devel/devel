@@ -22,10 +22,11 @@ class $NAME$ extends Seeder
         $root = Role::find('root');
 
         foreach ($this->permissions as $permission => $name) {
-            $permission = Permission::firstOrCreate([
+            $permission = Permission::updateOrCreate([
                 'key' => $permission,
-                'name' => $name,
                 'module' => '$MODULE$',
+            ], [
+                'name' => $name,
             ]);
 
             if ($root && !$root->permissions->contains($permission)) {

@@ -31,10 +31,11 @@ class $NAME$ extends Seeder
         $root = Role::find('root');
 
         foreach ($this->permissions as $permission => $name) {
-            $permission = Permission::firstOrCreate([
+            $permission = Permission::updateOrCreate([
                 'key' => $permission,
-                'name' => $name,
                 'module' => '$MODULE$',
+            ], [
+                'name' => $name,
             ]);
 
             if ($root && !$root->permissions->contains($permission)) {
@@ -50,9 +51,10 @@ class $NAME$ extends Seeder
             array_shift($parts);
             $key = implode('.', $parts);
 
-            Settings::create([
+            Settings::updateOrCreate([
                 'group' => $group,
                 'key' => $key,
+            ], [
                 'name' => $data['name'],
                 'value' => $data['value'],
             ]);
