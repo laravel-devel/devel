@@ -21,7 +21,7 @@ class Command extends IlluminateCommand
             $command = explode(' ', $command);
         }
         
-        $process = new Process($command, $dir);
+        $process = new Process($command, $dir, null, null, null);
         $process->run();
 
         if (!$process->isSuccessful()) {
