@@ -30,12 +30,14 @@ class SettingsSeeder extends Seeder
             array_shift($parts);
             $key = implode('.', $parts);
 
-            Settings::create([
-                'group' => $group,
-                'key' => $key,
-                'name' => $data['name'],
-                'value' => $data['value'],
-            ]);
+            if (!Settings::where('group', $group)->where('key', $key)->exists()) {
+                Settings::create([
+                    'group' => $group,
+                    'key' => $key,
+                    'name' => $data['name'],
+                    'value' => $data['value'],
+                ]);
+            }
         }
     }
 }
