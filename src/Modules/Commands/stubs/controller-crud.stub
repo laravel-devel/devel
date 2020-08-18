@@ -53,6 +53,7 @@ class $CLASS$ extends Controller
         return view('$LOWER_NAME$::dashboard.$MODEL_LOWER$.index', [
             'fields' => $this->datatable(),
             'actions' => $this->actions(),
+            'filters' => $this->filters(),
             'permissions' => $this->permissions(),
         ]);
     }
