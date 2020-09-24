@@ -8,13 +8,13 @@
             'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.index',
             'uses' => '$CONTROLLER_NAME$@index',
             'dashboardSidebar' => '$DISPLAY_NAME$->$CRUD_NAME$',
-            'permissions' => '$PERMISSION_GROUP$.list_$CRUD_NAME_LOWER$',
+            'permissions' => '$PERMISSION_GROUP$.browse_$CRUD_NAME_LOWER$',
         ]);
 
         Route::get('/list', [
             'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.get',
             'uses' => '$CONTROLLER_NAME$@get',
-            'permissions' => '$PERMISSION_GROUP$.list_$CRUD_NAME_LOWER$',
+            'permissions' => '$PERMISSION_GROUP$.browse_$CRUD_NAME_LOWER$',
         ]);
 
         Route::get('/add', [

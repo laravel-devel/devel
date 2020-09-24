@@ -10,7 +10,7 @@ class UserPermissionsSeeder extends Seeder
         'site.edit_settings' => 'Edit Site Settings',
         'site.manage_modules' => 'Manage Site Modules',
 
-        'users.list' => 'List Users',
+        'users.browse' => 'Browse Users',
         'users.view' => 'View Users',
         'users.add' => 'Add Users',
         'users.edit' => 'Edit Users',
@@ -18,7 +18,7 @@ class UserPermissionsSeeder extends Seeder
         'users.grant_personal_permissions' => 'Grant Personal Permissions',
         'users.delete' => 'Delete Users',
 
-        'user_roles.list' => 'List Roles',
+        'user_roles.browse' => 'Browse Roles',
         'user_roles.view' => 'View Roles',
         'user_roles.add' => 'Add Roles',
         'user_roles.edit' => 'Edit Roles',
