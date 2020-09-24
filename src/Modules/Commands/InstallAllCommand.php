@@ -40,16 +40,23 @@ class InstallAllCommand extends Command
      */
     public function handle()
     {
+        $modules = Module::all();
+
+        // Sort modules by their installation order
+        uasort($modules, function ($a, $b) {
+            return $a->json()->order - $b->json()->order;
+        });
+
         $this->info('Installing all modules...');
 
-        foreach (Module::all() as $name => $module) {
+        foreach ($modules as $name => $module) {
             $this->info('---');
             $this->info("Installing Module [{$name}]...");
 
             // Skip the already installed modules unless '--force'd
             if ($module->isInstalled() && !$this->option('force')) {
                 $this->info('Module already installed!');
-                
+
                 continue;
             }
 
