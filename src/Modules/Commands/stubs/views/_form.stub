@@ -4,5 +4,5 @@
     :fields="{{ json_encode($form) }}"
     success="{{ route('dashboard.$LOWER_NAME$.$CRUD_NAME_LOWER$.index') }}"
     :values="{{ $item ?? '{}' }}"
-    :collections="{{ isset($collections) ? json_encode($collections) : '{}' }}"
+    :collections="{{ isset($collections) && $collections ? json_encode($collections) : '{}' }}"
     :read-only="{{ !auth()->user()->hasPermissions('$PERMISSION_GROUP$.$PERMISSION_EDIT$') ? 'true' : 'false' }}"></v-form>
