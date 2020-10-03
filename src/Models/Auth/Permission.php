@@ -53,11 +53,17 @@ class Permission extends Model
 
                 $groups[$groupKey] = [
                     'name' => $groupName,
-                    'permissions' => [],
+                    'permissions' => collect([]),
                 ];
             }
 
             $groups[$groupKey]['permissions'][] = $permission->toArray();
+        }
+
+        // Sort items within groups alphabetically
+        foreach ($groups as &$group) {
+            $group['permissions'] = $group['permissions']->sortBy('name')
+                ->toArray();
         }
 
         return $groups;
