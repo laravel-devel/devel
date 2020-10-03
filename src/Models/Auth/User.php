@@ -122,4 +122,15 @@ class User extends Authenticatable
             $this->notify(new ResetPasswordNotification($token));
         }
     }
+
+    /**
+     * Check whether user has a certain role (by key).
+     *
+     * @param string $role
+     * @return boolean
+     */
+    public function hasRole(string $role): bool
+    {
+        return $this->roles->contains($role);
+    }
 }
