@@ -4,6 +4,7 @@ namespace Devel\Models\Auth;
 
 use Illuminate\Notifications\Notifiable;
 use Devel\Models\Authenticatable;
+use Devel\Modules\Facades\Module;
 use Devel\Traits\HasPermissions;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Modules\DevelDashboard\Notifications\ResetPasswordNotification;
@@ -115,6 +116,10 @@ class User extends Authenticatable
      */
     public function sendPasswordResetNotification($token)
     {
-        $this->notify(new ResetPasswordNotification($token));
+        $dm = Module::find('develdashboard');
+
+        if ($dm && $dm->isInstalled() && $dm->isEnabled()) {
+            $this->notify(new ResetPasswordNotification($token));
+        }
     }
 }
