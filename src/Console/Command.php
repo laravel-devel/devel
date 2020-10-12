@@ -18,8 +18,17 @@ class Command extends IlluminateCommand
     protected function runExternal($command, string $dir = null): void
     {
         if (is_string($command)) {
-            $command = explode(' ', $command);
+            preg_match_all(
+                '/(\"[\s\S]+?\")|(\'[\s\S]+?\')|([\S]+)/',
+                $command,
+                $matches
+            );
+
+            $command = array_map(function ($item) {
+                return trim($item, " '");
+            }, $matches[0]);
         }
+        
         
         $process = new Process($command, $dir, null, null, null);
         $process->run();
