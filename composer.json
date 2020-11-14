@@ -22,10 +22,10 @@
         }
     ],
     "require": {
-        "devel/module-installer-composer-plugin": "~0.1",
         "laravel/framework": "^6|^7|^8",
         "php": ">=7.2",
-        "doctrine/dbal": "^2.10"
+        "doctrine/dbal": "^2.10",
+        "devel/module-installer-composer-plugin": "^0.2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~7.0|~8.0|~9.0",

@@ -4,27 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f1fbc9d4be351bf02920b36424b705b",
+    "content-hash": "d27584b80e2ab36a31dcc79451fbd271",
     "packages": [
         {
             "name": "devel/module-installer-composer-plugin",
-            "version": "v0.1",
+            "version": "v0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-devel/module-installer.git",
-                "reference": "76dc74b438eecc257250ab90aff540e654f7843d"
+                "reference": "129183277e419b4fa14b3e0b6e41aca0141bb87a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-devel/module-installer/zipball/76dc74b438eecc257250ab90aff540e654f7843d",
-                "reference": "76dc74b438eecc257250ab90aff540e654f7843d",
+                "url": "https://api.github.com/repos/laravel-devel/module-installer/zipball/129183277e419b4fa14b3e0b6e41aca0141bb87a",
+                "reference": "129183277e419b4fa14b3e0b6e41aca0141bb87a",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0"
+                "composer-plugin-api": "^1.0|^2.0"
             },
             "require-dev": {
-                "composer/composer": "^1.3"
+                "composer/composer": "^1.3|^2.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -40,7 +40,11 @@
                 "MIT"
             ],
             "description": "Module installer Composer plugin for devel/devel",
-            "time": "2020-03-29T01:50:10+00:00"
+            "support": {
+                "issues": "https://github.com/laravel-devel/module-installer/issues",
+                "source": "https://github.com/laravel-devel/module-installer/tree/v0.2"
+            },
+            "time": "2020-11-14T05:04:53+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -6533,5 +6537,5 @@
         "php": ">=7.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
