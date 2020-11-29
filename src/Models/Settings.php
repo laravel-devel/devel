@@ -19,6 +19,29 @@ class Settings extends Model
     ];
 
     /**
+     * Map to convert setting value type to Devel Dashboard form field type
+     * 
+     * @var array
+     */
+    const TYPE_TO_FIELD_TYPE = [
+        'string' => 'text',
+        'integer' => 'number',
+        'float' => 'text',
+        'text' => 'textarea',
+        'boolean' => 'switch',
+    ];
+
+    /**
+     * Map to cast setting value to an appropriate type
+     * 
+     * @var array
+     */
+    const TYPE_CASTS = [
+        'integer' => 'int',
+        'float' => 'float',
+    ];
+
+    /**
      * An array of all the existing setings
      *
      * @var array
@@ -82,11 +105,22 @@ class Settings extends Model
             static::fetchAllSettings();
         }
 
-        if (!isset(static::$settings[$key])) {
+        if (!isset(static::$settings[$key]) || is_null(static::$settings[$key]->value)) {
             return $default;
         }
-        
-        return static::$settings[$key]->value ?: $default;
+
+        // Convert the string value from the DB to a appropriate type
+        $value = static::$settings[$key]->value;
+        $type = static::$settings[$key]->type;
+
+        // Boolean is a special case
+        if ($type === 'boolean') {
+            return strtolower($value) === 'true';
+        }
+
+        $cast = static::TYPE_CASTS[$type] ?? 'string';
+
+        return settype($value, $cast);
     }
 
     /**
@@ -139,5 +173,10 @@ class Settings extends Model
     public static function refetch(): void
     {
         static::fetchAllSettings();
+    }
+
+    public function getFieldTypeAttribute()
+    {
+        return static::TYPE_TO_FIELD_TYPE[$this->type] ?? 'text';
     }
 }

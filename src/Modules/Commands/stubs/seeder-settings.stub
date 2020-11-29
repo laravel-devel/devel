@@ -17,6 +17,7 @@ class $NAME$ extends Seeder
         // 'site-name' => [
         //     'name' => 'Site Name',
         //     'value' => 'Devel',
+        //     'type' => 'string',
         // ],
     ];
 
@@ -57,6 +58,7 @@ class $NAME$ extends Seeder
                     'key' => $key,
                     'name' => $data['name'],
                     'value' => $data['value'],
+                    'type' => $data['type'] ?? 'string',
                 ]);
             }
         }
