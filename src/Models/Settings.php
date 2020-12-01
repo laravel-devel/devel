@@ -120,7 +120,9 @@ class Settings extends Model
 
         $cast = static::TYPE_CASTS[$type] ?? 'string';
 
-        return settype($value, $cast);
+        settype($value, $cast);
+
+        return $value;
     }
 
     /**
