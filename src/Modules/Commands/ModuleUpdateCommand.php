@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Devel\Modules\Traits\ModuleCommandTrait;
 use Symfony\Component\Console\Input\InputArgument;
 
-class UpdateCommand extends Command
+class ModuleUpdateCommand extends Command
 {
     use ModuleCommandTrait;
 

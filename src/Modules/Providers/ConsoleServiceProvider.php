@@ -2,6 +2,7 @@
 
 namespace Devel\Modules\Providers;
 
+use Devel\Console\UpdateCommand;
 use Illuminate\Support\ServiceProvider;
 use Devel\Modules\Commands\CommandMakeCommand;
 use Devel\Modules\Commands\ControllerMakeCommand;
@@ -46,7 +47,7 @@ use Devel\Modules\Commands\SetupCommand;
 use Devel\Modules\Commands\TestMakeCommand;
 use Devel\Modules\Commands\UninstallCommand;
 use Devel\Modules\Commands\UnseedCommand;
-use Devel\Modules\Commands\UpdateCommand;
+use Devel\Modules\Commands\ModuleUpdateCommand;
 
 class ConsoleServiceProvider extends ServiceProvider
 {
@@ -74,6 +75,7 @@ class ConsoleServiceProvider extends ServiceProvider
         RouteProviderMakeCommand::class,
         InstallCommand::class,
         InstallAllCommand::class,
+        UpdateCommand::class,
         UninstallCommand::class,
         DownloadCommand::class,
         ListCommand::class,
@@ -103,7 +105,7 @@ class ConsoleServiceProvider extends ServiceProvider
         // sure if it's needed right now but it might be proven needed in the
         // future as I get deeper into module development. Maybe running
         // `composer install` for each module doesn't work as I think it does.
-        // UpdateCommand::class,
+        // ModuleUpdateCommand::class,
         ResourceMakeCommand::class,
         TestMakeCommand::class,
     ];
