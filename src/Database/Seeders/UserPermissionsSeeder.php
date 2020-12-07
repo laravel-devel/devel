@@ -3,6 +3,7 @@
 namespace Devel\Database\Seeders;
 
 use Devel\Models\Auth\Permission;
+use Devel\Models\Auth\Role;
 
 class UserPermissionsSeeder extends Seeder
 {
@@ -32,11 +33,18 @@ class UserPermissionsSeeder extends Seeder
      */
     public function run()
     {
+        $rootRole = Role::where('key', 'root')->first();
+
         foreach ($this->permissions as $permission => $name) {
-            Permission::create([
+            $permission = Permission::updateOrCreate([
                 'key' => $permission,
+            ], [
                 'name' => $name,
             ]);
-        }
+
+            if ($rootRole && !$rootRole->permissions->contains($permission)) {
+                $rootRole->permissions()->attach($permission);
+            }
+        } 
     }
 }
