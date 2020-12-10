@@ -110,6 +110,8 @@ class DevelServiceProvider extends ServiceProvider
     {
         $this->commands([
             \Devel\Console\InstallCommand::class,
+            \Devel\Console\UpdateCommand::class,
+            \Devel\Console\ResetPasswordCommand::class,
         ]);
     }
 

@@ -2,7 +2,6 @@
 
 namespace Devel\Modules\Providers;
 
-use Devel\Console\UpdateCommand;
 use Illuminate\Support\ServiceProvider;
 use Devel\Modules\Commands\CommandMakeCommand;
 use Devel\Modules\Commands\ControllerMakeCommand;
@@ -75,7 +74,6 @@ class ConsoleServiceProvider extends ServiceProvider
         RouteProviderMakeCommand::class,
         InstallCommand::class,
         InstallAllCommand::class,
-        UpdateCommand::class,
         UninstallCommand::class,
         DownloadCommand::class,
         ListCommand::class,

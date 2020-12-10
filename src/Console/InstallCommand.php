@@ -6,7 +6,6 @@ use Devel\Modules\Facades\Module;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Devel\Database\Seeders\DevelDatabaseSeeder;
-use Illuminate\Support\Facades\File;
 
 class InstallCommand extends Command
 {
