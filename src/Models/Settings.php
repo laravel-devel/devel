@@ -181,4 +181,9 @@ class Settings extends Model
     {
         return static::TYPE_TO_FIELD_TYPE[$this->type] ?? 'text';
     }
+
+    public function getFieldOptionsAttribute($value)
+    {
+        return $value ? json_decode($value) : $value;
+    }
 }
