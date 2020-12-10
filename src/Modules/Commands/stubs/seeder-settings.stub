@@ -59,6 +59,7 @@ class $NAME$ extends Seeder
                     'name' => $data['name'],
                     'value' => $data['value'],
                     'type' => $data['type'] ?? 'string',
+                    'field_options' => $data['field_options'] ?? null,
                 ]);
             }
         }
