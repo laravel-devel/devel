@@ -31,6 +31,7 @@ class Settings extends Model
         'float' => 'text',
         'text' => 'textarea',
         'boolean' => 'switch',
+        'select' => 'select',
     ];
 
     /**
@@ -41,6 +42,7 @@ class Settings extends Model
     const TYPE_CASTS = [
         'integer' => 'int',
         'float' => 'float',
+        'string' => 'string',
     ];
 
     /**
@@ -186,6 +188,6 @@ class Settings extends Model
 
     public function getFieldOptionsAttribute($value)
     {
-        return $value ? json_decode($value) : $value;
+        return $value ? json_decode($value, true) : $value;
     }
 }
