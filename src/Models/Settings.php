@@ -14,8 +14,10 @@ class Settings extends Model
     protected $fillable = [
         'group',
         'key',
+        'type',
         'value',
         'name',
+        'field_options',
     ];
 
     /**
