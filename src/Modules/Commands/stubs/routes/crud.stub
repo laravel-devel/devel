@@ -17,6 +17,12 @@
             'permissions' => '$PERMISSION_GROUP$.browse_$CRUD_NAME_LOWER$',
         ]);
 
+        Route::get('/export', [
+            'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.export',
+            'uses' => '$CONTROLLER_NAME$@exportData',
+            'permissions' => '$PERMISSION_GROUP$.browse_$CRUD_NAME_LOWER$',
+        ]);
+
         Route::get('/add', [
             'as' => '$LOWER_NAME$.$CRUD_NAME_LOWER$.create',
             'uses' => '$CONTROLLER_NAME$@create',
