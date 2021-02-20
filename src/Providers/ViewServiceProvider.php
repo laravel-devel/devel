@@ -31,7 +31,7 @@ class ViewServiceProvider extends ServiceProvider
         } catch (\Exception $e) {
             MetaTags::setTag('title', config('app.name', ''));
         }
-        
+
         // Page meta tags
         View::composer('devel::seo._metatags', function ($view) {
             $view->with('_metatags', MetaTags::getTags());

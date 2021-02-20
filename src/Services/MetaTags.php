@@ -37,11 +37,12 @@ class MetaTags
      *
      * @param string $name
      * @param string $value
+     * @param boolean $override Override the tag value. The default behavior is to append new value to the previous values.
      * @return void
      */
-    public static function setTag(string $name, string $value): void
+    public static function setTag(string $name, string $value, bool $override = false): void
     {
-        if (!isset(static::$tags[$name])) {
+        if (!isset(static::$tags[$name]) || $override) {
             static::$tags[$name] = new MetaTag($name, $value);
         } else {
             static::$tags[$name]->addValue($value);
@@ -52,12 +53,13 @@ class MetaTags
      * Set one or more meta tags
      *
      * @param array $tags
+     * @param boolean $override Override the tags values. The default behavior is to append new values to the previous values.
      * @return void
      */
-    public static function setTags(array $tags): void
+    public static function setTags(array $tags, bool $override = false): void
     {
         foreach ($tags as $name => $value) {
-            static::setTag($name, $value);
+            static::setTag($name, $value, $override);
         }
     }
 }
