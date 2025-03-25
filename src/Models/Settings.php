@@ -22,7 +22,7 @@ class Settings extends Model
 
     /**
      * Map to convert setting value type to Devel Dashboard form field type
-     * 
+     *
      * @var array
      */
     const TYPE_TO_FIELD_TYPE = [
@@ -36,7 +36,7 @@ class Settings extends Model
 
     /**
      * Map to cast setting value to an appropriate type
-     * 
+     *
      * @var array
      */
     const TYPE_CASTS = [
@@ -105,17 +105,18 @@ class Settings extends Model
      */
     public static function read(string $key, $default = null)
     {
-        if (!static::$settings) {
-            static::fetchAllSettings();
-        }
+        [$settingGroup, $settingKey] = explode('-', $key);
+        $setting = static::where('group', $settingGroup)
+            ->where('key', $settingKey)
+            ->first();
 
-        if (!isset(static::$settings[$key]) || is_null(static::$settings[$key]->value)) {
+        if (is_null($setting) || is_null($setting->value)) {
             return $default;
         }
 
         // Convert the string value from the DB to a appropriate type
-        $value = static::$settings[$key]->value;
-        $type = static::$settings[$key]->type;
+        $value = $setting->value;
+        $type = $setting->type;
 
         // Boolean is a special case
         if ($type === 'boolean') {
@@ -140,7 +141,7 @@ class Settings extends Model
         if (!static::$settings) {
             static::fetchAllSettings();
         }
-        
+
         return static::$settings[$key] ?? null;
     }
 
