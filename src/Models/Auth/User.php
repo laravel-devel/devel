@@ -79,7 +79,7 @@ class User extends Authenticatable
     /**
      * A user has many roles
      *
-     * @return void
+     * @return BelongsToMany<\Devel\Models\Auth\Role, $this>
      */
     public function roles(): BelongsToMany
     {
@@ -94,7 +94,7 @@ class User extends Authenticatable
     /**
      * A user has many individual permissions
      *
-     * @return void
+     * @return BelongsToMany<\Devel\Models\Auth\Permission, $this>
      */
     public function permissions(): BelongsToMany
     {

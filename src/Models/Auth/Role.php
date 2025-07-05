@@ -70,7 +70,7 @@ class Role extends Model
     /**
      * A role has many permissions
      *
-     * @return void
+     * @return BelongsToMany<\Devel\Models\Auth\Permission, $this>
      */
     public function permissions(): BelongsToMany
     {
