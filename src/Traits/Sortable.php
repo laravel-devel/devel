@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\DB;
 
 trait Sortable
 {
-    public function scopeSort($query, $sort)
+    /**
+     * @template T
+     * @param Builder<T> $query
+     * @return Builder<T>
+     */
+    public function scopeSort(Builder $query, string $sort): Builder
     {
         if (!$sort) {
             return $query;
@@ -43,16 +48,16 @@ trait Sortable
     }
 
     /**
-     * Left Join required relationship to the query to perform sorting. 
+     * Left Join required relationship to the query to perform sorting.
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string $sort
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @template T
+     * @param Builder<T> $query
+     * @return Builder<T>
      */
     protected function sortJoinRelationship(Builder $query, string $sort): Builder
     {
         $method = explode('.', $sort);
-        
+
         // Remove the field name from the chain, only keep the relationship names
         array_pop($method);
 

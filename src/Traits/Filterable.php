@@ -3,17 +3,18 @@
 namespace Devel\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 trait Filterable
 {
     /**
      * Apply filters to the query.
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @param Request $request
-     * @return Illuminate\Database\Eloquent\Builder
+     * @template T
+     * @param Builder<T> $query
+     * @return Builder<T>
      */
-    public function scopeFilter(Builder $query, $request): Builder
+    public function scopeFilter(Builder $query, Request $request): Builder
     {
         $table = $this->getTable();
 

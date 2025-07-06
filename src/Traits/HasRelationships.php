@@ -69,9 +69,9 @@ trait HasRelationships
     /**
      * Left join a relationship.
      *
-     * @param Illuminate\Database\Eloquent\Builder $query
-     * @param string $methods
-     * @return Illuminate\Database\Eloquent\Builder
+     * @template T
+     * @param Builder<T> $query
+     * @return Builder<T>
      */
     protected function leftJoinRelationship(Builder $query, string $methods): Builder
     {

@@ -2,11 +2,18 @@
 
 namespace Devel\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
+
 trait Searchable
 {
     protected $searchable = [];
 
-    public function scopeSearch($query, $search)
+    /**
+     * @template T
+     * @param Builder<T> $query
+     * @return Builder<T>
+     */
+    public function scopeSearch(Builder $query, string $search): Builder
     {
         if (!$search) {
             return $query;
