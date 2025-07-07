@@ -13,7 +13,7 @@ trait Searchable
      * @param Builder<T> $query
      * @return Builder<T>
      */
-    public function scopeSearch(Builder $query, string $search): Builder
+    public function scopeSearch(Builder $query, ?string $search): Builder
     {
         if (!$search) {
             return $query;
