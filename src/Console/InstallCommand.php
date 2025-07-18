@@ -3,8 +3,6 @@
 namespace Devel\Console;
 
 use Devel\Modules\Facades\Module;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Devel\Database\Seeders\DevelDatabaseSeeder;
 
 class InstallCommand extends Command
@@ -62,21 +60,6 @@ class InstallCommand extends Command
         $this->info('Seeding the required data...');
 
         (new DevelDatabaseSeeder)->run();
-
-        // Generate a User factory if there's none yet
-        $this->info('Generating a User factory if there\'s none yet...');
-        $userModel = config('auth.providers.users.model');
-            
-        try {
-            factory($userModel)->make();
-            // An exception would mean there's no factory
-        } catch (\Exception $e) {
-            $this->call('module:make-factory', [
-                'name' => 'UserFactory',
-                'module' => 'generate-main-user-factory',
-                '--model' => $userModel,
-            ]);
-        }
 
         // Create the Modules folder if it doesn't exist yet
         if (!file_exists(config('devel-modules.paths.modules'))) {
