@@ -26,10 +26,12 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         // Main site-wide page title
-        try {
-            MetaTags::setTag('title', setting('site-name', ''));
-        } catch (\Exception $e) {
-            MetaTags::setTag('title', config('app.name', ''));
+        if (! $this->app->environment('testing')) {
+            try {
+                MetaTags::setTag('title', setting('site-name', ''));
+            } catch (\Exception $e) {
+                MetaTags::setTag('title', config('app.name', ''));
+            }
         }
 
         // Page meta tags
