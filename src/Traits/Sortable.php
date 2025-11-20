@@ -12,9 +12,9 @@ trait Sortable
      * @param Builder<T> $query
      * @return Builder<T>
      */
-    public function scopeSort(Builder $query, string $sort): Builder
+    public function scopeSort(Builder $query, ?string $sort): Builder
     {
-        if (!$sort) {
+        if ($sort === null) {
             return $query;
         }
 
