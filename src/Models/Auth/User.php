@@ -58,24 +58,6 @@ class User extends Authenticatable
         'permissions',
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::updating(function ($user) {
-            // The root user can only be edited by the root themselves
-            if (!auth()->id() || ($user->roles->contains('root') && auth()->id() !== $user->id)) {
-                return false;
-            }
-        });
-
-        static::deleting(function ($user) {
-            if ($user->roles->contains('root')) {
-                return false;
-            }
-        });
-    }
-
     /**
      * A user has many roles
      *
